@@ -1,7 +1,9 @@
 Ludum-Dare-30
 =============
 
-Contributors
-  Tobias Bodewig
-  Philipp Auch
-  Gianluca Rubino
+<p>
+Contributors<br>
+  Tobias Bodewig<br>
+  Philipp Auch<br>
+  Gianluca Rubino<br>
+</p>
