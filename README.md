@@ -14,7 +14,7 @@ Ludum-Dare-30
   <td>Philipp Auch</td>
 </tr>
 <tr>
-  <td>Lead Designer</td>
+  <td>Music SFX & Art</td>
   <td>Gianluca Rubino</td>
 </tr>
 </table>
