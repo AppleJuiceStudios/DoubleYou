@@ -1,4 +1,7 @@
 Ludum-Dare-30
 =============
 
-Lead Programmer         Tobias Bodewig
+Contributors
+  Tobias Bodewig
+  Philipp Auch
+  Gianluca Rubino
