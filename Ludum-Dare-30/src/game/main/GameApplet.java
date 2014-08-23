@@ -9,6 +9,7 @@ public class GameApplet extends Applet {
 	private GameCanvas gameCanvas;
 
 	public void init() {
+		GameCanvas.IS_APPLET = true;
 		setBackground(Color.BLACK);
 		gameCanvas = new GameCanvas();
 		gameCanvas.init();

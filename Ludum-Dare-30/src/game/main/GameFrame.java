@@ -10,6 +10,7 @@ public class GameFrame extends JFrame {
 	private GameCanvas gameCanvas;
 
 	public GameFrame() {
+		GameCanvas.IS_APPLET = false;
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Game");
 		gameCanvas = new GameCanvas();
