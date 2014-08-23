@@ -35,6 +35,7 @@ public class Animation {
 		if (System.currentTimeMillis() > lastChange + delay) {
 			lastChange += delay;
 			index = (index + 1) % imgAnimation.length;
+			lastChange = System.currentTimeMillis();
 		}
 		return imgAnimation[index];
 	}
