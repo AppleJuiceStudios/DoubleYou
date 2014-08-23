@@ -92,18 +92,18 @@ public class StageLevel extends Stage {
 				}
 			}
 		}
-
-		if (isRecording) {
-			player.draw(g2, false);
-			playerRecord.draw(g2, true);
-		} else {
-			player.draw(g2, true);
-		}
-		if (isCloneMoving) {
-			playerClone.draw(g2, true);
-		}
-		g2.setTransform(new AffineTransform());
-
+		try {
+			if (isRecording) {
+				player.draw(g2, false);
+				playerRecord.draw(g2, true);
+			} else {
+				player.draw(g2, true);
+			}
+			if (isCloneMoving) {
+				playerClone.draw(g2, true);
+			}
+			g2.setTransform(new AffineTransform());
+		} catch (NullPointerException e) {}
 		/**
 		 * GUI
 		 */
@@ -112,18 +112,20 @@ public class StageLevel extends Stage {
 	}
 
 	public void update() {
-		if (isRecording) {
-			playerRecord.update(map);
-		} else {
-			player.update(map);
-			if (isCloneMoving) {
-				playerClone.update(map);
-				if (playerClone.isDead()) {
-					isCloneMoving = false;
-					playerClone = null;
+		try {
+			if (isRecording) {
+				playerRecord.update(map);
+			} else {
+				player.update(map);
+				if (isCloneMoving) {
+					playerClone.update(map);
+					if (playerClone.isDead()) {
+						isCloneMoving = false;
+						playerClone = null;
+					}
 				}
 			}
-		}
+		} catch (NullPointerException e) {}
 	}
 
 	public void stop() {
