@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -17,7 +16,6 @@ public class StageMainMenue extends Stage {
 	private Rectangle btnPlay;
 	private Rectangle btnOptions;
 	private Rectangle btnCredits;
-	private Rectangle btnLevelEditor;
 	private Rectangle btnExit;
 
 	private BufferedImage background;
@@ -48,8 +46,6 @@ public class StageMainMenue extends Stage {
 					options();
 				} else if (btnCredits.contains(point)) {
 					credits();
-				} else if (btnLevelEditor.contains(point)) {
-					levelEditor();
 				} else if (btnExit.contains(point)) {
 					exit();
 				}
@@ -70,17 +66,16 @@ public class StageMainMenue extends Stage {
 	}
 
 	private void initRecs() {
-		btnPlay = new Rectangle(30, 300, 200, 40);
-		btnOptions = new Rectangle(30, 350, 200, 40);
-		btnCredits = new Rectangle(30, 400, 200, 40);
-		btnLevelEditor = new Rectangle(30, 450, 200, 40);
+		btnPlay = new Rectangle(30, 350, 200, 40);
+		btnOptions = new Rectangle(30, 400, 200, 40);
+		btnCredits = new Rectangle(30, 450, 200, 40);
 		btnExit = new Rectangle(30, 500, 200, 40);
 	}
 
 	private void loadTextures() {
 		try {
 			background = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println("[Main Menue] Texture loading failed!");
 			e.printStackTrace();
 		}
@@ -94,7 +89,6 @@ public class StageMainMenue extends Stage {
 		g2.fill(btnPlay);
 		g2.fill(btnOptions);
 		g2.fill(btnCredits);
-		g2.fill(btnLevelEditor);
 		g2.fill(btnExit);
 	}
 
@@ -118,10 +112,6 @@ public class StageMainMenue extends Stage {
 
 	private void credits() {
 		System.out.println("Credits");
-	}
-
-	private void levelEditor() {
-		System.out.println("LevelEditor");
 	}
 
 	private void exit() {
