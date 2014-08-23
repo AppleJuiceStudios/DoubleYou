@@ -14,7 +14,7 @@ public class TileSet {
 	public TileSet() {
 		try {
 			sprites = new BufferedImage[9];
-			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/Mars-TileSet.png"));
+			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-TileSet.png"));
 			for (int y = 0; y < 3; y++) {
 				for (int x = 0; x < 3; x++) {
 					sprites[y * 3 + x] = image.getSubimage(x * SPRITE_SIZE, y * SPRITE_SIZE, SPRITE_SIZE, SPRITE_SIZE);
