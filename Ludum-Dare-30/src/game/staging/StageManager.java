@@ -21,7 +21,7 @@ public class StageManager {
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
-		stage = new StageMainMenue(this, null);
+		stage = new StageLevel(this, null);
 	}
 
 	public void setStage(int stageID) {
