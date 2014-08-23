@@ -65,13 +65,22 @@ public class EntityPlayer extends EntityMob {
 		}
 	}
 
-	protected BufferedImage getImage() {
-		if (!onGround) {
-			return animationJump.getImage();
-		} else if (key_A || key_D) {
-			return animationRun.getImage();
-		} else {
-			return image;
+	protected BufferedImage getImage(boolean animated) {
+		if (animated) {
+			if (!onGround) {
+				return animationJump.getImage();
+			} else if (key_A || key_D) {
+				return animationRun.getImage();
+			}
 		}
+		return image;
+	}
+
+	public EntityPlayerRecord createRecord() {
+		EntityPlayerRecord rec = new EntityPlayerRecord(x, y);
+		rec.key_A = key_A;
+		rec.key_D = key_D;
+		rec.key_W = key_W;
+		return rec;
 	}
 }

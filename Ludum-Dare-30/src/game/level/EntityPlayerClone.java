@@ -14,10 +14,10 @@ public class EntityPlayerClone extends EntityPlayer {
 		super(x, y);
 		animationRun = new Animation();
 		animationJump = new Animation();
-		animationRun.load("/model/clone/Run-Animation.png", 2, 150);
-		animationJump.load("/model/clone/Jump-Animation.png", 2, 150);
+		animationRun.load("/model/player/Run-Animation.png", 2, 150);
+		animationJump.load("/model/player/Jump-Animation.png", 2, 150);
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/model/clone/Player-Model.png"));
+			image = ImageIO.read(getClass().getResourceAsStream("/model/player/Player-Model.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

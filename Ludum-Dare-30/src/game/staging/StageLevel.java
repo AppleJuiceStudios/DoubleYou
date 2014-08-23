@@ -92,12 +92,15 @@ public class StageLevel extends Stage {
 				}
 			}
 		}
-		player.draw(g2);
+
 		if (isRecording) {
-			playerRecord.draw(g2);
+			player.draw(g2, false);
+			playerRecord.draw(g2, true);
+		} else {
+			player.draw(g2, true);
 		}
 		if (isCloneMoving) {
-			playerClone.draw(g2);
+			playerClone.draw(g2, true);
 		}
 		g2.setTransform(new AffineTransform());
 
@@ -157,7 +160,7 @@ public class StageLevel extends Stage {
 							isCloneMoving = false;
 							playerClone = null;
 						} else {
-							playerRecord = new EntityPlayerRecord(player.getXPos(), player.getYPos());
+							playerRecord = player.createRecord();
 							isRecording = true;
 						}
 					}

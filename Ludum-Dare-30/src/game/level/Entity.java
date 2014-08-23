@@ -23,17 +23,17 @@ public class Entity {
 		this.image = image;
 	}
 
-	public void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2, boolean animated) {
 		if (lookLeft) {
-			g2.drawImage(getImage(), (int) ((x + width) * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (-width * StageLevel.SCALE),
+			g2.drawImage(getImage(animated), (int) ((x + width) * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (-width * StageLevel.SCALE),
 					(int) (height * StageLevel.SCALE), null);
 		} else {
-			g2.drawImage(getImage(), (int) (x * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (width * StageLevel.SCALE),
+			g2.drawImage(getImage(animated), (int) (x * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (width * StageLevel.SCALE),
 					(int) (height * StageLevel.SCALE), null);
 		}
 	}
 
-	protected BufferedImage getImage() {
+	protected BufferedImage getImage(boolean animated) {
 		return image;
 	}
 
