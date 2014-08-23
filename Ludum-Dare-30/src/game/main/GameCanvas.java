@@ -12,10 +12,14 @@ import java.awt.image.BufferStrategy;
 public class GameCanvas extends Canvas {
 
 	private StageManager stageManager;
+	public FpsManager fpsManager;
+
+	public static final int FPS_MAX = 60;
 
 	public GameCanvas() {
 		setBackground(Color.RED);
 		stageManager = new StageManager(this);
+		fpsManager = new FpsManager();
 	}
 
 	public void draw() {
@@ -39,7 +43,15 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void start() {
-
+		new Thread(new Runnable() {
+			public void run() {
+				fpsManager.init();
+				while (true) {
+					fpsManager.limit();
+					draw();
+				}
+			}
+		}).start();
 	}
 
 	public void stop() {
@@ -50,4 +62,43 @@ public class GameCanvas extends Canvas {
 
 	}
 
+	private class FpsManager {
+		private long startTime;
+		private long delay;
+		private long waitTime;
+
+		private long lastTime;
+		private long time;
+
+		private int fps;
+
+		private void init() {
+			startTime = System.nanoTime();
+			delay = 0;
+			waitTime = 1000 / FPS_MAX;
+
+			lastTime = 0;
+			time = 0;
+		}
+
+		private void limit() {
+			delay = waitTime - (System.currentTimeMillis() - startTime);
+			if (delay > 0) {
+				try {
+					Thread.sleep(delay);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+			time = System.nanoTime();
+			fps = (int) (1000000000d / (time - lastTime));
+			lastTime = time;
+			startTime = System.currentTimeMillis();
+		}
+
+		public int getFps() {
+			return fps;
+		}
+	}
 }
