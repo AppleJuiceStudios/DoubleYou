@@ -10,7 +10,7 @@ public class EntityPlayer extends EntityMob {
 
 	private boolean key_A;
 	private boolean key_D;
-	private boolean key_SPACE;
+	private boolean key_W;
 
 	public int health;
 
@@ -36,7 +36,7 @@ public class EntityPlayer extends EntityMob {
 		if (key_D) {
 			xMovement = 1;
 		}
-		if (key_SPACE & onGround) {
+		if (key_W & onGround) {
 			yMovement = -2.5;
 		}
 		super.update(map);
@@ -47,8 +47,8 @@ public class EntityPlayer extends EntityMob {
 			key_A = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
 			key_D = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_SPACE | e.getKeyCode() == KeyEvent.VK_W) {
-			key_SPACE = true;
+		} else if (e.getKeyCode() == KeyEvent.VK_W) {
+			key_W = true;
 		}
 	}
 
@@ -58,13 +58,12 @@ public class EntityPlayer extends EntityMob {
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
 			key_D = false;
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE | e.getKeyCode() == KeyEvent.VK_W) {
-			key_SPACE = false;
+			key_W = false;
 		}
 	}
 
 	protected BufferedImage getImage() {
-		if (key_A || key_D)
-			return animation.getImage();
+		if (key_A || key_D) return animation.getImage();
 		else
 			return image;
 	}
