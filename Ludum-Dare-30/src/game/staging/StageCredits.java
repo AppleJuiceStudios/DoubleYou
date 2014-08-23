@@ -1,12 +1,21 @@
 package game.staging;
 
+import game.main.GameApplet;
+import game.main.GameCanvas;
+
+import java.applet.AppletContext;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -102,10 +111,25 @@ public class StageCredits extends Stage {
 	 * Actions
 	 */
 	private void back() {
-		System.out.println("Back");
+		getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 	}
 
 	private void website() {
-		System.out.println("Website");
+		URL url = null;
+		try {
+			url = new URL("http://philipp-auch.de/?page_id=14");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		if (GameCanvas.IS_APPLET) {
+			AppletContext a = GameApplet.appletContext;
+			a.showDocument(url, "_blank");
+		} else if (Desktop.isDesktopSupported()) {
+			try {
+				Desktop.getDesktop().browse(url.toURI());
+			} catch (IOException | URISyntaxException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
