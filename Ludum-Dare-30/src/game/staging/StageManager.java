@@ -30,11 +30,11 @@ public class StageManager {
 
 	public void setStage(int stageID, Map<String, String> data) {
 		Stage oldStage = stage;
+		keyListener = null;
+		mouseListener = null;
 		if (stageID == STAGE_LEVEL) {
 			stage = new StageLevel(this, data);
 		}
-		keyListener = null;
-		mouseListener = null;
 		oldStage.stop();
 	}
 
