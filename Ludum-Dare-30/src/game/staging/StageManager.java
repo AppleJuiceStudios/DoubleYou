@@ -18,7 +18,8 @@ public class StageManager {
 
 	public static final int STAGE_LEVEL = 1;
 	public static final int STAGE_MAIN_MENUE = 2;
-	public static final int STAGE_CREDITS = 3;
+	public static final int STAGE_OPTIONS = 3;
+	public static final int STAGE_CREDITS = 4;
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
@@ -37,6 +38,8 @@ public class StageManager {
 			stage = new StageLevel(this, data);
 		} else if (stageID == STAGE_MAIN_MENUE) {
 			stage = new StageMainMenue(this, data);
+		} else if (stageID == STAGE_OPTIONS) {
+			stage = new StageOptions(this, data);
 		} else if (stageID == STAGE_CREDITS) {
 			stage = new StageCredits(this, data);
 		}

@@ -31,6 +31,7 @@ public class StageCredits extends Stage {
 	 * Images
 	 */
 	private BufferedImage imgBackground;
+	private BufferedImage imgContributors;
 	private BufferedImage imgBack;
 	private BufferedImage imgWebsite;
 
@@ -83,6 +84,7 @@ public class StageCredits extends Stage {
 	private void loadTextures() {
 		try {
 			imgBackground = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
+			imgContributors = ImageIO.read(getClass().getResourceAsStream("/Contributors.png"));
 			imgBack = ImageIO.read(getClass().getResourceAsStream("/buttons/Settings-Button.png"));
 			imgWebsite = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
 		} catch (Exception e) {
@@ -94,6 +96,7 @@ public class StageCredits extends Stage {
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
+		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 200, null);
 		g2.drawImage(imgBack, btnBack.x, btnBack.y, btnBack.width, btnBack.height, null);
 		g2.drawImage(imgWebsite, btnWebsite.x, btnWebsite.y, btnWebsite.width, btnWebsite.height, null);
 	}
