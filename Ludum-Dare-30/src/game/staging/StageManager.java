@@ -20,6 +20,7 @@ public class StageManager {
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
+		stage = new StageLevel(this, null);
 	}
 
 	public void setStage(int stageID) {
@@ -29,7 +30,7 @@ public class StageManager {
 	public void setStage(int stageID, Map<String, String> data) {
 		Stage oldStage = stage;
 		if (stageID == STAGE_LEVEL) {
-			//
+			stage = new StageLevel(this, data);
 		}
 		keyListener = null;
 		mouseListener = null;
