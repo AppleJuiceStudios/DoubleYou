@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.res.SoundManager;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -23,6 +24,7 @@ public class StageManager {
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
+		SoundManager.init();
 		stage = new StageMainMenue(this, null);
 	}
 
