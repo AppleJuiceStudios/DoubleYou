@@ -14,13 +14,16 @@ public class EntityPlayer extends EntityMob {
 
 	public int health;
 
-	protected Animation animation;
+	protected Animation animationRun;
+	protected Animation animationJump;
 
 	public EntityPlayer(double x, double y) {
 		super(x, y, 14d, 31d, null);
 		health = 3;
-		animation = new Animation();
-		animation.load("/model/player/Run-Animation.png", 2, 150);
+		animationRun = new Animation();
+		animationJump = new Animation();
+		animationRun.load("/model/player/Run-Animation.png", 2, 150);
+		animationJump.load("/model/player/Jump-Animation.png", 2, 150);
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/model/player/Player-Model.png"));
 		} catch (IOException e) {
@@ -63,9 +66,12 @@ public class EntityPlayer extends EntityMob {
 	}
 
 	protected BufferedImage getImage() {
-		if (key_A || key_D)
-			return animation.getImage();
-		else
+		if (!onGround) {
+			return animationJump.getImage();
+		} else if (key_A || key_D) {
+			return animationRun.getImage();
+		} else {
 			return image;
+		}
 	}
 }

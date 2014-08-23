@@ -12,9 +12,10 @@ public class EntityPlayerRecord extends EntityPlayer {
 
 	public EntityPlayerRecord(double x, double y) {
 		super(x, y);
-		health = 3;
-		animation = new Animation();
-		animation.load("/model/clone/Run-Animation.png", 2, 150);
+		animationRun = new Animation();
+		animationJump = new Animation();
+		animationRun.load("/model/clone/Run-Animation.png", 2, 150);
+		animationJump.load("/model/clone/Jump-Animation.png", 2, 150);
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/model/clone/Player-Model.png"));
 		} catch (IOException e) {
