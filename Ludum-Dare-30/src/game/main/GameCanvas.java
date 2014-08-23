@@ -47,8 +47,8 @@ public class GameCanvas extends Canvas {
 			public void run() {
 				fpsManager.init();
 				while (true) {
-					fpsManager.limit();
 					draw();
+					fpsManager.limit();
 				}
 			}
 		});
@@ -77,7 +77,7 @@ public class GameCanvas extends Canvas {
 		private int fps;
 
 		private void init() {
-			startTime = System.nanoTime();
+			startTime = System.currentTimeMillis();
 			delay = 0;
 			waitTime = 1000 / FPS_MAX;
 

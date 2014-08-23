@@ -17,9 +17,11 @@ public class StageManager {
 	private MouseListener mouseListener;
 
 	public static final int STAGE_LEVEL = 1;
+	public static final int MAIN_MENUE = 2;
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
+		stage = new StageMainMenue(this, null);
 	}
 
 	public void setStage(int stageID) {
