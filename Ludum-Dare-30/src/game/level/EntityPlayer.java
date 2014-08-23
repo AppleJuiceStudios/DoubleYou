@@ -1,6 +1,7 @@
 package game.level;
 
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -11,10 +12,13 @@ public class EntityPlayer extends EntityMob {
 	private boolean key_D;
 	private boolean key_SPACE;
 
+	private Animation animation = new Animation();
+
 	public EntityPlayer(double x, double y) {
 		super(x, y, 14d, 31d, null);
+		animation.load("/model/player/Run-Animation.png", 2, 300);
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/Player-Model.png"));
+			image = ImageIO.read(getClass().getResourceAsStream("/model/player/Player-Model.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -54,4 +58,9 @@ public class EntityPlayer extends EntityMob {
 		}
 	}
 
+	protected BufferedImage getImage() {
+		if (key_A || key_D) return animation.getImage();
+		else
+			return image;
+	}
 }
