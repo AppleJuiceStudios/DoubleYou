@@ -13,6 +13,7 @@ public class Entity {
 	protected double height = 16;
 
 	protected BufferedImage image;
+	protected boolean lookLeft;
 
 	public Entity(double x, double y, double width, double height, BufferedImage image) {
 		this.x = x;
@@ -23,12 +24,25 @@ public class Entity {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(image, (int) (x * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (width * StageLevel.SCALE),
-				(int) (height * StageLevel.SCALE), null);
+		if (lookLeft) {
+			g2.drawImage(image, (int) ((x + width) * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (-width * StageLevel.SCALE),
+					(int) (height * StageLevel.SCALE), null);
+		} else {
+			g2.drawImage(image, (int) (x * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (width * StageLevel.SCALE),
+					(int) (height * StageLevel.SCALE), null);
+		}
 	}
 
 	public void update(LevelMap map) {
 
+	}
+
+	public double getXPos() {
+		return x;
+	}
+
+	public double getYPos() {
+		return y;
 	}
 
 }

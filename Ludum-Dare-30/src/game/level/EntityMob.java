@@ -16,6 +16,7 @@ public class EntityMob extends Entity {
 	public void update(LevelMap map) {
 		yMovement += 0.07;
 		if (xMovement > 0) {
+			lookLeft = false;
 			int xright = (int) ((x + width + xMovement) / 16);
 			int ytop = (int) (y / 16 + 0.00001);
 			int ycenter = (int) ((y + height / 2) / 16);
@@ -24,6 +25,7 @@ public class EntityMob extends Entity {
 				xMovement = (xright * 16) - (x + width);
 			}
 		} else if (xMovement < 0) {
+			lookLeft = true;
 			int xleft = (int) ((x + xMovement) / 16);
 			int ytop = (int) (y / 16 + 0.00001);
 			int ycenter = (int) ((y + height / 2) / 16);

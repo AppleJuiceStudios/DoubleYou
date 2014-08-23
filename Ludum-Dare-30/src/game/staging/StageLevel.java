@@ -7,6 +7,7 @@ import game.level.TileSet;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Map;
@@ -18,6 +19,8 @@ import javax.imageio.ImageIO;
 public class StageLevel extends Stage {
 
 	public static final int SCALE = 3;
+	private double xOffset = 0;
+	private double yOffset = 10;
 
 	private BufferedImage background;
 	private BufferedImage mountains;
@@ -49,8 +52,14 @@ public class StageLevel extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
+		xOffset += 1;
 		g2.drawImage(background, 0, 0, 1600, 800, null);
-		g2.drawImage(mountains, 0, -190, 800, 800, null);
+		double mountainsOffset = -xOffset * 0.3;
+		g2.drawImage(mountains, (int) (mountainsOffset % 800) + 800, -190, 800, 800, null);
+		g2.drawImage(mountains, (int) (mountainsOffset % 800), -190, 800, 800, null);
+		AffineTransform at = new AffineTransform();
+		at.translate((int) -xOffset, (int) -yOffset);
+		g2.setTransform(at);
 		int spriteSize = TileSet.SPRITE_SIZE * SCALE;
 		for (int y = 0; y < map.getHeight(); y++) {
 			for (int x = 0; x < map.getWidth(); x++) {
@@ -61,6 +70,7 @@ public class StageLevel extends Stage {
 			}
 		}
 		player.draw(g2);
+		g2.setTransform(new AffineTransform());
 	}
 
 	public void update() {
