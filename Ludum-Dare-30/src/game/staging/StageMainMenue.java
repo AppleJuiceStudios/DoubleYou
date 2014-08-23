@@ -1,5 +1,7 @@
 package game.staging;
 
+import game.res.SoundManager;
+
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -11,7 +13,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class StageMainMenue extends Stage {
-
 	/**
 	 * Buttons
 	 */
@@ -31,6 +32,11 @@ public class StageMainMenue extends Stage {
 
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
+		if (!SoundManager.isLoaded("Space Commando")) {
+			SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
+			SoundManager.play("Space Commando", true);
+		}
+
 		initMouse();
 		initRecs();
 		loadTextures();
@@ -117,6 +123,8 @@ public class StageMainMenue extends Stage {
 	 * Actions
 	 */
 	private void play() {
+		SoundManager.stopAll();
+		SoundManager.clearCache();
 		getStageManager().setStage(StageManager.STAGE_LEVEL);
 	}
 

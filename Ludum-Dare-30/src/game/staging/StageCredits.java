@@ -2,7 +2,6 @@ package game.staging;
 
 import game.main.GameApplet;
 import game.main.GameCanvas;
-import game.res.SoundManager;
 
 import java.applet.AppletContext;
 import java.awt.Desktop;
@@ -21,8 +20,6 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class StageCredits extends Stage {
-
-	SoundManager sound;
 	/**
 	 * Buttons
 	 */
