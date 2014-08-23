@@ -8,9 +8,9 @@ import javax.imageio.ImageIO;
 
 public class EntityPlayer extends EntityMob {
 
-	private boolean key_A;
-	private boolean key_D;
-	private boolean key_W;
+	protected boolean key_A;
+	protected boolean key_D;
+	protected boolean key_W;
 
 	public int health;
 
@@ -63,7 +63,8 @@ public class EntityPlayer extends EntityMob {
 	}
 
 	protected BufferedImage getImage() {
-		if (key_A || key_D) return animation.getImage();
+		if (key_A || key_D)
+			return animation.getImage();
 		else
 			return image;
 	}
