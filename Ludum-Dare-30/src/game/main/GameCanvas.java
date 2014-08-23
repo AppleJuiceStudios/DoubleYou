@@ -3,7 +3,6 @@ package game.main;
 import game.staging.StageManager;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
@@ -24,7 +23,7 @@ public class GameCanvas extends Canvas {
 	public static final int FPS_MAX = 60;
 
 	public GameCanvas() {
-		setBackground(Color.RED);
+
 		stageManager = new StageManager(this);
 		fpsManager = new FpsManager();
 	}
@@ -102,7 +101,7 @@ public class GameCanvas extends Canvas {
 
 			time = System.nanoTime();
 			fps = (int) (1000000000d / (time - lastTime));
-			//System.out.println("FPS: " + fps);
+			// System.out.println("FPS: " + fps);
 			lastTime = time;
 			startTime = System.currentTimeMillis();
 		}

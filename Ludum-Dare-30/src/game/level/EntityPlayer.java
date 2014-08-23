@@ -14,7 +14,7 @@ public class EntityPlayer extends EntityMob {
 
 	public int health;
 
-	private Animation animation;
+	protected Animation animation;
 
 	public EntityPlayer(double x, double y) {
 		super(x, y, 14d, 31d, null);
@@ -63,7 +63,8 @@ public class EntityPlayer extends EntityMob {
 	}
 
 	protected BufferedImage getImage() {
-		if (key_A || key_D) return animation.getImage();
+		if (key_A || key_D)
+			return animation.getImage();
 		else
 			return image;
 	}
