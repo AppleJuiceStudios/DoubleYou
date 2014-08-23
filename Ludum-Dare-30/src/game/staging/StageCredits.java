@@ -11,22 +11,20 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-public class StageMainMenue extends Stage {
+public class StageCredits extends Stage {
 
 	/**
 	 * Buttons
 	 */
-	private Rectangle btnPlay;
-	private Rectangle btnOptions;
-	private Rectangle btnCredits;
-	private Rectangle btnExit;
+	private Rectangle btnBack;
+	private Rectangle btnWebsite;
 
 	/**
 	 * Images
 	 */
 	private BufferedImage background;
 
-	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
+	public StageCredits(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		initMouse();
 		initRecs();
@@ -46,14 +44,10 @@ public class StageMainMenue extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				if (btnPlay.contains(point)) {
-					play();
-				} else if (btnOptions.contains(point)) {
-					options();
-				} else if (btnCredits.contains(point)) {
-					credits();
-				} else if (btnExit.contains(point)) {
-					exit();
+				if (btnBack.contains(point)) {
+					back();
+				} else if (btnWebsite.contains(point)) {
+					website();
 				}
 			}
 
@@ -72,10 +66,8 @@ public class StageMainMenue extends Stage {
 	}
 
 	private void initRecs() {
-		btnPlay = new Rectangle(30, 350, 200, 40);
-		btnOptions = new Rectangle(30, 400, 200, 40);
-		btnCredits = new Rectangle(30, 450, 200, 40);
-		btnExit = new Rectangle(30, 500, 200, 40);
+		btnBack = new Rectangle(190, 500, 200, 40);
+		btnWebsite = new Rectangle(410, 500, 200, 40);
 	}
 
 	private void loadTextures() {
@@ -92,10 +84,8 @@ public class StageMainMenue extends Stage {
 		g2.setColor(Color.RED);
 		g2.fillRect(0, 0, 800, 600); //Background
 		g2.setColor(Color.GREEN);
-		g2.fill(btnPlay);
-		g2.fill(btnOptions);
-		g2.fill(btnCredits);
-		g2.fill(btnExit);
+		g2.fill(btnBack);
+		g2.fill(btnWebsite);
 	}
 
 	@Override
@@ -111,19 +101,11 @@ public class StageMainMenue extends Stage {
 	/**
 	 * Actions
 	 */
-	private void play() {
-		getStageManager().setStage(StageManager.STAGE_LEVEL);
+	private void back() {
+		System.out.println("Back");
 	}
 
-	private void options() {
-		System.out.println("Options");
-	}
-
-	private void credits() {
-		getStageManager().setStage(StageManager.STAGE_CREDITS);
-	}
-
-	private void exit() {
-		System.exit(0);
+	private void website() {
+		System.out.println("Website");
 	}
 }

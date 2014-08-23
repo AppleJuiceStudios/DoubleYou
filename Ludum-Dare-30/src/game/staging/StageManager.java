@@ -17,11 +17,12 @@ public class StageManager {
 	private MouseListener mouseListener;
 
 	public static final int STAGE_LEVEL = 1;
-	public static final int MAIN_MENUE = 2;
+	public static final int STAGE_MAIN_MENUE = 2;
+	public static final int STAGE_CREDITS = 3;
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
-		stage = new StageLevel(this, null);
+		stage = new StageMainMenue(this, null);
 	}
 
 	public void setStage(int stageID) {
@@ -34,6 +35,10 @@ public class StageManager {
 		mouseListener = null;
 		if (stageID == STAGE_LEVEL) {
 			stage = new StageLevel(this, data);
+		} else if (stageID == STAGE_MAIN_MENUE) {
+			stage = new StageMainMenue(this, data);
+		} else if (stageID == STAGE_CREDITS) {
+			stage = new StageCredits(this, data);
 		}
 		oldStage.stop();
 	}
