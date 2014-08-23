@@ -85,7 +85,7 @@ public class StageCredits extends Stage {
 
 	private void loadTextures() {
 		try {
-			imgBackground = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
+			imgBackground = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Space-Background.png"));
 			imgContributors = ImageIO.read(getClass().getResourceAsStream("/Contributors.png"));
 			imgBack = ImageIO.read(getClass().getResourceAsStream("/buttons/Back-Button.png"));
 			imgWebsite = ImageIO.read(getClass().getResourceAsStream("/buttons/Web-Button.png"));

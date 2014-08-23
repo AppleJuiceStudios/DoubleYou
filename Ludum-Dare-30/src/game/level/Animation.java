@@ -31,10 +31,11 @@ public class Animation {
 		}
 	}
 
-	public BufferedImage getImage(int animation) {
+	public BufferedImage getImage() {
 		if (System.currentTimeMillis() > lastChange + delay) {
 			lastChange += delay;
 			index = (index + 1) % imgAnimation.length;
+			lastChange = System.currentTimeMillis();
 		}
 		return imgAnimation[index];
 	}
