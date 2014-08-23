@@ -11,6 +11,9 @@ import java.awt.image.BufferStrategy;
 @SuppressWarnings("serial")
 public class GameCanvas extends Canvas {
 
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
+
 	private StageManager stageManager;
 	public FpsManager fpsManager;
 
@@ -43,7 +46,7 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void init() {
-		setPreferredSize(new Dimension(800, 600));
+		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
 		thread = new Thread(new Runnable() {
 			public void run() {

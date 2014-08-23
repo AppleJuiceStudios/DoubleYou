@@ -1,6 +1,5 @@
 package game.staging;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -89,9 +88,7 @@ public class StageMainMenue extends Stage {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.setColor(Color.RED);
-		g2.fillRect(0, 0, 800, 600); //Background
-		g2.setColor(Color.GREEN);
+		g2.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
 		g2.fill(btnPlay);
 		g2.fill(btnOptions);
 		g2.fill(btnCredits);

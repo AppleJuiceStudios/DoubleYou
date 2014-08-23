@@ -4,7 +4,6 @@ import game.main.GameApplet;
 import game.main.GameCanvas;
 
 import java.applet.AppletContext;
-import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -90,9 +89,7 @@ public class StageCredits extends Stage {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.setColor(Color.RED);
-		g2.fillRect(0, 0, 800, 600); //Background
-		g2.setColor(Color.GREEN);
+		g2.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
 		g2.fill(btnBack);
 		g2.fill(btnWebsite);
 	}
