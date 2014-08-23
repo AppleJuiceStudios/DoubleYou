@@ -1,6 +1,8 @@
 package game.staging;
 
 import game.level.EntityPlayer;
+import game.level.EntityPlayerClone;
+import game.level.EntityPlayerRecord;
 import game.level.LevelMap;
 import game.level.TileSet;
 
@@ -32,7 +34,11 @@ public class StageLevel extends Stage {
 
 	private Timer updateTimer;
 
+	private boolean isRecording;
+	private boolean isCloneMoving;
 	private EntityPlayer player;
+	private EntityPlayerRecord playerRecord;
+	private EntityPlayerClone playerClone;
 
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
@@ -87,6 +93,12 @@ public class StageLevel extends Stage {
 			}
 		}
 		player.draw(g2);
+		if (isRecording) {
+			playerRecord.draw(g2);
+		}
+		if (isCloneMoving) {
+			playerClone.draw(g2);
+		}
 		g2.setTransform(new AffineTransform());
 
 		/**
@@ -97,7 +109,18 @@ public class StageLevel extends Stage {
 	}
 
 	public void update() {
-		player.update(map);
+		if (isRecording) {
+			playerRecord.update(map);
+		} else {
+			player.update(map);
+			if (isCloneMoving) {
+				playerClone.update(map);
+				if (playerClone.isDead()) {
+					isCloneMoving = false;
+					playerClone = null;
+				}
+			}
+		}
 	}
 
 	public void stop() {
@@ -113,10 +136,32 @@ public class StageLevel extends Stage {
 
 			public void keyReleased(KeyEvent e) {
 				player.keyReleased(e);
+				if (isRecording) {
+					playerRecord.keyReleased(e);
+				}
 			}
 
 			public void keyPressed(KeyEvent e) {
 				player.keyPressed(e);
+				if (isRecording) {
+					playerRecord.keyPressed(e);
+				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					if (isRecording) {
+						playerClone = new EntityPlayerClone(player.getXPos(), player.getYPos(), playerRecord.getRecording());
+						isRecording = false;
+						isCloneMoving = true;
+						playerRecord = null;
+					} else {
+						if (isCloneMoving) {
+							isCloneMoving = false;
+							playerClone = null;
+						} else {
+							playerRecord = new EntityPlayerRecord(player.getXPos(), player.getYPos());
+							isRecording = true;
+						}
+					}
+				}
 			}
 		});
 	}
