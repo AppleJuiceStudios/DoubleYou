@@ -13,11 +13,17 @@ import javax.imageio.ImageIO;
 
 public class StageMainMenue extends Stage {
 
+	/**
+	 * Buttons
+	 */
 	private Rectangle btnPlay;
 	private Rectangle btnOptions;
 	private Rectangle btnCredits;
 	private Rectangle btnExit;
 
+	/**
+	 * Images
+	 */
 	private BufferedImage background;
 
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
@@ -102,8 +108,11 @@ public class StageMainMenue extends Stage {
 
 	}
 
+	/**
+	 * Actions
+	 */
 	private void play() {
-		System.out.println("PLay");
+		getStageManager().setStage(StageManager.STAGE_LEVEL);
 	}
 
 	private void options() {
