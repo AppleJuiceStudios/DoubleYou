@@ -9,12 +9,20 @@ public class LevelMap {
 	private int width;
 	private int height;
 
-	private LevelMap() {
-
+	public LevelMap() {
+		byte[][] map = new byte[50][13];
+		for (int x = 0; x < map.length; x++) {
+			map[x][12] = 2;
+		}
+		setSpritesheet(map);
 	}
 
 	public byte getTileID(int x, int y) {
-		return spritesheet[x][y];
+		if (x >= 0 & x < width & y >= 0 & y < height) {
+			return spritesheet[x][y];
+		} else {
+			return 5;
+		}
 	}
 
 	public int getWidth() {
