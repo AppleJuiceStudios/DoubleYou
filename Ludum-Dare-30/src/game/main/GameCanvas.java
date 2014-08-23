@@ -14,6 +14,8 @@ public class GameCanvas extends Canvas {
 	private StageManager stageManager;
 	public FpsManager fpsManager;
 
+	private Thread thread;
+
 	public static final int FPS_MAX = 60;
 
 	public GameCanvas() {
@@ -40,10 +42,8 @@ public class GameCanvas extends Canvas {
 
 	public void init() {
 		setPreferredSize(new Dimension(800, 600));
-	}
 
-	public void start() {
-		new Thread(new Runnable() {
+		thread = new Thread(new Runnable() {
 			public void run() {
 				fpsManager.init();
 				while (true) {
@@ -51,7 +51,11 @@ public class GameCanvas extends Canvas {
 					draw();
 				}
 			}
-		}).start();
+		});
+	}
+
+	public void start() {
+		thread.start();
 	}
 
 	public void stop() {
