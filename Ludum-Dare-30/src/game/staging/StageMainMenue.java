@@ -23,7 +23,11 @@ public class StageMainMenue extends Stage {
 	/**
 	 * Images
 	 */
-	private BufferedImage background;
+	private BufferedImage imgBackground;
+	private BufferedImage imgPlay;
+	private BufferedImage imgOptions;
+	private BufferedImage imgCredits;
+	private BufferedImage imgExit;
 
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
@@ -79,7 +83,11 @@ public class StageMainMenue extends Stage {
 
 	private void loadTextures() {
 		try {
-			background = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
+			imgBackground = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
+			imgPlay = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
+			imgOptions = ImageIO.read(getClass().getResourceAsStream("/buttons/Settings-Button.png"));
+			imgCredits = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
+			imgExit = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
 		} catch (Exception e) {
 			System.out.println("[Main Menue] Texture loading failed!");
 			e.printStackTrace();
@@ -88,11 +96,11 @@ public class StageMainMenue extends Stage {
 
 	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
-		g2.fill(btnPlay);
-		g2.fill(btnOptions);
-		g2.fill(btnCredits);
-		g2.fill(btnExit);
+		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
+		g2.drawImage(imgPlay, btnPlay.x, btnPlay.y, btnPlay.width, btnPlay.height, null);
+		g2.drawImage(imgOptions, btnOptions.x, btnOptions.y, btnOptions.width, btnOptions.height, null);
+		g2.drawImage(imgCredits, btnCredits.x, btnCredits.y, btnCredits.width, btnCredits.height, null);
+		g2.drawImage(imgExit, btnExit.x, btnExit.y, btnExit.width, btnExit.height, null);
 	}
 
 	@Override
