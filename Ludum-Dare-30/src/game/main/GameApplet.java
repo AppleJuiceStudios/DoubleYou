@@ -20,7 +20,7 @@ public class GameApplet extends Applet {
 	}
 
 	public void stop() {
-		gameCanvas.start();
+		gameCanvas.stop();
 	}
 
 	public void destroy() {
