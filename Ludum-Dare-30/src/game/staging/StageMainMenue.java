@@ -121,7 +121,7 @@ public class StageMainMenue extends Stage {
 	}
 
 	private void options() {
-		System.out.println("Options");
+		getStageManager().setStage(StageManager.STAGE_OPTIONS);
 	}
 
 	private void credits() {
