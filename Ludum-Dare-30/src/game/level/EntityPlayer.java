@@ -20,7 +20,7 @@ public class EntityPlayer extends EntityMob {
 		super(x, y, 14d, 31d, null);
 		health = 3;
 		animation = new Animation();
-		animation.load("/model/player/Run-Animation.png", 2, 300);
+		animation.load("/model/player/Run-Animation.png", 2, 150);
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/model/player/Player-Model.png"));
 		} catch (IOException e) {
