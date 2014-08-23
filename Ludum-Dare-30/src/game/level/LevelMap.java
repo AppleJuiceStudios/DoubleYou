@@ -17,10 +17,14 @@ public class LevelMap {
 		for (int x = 0; x < map.length; x++) {
 			map[x][11] = 2;
 		}
-		map[0][10] = 5;
-		map[0][9] = 5;
-		map[10][10] = 5;
-		map[10][9] = 5;
+		for (int y = 0; y < 11; y++) {
+			map[0][y] = 6;
+		}
+		for (int y = 0; y < 11; y++) {
+			map[49][y] = 4;
+		}
+		map[0][11] = 5;
+		map[49][11] = 5;
 		setSpritesheet(map);
 	}
 
