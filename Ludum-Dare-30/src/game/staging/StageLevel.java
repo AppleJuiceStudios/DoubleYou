@@ -21,6 +21,8 @@ public class StageLevel extends Stage {
 	public static final int SCALE = 3;
 	private double xOffset = 0;
 	private double yOffset = 10;
+	private double maxXOffset;
+	private double maxYOffset;
 
 	private BufferedImage background;
 	private BufferedImage mountains;
@@ -49,10 +51,23 @@ public class StageLevel extends Stage {
 			}
 		}, 0, 1000 / 60);
 		initListeners();
+		maxXOffset = (map.getWidth() * TileSet.SPRITE_SIZE * SCALE) - 800;
+		maxYOffset = (map.getHeight() * TileSet.SPRITE_SIZE * SCALE) - 600;
 	}
 
 	public void draw(Graphics2D g2) {
-		xOffset += 1;
+		xOffset += (player.getXPos() * SCALE - (800 / 2) - xOffset) * 0.3;
+		yOffset += (player.getYPos() * SCALE - (600 / 3) - yOffset) * 0.3;
+		if (xOffset > maxXOffset) {
+			xOffset = maxXOffset;
+		} else if (xOffset < 0) {
+			xOffset = 0;
+		}
+		if (yOffset > maxYOffset) {
+			yOffset = maxYOffset;
+		} else if (yOffset < 0) {
+			yOffset = 0;
+		}
 		g2.drawImage(background, 0, 0, 1600, 800, null);
 		double mountainsOffset = -xOffset * 0.3;
 		g2.drawImage(mountains, (int) (mountainsOffset % 800) + 800, -190, 800, 800, null);
