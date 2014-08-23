@@ -102,6 +102,7 @@ public class GameCanvas extends Canvas {
 
 			time = System.nanoTime();
 			fps = (int) (1000000000d / (time - lastTime));
+			//System.out.println("FPS: " + fps);
 			lastTime = time;
 			startTime = System.currentTimeMillis();
 		}

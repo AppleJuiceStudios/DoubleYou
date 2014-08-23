@@ -17,7 +17,7 @@ public class SoundManager {
 	/**
 	 * Add new Sound here!
 	 */
-	public final static SoundFile TEST = new SoundFile("Test", "/sounds/Chiptune.wav");
+	public final static SoundFile TEST = new SoundFile("Test", "/Chiptune.wav");
 
 	public SoundManager() {
 		clips = new HashMap<String, Clip>();

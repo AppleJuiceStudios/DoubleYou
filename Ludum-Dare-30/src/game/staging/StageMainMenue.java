@@ -86,8 +86,8 @@ public class StageMainMenue extends Stage {
 			imgBackground = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
 			imgPlay = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
 			imgOptions = ImageIO.read(getClass().getResourceAsStream("/buttons/Settings-Button.png"));
-			imgCredits = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
-			imgExit = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
+			imgCredits = ImageIO.read(getClass().getResourceAsStream("/buttons/Credits-Button.png"));
+			imgExit = ImageIO.read(getClass().getResourceAsStream("/buttons/Exit-Button.png"));
 		} catch (Exception e) {
 			System.out.println("[Main Menue] Texture loading failed!");
 			e.printStackTrace();
