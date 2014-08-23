@@ -6,7 +6,11 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 public class StageMainMenue extends Stage {
 
@@ -16,10 +20,13 @@ public class StageMainMenue extends Stage {
 	private Rectangle btnLevelEditor;
 	private Rectangle btnExit;
 
+	private BufferedImage background;
+
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		initMouse();
 		initRecs();
+		loadTextures();
 	}
 
 	private void initMouse() {
@@ -68,6 +75,15 @@ public class StageMainMenue extends Stage {
 		btnCredits = new Rectangle(30, 400, 200, 40);
 		btnLevelEditor = new Rectangle(30, 450, 200, 40);
 		btnExit = new Rectangle(30, 500, 200, 40);
+	}
+
+	private void loadTextures() {
+		try {
+			background = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
+		} catch (IOException e) {
+			System.out.println("[Main Menue] Texture loading failed!");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
