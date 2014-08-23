@@ -112,7 +112,7 @@ public class StageMainMenue extends Stage {
 	 * Actions
 	 */
 	private void play() {
-		System.out.println("PLay");
+		getStageManager().setStage(StageManager.STAGE_LEVEL);
 	}
 
 	private void options() {
