@@ -80,7 +80,7 @@ public class StageOptions extends Stage {
 
 	private void loadTextures() {
 		try {
-			background = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
+			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
 		} catch (Exception e) {
 			System.out.println("[Main Menue] Texture loading failed!");
 			e.printStackTrace();

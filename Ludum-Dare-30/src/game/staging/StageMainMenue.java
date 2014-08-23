@@ -83,7 +83,7 @@ public class StageMainMenue extends Stage {
 
 	private void loadTextures() {
 		try {
-			imgBackground = ImageIO.read(getClass().getResourceAsStream("/Space-Background.png"));
+			imgBackground = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
 			imgPlay = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
 			imgOptions = ImageIO.read(getClass().getResourceAsStream("/buttons/Settings-Button.png"));
 			imgCredits = ImageIO.read(getClass().getResourceAsStream("/buttons/Credits-Button.png"));
