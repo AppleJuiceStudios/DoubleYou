@@ -12,10 +12,14 @@ public class EntityPlayer extends EntityMob {
 	private boolean key_D;
 	private boolean key_SPACE;
 
-	private Animation animation = new Animation();
+	public int health;
+
+	private Animation animation;
 
 	public EntityPlayer(double x, double y) {
 		super(x, y, 14d, 31d, null);
+		health = 3;
+		animation = new Animation();
 		animation.load("/model/player/Run-Animation.png", 2, 300);
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/model/player/Player-Model.png"));

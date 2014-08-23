@@ -24,6 +24,7 @@ public class StageLevel extends Stage {
 
 	private BufferedImage background;
 	private BufferedImage mountains;
+	private BufferedImage healthbar;
 	private LevelMap map;
 	private TileSet tileSet;
 
@@ -38,6 +39,7 @@ public class StageLevel extends Stage {
 		try {
 			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Space-Background.png"));
 			mountains = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-Mountains.png"));
+			healthbar = ImageIO.read(getClass().getResourceAsStream("/Healthbar.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,6 +73,12 @@ public class StageLevel extends Stage {
 		}
 		player.draw(g2);
 		g2.setTransform(new AffineTransform());
+
+		/**
+		 * GUI
+		 */
+		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
+		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
 	}
 
 	public void update() {
