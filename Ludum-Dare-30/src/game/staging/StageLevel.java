@@ -5,6 +5,7 @@ import game.level.EntityPlayerClone;
 import game.level.EntityPlayerRecord;
 import game.level.LevelMap;
 import game.level.TileSet;
+import game.main.GameCanvas;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -89,8 +90,14 @@ public class StageLevel extends Stage {
 		at.translate((int) -xOffset, (int) -yOffset);
 		g2.setTransform(at);
 		int spriteSize = TileSet.SPRITE_SIZE * SCALE;
-		for (int y = 0; y < map.getHeight(); y++) {
-			for (int x = 0; x < map.getWidth(); x++) {
+
+		int xStart = (int) (xOffset / (TileSet.SPRITE_SIZE * SCALE));
+		int yStart = (int) (yOffset / (TileSet.SPRITE_SIZE * SCALE));
+		int xEnd = xStart + GameCanvas.WIDTH / (TileSet.SPRITE_SIZE * SCALE) + 2;
+		int yEnd = yStart + GameCanvas.HEIGHT / (TileSet.SPRITE_SIZE * SCALE) + 2;
+
+		for (int y = yStart; y < yEnd; y++) {
+			for (int x = xStart; x < xEnd; x++) {
 				BufferedImage image = tileSet.getSprite(map.getTileID(x, y));
 				if (image != null) {
 					g2.drawImage(image, x * spriteSize, y * spriteSize, spriteSize, spriteSize, null);
@@ -108,7 +115,8 @@ public class StageLevel extends Stage {
 				playerClone.draw(g2, true);
 			}
 			g2.setTransform(new AffineTransform());
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		map.drawObjects(g2);
 		/**
 		 * GUI
@@ -136,7 +144,8 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 	}
 
 	public void stop() {
