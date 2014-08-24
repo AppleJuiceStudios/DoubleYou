@@ -3,8 +3,8 @@ package game.level.map;
 import game.level.EntityPlayer;
 import game.level.mapobject.MapObject;
 import game.res.SaveGame;
-import game.res.SoundManager;
 import game.staging.StageLevel;
+import game.staging.StageManager;
 
 import java.awt.Graphics2D;
 import java.io.File;
@@ -132,10 +132,8 @@ public class LevelMap {
 	}
 
 	public void hasWon() {
-		System.out.println("Has WON!");
-		SoundManager.loadClipInCache("Won", "you_win.wav");
-		//		stageLevel.getStageManager().setStage(StageManager.);
 		SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
 		SaveGame.save();
+		stageLevel.getStageManager().setStage(StageManager.STAGE_WON);
 	}
 }
