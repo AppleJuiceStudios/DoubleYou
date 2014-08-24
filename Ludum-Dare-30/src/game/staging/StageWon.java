@@ -82,10 +82,10 @@ public class StageWon extends Stage {
 
 	private void loadTextures() {
 		try {
-			imgBackground = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Space-Background.png"));
+			imgBackground = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
 			imgWon = ImageIO.read(getClass().getResourceAsStream("/Contributors.png"));
-			imgLevel = ImageIO.read(getClass().getResourceAsStream("/buttons/Back-Button.png"));
-			imgMenu = ImageIO.read(getClass().getResourceAsStream("/buttons/Web-Button.png"));
+			imgLevel = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
+			imgMenu = ImageIO.read(getClass().getResourceAsStream("/buttons/Back-Button.png"));
 		} catch (Exception e) {
 			System.out.println("[Main Menue] Texture loading failed!");
 			e.printStackTrace();
