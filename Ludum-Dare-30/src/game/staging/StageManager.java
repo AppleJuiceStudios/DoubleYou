@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.res.SaveGame;
 import game.res.SoundManager;
 
 import java.awt.Graphics2D;
@@ -25,6 +26,7 @@ public class StageManager {
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
+		SaveGame.load();
 		SoundManager.init();
 		stage = new StageMainMenue(this, null);
 	}
