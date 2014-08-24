@@ -28,7 +28,7 @@ public class StageManager {
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
-		SaveGame.load();
+		if (!GameCanvas.IS_APPLET) SaveGame.load();
 		SoundManager.init();
 		stage = new StageMainMenue(this, null);
 	}

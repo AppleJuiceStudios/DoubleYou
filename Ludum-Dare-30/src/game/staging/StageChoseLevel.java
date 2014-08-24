@@ -82,7 +82,8 @@ public class StageChoseLevel extends Stage {
 			SoundManager.play("Space Commando", true);
 		}
 
-		nextLevel = SaveGame.saveGame.getNextLevel();
+		nextLevel = 16;
+		if (!GameCanvas.IS_APPLET) nextLevel = SaveGame.saveGame.getNextLevel();
 		initMouse();
 		initRecs();
 		loadTextures();

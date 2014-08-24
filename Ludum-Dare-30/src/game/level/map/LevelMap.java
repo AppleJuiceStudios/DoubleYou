@@ -2,8 +2,8 @@ package game.level.map;
 
 import game.level.entity.EntityPlayer;
 import game.level.mapobject.MapObject;
+import game.main.GameCanvas;
 import game.res.SaveGame;
-import game.res.SoundManager;
 import game.staging.StageLevel;
 import game.staging.StageManager;
 
@@ -135,8 +135,8 @@ public class LevelMap {
 	}
 
 	public void hasWon() {
-		SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
-		SaveGame.save();
+		if (!GameCanvas.IS_APPLET) SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
+		if (!GameCanvas.IS_APPLET) SaveGame.save();
 		stageLevel.getStageManager().setStage(StageManager.STAGE_WON);
 	}
 }
