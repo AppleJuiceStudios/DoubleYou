@@ -166,7 +166,7 @@ public class StageChoseLevel extends Stage {
 
 	private void loadTextures() {
 		try {
-			imgLock = ImageIO.read(getClass().getResourceAsStream("/buttons/Back-Button.png"));
+			imgLock = ImageIO.read(getClass().getResourceAsStream("/buttons/Lock.png"));
 			//Stage 1
 			imgS1L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
 			imgS1L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-2.png"));
