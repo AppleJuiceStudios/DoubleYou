@@ -226,7 +226,6 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgS4L3, 630, 340, 50, 50, null);
 		g2.drawImage(imgS4L4, 630, 470, 50, 50, null);
 		//Overlay
-		System.out.println("");
 		for (int y = 0; y < 4; y++) {
 			for (int x = 0; x < 4; x++) {
 				int current = y + x * 4;
