@@ -22,7 +22,7 @@ public class MapObjectGroundswich extends MapObject {
 		this.targetID = targetID;
 		this.keep = keep;
 		try {
-			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Groundswich.png"));
+			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Groundswitch.png"));
 			images = new BufferedImage[2];
 			images[0] = image.getSubimage(0, 0, 16, 16);
 			images[1] = image.getSubimage(0, 16, 16, 16);
