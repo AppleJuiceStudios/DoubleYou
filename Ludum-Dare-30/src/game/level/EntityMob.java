@@ -14,6 +14,10 @@ public class EntityMob extends Entity {
 	}
 
 	public void update(LevelMap map) {
+		colision(map);
+	}
+
+	protected void colision(LevelMap map) {
 		yMovement += 0.07;
 		if (xMovement > 0) {
 			lookLeft = false;

@@ -64,8 +64,13 @@ public class StageLevel extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		xOffset += (player.getXPos() * SCALE - (800 / 2) - xOffset) * 0.3;
-		yOffset += (player.getYPos() * SCALE - (600 / 3) - yOffset) * 0.3;
+		if (isRecording) {
+			xOffset += (playerRecord.getXPos() * SCALE - (800 / 2) - xOffset) * 0.2;
+			yOffset += (playerRecord.getYPos() * SCALE - (600 / 3) - yOffset) * 0.2;
+		} else {
+			xOffset += (player.getXPos() * SCALE - (800 / 2) - xOffset) * 0.2;
+			yOffset += (player.getYPos() * SCALE - (600 / 3) - yOffset) * 0.2;
+		}
 		if (xOffset > maxXOffset) {
 			xOffset = maxXOffset;
 		} else if (xOffset < 0) {

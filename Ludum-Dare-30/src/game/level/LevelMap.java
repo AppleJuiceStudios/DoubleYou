@@ -78,9 +78,19 @@ public class LevelMap {
 		height = spritesheet[0].length;
 	}
 
-	public boolean isSolidTile(int x, int y) {
+	public boolean isBlock(int x, int y) {
 		int id = getTileID(x, y);
 		return id > 0 & id < 10;
+	}
+
+	public boolean isSolidTile(int x, int y) {
+		int id = getTileID(x, y);
+		if (id < 32) {
+			return id > 0 & id < 10;
+		} else {
+			return objects[id - 32].isSolid();
+		}
+
 	}
 
 	public void save(String name) {

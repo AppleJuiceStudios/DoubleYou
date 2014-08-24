@@ -33,7 +33,7 @@ public class MapObject {
 	}
 
 	public boolean isSolid() {
-		return false;
+		return true;
 	}
 
 	public void updateTriger(EntityPlayer[] player) {
