@@ -15,6 +15,9 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 public class StageChoseLevel extends Stage {
+
+	private int nextLevel = 1;
+
 	/**
 	 * Buttons
 	 */
@@ -42,6 +45,7 @@ public class StageChoseLevel extends Stage {
 	/**
 	 * Images
 	 */
+	private BufferedImage imgLock;
 	//Stage 1
 	private BufferedImage imgS1L1;
 	private BufferedImage imgS1L2;
@@ -88,37 +92,37 @@ public class StageChoseLevel extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				if (btnS1L1.contains(point)) { //Stage 1
+				if (btnS1L1.contains(point) && nextLevel < 1) { //Stage 1
 					send("S1L1");
-				} else if (btnS1L2.contains(point)) {
+				} else if (btnS1L2.contains(point) && nextLevel < 2) {
 					send("S1L2");
-				} else if (btnS1L3.contains(point)) {
+				} else if (btnS1L3.contains(point) && nextLevel < 3) {
 					send("S1L3");
-				} else if (btnS1L4.contains(point)) {
+				} else if (btnS1L4.contains(point) && nextLevel < 4) {
 					send("S1L4");
-				} else if (btnS2L1.contains(point)) { //Stage 2
+				} else if (btnS2L1.contains(point) && nextLevel < 5) { //Stage 2
 					send("S2L1");
-				} else if (btnS2L2.contains(point)) {
+				} else if (btnS2L2.contains(point) && nextLevel < 6) {
 					send("S2L2");
-				} else if (btnS2L3.contains(point)) {
+				} else if (btnS2L3.contains(point) && nextLevel < 7) {
 					send("S2L3");
-				} else if (btnS2L4.contains(point)) {
+				} else if (btnS2L4.contains(point) && nextLevel < 8) {
 					send("S2L4");
-				} else if (btnS3L1.contains(point)) { //Stage 3
+				} else if (btnS3L1.contains(point) && nextLevel < 9) { //Stage 3
 					send("S3L1");
-				} else if (btnS3L2.contains(point)) {
+				} else if (btnS3L2.contains(point) && nextLevel < 10) {
 					send("S3L2");
-				} else if (btnS3L3.contains(point)) {
+				} else if (btnS3L3.contains(point) && nextLevel < 11) {
 					send("S3L3");
-				} else if (btnS3L4.contains(point)) {
+				} else if (btnS3L4.contains(point) && nextLevel < 12) {
 					send("S3L4");
-				} else if (btnS4L1.contains(point)) { //Stage 4
+				} else if (btnS4L1.contains(point) && nextLevel < 13) { //Stage 4
 					send("S4L1");
-				} else if (btnS4L2.contains(point)) {
+				} else if (btnS4L2.contains(point) && nextLevel < 14) {
 					send("S4L2");
-				} else if (btnS4L3.contains(point)) {
+				} else if (btnS4L3.contains(point) && nextLevel < 15) {
 					send("S4L3");
-				} else if (btnS4L4.contains(point)) {
+				} else if (btnS4L4.contains(point) && nextLevel < 16) {
 					send("S4L4");
 				}
 			}
@@ -162,6 +166,7 @@ public class StageChoseLevel extends Stage {
 
 	private void loadTextures() {
 		try {
+			imgLock = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
 			//Stage 1
 			imgS1L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
 			imgS1L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
@@ -220,6 +225,17 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgS4L2, 630, 210, 50, 50, null);
 		g2.drawImage(imgS4L3, 630, 340, 50, 50, null);
 		g2.drawImage(imgS4L4, 630, 470, 50, 50, null);
+		//Overlay
+		for (int y = 0; y < 4; y++) {
+			for (int x = 0; x < 4; x++) {
+				int current = y + y * x;
+				int xx = x * 50 + (x + 1) * 120;
+				int yy = y * 50 + (y + 1) * 80;
+				if (current < nextLevel) {
+					g2.drawImage(imgLock, xx, yy, 50, 50, null);
+				}
+			}
+		}
 	}
 
 	private void send(String level) {
