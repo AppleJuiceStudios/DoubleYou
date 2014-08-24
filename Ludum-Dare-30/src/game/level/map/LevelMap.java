@@ -92,9 +92,9 @@ public class LevelMap {
 
 	public static LevelMap loadLevel(String name) {
 		if (name.equals("S1L1")) {
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMap11.class);
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level11.xml"), LevelMap11.class);
 		} else {
-			return null;
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMapTest.class);
 		}
 	}
 
