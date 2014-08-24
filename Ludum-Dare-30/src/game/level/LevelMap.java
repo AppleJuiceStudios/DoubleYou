@@ -77,11 +77,11 @@ public class LevelMap {
 	}
 
 	public void save(String name) {
-		JAXB.marshal(this, new File("res/level/" + name + ".xml"));
+		JAXB.marshal(this, new File("/res/level/" + name + ".xml"));
 	}
 
 	public static LevelMap loadLevel(String name) {
-		return JAXB.unmarshal(new File("res/level/" + name + ".xml"), LevelMap.class);
+		return JAXB.unmarshal(new File("/res/level/" + name + ".xml"), LevelMap.class);
 	}
 
 	public MapObject[] getObjects() {
