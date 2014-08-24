@@ -123,8 +123,7 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		map.drawObjects(g2);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -170,8 +169,7 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 	}
 
 	public void stop() {
@@ -218,6 +216,14 @@ public class StageLevel extends Stage {
 				}
 			}
 		});
+	}
+
+	public boolean isRecording() {
+		return isRecording;
+	}
+
+	public boolean isCloneMoving() {
+		return isCloneMoving;
 	}
 
 }

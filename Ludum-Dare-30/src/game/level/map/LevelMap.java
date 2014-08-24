@@ -98,6 +98,8 @@ public class LevelMap {
 	public static LevelMap loadLevel(String name) {
 		if (name.equals("S1L1")) {
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level11.xml"), LevelMap11.class);
+		} else if (name.equals("S1L2")) {
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level12.xml"), LevelMap12.class);
 		} else {
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMapTest.class);
 		}
@@ -134,7 +136,7 @@ public class LevelMap {
 	public void hasWon() {
 		System.out.println("Has WON!");
 		SoundManager.loadClipInCache("Won", "you_win.wav");
-		//		stageLevel.getStageManager().setStage(StageManager.);
+		// stageLevel.getStageManager().setStage(StageManager.);
 		SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
 		SaveGame.save();
 	}

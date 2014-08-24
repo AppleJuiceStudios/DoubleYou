@@ -16,7 +16,7 @@ public class MapObjectLasergateHorizontal extends MapObject {
 			width = 2;
 		}
 		try {
-			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Lasergate-Horizontal.png"));
+			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Lasergate-Hrizontal.png"));
 			images = new BufferedImage[6];
 			images[0] = image.getSubimage(0, 0, 16, 16);
 			images[1] = image.getSubimage(16, 0, 16, 16);
