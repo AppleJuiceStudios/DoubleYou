@@ -37,7 +37,7 @@ public class LevelMap {
 		objects[0] = new MapObject((byte) 32, 5, 10, 1, 1, false);
 
 		setSpritesheet(map);
-		save("test");
+		//		save("test");
 	}
 
 	public void drawObjects(Graphics2D g2) {
@@ -94,11 +94,11 @@ public class LevelMap {
 	}
 
 	public void save(String name) {
-		JAXB.marshal(this, new File("res/level/" + name + ".xml"));
+		JAXB.marshal(this, new File("/res/level/" + name + ".xml"));
 	}
 
 	public static LevelMap loadLevel(String name) {
-		return JAXB.unmarshal(new File("res/level/" + name + ".xml"), LevelMap.class);
+		return JAXB.unmarshal(new File("/res/level/" + name + ".xml"), LevelMap.class);
 	}
 
 	public MapObject[] getObjects() {

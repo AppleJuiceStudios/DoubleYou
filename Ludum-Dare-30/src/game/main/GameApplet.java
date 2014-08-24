@@ -1,5 +1,7 @@
 package game.main;
 
+import game.res.SoundManager;
+
 import java.applet.Applet;
 import java.applet.AppletContext;
 import java.awt.Color;
@@ -25,6 +27,7 @@ public class GameApplet extends Applet {
 
 	public void stop() {
 		gameCanvas.stop();
+		SoundManager.stopAll();
 	}
 
 	public void destroy() {
