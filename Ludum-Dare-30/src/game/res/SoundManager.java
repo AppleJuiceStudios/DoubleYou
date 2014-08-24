@@ -73,7 +73,7 @@ public class SoundManager {
 			cacheClips.get(id).close();
 		}
 		cacheClips.clear();
-		System.out.println("[SoundManger] Clearing cache.");
+		System.out.println("[SoundManager] Clearing cache.");
 	}
 
 	public static void play(String id) {
