@@ -85,5 +85,4 @@ public class Monitoring {
 		physics = physicsStop - physicsStart;
 		totMon += physics;
 	}
-
 }
