@@ -46,7 +46,7 @@ public class StageLevel extends Stage {
 		tileSet = new TileSet();
 		map = LevelMap.loadLevel(data.get("level"));
 		try {
-			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Space-Background.png"));
+			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Mars-Background.png"));
 			mountains = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-Mountains.png"));
 			healthbar = ImageIO.read(getClass().getResourceAsStream("/Healthbar.png"));
 		} catch (IOException e) {
@@ -82,7 +82,7 @@ public class StageLevel extends Stage {
 		} else if (yOffset < 0) {
 			yOffset = 0;
 		}
-		g2.drawImage(background, 0, 0, 1600, 800, null);
+		g2.drawImage(background, 0, 0, 800, 600, null);
 		double mountainsOffset = -xOffset * 0.3;
 		g2.drawImage(mountains, (int) (mountainsOffset % 800) + 800, -190, 800, 800, null);
 		g2.drawImage(mountains, (int) (mountainsOffset % 800), -190, 800, 800, null);
@@ -114,7 +114,8 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		map.drawObjects(g2);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -143,7 +144,8 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 	}
 
 	public void stop() {
