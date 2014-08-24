@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 
 public class StageChoseLevel extends Stage {
 
-	private int nextLevel = 1;
+	private int nextLevel = 5;
 
 	/**
 	 * Buttons
@@ -92,37 +92,37 @@ public class StageChoseLevel extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				if (btnS1L1.contains(point) && nextLevel < 1) { //Stage 1
+				if (btnS1L1.contains(point)) { //Stage 1
 					send("S1L1");
-				} else if (btnS1L2.contains(point) && nextLevel < 2) {
+				} else if (btnS1L2.contains(point) && nextLevel >= 2) {
 					send("S1L2");
-				} else if (btnS1L3.contains(point) && nextLevel < 3) {
+				} else if (btnS1L3.contains(point) && nextLevel >= 3) {
 					send("S1L3");
-				} else if (btnS1L4.contains(point) && nextLevel < 4) {
+				} else if (btnS1L4.contains(point) && nextLevel >= 4) {
 					send("S1L4");
-				} else if (btnS2L1.contains(point) && nextLevel < 5) { //Stage 2
+				} else if (btnS2L1.contains(point) && nextLevel >= 5) { //Stage 2
 					send("S2L1");
-				} else if (btnS2L2.contains(point) && nextLevel < 6) {
+				} else if (btnS2L2.contains(point) && nextLevel >= 6) {
 					send("S2L2");
-				} else if (btnS2L3.contains(point) && nextLevel < 7) {
+				} else if (btnS2L3.contains(point) && nextLevel >= 7) {
 					send("S2L3");
-				} else if (btnS2L4.contains(point) && nextLevel < 8) {
+				} else if (btnS2L4.contains(point) && nextLevel >= 8) {
 					send("S2L4");
-				} else if (btnS3L1.contains(point) && nextLevel < 9) { //Stage 3
+				} else if (btnS3L1.contains(point) && nextLevel >= 9) { //Stage 3
 					send("S3L1");
-				} else if (btnS3L2.contains(point) && nextLevel < 10) {
+				} else if (btnS3L2.contains(point) && nextLevel >= 10) {
 					send("S3L2");
-				} else if (btnS3L3.contains(point) && nextLevel < 11) {
+				} else if (btnS3L3.contains(point) && nextLevel >= 11) {
 					send("S3L3");
-				} else if (btnS3L4.contains(point) && nextLevel < 12) {
+				} else if (btnS3L4.contains(point) && nextLevel >= 12) {
 					send("S3L4");
-				} else if (btnS4L1.contains(point) && nextLevel < 13) { //Stage 4
+				} else if (btnS4L1.contains(point) && nextLevel >= 13) { //Stage 4
 					send("S4L1");
-				} else if (btnS4L2.contains(point) && nextLevel < 14) {
+				} else if (btnS4L2.contains(point) && nextLevel >= 14) {
 					send("S4L2");
-				} else if (btnS4L3.contains(point) && nextLevel < 15) {
+				} else if (btnS4L3.contains(point) && nextLevel >= 15) {
 					send("S4L3");
-				} else if (btnS4L4.contains(point) && nextLevel < 16) {
+				} else if (btnS4L4.contains(point) && nextLevel >= 16) {
 					send("S4L4");
 				}
 			}
@@ -166,27 +166,27 @@ public class StageChoseLevel extends Stage {
 
 	private void loadTextures() {
 		try {
-			imgLock = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
+			imgLock = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-2.png"));
 			//Stage 1
-			imgS1L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS1L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS1L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS1L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
+			imgS1L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS1L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS1L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS1L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
 			//Stage 2
-			imgS2L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS2L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS2L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS2L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
+			imgS2L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS2L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS2L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS2L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
 			//Stage 3
-			imgS3L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS3L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS3L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS3L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
+			imgS3L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS3L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS3L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS3L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
 			//Stage 4
-			imgS4L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS4L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS4L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
-			imgS4L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Menu-Background.png"));
+			imgS4L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS4L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS4L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
+			imgS4L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
 			//Backgrounds
 			imgBGS1 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
 			imgBGS2 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
@@ -226,12 +226,13 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgS4L3, 630, 340, 50, 50, null);
 		g2.drawImage(imgS4L4, 630, 470, 50, 50, null);
 		//Overlay
+		System.out.println("");
 		for (int y = 0; y < 4; y++) {
 			for (int x = 0; x < 4; x++) {
-				int current = y + y * x;
+				int current = y + x * 4;
 				int xx = x * 50 + (x + 1) * 120;
 				int yy = y * 50 + (y + 1) * 80;
-				if (current < nextLevel) {
+				if (current >= nextLevel) {
 					g2.drawImage(imgLock, xx, yy, 50, 50, null);
 				}
 			}
