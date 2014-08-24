@@ -96,11 +96,11 @@ public class GameCanvas extends Canvas {
 			Monitoring.startSleep();
 			delay = waitTime - (System.currentTimeMillis() - startTime);
 			if (delay > 0) {
-				try {
-					Thread.sleep(delay);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				//				try {
+				//										Thread.sleep(delay);
+				//				} catch (InterruptedException e) {
+				//					e.printStackTrace();
+				//				}
 			}
 
 			time = System.nanoTime();
