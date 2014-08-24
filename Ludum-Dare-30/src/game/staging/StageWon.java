@@ -115,6 +115,6 @@ public class StageWon extends Stage {
 	}
 
 	private void level() {
-		getStageManager().setStage(StageManager.STAGE_LEVEL);
+		getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 	}
 }
