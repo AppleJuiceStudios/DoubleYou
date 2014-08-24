@@ -8,12 +8,10 @@ public class Monitoring {
 
 	private static long start = 0;
 	private static long end = 0;
-	private static long totMon = 0;
 
 	public static void tick() {
 		end = System.currentTimeMillis();
 		if (start != 0) print();
-		totMon = 0;
 		start = System.currentTimeMillis();
 	}
 
@@ -23,6 +21,7 @@ public class Monitoring {
 			System.out.println("FPS: \t\t\t" + FpsManager.getFps());
 			System.out.println("Drawing time:\t\t" + String.format("%02d", draw) + " ms");
 			System.out.println("Physics time:\t\t" + String.format("%02d", physics) + " ms");
+			System.out.println("Physics-Sleep:\t\t" + String.format("%02d", physicsSleep) + " ms");
 			System.out.println("Sleep time:\t\t" + String.format("%02d", sleep) + " ms");
 			System.out.println("################################\n\n\n");
 		}
@@ -42,7 +41,6 @@ public class Monitoring {
 	public static void stopSleep() {
 		sleepStop = System.currentTimeMillis();
 		sleep = sleepStop - sleepStart;
-		totMon += sleep;
 	}
 
 	/**
@@ -59,7 +57,6 @@ public class Monitoring {
 	public static void stopDraw() {
 		drawStop = System.currentTimeMillis();
 		draw = drawStop - drawStart;
-		totMon += draw;
 	}
 
 	/**
@@ -68,14 +65,15 @@ public class Monitoring {
 	private static long physicsStart = 0;
 	private static long physicsStop = 0;
 	private static long physics = 0;
+	private static long physicsSleep = 0;
 
 	public static void startPhysics() {
 		physicsStart = System.currentTimeMillis();
+		physicsSleep = physicsStart - physicsStop;
 	}
 
 	public static void stopPhysics() {
 		physicsStop = System.currentTimeMillis();
 		physics = physicsStop - physicsStart;
-		totMon += physics;
 	}
 }
