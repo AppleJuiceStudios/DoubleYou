@@ -16,8 +16,7 @@ public class Monitoring {
 		end = System.currentTimeMillis();
 		totTime = end - start;
 		unMon = totTime - totMon;
-		if (start != 0)
-			print();
+		if (start != 0) print();
 		totMon = 0;
 		start = System.currentTimeMillis();
 	}
@@ -86,5 +85,4 @@ public class Monitoring {
 		physics = physicsStop - physicsStart;
 		totMon += physics;
 	}
-
 }

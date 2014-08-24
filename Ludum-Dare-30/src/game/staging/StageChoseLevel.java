@@ -1,8 +1,10 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.res.SaveGame;
 import game.res.SoundManager;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -16,7 +18,7 @@ import javax.imageio.ImageIO;
 
 public class StageChoseLevel extends Stage {
 
-	private int nextLevel = 5;
+	private int nextLevel;
 
 	/**
 	 * Buttons
@@ -74,6 +76,8 @@ public class StageChoseLevel extends Stage {
 
 	public StageChoseLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
+
+		nextLevel = SaveGame.saveGame.getNextLevel();
 		initMouse();
 		initRecs();
 		loadTextures();
@@ -188,8 +192,8 @@ public class StageChoseLevel extends Stage {
 			imgS4L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-3.png"));
 			imgS4L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-4.png"));
 			//Backgrounds
-			imgBGS1 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
-			imgBGS2 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
+			imgBGS1 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Mars-Background.png"));
+			imgBGS2 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Saturn-Background.png"));
 			imgBGS3 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
 			imgBGS4 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
 		} catch (Exception e) {
@@ -205,6 +209,10 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgBGS2, GameCanvas.WIDTH / 2, 0, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
 		g2.drawImage(imgBGS3, 0, GameCanvas.HEIGHT / 2, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
 		g2.drawImage(imgBGS4, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
+		//Border
+		g2.setColor(Color.BLACK);
+		g2.fillRect(398, 0, 4, 600);
+		g2.fillRect(0, 298, 800, 4);
 		//Stage 1
 		g2.drawImage(imgS1L1, 120, 80, 50, 50, null);
 		g2.drawImage(imgS1L2, 290, 80, 50, 50, null);
