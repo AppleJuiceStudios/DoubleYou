@@ -50,4 +50,12 @@ public class Entity {
 		return y;
 	}
 
+	public double getWidth() {
+		return width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
 }

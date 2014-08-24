@@ -85,4 +85,9 @@ public class EntityPlayer extends EntityMob {
 		rec.key_W = key_W;
 		return rec;
 	}
+
+	public int getHealth() {
+		return health;
+	}
+
 }

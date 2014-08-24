@@ -40,7 +40,8 @@ public class MapObjectPlate extends MapObject {
 
 	public void updateTriger(EntityPlayer[] player, LevelMap map) {
 		for (int i = 0; i < player.length; i++) {
-			if (x == (int) ((player[i].getXPos() + (player[i].width / 2)) / 16) & y == (int) ((player[i].getYPos() + player[i].height - 1) / 16)) {
+			if (x == (int) ((player[i].getXPos() + (player[i].getWidth() / 2)) / 16)
+					& y == (int) ((player[i].getYPos() + player[i].getHeight() - 1) / 16)) {
 				if (triger == false) {
 					triger = true;
 					map.powerObject(targetID, true ^ power);
