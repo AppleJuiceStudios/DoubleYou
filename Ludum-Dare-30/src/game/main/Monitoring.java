@@ -6,13 +6,8 @@ public class Monitoring {
 
 	public final static boolean DISPLAY = true;
 
-	private static long start = 0;
-	private static long end = 0;
-
 	public static void tick() {
-		end = System.currentTimeMillis();
-		if (start != 0) print();
-		start = System.currentTimeMillis();
+		print();
 	}
 
 	private static void print() {

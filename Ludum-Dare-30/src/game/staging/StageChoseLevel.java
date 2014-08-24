@@ -77,6 +77,11 @@ public class StageChoseLevel extends Stage {
 	public StageChoseLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 
+		if (!SoundManager.isLoaded("Space Commando")) {
+			SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
+			SoundManager.play("Space Commando", true);
+		}
+
 		nextLevel = SaveGame.saveGame.getNextLevel();
 		initMouse();
 		initRecs();
@@ -147,25 +152,25 @@ public class StageChoseLevel extends Stage {
 
 	private void initRecs() {
 		//Stage 1
-		btnS1L1 = new Rectangle(120, 80, 50, 50);
-		btnS1L2 = new Rectangle(290, 80, 50, 50);
-		btnS1L3 = new Rectangle(120, 210, 50, 50);
-		btnS1L4 = new Rectangle(290, 210, 50, 50);
+		btnS1L1 = new Rectangle(100, 66, 50, 50);
+		btnS1L2 = new Rectangle(250, 66, 50, 50);
+		btnS1L3 = new Rectangle(100, 182, 50, 50);
+		btnS1L4 = new Rectangle(250, 182, 50, 50);
 		//Stage 2
-		btnS2L1 = new Rectangle(460, 80, 50, 50);
-		btnS2L2 = new Rectangle(630, 80, 50, 50);
-		btnS2L3 = new Rectangle(460, 210, 50, 50);
-		btnS2L4 = new Rectangle(630, 210, 50, 50);
+		btnS2L1 = new Rectangle(500, 66, 50, 50);
+		btnS2L2 = new Rectangle(650, 66, 50, 50);
+		btnS2L3 = new Rectangle(500, 182, 50, 50);
+		btnS2L4 = new Rectangle(650, 182, 50, 50);
 		//Stage 3
-		btnS3L1 = new Rectangle(120, 340, 50, 50);
-		btnS3L2 = new Rectangle(290, 340, 50, 50);
-		btnS3L3 = new Rectangle(120, 470, 50, 50);
-		btnS3L4 = new Rectangle(290, 470, 50, 50);
+		btnS3L1 = new Rectangle(100, 364, 50, 50);
+		btnS3L2 = new Rectangle(250, 364, 50, 50);
+		btnS3L3 = new Rectangle(100, 480, 50, 50);
+		btnS3L4 = new Rectangle(250, 480, 50, 50);
 		//Stage 4
-		btnS4L1 = new Rectangle(460, 340, 50, 50);
-		btnS4L2 = new Rectangle(630, 340, 50, 50);
-		btnS4L3 = new Rectangle(460, 470, 50, 50);
-		btnS4L4 = new Rectangle(630, 470, 50, 50);
+		btnS4L1 = new Rectangle(500, 364, 50, 50);
+		btnS4L2 = new Rectangle(650, 364, 50, 50);
+		btnS4L3 = new Rectangle(500, 480, 50, 50);
+		btnS4L4 = new Rectangle(650, 480, 50, 50);
 	}
 
 	private void loadTextures() {
@@ -211,28 +216,28 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgBGS4, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
 		//Border
 		g2.setColor(Color.BLACK);
-		g2.fillRect(398, 0, 4, 600);
-		g2.fillRect(0, 298, 800, 4);
+		g2.fillRect(397, 0, 6, 600);
+		g2.fillRect(0, 297, 800, 6);
 		//Stage 1
-		g2.drawImage(imgS1L1, 120, 80, 50, 50, null);
-		g2.drawImage(imgS1L2, 290, 80, 50, 50, null);
-		g2.drawImage(imgS1L3, 120, 210, 50, 50, null);
-		g2.drawImage(imgS1L4, 290, 210, 50, 50, null);
+		g2.drawImage(imgS1L1, 100, 66, 50, 50, null);
+		g2.drawImage(imgS1L2, 250, 66, 50, 50, null);
+		g2.drawImage(imgS1L3, 100, 182, 50, 50, null);
+		g2.drawImage(imgS1L4, 250, 182, 50, 50, null);
 		//Stage 2
-		g2.drawImage(imgS2L1, 460, 80, 50, 50, null);
-		g2.drawImage(imgS2L2, 630, 80, 50, 50, null);
-		g2.drawImage(imgS2L3, 460, 210, 50, 50, null);
-		g2.drawImage(imgS2L4, 630, 210, 50, 50, null);
+		g2.drawImage(imgS2L1, 500, 66, 50, 50, null);
+		g2.drawImage(imgS2L2, 650, 66, 50, 50, null);
+		g2.drawImage(imgS2L3, 500, 182, 50, 50, null);
+		g2.drawImage(imgS2L4, 650, 182, 50, 50, null);
 		//Stage 3
-		g2.drawImage(imgS3L1, 120, 340, 50, 50, null);
-		g2.drawImage(imgS3L2, 290, 340, 50, 50, null);
-		g2.drawImage(imgS3L3, 120, 470, 50, 50, null);
-		g2.drawImage(imgS3L4, 290, 470, 50, 50, null);
+		g2.drawImage(imgS3L1, 100, 364, 50, 50, null);
+		g2.drawImage(imgS3L2, 250, 364, 50, 50, null);
+		g2.drawImage(imgS3L3, 100, 480, 50, 50, null);
+		g2.drawImage(imgS3L4, 250, 480, 50, 50, null);
 		//Stage 4
-		g2.drawImage(imgS4L1, 460, 340, 50, 50, null);
-		g2.drawImage(imgS4L2, 630, 340, 50, 50, null);
-		g2.drawImage(imgS4L3, 460, 470, 50, 50, null);
-		g2.drawImage(imgS4L4, 630, 470, 50, 50, null);
+		g2.drawImage(imgS4L1, 500, 364, 50, 50, null);
+		g2.drawImage(imgS4L2, 650, 364, 50, 50, null);
+		g2.drawImage(imgS4L3, 500, 480, 50, 50, null);
+		g2.drawImage(imgS4L4, 650, 480, 50, 50, null);
 		//Overlay
 		for (int y = 0; y < 4; y++) {
 			for (int x = 0; x < 4; x++) {
