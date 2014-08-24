@@ -9,17 +9,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class MapObjectGroundswich extends MapObject {
+public class MapObjectGroundswtich extends MapObject {
 
 	private byte targetID;
 
 	private BufferedImage[] images;
-	private boolean triger;
 	private boolean keep;
+	private boolean inverted;
 
-	public MapObjectGroundswich(byte id, int x, int y, byte targetID, boolean keep) {
-		super(id, x, y, 1, 1, true);
+	public MapObjectGroundswtich(byte id, int x, int y, byte targetID, boolean inverted, boolean keep) {
+		super(id, x, y, 1, 1, false);
 		this.targetID = targetID;
+		this.inverted = inverted;
 		this.keep = keep;
 		try {
 			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Groundswitch.png"));
@@ -33,7 +34,7 @@ public class MapObjectGroundswich extends MapObject {
 
 	public void draw(Graphics2D g2) {
 		int scale = 16 * 3;
-		if (triger) {
+		if (power) {
 			g2.drawImage(images[1], x * scale, y * scale, scale, scale, null);
 		} else {
 			g2.drawImage(images[0], x * scale, y * scale, scale, scale, null);
@@ -44,14 +45,14 @@ public class MapObjectGroundswich extends MapObject {
 		for (int i = 0; i < player.length; i++) {
 			if (x == (int) ((player[i].getXPos() + (player[i].getWidth() / 2)) / 16)
 					& y == (int) ((player[i].getYPos() + player[i].getHeight() - 1) / 16)) {
-				if (triger == false) {
-					triger = true;
-					map.powerObject(targetID, true ^ power);
+				if (power == false) {
+					power = true;
+					map.powerObject(targetID, !inverted);
 				}
 			} else {
-				if (triger & !keep) {
-					triger = false;
-					map.powerObject(targetID, false ^ power);
+				if (power & !keep) {
+					power = false;
+					map.powerObject(targetID, inverted);
 				}
 			}
 		}

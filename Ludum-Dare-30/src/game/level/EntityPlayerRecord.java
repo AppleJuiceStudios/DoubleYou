@@ -88,7 +88,7 @@ public class EntityPlayerRecord extends EntityPlayer {
 			int ybottom = (int) ((y + height + yMovement) / 16);
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
-			if (map.isSolidTile(xleft, ybottom) | map.isSolidTile(xright, ybottom)) {
+			if (map.isBlock(xleft, ybottom) | map.isBlock(xright, ybottom)) {
 				yMovement = (ybottom * 16) - (y + height);
 				onGround = true;
 			}
@@ -96,7 +96,7 @@ public class EntityPlayerRecord extends EntityPlayer {
 			int ytop = (int) ((y + yMovement) / 16);
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
-			if (map.isSolidTile(xleft, ytop) | map.isSolidTile(xright, ytop)) {
+			if (map.isBlock(xleft, ytop) | map.isBlock(xright, ytop)) {
 				yMovement = ((ytop + 1) * 16) - y;
 			}
 		}

@@ -18,10 +18,6 @@ public class MapObject {
 
 	protected boolean power;
 
-	public MapObject() {
-
-	}
-
 	public MapObject(byte id, int x, int y, int width, int height, boolean power) {
 		this.id = id;
 		this.x = x;
@@ -81,6 +77,14 @@ public class MapObject {
 
 	public void setPower(boolean power) {
 		this.power = power;
+	}
+
+	public void setPower(boolean power, LevelMap map) {
+		this.power = power;
+	}
+
+	public boolean getPower() {
+		return power;
 	}
 
 	public byte getId() {

@@ -42,7 +42,7 @@ public class LevelMap {
 	}
 
 	public void powerObject(byte id, boolean power) {
-		objects[id - 32].setPower(power);
+		objects[id - 32].setPower(power, this);
 	}
 
 	public byte getTileID(int x, int y) {
@@ -98,12 +98,8 @@ public class LevelMap {
 		}
 	}
 
-	public MapObject[] getObjects() {
-		return objects;
-	}
-
-	public void setObjects(MapObject[] objects) {
-		this.objects = objects;
+	public MapObject getMapObject(byte id) {
+		return objects[id - 32];
 	}
 
 	public int getPlayerSpawnX() {
