@@ -4,7 +4,7 @@ import game.main.GameCanvas.FpsManager;
 
 public class Monitoring {
 
-	public final static boolean DISPLAY = false;
+	public final static boolean DISPLAY = true;
 
 	private static long start = 0;
 	private static long end = 0;
@@ -26,8 +26,7 @@ public class Monitoring {
 			System.out.println("################################");
 			System.out.println("FPS: \t\t\t" + FpsManager.getFps());
 			System.out.println("Drawing time:\t\t" + String.format("%02d", draw) + " ms");
-			System.out.println("   Physics time:\t  " + String.format("%02d", physics) + " ms");
-			System.out.println("   Unmon drawing:\t  " + String.format("%02d", (draw - (physics))) + " ms");
+			System.out.println("Physics time:\t\t" + String.format("%02d", physics) + " ms");
 			System.out.println("Sleep time:\t\t" + String.format("%02d", sleep) + " ms");
 			System.out.println("Unmonitored time:\t" + String.format("%02d", unMon) + " ms");
 			System.out.println("Total time:\t\t" + String.format("%02d", totTime) + " ms");

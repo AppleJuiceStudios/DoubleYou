@@ -29,7 +29,6 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void draw() {
-		Monitoring.startDraw();
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
@@ -39,7 +38,6 @@ public class GameCanvas extends Canvas {
 		stageManager.draw(g2);
 		g2.dispose();
 		bs.show();
-		Monitoring.stopDraw();
 	}
 
 	public void paint() {

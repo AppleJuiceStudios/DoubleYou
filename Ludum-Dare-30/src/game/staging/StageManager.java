@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.main.Monitoring;
 import game.res.SaveGame;
 import game.res.SoundManager;
 
@@ -57,11 +58,15 @@ public class StageManager {
 	}
 
 	public void draw(Graphics2D g2) {
+		Monitoring.startDraw();
 		stage.draw(g2);
+		Monitoring.stopDraw();
 	}
 
 	public void update() {
+		Monitoring.startPhysics();
 		stage.update();
+		Monitoring.stopPhysics();
 	}
 
 	public void setKeyListener(KeyListener keyListener) {
