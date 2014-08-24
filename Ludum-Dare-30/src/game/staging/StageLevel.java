@@ -104,6 +104,7 @@ public class StageLevel extends Stage {
 			}
 			g2.setTransform(new AffineTransform());
 		} catch (NullPointerException e) {}
+		map.drawObjects(g2);
 		/**
 		 * GUI
 		 */
@@ -124,6 +125,11 @@ public class StageLevel extends Stage {
 						playerClone = null;
 					}
 				}
+			}
+			if (isCloneMoving) {
+				map.updateTriger(player, playerClone);
+			} else {
+				map.updateTriger(player);
 			}
 		} catch (NullPointerException e) {}
 	}

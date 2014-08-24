@@ -1,5 +1,9 @@
 package game.level;
 
+import java.awt.Graphics2D;
+import java.io.File;
+
+import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -8,6 +12,8 @@ public class LevelMap {
 	private byte[][] spritesheet;
 	private int width;
 	private int height;
+
+	private MapObject[] objects;
 
 	public LevelMap() {
 		byte[][] map = new byte[50][13];
@@ -25,7 +31,25 @@ public class LevelMap {
 		}
 		map[0][11] = 5;
 		map[49][11] = 5;
+		map[5][10] = 32;
+
+		objects = new MapObject[1];
+		objects[0] = new MapObject((byte) 32, 5, 10, 1, 1, false);
+
 		setSpritesheet(map);
+		save("test");
+	}
+
+	public void drawObjects(Graphics2D g2) {
+		for (int i = 0; i < objects.length; i++) {
+			objects[i].draw(g2);
+		}
+	}
+
+	public void updateTriger(EntityPlayer... player) {
+		for (int i = 0; i < objects.length; i++) {
+			objects[i].updateTriger(player);
+		}
 	}
 
 	public byte getTileID(int x, int y) {
@@ -57,6 +81,22 @@ public class LevelMap {
 	public boolean isSolidTile(int x, int y) {
 		int id = getTileID(x, y);
 		return id > 0 & id < 10;
+	}
+
+	public void save(String name) {
+		JAXB.marshal(this, new File("res/level/" + name + ".xml"));
+	}
+
+	public static LevelMap loadLevel(String name) {
+		return JAXB.unmarshal(new File("res/level/" + name + ".xml"), LevelMap.class);
+	}
+
+	public MapObject[] getObjects() {
+		return objects;
+	}
+
+	public void setObjects(MapObject[] objects) {
+		this.objects = objects;
 	}
 
 }
