@@ -2,6 +2,7 @@ package game.level.map;
 
 import game.level.EntityPlayer;
 import game.level.mapobject.MapObject;
+import game.res.SaveGame;
 
 import java.awt.Graphics2D;
 import java.io.File;
@@ -118,4 +119,10 @@ public class LevelMap {
 		this.playerSpawnY = playerSpawnY;
 	}
 
+	public void hasWon() {
+		System.out.println("Has WON!");
+
+		SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
+		SaveGame.save();
+	}
 }
