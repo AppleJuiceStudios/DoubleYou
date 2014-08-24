@@ -1,7 +1,7 @@
 package game.level.map;
 
 import game.level.EntityPlayer;
-import game.level.MapObject;
+import game.level.mapobject.MapObject;
 
 import java.awt.Graphics2D;
 import java.io.File;
@@ -19,9 +19,13 @@ public class LevelMap {
 	private int width;
 	private int height;
 
-	private MapObject[] objects;
+	protected MapObject[] objects;
 
 	public LevelMap() {
+		init();
+	}
+
+	public void init() {
 		objects = new MapObject[0];
 	}
 
@@ -87,7 +91,11 @@ public class LevelMap {
 	}
 
 	public static LevelMap loadLevel(String name) {
-		return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/" + name + ".xml"), LevelMap.class);
+		if (name.equals("S1L1")) {
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMap11.class);
+		} else {
+			return null;
+		}
 	}
 
 	public MapObject[] getObjects() {

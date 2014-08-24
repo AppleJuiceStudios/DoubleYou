@@ -44,7 +44,7 @@ public class StageLevel extends Stage {
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		tileSet = new TileSet();
-		map = LevelMap.loadLevel("test");
+		map = LevelMap.loadLevel(data.get("level"));
 		try {
 			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Space-Background.png"));
 			mountains = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-Mountains.png"));

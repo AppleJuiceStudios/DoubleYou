@@ -1,5 +1,7 @@
 package game.level;
 
+import game.level.mapobject.MapObject;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
