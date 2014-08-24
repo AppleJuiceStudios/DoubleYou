@@ -9,18 +9,20 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class MapObjectPlate extends MapObject {
+public class MapObjectGroundswich extends MapObject {
 
 	private byte targetID;
 
 	private BufferedImage[] images;
 	private boolean triger;
+	private boolean keep;
 
-	public MapObjectPlate(byte id, int x, int y, byte targetID) {
+	public MapObjectGroundswich(byte id, int x, int y, byte targetID, boolean keep) {
 		super(id, x, y, 1, 1, true);
 		this.targetID = targetID;
+		this.keep = keep;
 		try {
-			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Plate.png"));
+			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Groundswich.png"));
 			images = new BufferedImage[2];
 			images[0] = image.getSubimage(0, 0, 16, 16);
 			images[1] = image.getSubimage(0, 16, 16, 16);
@@ -47,7 +49,7 @@ public class MapObjectPlate extends MapObject {
 					map.powerObject(targetID, true ^ power);
 				}
 			} else {
-				if (triger) {
+				if (triger & !keep) {
 					triger = false;
 					map.powerObject(targetID, false ^ power);
 				}
