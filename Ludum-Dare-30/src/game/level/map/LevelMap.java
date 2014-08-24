@@ -3,6 +3,8 @@ package game.level.map;
 import game.level.EntityPlayer;
 import game.level.mapobject.MapObject;
 import game.res.SaveGame;
+import game.res.SoundManager;
+import game.staging.StageLevel;
 
 import java.awt.Graphics2D;
 import java.io.File;
@@ -12,6 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class LevelMap {
+
+	private StageLevel stageLevel;
 
 	private int playerSpawnX;
 	private int playerSpawnY;
@@ -119,9 +123,13 @@ public class LevelMap {
 		this.playerSpawnY = playerSpawnY;
 	}
 
+	public void setStageLevel(StageLevel stageLevel) {
+		this.stageLevel = stageLevel;
+	}
+
 	public void hasWon() {
 		System.out.println("Has WON!");
-
+		SoundManager.loadClipInCache("Won", "you_win.wav");
 		SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
 		SaveGame.save();
 	}
