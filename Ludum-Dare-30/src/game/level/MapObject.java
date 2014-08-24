@@ -1,5 +1,7 @@
 package game.level;
 
+import game.level.map.LevelMap;
+
 import java.awt.Graphics2D;
 
 import javax.xml.bind.annotation.XmlRootElement;

@@ -4,7 +4,7 @@ import game.main.GameCanvas.FpsManager;
 
 public class Monitoring {
 
-	public final static boolean DISPLAY = true;
+	public final static boolean DISPLAY = false;
 
 	private static long start = 0;
 	private static long end = 0;
@@ -16,7 +16,8 @@ public class Monitoring {
 		end = System.currentTimeMillis();
 		totTime = end - start;
 		unMon = totTime - totMon;
-		if (start != 0) print();
+		if (start != 0)
+			print();
 		totMon = 0;
 		start = System.currentTimeMillis();
 	}

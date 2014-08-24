@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap>
+    <playerSpawnX>32</playerSpawnX>
+    <playerSpawnY>32</playerSpawnY>
     <spritesheet>AwYGBgUFBgYGBgUFBQ==</spritesheet>
     <spritesheet>AAAAAAIIAAAAAAIFBQ==</spritesheet>
     <spritesheet>AAAAAAIIAAAAAAMGBQ==</spritesheet>

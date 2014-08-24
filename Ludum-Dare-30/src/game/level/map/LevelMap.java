@@ -1,4 +1,7 @@
-package game.level;
+package game.level.map;
+
+import game.level.EntityPlayer;
+import game.level.MapObject;
 
 import java.awt.Graphics2D;
 import java.io.File;
@@ -8,6 +11,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class LevelMap {
+
+	private int playerSpawnX;
+	private int playerSpawnY;
 
 	private byte[][] spritesheet;
 	private int width;
@@ -81,7 +87,7 @@ public class LevelMap {
 	}
 
 	public static LevelMap loadLevel(String name) {
-		return JAXB.unmarshal(new File("/res/level/" + name + ".xml"), LevelMap.class);
+		return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/" + name + ".xml"), LevelMap.class);
 	}
 
 	public MapObject[] getObjects() {
@@ -90,6 +96,22 @@ public class LevelMap {
 
 	public void setObjects(MapObject[] objects) {
 		this.objects = objects;
+	}
+
+	public int getPlayerSpawnX() {
+		return playerSpawnX;
+	}
+
+	public void setPlayerSpawnX(int playerSpawnX) {
+		this.playerSpawnX = playerSpawnX;
+	}
+
+	public int getPlayerSpawnY() {
+		return playerSpawnY;
+	}
+
+	public void setPlayerSpawnY(int playerSpawnY) {
+		this.playerSpawnY = playerSpawnY;
 	}
 
 }

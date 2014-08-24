@@ -3,8 +3,8 @@ package game.staging;
 import game.level.EntityPlayer;
 import game.level.EntityPlayerClone;
 import game.level.EntityPlayerRecord;
-import game.level.LevelMap;
 import game.level.TileSet;
+import game.level.map.LevelMap;
 import game.main.GameCanvas;
 
 import java.awt.Graphics2D;
@@ -52,7 +52,7 @@ public class StageLevel extends Stage {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		player = new EntityPlayer(97, 145);
+		player = new EntityPlayer(map.getPlayerSpawnX(), map.getPlayerSpawnY());
 		updateTimer = new Timer();
 		updateTimer.schedule(new TimerTask() {
 			public void run() {
