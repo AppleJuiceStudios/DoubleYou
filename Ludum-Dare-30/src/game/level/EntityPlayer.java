@@ -1,5 +1,7 @@
 package game.level;
 
+import game.level.map.LevelMap;
+
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -34,13 +36,13 @@ public class EntityPlayer extends EntityMob {
 	public void update(LevelMap map) {
 		xMovement = 0;
 		if (key_A) {
-			xMovement = -1;
+			xMovement = -2;
 		}
 		if (key_D) {
-			xMovement = 1;
+			xMovement = 2;
 		}
 		if (key_W & onGround) {
-			yMovement = -2.5;
+			yMovement = -2.75;
 		}
 		super.update(map);
 	}

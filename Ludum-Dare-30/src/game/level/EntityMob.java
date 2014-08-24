@@ -1,5 +1,6 @@
 package game.level;
 
+import game.level.map.LevelMap;
 import game.main.Monitoring;
 
 import java.awt.image.BufferedImage;

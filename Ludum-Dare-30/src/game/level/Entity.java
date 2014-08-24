@@ -1,5 +1,6 @@
 package game.level;
 
+import game.level.map.LevelMap;
 import game.staging.StageLevel;
 
 import java.awt.Graphics2D;
