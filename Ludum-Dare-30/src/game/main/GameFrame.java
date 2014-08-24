@@ -12,7 +12,7 @@ public class GameFrame extends JFrame {
 	public GameFrame() {
 		GameCanvas.IS_APPLET = false;
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Game");
+		setTitle("Double You");
 		gameCanvas = new GameCanvas();
 		gameCanvas.init();
 		add(gameCanvas);

@@ -1,5 +1,6 @@
 package game.res;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,8 @@ public class SoundManager {
 		Clip clip = null;
 		try {
 			clip = AudioSystem.getClip();
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(SoundManager.class.getResourceAsStream(soundPath + path));
+			BufferedInputStream inStream = new BufferedInputStream(SoundManager.class.getResourceAsStream(soundPath + path));
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(inStream);
 			clip.open(audioIn);
 			audioIn.close();
 			System.out.println("[SoundManager] Loading clip: " + id);
