@@ -1,6 +1,4 @@
-package game.level;
-
-import game.level.mapobject.MapObject;
+package game.level.mapobject;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

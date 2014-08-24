@@ -1,8 +1,8 @@
 package game.level.map;
 
-import game.level.MapObjectDoor;
-import game.level.MapObjectPlate;
 import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectDoor;
+import game.level.mapobject.MapObjectPlate;
 
 public class LevelMap11 extends LevelMap {
 
