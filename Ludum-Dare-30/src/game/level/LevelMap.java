@@ -16,28 +16,7 @@ public class LevelMap {
 	private MapObject[] objects;
 
 	public LevelMap() {
-		byte[][] map = new byte[50][13];
-		for (int x = 0; x < map.length; x++) {
-			map[x][12] = 5;
-		}
-		for (int x = 0; x < map.length; x++) {
-			map[x][11] = 2;
-		}
-		for (int y = 0; y < 11; y++) {
-			map[0][y] = 6;
-		}
-		for (int y = 0; y < 11; y++) {
-			map[49][y] = 4;
-		}
-		map[0][11] = 5;
-		map[49][11] = 5;
-		map[5][10] = 32;
-
-		objects = new MapObject[1];
-		objects[0] = new MapObject((byte) 32, 5, 10, 1, 1, false);
-
-		setSpritesheet(map);
-		save("test");
+		objects = new MapObject[0];
 	}
 
 	public void drawObjects(Graphics2D g2) {
@@ -48,8 +27,12 @@ public class LevelMap {
 
 	public void updateTriger(EntityPlayer... player) {
 		for (int i = 0; i < objects.length; i++) {
-			objects[i].updateTriger(player);
+			objects[i].updateTriger(player, this);
 		}
+	}
+
+	public void powerObject(byte id, boolean power) {
+		objects[id - 32].setPower(power);
 	}
 
 	public byte getTileID(int x, int y) {

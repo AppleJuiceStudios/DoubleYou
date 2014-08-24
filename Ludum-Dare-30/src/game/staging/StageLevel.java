@@ -43,7 +43,7 @@ public class StageLevel extends Stage {
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		tileSet = new TileSet();
-		map = new LevelMap();
+		map = LevelMap.loadLevel("test");
 		try {
 			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Space-Background.png"));
 			mountains = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-Mountains.png"));
@@ -107,9 +107,9 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-			g2.setTransform(new AffineTransform());
 		} catch (NullPointerException e) {}
 		map.drawObjects(g2);
+		g2.setTransform(new AffineTransform());
 		/**
 		 * GUI
 		 */

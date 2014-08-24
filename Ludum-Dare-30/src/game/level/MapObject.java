@@ -33,10 +33,10 @@ public class MapObject {
 	}
 
 	public boolean isSolid() {
-		return true;
+		return false;
 	}
 
-	public void updateTriger(EntityPlayer[] player) {
+	public void updateTriger(EntityPlayer[] player, LevelMap map) {
 
 	}
 
