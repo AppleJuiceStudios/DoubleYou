@@ -1,7 +1,6 @@
-package game.level;
+package game.level.entity;
 
 import game.level.map.LevelMap;
-import game.main.Monitoring;
 
 import java.awt.image.BufferedImage;
 
@@ -21,7 +20,6 @@ public class EntityMob extends Entity {
 	}
 
 	protected void colision(LevelMap map) {
-		Monitoring.startPhysics();
 		yMovement += 0.07;
 		if (xMovement > 0) {
 			lookLeft = false;
@@ -68,7 +66,6 @@ public class EntityMob extends Entity {
 			}
 		}
 		y += yMovement;
-		Monitoring.stopPhysics();
 	}
 
 }

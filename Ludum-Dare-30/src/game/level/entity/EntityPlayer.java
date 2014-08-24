@@ -1,5 +1,6 @@
-package game.level;
+package game.level.entity;
 
+import game.level.Animation;
 import game.level.map.LevelMap;
 
 import java.awt.event.KeyEvent;

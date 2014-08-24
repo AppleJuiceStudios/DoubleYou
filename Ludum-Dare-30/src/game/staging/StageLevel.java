@@ -1,10 +1,10 @@
 package game.staging;
 
-import game.level.EntityPlayer;
-import game.level.EntityPlayerClone;
-import game.level.EntityPlayerRecord;
 import game.level.Textbox;
 import game.level.TileSet;
+import game.level.entity.EntityPlayer;
+import game.level.entity.EntityPlayerClone;
+import game.level.entity.EntityPlayerRecord;
 import game.level.map.LevelMap;
 import game.main.GameCanvas;
 

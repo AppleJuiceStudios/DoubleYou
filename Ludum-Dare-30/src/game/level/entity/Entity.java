@@ -1,4 +1,4 @@
-package game.level;
+package game.level.entity;
 
 import game.level.map.LevelMap;
 import game.staging.StageLevel;

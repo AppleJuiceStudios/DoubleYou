@@ -1,6 +1,6 @@
 package game.level.map;
 
-import game.level.EntityPlayer;
+import game.level.entity.EntityPlayer;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;

@@ -1,6 +1,6 @@
 package game.level.mapobject;
 
-import game.level.EntityPlayer;
+import game.level.entity.EntityPlayer;
 import game.level.map.LevelMap;
 
 import java.awt.Graphics2D;
