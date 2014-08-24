@@ -123,11 +123,7 @@ public class StageMainMenue extends Stage {
 	 * Actions
 	 */
 	private void play() {
-		SoundManager.stopAll();
-		SoundManager.clearCache();
-		SoundManager.loadClipInCache("Mars 1", "mars_1.wav");
-		SoundManager.play("Mars 1", true);
-		getStageManager().setStage(StageManager.STAGE_LEVEL);
+		getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 	}
 
 	private void options() {
