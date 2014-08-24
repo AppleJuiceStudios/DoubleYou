@@ -64,9 +64,7 @@ public class StageManager {
 	}
 
 	public void update() {
-		Monitoring.startPhysics();
 		stage.update();
-		Monitoring.stopPhysics();
 	}
 
 	public void setKeyListener(KeyListener keyListener) {

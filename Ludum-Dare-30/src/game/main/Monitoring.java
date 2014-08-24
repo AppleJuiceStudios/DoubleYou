@@ -8,14 +8,10 @@ public class Monitoring {
 
 	private static long start = 0;
 	private static long end = 0;
-	private static long totTime = 0;
-	private static long unMon = 0;
 	private static long totMon = 0;
 
 	public static void tick() {
 		end = System.currentTimeMillis();
-		totTime = end - start;
-		unMon = totTime - totMon;
 		if (start != 0) print();
 		totMon = 0;
 		start = System.currentTimeMillis();
@@ -28,8 +24,6 @@ public class Monitoring {
 			System.out.println("Drawing time:\t\t" + String.format("%02d", draw) + " ms");
 			System.out.println("Physics time:\t\t" + String.format("%02d", physics) + " ms");
 			System.out.println("Sleep time:\t\t" + String.format("%02d", sleep) + " ms");
-			System.out.println("Unmonitored time:\t" + String.format("%02d", unMon) + " ms");
-			System.out.println("Total time:\t\t" + String.format("%02d", totTime) + " ms");
 			System.out.println("################################\n\n\n");
 		}
 	}

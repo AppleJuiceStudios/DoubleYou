@@ -7,6 +7,7 @@ import game.level.entity.EntityPlayerClone;
 import game.level.entity.EntityPlayerRecord;
 import game.level.map.LevelMap;
 import game.main.GameCanvas;
+import game.main.Monitoring;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -123,7 +124,8 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		map.drawObjects(g2);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -151,6 +153,7 @@ public class StageLevel extends Stage {
 	}
 
 	public void update() {
+		Monitoring.startPhysics();
 		try {
 			if (isRecording) {
 				playerRecord.update(map);
@@ -169,7 +172,9 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
+		Monitoring.stopPhysics();
 	}
 
 	public void stop() {
