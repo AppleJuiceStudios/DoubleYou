@@ -148,23 +148,23 @@ public class StageChoseLevel extends Stage {
 	private void initRecs() {
 		//Stage 1
 		btnS1L1 = new Rectangle(120, 80, 50, 50);
-		btnS1L2 = new Rectangle(120, 210, 50, 50);
-		btnS1L3 = new Rectangle(120, 340, 50, 50);
-		btnS1L4 = new Rectangle(120, 470, 50, 50);
+		btnS1L2 = new Rectangle(290, 80, 50, 50);
+		btnS1L3 = new Rectangle(120, 210, 50, 50);
+		btnS1L4 = new Rectangle(290, 210, 50, 50);
 		//Stage 2
-		btnS2L1 = new Rectangle(290, 80, 50, 50);
-		btnS2L2 = new Rectangle(290, 210, 50, 50);
-		btnS2L3 = new Rectangle(290, 340, 50, 50);
-		btnS2L4 = new Rectangle(290, 470, 50, 50);
+		btnS2L1 = new Rectangle(460, 80, 50, 50);
+		btnS2L2 = new Rectangle(630, 80, 50, 50);
+		btnS2L3 = new Rectangle(460, 210, 50, 50);
+		btnS2L4 = new Rectangle(630, 210, 50, 50);
 		//Stage 3
-		btnS3L1 = new Rectangle(460, 80, 50, 50);
-		btnS3L2 = new Rectangle(460, 210, 50, 50);
-		btnS3L3 = new Rectangle(460, 340, 50, 50);
-		btnS3L4 = new Rectangle(460, 470, 50, 50);
+		btnS3L1 = new Rectangle(120, 340, 50, 50);
+		btnS3L2 = new Rectangle(290, 340, 50, 50);
+		btnS3L3 = new Rectangle(120, 470, 50, 50);
+		btnS3L4 = new Rectangle(290, 470, 50, 50);
 		//Stage 4
-		btnS4L1 = new Rectangle(630, 80, 50, 50);
-		btnS4L2 = new Rectangle(630, 210, 50, 50);
-		btnS4L3 = new Rectangle(630, 340, 50, 50);
+		btnS4L1 = new Rectangle(460, 340, 50, 50);
+		btnS4L2 = new Rectangle(630, 340, 50, 50);
+		btnS4L3 = new Rectangle(460, 470, 50, 50);
 		btnS4L4 = new Rectangle(630, 470, 50, 50);
 	}
 
