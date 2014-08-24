@@ -1,5 +1,6 @@
 package game.level;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +9,28 @@ import javax.imageio.ImageIO;
 
 public class EntityPlayerRecord extends EntityPlayer {
 
+	private static BufferedImage imageIdel;
+	private static BufferedImage imageRun;
+	private static BufferedImage imageJump;
+
 	private List<Byte> recording;
 
 	public EntityPlayerRecord(double x, double y) {
 		super(x, y);
+		if (imageIdel == null) {
+			try {
+				imageIdel = ImageIO.read(getClass().getResourceAsStream("/model/clone/Player-Model.png"));
+				imageRun = ImageIO.read(getClass().getResourceAsStream("/model/clone/Run-Animation.png"));
+				imageJump = ImageIO.read(getClass().getResourceAsStream("/model/clone/Jump-Animation.png"));
+			} catch (IOException e) {
+
+			}
+		}
+		image = imageIdel;
 		animationRun = new Animation();
 		animationJump = new Animation();
-		animationRun.load("/model/clone/Run-Animation.png", 2, 150);
-		animationJump.load("/model/clone/Jump-Animation.png", 2, 150);
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/model/clone/Player-Model.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		animationRun.load(imageRun, 2, 150);
+		animationJump.load(imageJump, 2, 150);
 		recording = new ArrayList<Byte>();
 	}
 

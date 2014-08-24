@@ -31,6 +31,15 @@ public class Animation {
 		}
 	}
 
+	public void load(BufferedImage image, int imageAmount, int delay) {
+		this.delay = delay;
+		imgAnimation = new BufferedImage[imageAmount];
+		for (int i = 0; i < imageAmount; i++) {
+			imgAnimation[i] = image.getSubimage(i * WIDTH, 0, WIDTH, HEIGHT);
+		}
+
+	}
+
 	public BufferedImage getImage() {
 		if (System.currentTimeMillis() > lastChange + delay) {
 			lastChange += delay;
