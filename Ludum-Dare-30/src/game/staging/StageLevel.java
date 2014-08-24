@@ -3,10 +3,13 @@ package game.staging;
 import game.level.EntityPlayer;
 import game.level.EntityPlayerClone;
 import game.level.EntityPlayerRecord;
+import game.level.Textbox;
 import game.level.TileSet;
 import game.level.map.LevelMap;
 import game.main.GameCanvas;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -41,6 +44,10 @@ public class StageLevel extends Stage {
 	private EntityPlayerRecord playerRecord;
 	private EntityPlayerClone playerClone;
 
+	public Textbox textbox;
+	private BufferedImage imgTextbox;
+	private boolean hasTextbox;
+
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		tileSet = new TileSet();
@@ -49,6 +56,7 @@ public class StageLevel extends Stage {
 			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Mars-Background.png"));
 			mountains = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-Mountains.png"));
 			healthbar = ImageIO.read(getClass().getResourceAsStream("/Healthbar.png"));
+			imgTextbox = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Textbox.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -123,6 +131,23 @@ public class StageLevel extends Stage {
 		 */
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
+		drawTextbox(g2);
+	}
+
+	private void drawTextbox(Graphics2D g2) {
+		if (textbox != null) {
+			if (textbox.hasNextPage()) {
+				hasTextbox = true;
+
+				g2.drawImage(imgTextbox, 100, 400, 600, 150, null);
+				g2.setColor(Color.WHITE);
+				g2.setFont(new Font("Garamond", Font.BOLD, 30));
+				g2.drawString(textbox.getPage(), 130, 450);
+			} else {
+				hasTextbox = false;
+				textbox = null;
+			}
+		}
 	}
 
 	public void update() {
@@ -186,6 +211,9 @@ public class StageLevel extends Stage {
 							isRecording = true;
 						}
 					}
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER && hasTextbox) {
+					textbox.nextPage();
 				}
 			}
 		});

@@ -21,15 +21,24 @@ public class Textbox {
 	}
 
 	public boolean hasNextPage() {
-		if (currentPage <= pages) {
-			return false;
-		} else {
+		if (currentPage < pages) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
-	public String getNextPage() {
+	public void nextPage() {
 		currentPage++;
-		return content.get(currentPage - 1);
+	}
+
+	public String getPage() {
+		String str;
+		if (hasNextPage()) {
+			str = content.get(currentPage);
+		} else {
+			str = "";
+		}
+		return str;
 	}
 }
