@@ -127,9 +127,14 @@ public class LevelMap {
 		this.stageLevel = stageLevel;
 	}
 
+	public StageLevel getStageLevel() {
+		return stageLevel;
+	}
+
 	public void hasWon() {
 		System.out.println("Has WON!");
 		SoundManager.loadClipInCache("Won", "you_win.wav");
+		//		stageLevel.getStageManager().setStage(StageManager.);
 		SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
 		SaveGame.save();
 	}
