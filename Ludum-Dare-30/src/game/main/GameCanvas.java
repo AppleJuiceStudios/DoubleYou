@@ -14,7 +14,7 @@ public class GameCanvas extends Canvas {
 	public static final int HEIGHT = 600;
 
 	private StageManager stageManager;
-	public FpsManager fpsManager;
+	public static FpsManager fpsManager;
 
 	private Thread thread;
 
@@ -29,6 +29,7 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void draw() {
+		Monitoring.startDraw();
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
@@ -38,6 +39,7 @@ public class GameCanvas extends Canvas {
 		stageManager.draw(g2);
 		g2.dispose();
 		bs.show();
+		Monitoring.stopDraw();
 	}
 
 	public void paint() {
@@ -53,6 +55,7 @@ public class GameCanvas extends Canvas {
 				while (true) {
 					draw();
 					fpsManager.limit();
+					Monitoring.tick();
 				}
 			}
 		});
@@ -70,7 +73,7 @@ public class GameCanvas extends Canvas {
 
 	}
 
-	private class FpsManager {
+	static class FpsManager {
 		private long startTime;
 		private long delay;
 		private long waitTime;
@@ -78,7 +81,7 @@ public class GameCanvas extends Canvas {
 		private long lastTime;
 		private long time;
 
-		private int fps;
+		private static int fps;
 
 		private void init() {
 			startTime = System.currentTimeMillis();
@@ -90,6 +93,7 @@ public class GameCanvas extends Canvas {
 		}
 
 		private void limit() {
+			Monitoring.startSleep();
 			delay = waitTime - (System.currentTimeMillis() - startTime);
 			if (delay > 0) {
 				try {
@@ -104,6 +108,11 @@ public class GameCanvas extends Canvas {
 			//			System.out.println("FPS: " + fps);
 			lastTime = time;
 			startTime = System.currentTimeMillis();
+			Monitoring.stopSleep();
+		}
+
+		public static int getFps() {
+			return fps;
 		}
 	}
 }
