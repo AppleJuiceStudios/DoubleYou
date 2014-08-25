@@ -23,8 +23,10 @@ public class LevelMap11 extends LevelMap {
 	}
 
 	public void start() {
-		getStageLevel().textbox = new Textbox("Hey!\nGlad you made it!\n            (Press enter to continue...)", "You are currently on Mars so ahead go and \nexperiment with the low gravity...\nUse W,A,D to move around.",
+		getStageLevel().textbox = new Textbox("Hey!\nGlad you made it!\n            (Press enter to continue...)",
+				"You are currently on Mars so ahead go and \nexperiment with the low gravity...\nUse W,A,D to move around.",
 				"If you see red laser beams those are doors!\nUsually there is a plate to open them...");
+		getStageLevel().isCloneAllowed = false;
 	}
 
 }
