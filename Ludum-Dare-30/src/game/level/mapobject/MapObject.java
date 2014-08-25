@@ -35,6 +35,10 @@ public class MapObject {
 		return false;
 	}
 
+	public boolean isCloneSolid() {
+		return isSolid();
+	}
+
 	public void updateTriger(EntityPlayer[] player, LevelMap map) {
 
 	}

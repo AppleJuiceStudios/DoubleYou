@@ -8,13 +8,17 @@ import javax.imageio.ImageIO;
 
 public class MapObjectLasergate extends MapObject {
 
-	private BufferedImage[] images;
+	protected BufferedImage[] images;
 
 	public MapObjectLasergate(byte id, int x, int y, int height, boolean closed) {
 		super(id, x, y, 1, height, closed);
 		if (height < 2) {
 			height = 2;
 		}
+		loadTexture();
+	}
+
+	protected void loadTexture() {
 		try {
 			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Lasergate.png"));
 			images = new BufferedImage[6];

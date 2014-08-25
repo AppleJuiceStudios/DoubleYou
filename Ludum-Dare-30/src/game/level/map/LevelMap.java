@@ -93,7 +93,15 @@ public class LevelMap {
 		} else {
 			return objects[id - 32].isSolid();
 		}
+	}
 
+	public boolean isCloneSolid(int x, int y) {
+		int id = getTileID(x, y);
+		if (id < 32) {
+			return id > 0 & id < 10;
+		} else {
+			return objects[id - 32].isSolid();
+		}
 	}
 
 	public void save(String name) {
@@ -147,4 +155,5 @@ public class LevelMap {
 			SaveGame.save();
 		stageLevel.getStageManager().setStage(StageManager.STAGE_WON);
 	}
+
 }
