@@ -35,6 +35,10 @@ public class LevelMap {
 		objects = new MapObject[0];
 	}
 
+	public void start() {
+
+	}
+
 	public void drawObjects(Graphics2D g2) {
 		for (int i = 0; i < objects.length; i++) {
 			objects[i].draw(g2);
@@ -135,8 +139,10 @@ public class LevelMap {
 	}
 
 	public void hasWon() {
-		if (!GameCanvas.IS_APPLET) SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
-		if (!GameCanvas.IS_APPLET) SaveGame.save();
+		if (!GameCanvas.IS_APPLET)
+			SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
+		if (!GameCanvas.IS_APPLET)
+			SaveGame.save();
 		stageLevel.getStageManager().setStage(StageManager.STAGE_WON);
 	}
 }

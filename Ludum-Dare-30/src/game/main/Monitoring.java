@@ -4,7 +4,7 @@ import game.main.GameCanvas.FpsManager;
 
 public class Monitoring {
 
-	public final static boolean DISPLAY = true;
+	public final static boolean DISPLAY = false;
 
 	public static void tick() {
 		print();

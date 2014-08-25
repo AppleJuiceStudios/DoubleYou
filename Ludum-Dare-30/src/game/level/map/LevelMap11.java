@@ -1,9 +1,11 @@
 package game.level.map;
 
+import game.level.Textbox;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateHorizontal;
+import game.level.mapobject.MapObjectTriggerTextbox;
 import game.level.mapobject.MapObjectTriggerWinning;
 
 public class LevelMap11 extends LevelMap {
@@ -16,9 +18,12 @@ public class LevelMap11 extends LevelMap {
 		objects[3] = new MapObjectGroundswtich((byte) 35, 32, 15, (byte) 34, true, true);
 		objects[4] = new MapObjectGroundswtich((byte) 36, 54, 14, (byte) 37, true, true);
 		objects[5] = new MapObjectLasergateHorizontal((byte) 37, 49, 15, 4, true);
+		objects[6] = new MapObjectTriggerTextbox((byte) 38, 64, 12, 1, 4, new Textbox("Story"));
 		objects[7] = new MapObjectTriggerWinning((byte) 39, 68, 12, 1, 4);
-		// Dumy
-		objects[6] = new MapObjectGroundswtich((byte) 38, 64, 12, (byte) 32, true, true);
+	}
+
+	public void start() {
+		getStageLevel().textbox = new Textbox("Hallo,Test");
 	}
 
 }

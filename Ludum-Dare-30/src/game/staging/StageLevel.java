@@ -54,6 +54,7 @@ public class StageLevel extends Stage {
 		tileSet = new TileSet();
 		map = LevelMap.loadLevel(data.get("level"));
 		map.setStageLevel(this);
+		map.start();
 		try {
 			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Mars-Background.png"));
 			mountains = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-Mountains.png"));
@@ -64,7 +65,7 @@ public class StageLevel extends Stage {
 		}
 		player = new EntityPlayer(map.getPlayerSpawnX(), map.getPlayerSpawnY());
 		updateTimer = new Timer();
-		updateTimer.schedule(new TimerTask() {
+		updateTimer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				update();
 			}
@@ -124,8 +125,7 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		map.drawObjects(g2);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -172,8 +172,7 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		Monitoring.stopPhysics();
 	}
 
