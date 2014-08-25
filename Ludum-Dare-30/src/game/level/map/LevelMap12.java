@@ -31,7 +31,8 @@ public class LevelMap12 extends LevelMap {
 	}
 
 	public void start() {
-		getStageLevel().textbox = new Textbox("Clone");
+		getStageLevel().textbox = new Textbox("So in this level there is something new!\nUse the spacebar to create a clone!", "While you clone is transparent you can\ntell him what to do. When you hit\nspace again he will perform this!",
+				"You will notice that the plates aren't\nsticking to the floor anymore!", "With the right amount of timing\nyou're clone might help you ;)\nJust try it out!");
 	}
 
 }

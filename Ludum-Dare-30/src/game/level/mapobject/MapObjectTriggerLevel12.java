@@ -32,7 +32,7 @@ public class MapObjectTriggerLevel12 extends MapObject {
 	}
 
 	protected void action(EntityPlayer player, LevelMap map) {
-		map.getStageLevel().textbox = new Textbox("Tip");
+		map.getStageLevel().textbox = new Textbox("That's not the way to do it!\nMaybe you could time you're clone\nto open both doors for you...");
 		player.setX(43 * 16);
 		player.setY(13 * 16);
 	}

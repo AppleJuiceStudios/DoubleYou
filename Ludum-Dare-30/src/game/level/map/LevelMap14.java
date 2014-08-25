@@ -33,7 +33,7 @@ public class LevelMap14 extends LevelMap {
 	}
 
 	public void start() {
-		getStageLevel().textbox = new Textbox("Cloneonly");
+		getStageLevel().textbox = new Textbox("These blue doors are different!\nYou're clone can walk through them\neven when you are not programming him...");
 	}
 
 }
