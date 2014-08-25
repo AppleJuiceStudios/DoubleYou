@@ -141,24 +141,6 @@ public class StageChoseLevel extends Stage {
 				}
 			}
 
-			private void initKey() {
-				getStageManager().setKeyListener(new KeyListener() {
-					public void keyTyped(KeyEvent e) {
-
-					}
-
-					public void keyReleased(KeyEvent e) {
-
-					}
-
-					public void keyPressed(KeyEvent e) {
-						if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-							getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
-						}
-					}
-				});
-			}
-
 			@Override
 			public void mouseExited(MouseEvent e) {
 			}
