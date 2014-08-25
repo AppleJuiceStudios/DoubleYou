@@ -1,7 +1,6 @@
 package game.level.map;
 
 import game.level.Textbox;
-import game.level.entity.EntityPlayer;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
@@ -14,7 +13,7 @@ public class LevelMap12 extends LevelMap {
 
 	public void init() {
 		objects = new MapObject[15];
-		objects[0] = new MapObjectLasergate((byte) 32, 13, 16, 3, true);
+		objects[0] = new MapObject((byte) 32, 0, 0, 0, 0, false);
 		objects[1] = new MapObjectLasergate((byte) 33, 23, 18, 2, true);
 		objects[2] = new MapObjectGroundswtich((byte) 34, 23, 15, (byte) 33, true, false);
 		objects[3] = new MapObjectGroundswtich((byte) 35, 31, 18, (byte) 46, false, false);
@@ -29,13 +28,6 @@ public class LevelMap12 extends LevelMap {
 		objects[11] = new MapObjectGroundswtich((byte) 43, 69, 11, (byte) 44, true, false);
 		objects[12] = new MapObjectLasergateHorizontal((byte) 44, 62, 16, 3, true);
 		objects[13] = new MapObjectTriggerWinning((byte) 45, 77, 14, 1, 4);
-	}
-
-	public void updateTriger(EntityPlayer... player) {
-		if (getStageLevel().isCloneMoving()) {
-			getMapObject((byte) 32).setPower(false);
-		}
-		super.updateTriger(player);
 	}
 
 	public void start() {

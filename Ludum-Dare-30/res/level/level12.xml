@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap>
     <playerSpawnX>48</playerSpawnX>
-    <playerSpawnY>272</playerSpawnY>
-    <spritesheet>AwYGBgYGBgYFBQUFBQYGBgYGBgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAADBQUFCQAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAgUIAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAgUIAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAwUFBwAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAIFCAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAIFBQcAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAMFBQgAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAACBQgAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAADBQgAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAgUHAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAwUIAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAIFBwAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAMFCCAgIAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAADCQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
+    <playerSpawnY>240</playerSpawnY>
+    <spritesheet>AwYGBgYGBgUFBQUFBQYGBgYFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAIFBQUFCQAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAIFBQUIAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAMFBQUIAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAACBQUJAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAACBQgAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAACBQgAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAACBQgAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAADBQgAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAggAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAggAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAwUHAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAIIAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAMFBwAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAADBQcAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAwkAAAADBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAwUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAMF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAAC</spritesheet>
@@ -69,9 +69,9 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAACwAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAQcAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAABBQkAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAACCAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAEFCQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAArAQUIAAAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAEFCAAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAQUFCQAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAArAgUIAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAgUFBwAAAAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBQUFBQcAAAIF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgkAAAIF</spritesheet>
