@@ -33,6 +33,8 @@ public class StageOptions extends Stage {
 	 * Images
 	 */
 	private BufferedImage background;
+	private BufferedImage imgBack;
+	private BufferedImage imgWebsite;
 
 	public StageOptions(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
@@ -102,6 +104,8 @@ public class StageOptions extends Stage {
 	private void loadTextures() {
 		try {
 			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
+			imgBack = ImageIO.read(getClass().getResourceAsStream("/buttons/Back-Button.png"));
+			imgWebsite = ImageIO.read(getClass().getResourceAsStream("/buttons/Web-Button.png"));
 		} catch (Exception e) {
 			System.out.println("[Main Menue] Texture loading failed!");
 			e.printStackTrace();
@@ -111,8 +115,8 @@ public class StageOptions extends Stage {
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
-		g2.fill(btnBack);
-		g2.fill(btnWebsite);
+		g2.drawImage(imgBack, btnBack.x, btnBack.y, btnBack.width, btnBack.height, null);
+		g2.drawImage(imgWebsite, btnWebsite.x, btnWebsite.y, btnWebsite.width, btnWebsite.height, null);
 	}
 
 	@Override
