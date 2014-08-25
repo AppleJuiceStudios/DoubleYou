@@ -39,6 +39,8 @@ public class StageLevel extends Stage {
 
 	private Timer updateTimer;
 
+	public boolean isCloneAllowed = true;
+
 	private boolean isRecording;
 	private boolean isCloneMoving;
 	private EntityPlayer player;
@@ -202,7 +204,7 @@ public class StageLevel extends Stage {
 				if (isRecording) {
 					playerRecord.keyPressed(e);
 				}
-				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+				if (e.getKeyCode() == KeyEvent.VK_SPACE & isCloneAllowed) {
 					if (isRecording) {
 						playerClone = new EntityPlayerClone(player.getXPos(), player.getYPos(), playerRecord.getRecording());
 						isRecording = false;

@@ -24,6 +24,7 @@ public class LevelMap11 extends LevelMap {
 
 	public void start() {
 		getStageLevel().textbox = new Textbox("Hallo,\nTest\nTest1");
+		getStageLevel().isCloneAllowed = false;
 	}
 
 }
