@@ -27,7 +27,7 @@ public class MapObjectLasergateHorizontalClone extends MapObjectLasergateHorizon
 	}
 
 	public boolean isCloneSolid() {
-		return super.isCloneSolid();
+		return false;
 	}
 
 }

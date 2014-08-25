@@ -100,7 +100,7 @@ public class LevelMap {
 		if (id < 32) {
 			return id > 0 & id < 10;
 		} else {
-			return objects[id - 32].isSolid();
+			return objects[id - 32].isCloneSolid();
 		}
 	}
 
@@ -115,6 +115,8 @@ public class LevelMap {
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level12.xml"), LevelMap12.class);
 		} else if (name.equals("S1L3")) {
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level13.xml"), LevelMap13.class);
+		} else if (name.equals("S1L4")) {
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level14.xml"), LevelMap14.class);
 		} else {
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMapTest.class);
 		}
