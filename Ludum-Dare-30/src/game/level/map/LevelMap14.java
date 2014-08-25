@@ -1,5 +1,6 @@
 package game.level.map;
 
+import game.level.Textbox;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
@@ -29,6 +30,10 @@ public class LevelMap14 extends LevelMap {
 		objects[15] = new MapObjectGroundswtich((byte) 47, 64, 11, (byte) 46, true, false);
 		objects[16] = new MapObjectLasergateHorizontalClone((byte) 48, 60, 12, 3, true);
 		objects[17] = new MapObjectTriggerWinning((byte) 49, 68, 15, 1, 4);
+	}
+
+	public void start() {
+		getStageLevel().textbox = new Textbox("Cloneonly");
 	}
 
 }
