@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Textbox {
 
-	private List<String> content;
+	private List<String[]> content;
 
 	private int pages;
 	private int currentPage;
 
 	public Textbox(String... lines) {
-		content = new ArrayList<String>();
+		content = new ArrayList<String[]>();
 		currentPage = 0;
 
 		for (String string : lines) {
-			content.add(string);
+			content.add(string.split("\n"));
 		}
 		pages = content.size();
 	}
@@ -32,12 +32,12 @@ public class Textbox {
 		currentPage++;
 	}
 
-	public String getPage() {
-		String str;
+	public String[] getPage() {
+		String[] str;
 		if (hasNextPage()) {
 			str = content.get(currentPage);
 		} else {
-			str = "";
+			str = new String[] { "" };
 		}
 		return str;
 	}

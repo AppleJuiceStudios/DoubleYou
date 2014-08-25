@@ -141,10 +141,13 @@ public class StageLevel extends Stage {
 			if (textbox.hasNextPage()) {
 				hasTextbox = true;
 
-				g2.drawImage(imgTextbox, 100, 400, 600, 150, null);
+				g2.drawImage(imgTextbox, 100, 425, 600, 150, null);
 				g2.setColor(Color.WHITE);
 				g2.setFont(new Font("Garamond", Font.BOLD, 30));
-				g2.drawString(textbox.getPage(), 130, 450);
+				String[] line = textbox.getPage();
+				for (int i = 0; i < line.length; i++) {
+					g2.drawString(line[i], 130, 475 + (i * 32));
+				}
 			} else {
 				hasTextbox = false;
 				textbox = null;

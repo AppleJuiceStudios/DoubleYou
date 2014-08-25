@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap>
     <playerSpawnX>48</playerSpawnX>
-    <playerSpawnY>272</playerSpawnY>
-    <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYGBgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAABBQUF</spritesheet>
+    <playerSpawnY>240</playerSpawnY>
+    <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAADBgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
