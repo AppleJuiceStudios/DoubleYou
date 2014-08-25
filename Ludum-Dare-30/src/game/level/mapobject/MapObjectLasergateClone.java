@@ -27,7 +27,6 @@ public class MapObjectLasergateClone extends MapObjectLasergate {
 	}
 
 	public boolean isCloneSolid() {
-		System.out.println("Clone");
 		return false;
 	}
 
