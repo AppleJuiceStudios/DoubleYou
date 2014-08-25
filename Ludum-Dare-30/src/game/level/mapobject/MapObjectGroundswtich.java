@@ -42,18 +42,22 @@ public class MapObjectGroundswtich extends MapObject {
 	}
 
 	public void updateTriger(EntityPlayer[] player, LevelMap map) {
+		boolean t = false;
 		for (int i = 0; i < player.length; i++) {
 			if (x == (int) ((player[i].getXPos() + (player[i].getWidth() / 2)) / 16)
 					& y == (int) ((player[i].getYPos() + player[i].getHeight() - 1) / 16)) {
-				if (power == false) {
-					power = true;
-					map.powerObject(targetID, !inverted);
-				}
-			} else {
-				if (power & !keep) {
-					power = false;
-					map.powerObject(targetID, inverted);
-				}
+				t = true;
+			}
+		}
+		if (t) {
+			if (power == false) {
+				power = true;
+				map.powerObject(targetID, !inverted);
+			}
+		} else {
+			if (power & !keep) {
+				power = false;
+				map.powerObject(targetID, inverted);
 			}
 		}
 	}

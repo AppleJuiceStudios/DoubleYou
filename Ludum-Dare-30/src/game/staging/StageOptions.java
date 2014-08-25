@@ -8,6 +8,8 @@ import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -35,6 +37,7 @@ public class StageOptions extends Stage {
 	public StageOptions(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		initMouse();
+		initKey();
 		initRecs();
 		loadTextures();
 	}
@@ -69,6 +72,24 @@ public class StageOptions extends Stage {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+			}
+		});
+	}
+
+	private void initKey() {
+		getStageManager().setKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			public void keyReleased(KeyEvent e) {
+
+			}
+
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+				}
 			}
 		});
 	}

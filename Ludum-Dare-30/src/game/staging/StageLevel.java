@@ -218,6 +218,9 @@ public class StageLevel extends Stage {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER && hasTextbox) {
 					textbox.nextPage();
 				}
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
+				}
 			}
 		});
 	}
