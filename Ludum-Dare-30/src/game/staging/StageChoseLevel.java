@@ -265,8 +265,8 @@ public class StageChoseLevel extends Stage {
 		for (int y = 0; y < 4; y++) {
 			for (int x = 0; x < 4; x++) {
 				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
-				int xx = x * 50 + (x + 1) * 120;
-				int yy = y * 50 + (y + 1) * 80;
+				int xx = 100 + (x / 2) * 400 + (x % 2) * 150;
+				int yy = 66 + (y / 2) * 298 + (y % 2) * 116;
 				if (current >= nextLevel) {
 					g2.drawImage(imgLock, xx, yy, 50, 50, null);
 				}
