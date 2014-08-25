@@ -1,5 +1,7 @@
 package game.res;
 
+import game.main.GameCanvas;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -23,26 +25,30 @@ public class SaveGame {
 	}
 
 	public static void load() {
-		path = getPath();
-		File file = new File(path);
-		if (file.exists()) {
-			saveGame = JAXB.unmarshal(file, SaveGame.class);
-		} else {
-			saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/DoubleYouPlayer.xml"), SaveGame.class);
-			SaveGame.save();
+		if (!GameCanvas.IS_APPLET) {
+			path = getPath();
+			File file = new File(path);
+			if (file.exists()) {
+				saveGame = JAXB.unmarshal(file, SaveGame.class);
+			} else {
+				saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/DoubleYouPlayer.xml"), SaveGame.class);
+				SaveGame.save();
+			}
 		}
 	}
 
 	public static void save() {
-		path = getPath();
-		File file = new File(path);
-		try {
-			new File(file.getParent()).mkdirs();
-			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (!GameCanvas.IS_APPLET) {
+			path = getPath();
+			File file = new File(path);
+			try {
+				new File(file.getParent()).mkdirs();
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			JAXB.marshal(saveGame, path);
 		}
-		JAXB.marshal(saveGame, path);
 	}
 
 	public int getNextLevel() {
