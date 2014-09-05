@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.res.ResourceManager;
 import game.res.SoundManager;
 
 import java.awt.Graphics2D;
@@ -12,8 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 public class StageWon extends Stage {
 
@@ -102,15 +101,10 @@ public class StageWon extends Stage {
 	}
 
 	private void loadTextures() {
-		try {
-			imgBackground = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
-			imgWon = ImageIO.read(getClass().getResourceAsStream("/Contributors.png"));
-			imgLevel = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
-			imgMenu = ImageIO.read(getClass().getResourceAsStream("/buttons/Back-Button.png"));
-		} catch (Exception e) {
-			System.out.println("[Main Menue] Texture loading failed!");
-			e.printStackTrace();
-		}
+		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
+		imgWon = ResourceManager.getImage("/Contributors.png");
+		imgLevel = ResourceManager.getImage("/buttons/Play-Button.png");
+		imgMenu = ResourceManager.getImage("/buttons/Back-Button.png");
 	}
 
 	@Override

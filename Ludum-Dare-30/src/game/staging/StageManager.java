@@ -2,6 +2,7 @@ package game.staging;
 
 import game.main.GameCanvas;
 import game.main.Monitoring;
+import game.res.ResourceManager;
 import game.res.SaveGame;
 import game.res.SoundManager;
 
@@ -28,7 +29,9 @@ public class StageManager {
 
 	public StageManager(GameCanvas gameCanvas) {
 		initListener(gameCanvas);
-		if (!GameCanvas.IS_APPLET) SaveGame.load();
+		if (!GameCanvas.IS_APPLET)
+			SaveGame.load();
+		ResourceManager.load();
 		SoundManager.init();
 		stage = new StageMainMenue(this, null);
 	}

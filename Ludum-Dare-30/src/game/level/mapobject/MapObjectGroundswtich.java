@@ -2,12 +2,10 @@ package game.level.mapobject;
 
 import game.level.entity.EntityPlayer;
 import game.level.map.LevelMap;
+import game.res.ResourceManager;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class MapObjectGroundswtich extends MapObject {
 
@@ -22,14 +20,10 @@ public class MapObjectGroundswtich extends MapObject {
 		this.targetID = targetID;
 		this.inverted = inverted;
 		this.keep = keep;
-		try {
-			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Groundswitch.png"));
-			images = new BufferedImage[2];
-			images[0] = image.getSubimage(0, 0, 16, 16);
-			images[1] = image.getSubimage(0, 16, 16, 16);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		BufferedImage image = ResourceManager.getImage("/level/object/Groundswitch.png");
+		images = new BufferedImage[2];
+		images[0] = image.getSubimage(0, 0, 16, 16);
+		images[1] = image.getSubimage(0, 16, 16, 16);
 	}
 
 	public void draw(Graphics2D g2) {

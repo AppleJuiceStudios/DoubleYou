@@ -29,7 +29,7 @@ public class SoundManager {
 	}
 
 	public static void loadStaticClips() {
-		//		loadStaticClip("hit", "hit.wav");
+		// loadStaticClip("hit", "hit.wav");
 	}
 
 	public static void loadStaticClip(String id, String path) {
@@ -41,24 +41,7 @@ public class SoundManager {
 	}
 
 	private static Clip loadClip(String id, String path) {
-		Clip clip = null;
-		try {
-			clip = AudioSystem.getClip();
-			BufferedInputStream inStream = new BufferedInputStream(SoundManager.class.getResourceAsStream(soundPath + path));
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(inStream);
-			clip.open(audioIn);
-			audioIn.close();
-			System.out.println("[SoundManager] Loading clip: " + id);
-			return clip;
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("[SoundManager] Can not load clip: " + id + " | " + path);
-			e.printStackTrace();
-		}
-		return clip;
+		return ResourceManager.getClip(soundPath + path);
 	}
 
 	public static void reloadStaticClip(String id, String path) {

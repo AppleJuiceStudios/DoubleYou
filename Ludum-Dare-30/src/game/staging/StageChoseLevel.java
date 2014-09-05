@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.res.ResourceManager;
 import game.res.SaveGame;
 import game.res.SoundManager;
 
@@ -15,8 +16,6 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 public class StageChoseLevel extends Stage {
 
@@ -197,37 +196,32 @@ public class StageChoseLevel extends Stage {
 	}
 
 	private void loadTextures() {
-		try {
-			imgLock = ImageIO.read(getClass().getResourceAsStream("/buttons/Lock.png"));
-			// Stage 1
-			imgS1L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
-			imgS1L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-2.png"));
-			imgS1L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-3.png"));
-			imgS1L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-4.png"));
-			// Stage 2
-			imgS2L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
-			imgS2L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-2.png"));
-			imgS2L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-3.png"));
-			imgS2L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-4.png"));
-			// Stage 3
-			imgS3L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
-			imgS3L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-2.png"));
-			imgS3L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-3.png"));
-			imgS3L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-4.png"));
-			// Stage 4
-			imgS4L1 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-1.png"));
-			imgS4L2 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-2.png"));
-			imgS4L3 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-3.png"));
-			imgS4L4 = ImageIO.read(getClass().getResourceAsStream("/buttons/Mars-4.png"));
-			// Backgrounds
-			imgBGS1 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Mars-Background.png"));
-			imgBGS2 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Saturn-Background.png"));
-			imgBGS3 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
-			imgBGS4 = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
-		} catch (Exception e) {
-			System.out.println("[Level Selection] Texture loading failed!");
-			e.printStackTrace();
-		}
+		imgLock = ResourceManager.getImage("/buttons/Lock.png");
+		// Stage 1
+		imgS1L1 = ResourceManager.getImage("/buttons/Mars-1.png");
+		imgS1L2 = ResourceManager.getImage("/buttons/Mars-2.png");
+		imgS1L3 = ResourceManager.getImage("/buttons/Mars-3.png");
+		imgS1L4 = ResourceManager.getImage("/buttons/Mars-4.png");
+		// Stage 2
+		imgS2L1 = ResourceManager.getImage("/buttons/Mars-1.png");
+		imgS2L2 = ResourceManager.getImage("/buttons/Mars-2.png");
+		imgS2L3 = ResourceManager.getImage("/buttons/Mars-3.png");
+		imgS2L4 = ResourceManager.getImage("/buttons/Mars-4.png");
+		// Stage 3
+		imgS3L1 = ResourceManager.getImage("/buttons/Mars-1.png");
+		imgS3L2 = ResourceManager.getImage("/buttons/Mars-2.png");
+		imgS3L3 = ResourceManager.getImage("/buttons/Mars-3.png");
+		imgS3L4 = ResourceManager.getImage("/buttons/Mars-4.png");
+		// Stage 4
+		imgS4L1 = ResourceManager.getImage("/buttons/Mars-1.png");
+		imgS4L2 = ResourceManager.getImage("/buttons/Mars-2.png");
+		imgS4L3 = ResourceManager.getImage("/buttons/Mars-3.png");
+		imgS4L4 = ResourceManager.getImage("/buttons/Mars-4.png");
+		// Backgrounds
+		imgBGS1 = ResourceManager.getImage("/backgrounds/Mars-Background.png");
+		imgBGS2 = ResourceManager.getImage("/backgrounds/Saturn-Background.png");
+		imgBGS3 = ResourceManager.getImage("/backgrounds/Menu-Background.png");
+		imgBGS4 = ResourceManager.getImage("/backgrounds/Menu-Background.png");
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package game.staging;
 
 import game.main.GameApplet;
 import game.main.GameCanvas;
+import game.res.ResourceManager;
 
 import java.applet.AppletContext;
 import java.awt.Desktop;
@@ -18,8 +19,6 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 public class StageCredits extends Stage {
 	/**
@@ -102,15 +101,10 @@ public class StageCredits extends Stage {
 	}
 
 	private void loadTextures() {
-		try {
-			imgBackground = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Space-Background.png"));
-			imgContributors = ImageIO.read(getClass().getResourceAsStream("/Contributors.png"));
-			imgBack = ImageIO.read(getClass().getResourceAsStream("/buttons/Back-Button.png"));
-			imgWebsite = ImageIO.read(getClass().getResourceAsStream("/buttons/Web-Button.png"));
-		} catch (Exception e) {
-			System.out.println("[Main Menue] Texture loading failed!");
-			e.printStackTrace();
-		}
+		imgBackground = ResourceManager.getImage("/backgrounds/Space-Background.png");
+		imgContributors = ResourceManager.getImage("/Contributors.png");
+		imgBack = ResourceManager.getImage("/buttons/Back-Button.png");
+		imgWebsite = ResourceManager.getImage("/buttons/Web-Button.png");
 	}
 
 	@Override

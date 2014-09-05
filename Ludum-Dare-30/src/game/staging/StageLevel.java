@@ -8,6 +8,7 @@ import game.level.entity.EntityPlayerRecord;
 import game.level.map.LevelMap;
 import game.main.GameCanvas;
 import game.main.Monitoring;
+import game.res.ResourceManager;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -16,12 +17,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.imageio.ImageIO;
 
 public class StageLevel extends Stage {
 
@@ -57,14 +55,10 @@ public class StageLevel extends Stage {
 		map = LevelMap.loadLevel(data.get("level"));
 		map.setStageLevel(this);
 		map.start();
-		try {
-			background = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Mars-Background.png"));
-			mountains = ImageIO.read(getClass().getResourceAsStream("/planets/mars/Mars-Mountains.png"));
-			healthbar = ImageIO.read(getClass().getResourceAsStream("/Healthbar.png"));
-			imgTextbox = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Textbox.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
+		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
+		healthbar = ResourceManager.getImage("/Healthbar.png");
+		imgTextbox = ResourceManager.getImage("/backgrounds/Textbox.png");
 		player = new EntityPlayer(map.getPlayerSpawnX(), map.getPlayerSpawnY());
 		updateTimer = new Timer();
 		updateTimer.scheduleAtFixedRate(new TimerTask() {

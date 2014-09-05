@@ -2,12 +2,10 @@ package game.level.entity;
 
 import game.level.Animation;
 import game.level.map.LevelMap;
+import game.res.ResourceManager;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class EntityPlayer extends EntityMob {
 
@@ -27,11 +25,7 @@ public class EntityPlayer extends EntityMob {
 		animationJump = new Animation();
 		animationRun.load("/model/player/Run-Animation.png", 2, 150);
 		animationJump.load("/model/player/Jump-Animation.png", 2, 150);
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/model/player/Player-Model.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		image = ResourceManager.getImage("/model/player/Player-Model.png");
 	}
 
 	public void update(LevelMap map) {

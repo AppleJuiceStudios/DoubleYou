@@ -1,9 +1,8 @@
 package game.level;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import game.res.ResourceManager;
 
-import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 public class Animation {
 	public static final int WIDTH = 14;
@@ -20,14 +19,10 @@ public class Animation {
 
 	public void load(String path, int imageAmount, int delay) {
 		this.delay = delay;
-		try {
-			BufferedImage image = ImageIO.read(getClass().getResourceAsStream(path));
-			imgAnimation = new BufferedImage[imageAmount];
-			for (int i = 0; i < imageAmount; i++) {
-				imgAnimation[i] = image.getSubimage(i * WIDTH, 0, WIDTH, HEIGHT);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		BufferedImage image = ResourceManager.getImage(path);
+		imgAnimation = new BufferedImage[imageAmount];
+		for (int i = 0; i < imageAmount; i++) {
+			imgAnimation[i] = image.getSubimage(i * WIDTH, 0, WIDTH, HEIGHT);
 		}
 	}
 

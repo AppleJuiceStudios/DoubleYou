@@ -2,11 +2,9 @@ package game.level.entity;
 
 import game.level.Animation;
 import game.level.map.LevelMap;
+import game.res.ResourceManager;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class EntityPlayerClone extends EntityPlayer {
 
@@ -23,13 +21,9 @@ public class EntityPlayerClone extends EntityPlayer {
 		animationRun = new Animation();
 		animationJump = new Animation();
 		if (imageIdel == null) {
-			try {
-				imageIdel = ImageIO.read(getClass().getResourceAsStream("/model/player/Player-Model.png"));
-				imageRun = ImageIO.read(getClass().getResourceAsStream("/model/player/Run-Animation.png"));
-				imageJump = ImageIO.read(getClass().getResourceAsStream("/model/player/Jump-Animation.png"));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			imageIdel = ResourceManager.getImage("/model/player/Player-Model.png");
+			imageRun = ResourceManager.getImage("/model/player/Run-Animation.png");
+			imageJump = ResourceManager.getImage("/model/player/Jump-Animation.png");
 		}
 		image = imageIdel;
 		animationRun.load(imageRun, 2, 150);
