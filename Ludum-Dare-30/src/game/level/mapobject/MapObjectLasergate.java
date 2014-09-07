@@ -5,6 +5,9 @@ import game.res.ResourceManager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class MapObjectLasergate extends MapObject {
 
 	protected BufferedImage[] images;
@@ -14,6 +17,10 @@ public class MapObjectLasergate extends MapObject {
 		if (height < 2) {
 			height = 2;
 		}
+		loadTexture();
+	}
+
+	public MapObjectLasergate() {
 		loadTexture();
 	}
 

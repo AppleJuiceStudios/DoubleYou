@@ -4,10 +4,17 @@ import game.res.ResourceManager;
 
 import java.awt.image.BufferedImage;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class MapObjectLasergateClone extends MapObjectLasergate {
 
 	public MapObjectLasergateClone(byte id, int x, int y, int height, boolean closed) {
 		super(id, x, y, height, closed);
+	}
+
+	public MapObjectLasergateClone() {
+
 	}
 
 	protected void loadTexture() {

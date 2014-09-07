@@ -27,6 +27,10 @@ public class MapObject {
 		this.power = power;
 	}
 
+	public MapObject() {
+
+	}
+
 	public void draw(Graphics2D g2) {
 
 	}

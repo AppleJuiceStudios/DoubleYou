@@ -1,12 +1,19 @@
 package game.level.mapobject;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import game.level.entity.EntityPlayer;
 import game.level.map.LevelMap;
 
+@XmlRootElement
 public class MapObjectTrigger extends MapObject {
 
 	public MapObjectTrigger(byte id, int x, int y, int width, int height) {
 		super(id, x, y, width, height, false);
+	}
+
+	public MapObjectTrigger() {
+
 	}
 
 	public void updateTriger(EntityPlayer[] player, LevelMap map) {

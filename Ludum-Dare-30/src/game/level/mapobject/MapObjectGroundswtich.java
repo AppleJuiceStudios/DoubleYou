@@ -7,6 +7,9 @@ import game.res.ResourceManager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class MapObjectGroundswtich extends MapObject {
 
 	private byte targetID;
@@ -20,6 +23,14 @@ public class MapObjectGroundswtich extends MapObject {
 		this.targetID = targetID;
 		this.inverted = inverted;
 		this.keep = keep;
+		loadTextures();
+	}
+
+	public MapObjectGroundswtich() {
+		loadTextures();
+	}
+
+	protected void loadTextures() {
 		BufferedImage image = ResourceManager.getImage("/level/object/Groundswitch.png");
 		images = new BufferedImage[2];
 		images[0] = image.getSubimage(0, 0, 16, 16);
@@ -54,6 +65,30 @@ public class MapObjectGroundswtich extends MapObject {
 				map.powerObject(targetID, inverted);
 			}
 		}
+	}
+
+	public byte getTargetID() {
+		return targetID;
+	}
+
+	public void setTargetID(byte targetID) {
+		this.targetID = targetID;
+	}
+
+	public boolean isKeep() {
+		return keep;
+	}
+
+	public void setKeep(boolean keep) {
+		this.keep = keep;
+	}
+
+	public boolean isInverted() {
+		return inverted;
+	}
+
+	public void setInverted(boolean inverted) {
+		this.inverted = inverted;
 	}
 
 }

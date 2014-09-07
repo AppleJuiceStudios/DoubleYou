@@ -5,6 +5,9 @@ import game.res.ResourceManager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class MapObjectLasergateHorizontal extends MapObject {
 
 	protected BufferedImage[] images;
@@ -14,6 +17,10 @@ public class MapObjectLasergateHorizontal extends MapObject {
 		if (width < 2) {
 			width = 2;
 		}
+		loadTexture();
+	}
+
+	public MapObjectLasergateHorizontal() {
 		loadTexture();
 	}
 

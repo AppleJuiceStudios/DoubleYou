@@ -1,86 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<levelMap11>
-    <mapObjects>
-        <mapObjectLasergate>
-            <height>3</height>
-            <id>32</id>
-            <power>true</power>
-            <width>1</width>
-            <x>23</x>
-            <y>16</y>
-        </mapObjectLasergate>
-        <mapObjectGroundswtich>
-            <height>1</height>
-            <id>33</id>
-            <power>false</power>
-            <width>1</width>
-            <x>20</x>
-            <y>18</y>
-            <inverted>true</inverted>
-            <keep>true</keep>
-            <targetID>32</targetID>
-        </mapObjectGroundswtich>
-        <mapObjectLasergate>
-            <height>2</height>
-            <id>34</id>
-            <power>true</power>
-            <width>1</width>
-            <x>32</x>
-            <y>18</y>
-        </mapObjectLasergate>
-        <mapObjectGroundswtich>
-            <height>1</height>
-            <id>35</id>
-            <power>false</power>
-            <width>1</width>
-            <x>32</x>
-            <y>15</y>
-            <inverted>true</inverted>
-            <keep>true</keep>
-            <targetID>34</targetID>
-        </mapObjectGroundswtich>
-        <mapObjectGroundswtich>
-            <height>1</height>
-            <id>36</id>
-            <power>false</power>
-            <width>1</width>
-            <x>54</x>
-            <y>14</y>
-            <inverted>true</inverted>
-            <keep>true</keep>
-            <targetID>37</targetID>
-        </mapObjectGroundswtich>
-        <mapObjectLasergateHorizontal>
-            <height>1</height>
-            <id>37</id>
-            <power>true</power>
-            <width>4</width>
-            <x>49</x>
-            <y>15</y>
-        </mapObjectLasergateHorizontal>
-        <mapObjectTriggerTextbox>
-            <height>4</height>
-            <id>38</id>
-            <power>false</power>
-            <width>1</width>
-            <x>64</x>
-            <y>12</y>
-            <textbox>
-                <content>
-                    <item>Congratulations!</item>
-                    <item>See you in the next level!</item>
-                </content>
-            </textbox>
-        </mapObjectTriggerTextbox>
-        <mapObjectTriggerWinning>
-            <height>4</height>
-            <id>39</id>
-            <power>false</power>
-            <width>1</width>
-            <x>68</x>
-            <y>12</y>
-        </mapObjectTriggerWinning>
-    </mapObjects>
+<levelMap>
     <playerSpawnX>48</playerSpawnX>
     <playerSpawnY>240</playerSpawnY>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYFBQUF</spritesheet>
@@ -158,4 +77,4 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAUFBQUF</spritesheet>
-</levelMap11>
+</levelMap>
