@@ -11,6 +11,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import util.log.Log;
+
 public class SoundManager {
 
 	private SoundManager() {
@@ -56,7 +58,7 @@ public class SoundManager {
 			cacheClips.get(id).close();
 		}
 		cacheClips.clear();
-		System.out.println("[SoundManager] Clearing cache.");
+		Log.info(" Clearing cache.");
 	}
 
 	public static void play(String id) {
@@ -70,7 +72,7 @@ public class SoundManager {
 		} else if (cacheClips.containsKey(id)) {
 			clip = cacheClips.get(id);
 		} else {
-			System.out.println("[SoundManager] Try playing unloaded clip: " + id);
+			Log.warning("Try playing unloaded clip: " + id);
 		}
 		if (clip != null) {
 			clip.stop();
@@ -79,7 +81,6 @@ public class SoundManager {
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
 			clip.start();
-			System.out.println("[SoundManager] Playing clip: " + id);
 		}
 	}
 
@@ -89,7 +90,7 @@ public class SoundManager {
 		} else if (cacheClips.containsKey(id)) {
 			cacheClips.get(id).stop();
 		} else {
-			System.out.println("[SoundManager] Try stoping unloaded clip: " + id);
+			Log.warning("Try stoping unloaded clip: " + id);
 		}
 	}
 

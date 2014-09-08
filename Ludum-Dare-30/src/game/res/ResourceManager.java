@@ -14,6 +14,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import util.log.Log;
+
 public class ResourceManager {
 
 	private static Map<String, BufferedImage> images;
@@ -38,9 +40,9 @@ public class ResourceManager {
 		try {
 			BufferedImage image = ImageIO.read(ResourceManager.class.getResourceAsStream(path));
 			images.put(path, image);
-			System.out.println("Load image: " + path);
+			Log.info("Load image: " + path);
 		} catch (IOException e) {
-			System.out.println("Can not load image: " + path);
+			Log.error("Can not load image: " + path);
 			e.printStackTrace();
 		}
 	}
@@ -52,14 +54,14 @@ public class ResourceManager {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(inStream);
 			clip.open(audioIn);
 			audioIn.close();
-			System.out.println("Load clip: " + path);
+			Log.info("Load clip: " + path);
 			clips.put(path, clip);
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("Can not load clip: " + path);
+			Log.error("Can not load clip: " + path);
 			e.printStackTrace();
 		}
 	}
