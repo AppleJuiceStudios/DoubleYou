@@ -11,6 +11,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import util.log.Log;
+
 public class SoundManager {
 
 	private SoundManager() {
@@ -29,7 +31,7 @@ public class SoundManager {
 	}
 
 	public static void loadStaticClips() {
-		//		loadStaticClip("hit", "hit.wav");
+		// loadStaticClip("hit", "hit.wav");
 	}
 
 	public static void loadStaticClip(String id, String path) {
@@ -41,24 +43,7 @@ public class SoundManager {
 	}
 
 	private static Clip loadClip(String id, String path) {
-		Clip clip = null;
-		try {
-			clip = AudioSystem.getClip();
-			BufferedInputStream inStream = new BufferedInputStream(SoundManager.class.getResourceAsStream(soundPath + path));
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(inStream);
-			clip.open(audioIn);
-			audioIn.close();
-			System.out.println("[SoundManager] Loading clip: " + id);
-			return clip;
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("[SoundManager] Can not load clip: " + id + " | " + path);
-			e.printStackTrace();
-		}
-		return clip;
+		return ResourceManager.getClip(soundPath + path);
 	}
 
 	public static void reloadStaticClip(String id, String path) {
@@ -73,7 +58,7 @@ public class SoundManager {
 			cacheClips.get(id).close();
 		}
 		cacheClips.clear();
-		System.out.println("[SoundManager] Clearing cache.");
+		Log.info(" Clearing cache.");
 	}
 
 	public static void play(String id) {
@@ -87,7 +72,7 @@ public class SoundManager {
 		} else if (cacheClips.containsKey(id)) {
 			clip = cacheClips.get(id);
 		} else {
-			System.out.println("[SoundManager] Try playing unloaded clip: " + id);
+			Log.warning("Try playing unloaded clip: " + id);
 		}
 		if (clip != null) {
 			clip.stop();
@@ -96,7 +81,6 @@ public class SoundManager {
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
 			clip.start();
-			System.out.println("[SoundManager] Playing clip: " + id);
 		}
 	}
 
@@ -106,7 +90,7 @@ public class SoundManager {
 		} else if (cacheClips.containsKey(id)) {
 			cacheClips.get(id).stop();
 		} else {
-			System.out.println("[SoundManager] Try stoping unloaded clip: " + id);
+			Log.warning("Try stoping unloaded clip: " + id);
 		}
 	}
 

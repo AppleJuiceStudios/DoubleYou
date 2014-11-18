@@ -2,13 +2,14 @@ package game.level.mapobject;
 
 import game.level.entity.EntityPlayer;
 import game.level.map.LevelMap;
+import game.res.ResourceManager;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class MapObjectGroundswtich extends MapObject {
 
 	private byte targetID;
@@ -22,14 +23,18 @@ public class MapObjectGroundswtich extends MapObject {
 		this.targetID = targetID;
 		this.inverted = inverted;
 		this.keep = keep;
-		try {
-			BufferedImage image = ImageIO.read(getClass().getResourceAsStream("/level/object/Groundswitch.png"));
-			images = new BufferedImage[2];
-			images[0] = image.getSubimage(0, 0, 16, 16);
-			images[1] = image.getSubimage(0, 16, 16, 16);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		loadTextures();
+	}
+
+	public MapObjectGroundswtich() {
+		loadTextures();
+	}
+
+	protected void loadTextures() {
+		BufferedImage image = ResourceManager.getImage("/level/object/Groundswitch.png");
+		images = new BufferedImage[2];
+		images[0] = image.getSubimage(0, 0, 16, 16);
+		images[1] = image.getSubimage(0, 16, 16, 16);
 	}
 
 	public void draw(Graphics2D g2) {
@@ -60,6 +65,30 @@ public class MapObjectGroundswtich extends MapObject {
 				map.powerObject(targetID, inverted);
 			}
 		}
+	}
+
+	public byte getTargetID() {
+		return targetID;
+	}
+
+	public void setTargetID(byte targetID) {
+		this.targetID = targetID;
+	}
+
+	public boolean isKeep() {
+		return keep;
+	}
+
+	public void setKeep(boolean keep) {
+		this.keep = keep;
+	}
+
+	public boolean isInverted() {
+		return inverted;
+	}
+
+	public void setInverted(boolean inverted) {
+		this.inverted = inverted;
 	}
 
 }

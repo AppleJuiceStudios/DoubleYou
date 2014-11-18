@@ -1,6 +1,7 @@
 package game.main;
 
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 
@@ -18,6 +19,12 @@ public class GameFrame extends JFrame {
 		add(gameCanvas);
 		setResizable(false);
 		pack();
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+				stop();
+				System.exit(0);
+			}
+		});
 		setLocationRelativeTo(null);
 	}
 
@@ -33,6 +40,10 @@ public class GameFrame extends JFrame {
 				gf.start();
 			}
 		});
+	}
+
+	public void stop() {
+		gameCanvas.stop();
 	}
 
 }

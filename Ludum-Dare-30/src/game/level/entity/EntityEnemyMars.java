@@ -2,10 +2,7 @@ package game.level.entity;
 
 import game.level.Animation;
 import game.level.map.LevelMap;
-
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import game.res.ResourceManager;
 
 public class EntityEnemyMars extends EntityEnemy {
 
@@ -22,12 +19,7 @@ public class EntityEnemyMars extends EntityEnemy {
 		animationFight = new Animation();
 		animationRun.load("/model/enemys/MarsKnight-RunAnimation.png", 2, 150);
 		animationFight.load("/model/enemys/MarsKnight-FightAnimation.png", 2, 150);
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/model/enemys/MarsKnight-Model.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		image = ResourceManager.getImage("/model/enemys/MarsKnight-Model.png");
 	}
 
 	public void update(LevelMap map) {

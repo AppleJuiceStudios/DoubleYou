@@ -26,7 +26,7 @@ public class SaveGame {
 
 	public static void load() {
 		if (!GameCanvas.IS_APPLET) {
-			path = getPath();
+			path = getPath() + "/SaveGame.xml";
 			File file = new File(path);
 			if (file.exists()) {
 				saveGame = JAXB.unmarshal(file, SaveGame.class);
@@ -39,7 +39,7 @@ public class SaveGame {
 
 	public static void save() {
 		if (!GameCanvas.IS_APPLET) {
-			path = getPath();
+			path = getPath() + "/SaveGame.xml";
 			File file = new File(path);
 			try {
 				new File(file.getParent()).mkdirs();
@@ -59,7 +59,7 @@ public class SaveGame {
 		this.nextLevel = nextLevel;
 	}
 
-	private static String getPath() {
+	public static String getPath() {
 		String path;
 		String OS = (System.getProperty("os.name")).toUpperCase();
 		if (OS.contains("WIN")) {
@@ -68,7 +68,7 @@ public class SaveGame {
 			path = System.getProperty("user.home");
 			path += "/Library/Application Support";
 		}
-		path += "/DoubleYou/SaveGame.xml";
+		path += "/DoubleYou";
 		return path;
 	}
 }

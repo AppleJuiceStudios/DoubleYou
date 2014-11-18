@@ -1,5 +1,6 @@
 package game.staging;
 
+import game.res.ResourceManager;
 import game.res.SoundManager;
 
 import java.awt.Graphics2D;
@@ -9,8 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
 
 public class StageMainMenue extends Stage {
 	/**
@@ -88,16 +87,11 @@ public class StageMainMenue extends Stage {
 	}
 
 	private void loadTextures() {
-		try {
-			imgBackground = ImageIO.read(getClass().getResourceAsStream("/backgrounds/Menu-Background.png"));
-			imgPlay = ImageIO.read(getClass().getResourceAsStream("/buttons/Play-Button.png"));
-			imgOptions = ImageIO.read(getClass().getResourceAsStream("/buttons/Settings-Button.png"));
-			imgCredits = ImageIO.read(getClass().getResourceAsStream("/buttons/Credits-Button.png"));
-			imgExit = ImageIO.read(getClass().getResourceAsStream("/buttons/Exit-Button.png"));
-		} catch (Exception e) {
-			System.out.println("[Main Menue] Texture loading failed!");
-			e.printStackTrace();
-		}
+		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
+		imgPlay = ResourceManager.getImage("/buttons/Play-Button.png");
+		imgOptions = ResourceManager.getImage("/buttons/Settings-Button.png");
+		imgCredits = ResourceManager.getImage("/buttons/Credits-Button.png");
+		imgExit = ResourceManager.getImage("/buttons/Exit-Button.png");
 	}
 
 	@Override

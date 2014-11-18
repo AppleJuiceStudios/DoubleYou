@@ -2,6 +2,16 @@ package game.level.map;
 
 import game.level.entity.EntityPlayer;
 import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectGroundswtich;
+import game.level.mapobject.MapObjectLasergate;
+import game.level.mapobject.MapObjectLasergateClone;
+import game.level.mapobject.MapObjectLasergateHorizontal;
+import game.level.mapobject.MapObjectLasergateHorizontalClone;
+import game.level.mapobject.MapObjectLogicAndKeeping;
+import game.level.mapobject.MapObjectLogicOr;
+import game.level.mapobject.MapObjectTriggerLevel12;
+import game.level.mapobject.MapObjectTriggerTextbox;
+import game.level.mapobject.MapObjectTriggerWinning;
 import game.main.GameCanvas;
 import game.res.SaveGame;
 import game.staging.StageLevel;
@@ -11,6 +21,9 @@ import java.awt.Graphics2D;
 import java.io.File;
 
 import javax.xml.bind.JAXB;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -25,6 +38,13 @@ public class LevelMap {
 	private int width;
 	private int height;
 
+	@XmlElementWrapper(name = "mapObjects")
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
+			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
+			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
+			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
+			@XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class),
+			@XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
@@ -105,7 +125,7 @@ public class LevelMap {
 	}
 
 	public void save(String name) {
-		JAXB.marshal(this, new File("/res/level/" + name + ".xml"));
+		JAXB.marshal(this, new File("res/level/" + name + ".xml"));
 	}
 
 	public static LevelMap loadLevel(String name) {

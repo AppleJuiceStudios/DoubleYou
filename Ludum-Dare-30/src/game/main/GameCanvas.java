@@ -1,11 +1,14 @@
 package game.main;
 
+import game.res.SaveGame;
 import game.staging.StageManager;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+
+import util.log.Log;
 
 @SuppressWarnings("serial")
 public class GameCanvas extends Canvas {
@@ -23,7 +26,7 @@ public class GameCanvas extends Canvas {
 	public static final int FPS_MAX = 60;
 
 	public GameCanvas() {
-
+		Log.openLog(SaveGame.getPath());
 		stageManager = new StageManager(this);
 		fpsManager = new FpsManager();
 	}
@@ -64,7 +67,7 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void stop() {
-
+		Log.closeLog();
 	}
 
 	public void destroy() {
@@ -94,16 +97,16 @@ public class GameCanvas extends Canvas {
 			Monitoring.startSleep();
 			delay = waitTime - (System.currentTimeMillis() - startTime);
 			if (delay > 0) {
-				//				try {
-				//										Thread.sleep(delay);
-				//				} catch (InterruptedException e) {
-				//					e.printStackTrace();
-				//				}
+				// try {
+				// Thread.sleep(delay);
+				// } catch (InterruptedException e) {
+				// e.printStackTrace();
+				// }
 			}
 
 			time = System.nanoTime();
 			fps = (int) (1000000000d / (time - lastTime));
-			//			System.out.println("FPS: " + fps);
+			// System.out.println("FPS: " + fps);
 			lastTime = time;
 			startTime = System.currentTimeMillis();
 			Monitoring.stopSleep();
