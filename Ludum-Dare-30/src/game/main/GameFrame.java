@@ -5,9 +5,9 @@ import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 
-@SuppressWarnings("serial")
 public class GameFrame extends JFrame {
-
+	private static final long serialVersionUID = 4260463266395801740L;
+	
 	private GameCanvas gameCanvas;
 
 	public GameFrame() {
