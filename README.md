@@ -17,4 +17,8 @@ Ludum-Dare-30
   <td>Music SFX & Art</td>
   <td>Gianluca Rubino</td>
 </tr>
+<tr>
+  <td>Cover Art & Design</td>
+  <td>(???)</td>
+</tr>
 </table>
