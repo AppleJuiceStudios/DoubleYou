@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LevelMap {
 
 	private StageLevel stageLevel;
+	private static int levelID;
 
 	private int playerSpawnX;
 	private int playerSpawnY;
@@ -39,12 +40,7 @@ public class LevelMap {
 	private int height;
 
 	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
-			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
-			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
-			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class),
-			@XmlElementRef(type = MapObjectTriggerWinning.class) })
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class), @XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
@@ -130,14 +126,19 @@ public class LevelMap {
 
 	public static LevelMap loadLevel(String name) {
 		if (name.equals("S1L1")) {
+			levelID = 1;
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level11.xml"), LevelMap11.class);
 		} else if (name.equals("S1L2")) {
+			levelID = 2;
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level12.xml"), LevelMap12.class);
 		} else if (name.equals("S1L3")) {
+			levelID = 3;
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level13.xml"), LevelMap13.class);
 		} else if (name.equals("S1L4")) {
+			levelID = 4;
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level14.xml"), LevelMap14.class);
 		} else {
+			levelID = -1;
 			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMapTest.class);
 		}
 	}
@@ -171,10 +172,12 @@ public class LevelMap {
 	}
 
 	public void hasWon() {
-		if (!GameCanvas.IS_APPLET)
-			SaveGame.saveGame.setNextLevel(SaveGame.saveGame.getNextLevel() + 1);
-		if (!GameCanvas.IS_APPLET)
+		if (!GameCanvas.IS_APPLET) {
+			int nextLevel = SaveGame.saveGame.getNextLevel();
+			if (nextLevel == levelID)
+				SaveGame.saveGame.setNextLevel(nextLevel + 1);
 			SaveGame.save();
+		}
 		stageLevel.getStageManager().setStage(StageManager.STAGE_WON);
 	}
 
