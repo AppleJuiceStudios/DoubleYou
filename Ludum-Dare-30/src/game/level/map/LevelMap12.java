@@ -1,10 +1,15 @@
 package game.level.map;
 
 import game.level.Textbox;
+import game.res.SoundManager;
 
 public class LevelMap12 extends LevelMap {
 
 	public void init() {
+
+		SoundManager.loadClipInCache("Mars 2", "mars_2.wav");
+		SoundManager.play("Mars 2", true);
+		
 		// objects = new MapObject[15];
 		// objects[0] = new MapObject((byte) 32, 0, 0, 0, 0, false);
 		// objects[1] = new MapObjectLasergate((byte) 33, 23, 18, 2, true);
