@@ -22,8 +22,10 @@ public class ResourceManager {
 	private static Map<String, Clip> clips;
 
 	public static void load() {
+		Log.debug("Loading res!");
 		images = new HashMap<>();
 		clips = new HashMap<>();
+		long startTime = System.currentTimeMillis();
 		Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/res.data"));
 		while (scanner.hasNextLine()) {
 			String path = scanner.nextLine();
@@ -34,6 +36,8 @@ public class ResourceManager {
 			}
 		}
 		scanner.close();
+		Log.debug("Loading res took " + (System.currentTimeMillis() - startTime) + " ms!");
+		Log.debug("Done with ResourceManager!");
 	}
 
 	private static void loadImage(String path) {

@@ -31,11 +31,8 @@ public class StageMainMenue extends Stage {
 
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
-		// if (!SoundManager.isLoaded("Space Commando")) {
 		SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
 		SoundManager.play("Space Commando", true);
-		System.out.println("Start");
-		// }
 
 		initMouse();
 		initRecs();
