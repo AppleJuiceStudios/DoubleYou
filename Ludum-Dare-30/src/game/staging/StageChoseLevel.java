@@ -273,8 +273,8 @@ public class StageChoseLevel extends Stage {
 		send.put("level", level);
 		SoundManager.stopAll();
 		SoundManager.clearCache();
-		SoundManager.loadClipInCache("Mars 1", "mars_1.wav");
-		SoundManager.play("Mars 1", true);
+//		SoundManager.loadClipInCache("Mars 1", "mars_1.wav");
+//		SoundManager.play("Mars 1", true);
 		getStageManager().setStage(StageManager.STAGE_LEVEL, send);
 	}
 

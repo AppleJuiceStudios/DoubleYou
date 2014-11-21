@@ -44,6 +44,9 @@ public class StageManager {
 		Stage oldStage = stage;
 		keyListener = null;
 		mouseListener = null;
+		SoundManager.stopAll();
+		SoundManager.clearCache();
+		
 		if (stageID == STAGE_LEVEL) {
 			stage = new StageLevel(this, data);
 		} else if (stageID == STAGE_MAIN_MENUE) {
