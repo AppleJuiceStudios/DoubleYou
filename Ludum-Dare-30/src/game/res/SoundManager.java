@@ -49,7 +49,6 @@ public class SoundManager {
 	public static void clearCache() {
 		for (String id : cacheClips.keySet()) {
 			stop(id);
-			cacheClips.get(id).close();
 		}
 		cacheClips.clear();
 		Log.info(" Clearing cache.");
