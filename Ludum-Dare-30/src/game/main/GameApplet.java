@@ -7,9 +7,9 @@ import java.awt.Color;
 
 import javax.swing.JApplet;
 
-@SuppressWarnings("serial")
 public class GameApplet extends JApplet {
-
+	private static final long serialVersionUID = 922363733377328646L;
+	
 	private GameCanvas gameCanvas;
 	public static AppletContext appletContext;
 
