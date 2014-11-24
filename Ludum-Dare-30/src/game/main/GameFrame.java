@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
-import java.net.URL;
 
 import javax.swing.JFrame;
 
