@@ -5,7 +5,6 @@ import game.main.GameCanvas;
 import game.res.ResourceManager;
 
 import java.applet.AppletContext;
-import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Point;
