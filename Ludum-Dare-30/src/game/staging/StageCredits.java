@@ -5,6 +5,7 @@ import game.main.GameCanvas;
 import game.res.ResourceManager;
 
 import java.applet.AppletContext;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -110,7 +111,8 @@ public class StageCredits extends Stage {
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
-		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 200, null);
+		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 150, null);
+
 		g2.drawImage(imgBack, btnBack.x, btnBack.y, btnBack.width, btnBack.height, null);
 		g2.drawImage(imgWebsite, btnWebsite.x, btnWebsite.y, btnWebsite.width, btnWebsite.height, null);
 	}
