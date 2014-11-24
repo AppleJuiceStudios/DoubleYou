@@ -1,17 +1,18 @@
 Ludum-Dare-30
 =============
-
 <table cellspacing="0" cellpadding="3">
 	<tr>
 		<th colspan="2" style="text-align:center;"><i>Double You</i>
-<!--			<table style="margin: 6px 0 0 0" cellspacing="0" cellpadding="0">
+			<table style="margin: 6px 0 0 0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td colspan="2" style="text-align:center;">[[File:{{{image}}}|frameless|upright=1]]<br />
+					<td colspan="2" style="text-align:center;">
+					<img src="https://github.com/TobiasBodewig/Ludum-Dare-30/blob/master/Ludum-Dare-30/resource/illustartions/logo_oh.png">
+					<br />
 						Logo
 					</td>
 				</tr>
 			</table>
--->		</th>
+		</th>
 	</tr>
 	<tr>
 		<td><b>Programmer</b></td>
