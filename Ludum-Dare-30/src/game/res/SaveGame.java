@@ -31,7 +31,7 @@ public class SaveGame {
 			if (file.exists()) {
 				saveGame = JAXB.unmarshal(file, SaveGame.class);
 			} else {
-				saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/DoubleYouPlayer.xml"), SaveGame.class);
+				saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/SaveGame.xml"), SaveGame.class);
 				SaveGame.save();
 			}
 		}
