@@ -111,7 +111,6 @@ public class StageCredits extends Stage {
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
 		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 150, null);
-
 		g2.drawImage(imgBack, btnBack.x, btnBack.y, btnBack.width, btnBack.height, null);
 		g2.drawImage(imgWebsite, btnWebsite.x, btnWebsite.y, btnWebsite.width, btnWebsite.height, null);
 	}
