@@ -135,7 +135,7 @@ public class StageCredits extends Stage {
 	private void website() {
 		URL url = null;
 		try {
-			url = new URL("http://philipp-auch.de/?page_id=14");
+			url = new URL("https://github.com/TobiasBodewig/Ludum-Dare-30");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
