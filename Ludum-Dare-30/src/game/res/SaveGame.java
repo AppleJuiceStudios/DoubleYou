@@ -4,6 +4,8 @@ import game.main.GameCanvas;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,8 +34,10 @@ public class SaveGame {
 				saveGame = JAXB.unmarshal(file, SaveGame.class);
 			} else {
 				saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/SaveGame.xml"), SaveGame.class);
+				System.out.println();
 				SaveGame.save();
 			}
+			writeVersion();
 		}
 	}
 
@@ -70,5 +74,26 @@ public class SaveGame {
 		}
 		path += "/DoubleYou";
 		return path;
+	}
+
+	private static void writeVersion() {
+		PrintWriter writer = null;
+		Scanner in = null;
+		try {
+			in = new Scanner(SaveGame.class.getResourceAsStream("/VERSION"));
+			writer = new PrintWriter(getPath() + "/VERSION");
+
+			while (in.hasNext())
+				writer.println(in.nextLine());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (writer != null)
+				writer.close();
+			if (in != null)
+				in.close();
+		}
+
 	}
 }
