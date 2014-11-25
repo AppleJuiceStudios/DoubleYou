@@ -11,7 +11,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+<<<<<<< HEAD
 import java.util.HashMap;
+=======
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+>>>>>>> refs/heads/master
 import java.util.Map;
 
 import util.log.Log;
@@ -22,6 +28,8 @@ public class StageManager {
 
 	private KeyListener keyListener;
 	private MouseListener mouseListener;
+	private MouseMotionListener mouseMotionListener;
+	private MouseWheelListener mouseWheelListener;
 
 	public static final int STAGE_LEVEL = 1;
 	public static final int STAGE_MAIN_MENUE = 2;
@@ -49,6 +57,8 @@ public class StageManager {
 		Stage oldStage = stage;
 		keyListener = null;
 		mouseListener = null;
+		mouseMotionListener = null;
+		mouseWheelListener = null;
 		SoundManager.stopAll();
 		SoundManager.clearCache();
 		try {
@@ -89,6 +99,14 @@ public class StageManager {
 
 	public void setMouseListener(MouseListener mouseListener) {
 		this.mouseListener = mouseListener;
+	}
+
+	public void setMouseMotionListener(MouseMotionListener mouseMotionListener) {
+		this.mouseMotionListener = mouseMotionListener;
+	}
+
+	public void setMouseWheelListener(MouseWheelListener mouseWheelListener) {
+		this.mouseWheelListener = mouseWheelListener;
 	}
 
 	private void initListener(GameCanvas gameCanvas) {
@@ -141,6 +159,26 @@ public class StageManager {
 			public void mouseClicked(MouseEvent e) {
 				if (mouseListener != null) {
 					mouseListener.mouseClicked(e);
+				}
+			}
+		});
+		gameCanvas.addMouseMotionListener(new MouseMotionListener() {
+			public void mouseMoved(MouseEvent e) {
+				if (mouseMotionListener != null) {
+					mouseMotionListener.mouseMoved(e);
+				}
+			}
+
+			public void mouseDragged(MouseEvent e) {
+				if (mouseMotionListener != null) {
+					mouseMotionListener.mouseDragged(e);
+				}
+			}
+		});
+		gameCanvas.addMouseWheelListener(new MouseWheelListener() {
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				if (mouseWheelListener != null) {
+					mouseWheelListener.mouseWheelMoved(e);
 				}
 			}
 		});
