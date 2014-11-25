@@ -37,12 +37,11 @@ public class MapObjectGroundswtich extends MapObject {
 		images[1] = image.getSubimage(0, 16, 16, 16);
 	}
 
-	public void draw(Graphics2D g2) {
-		int scale = 16 * 3;
+	public void draw(Graphics2D g2, int size) {
 		if (power) {
-			g2.drawImage(images[1], x * scale, y * scale, scale, scale, null);
+			g2.drawImage(images[1], x * size, y * size, size, size, null);
 		} else {
-			g2.drawImage(images[0], x * scale, y * scale, scale, scale, null);
+			g2.drawImage(images[0], x * size, y * size, size, size, null);
 		}
 	}
 
