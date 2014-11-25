@@ -78,6 +78,10 @@ public class StageEditor extends Stage {
 		int yStart = (int) (yOffset / (TileSet.SPRITE_SIZE * SCALE));
 		int xEnd = xStart + GameCanvas.WIDTH / (TileSet.SPRITE_SIZE * SCALE) + 2;
 		int yEnd = yStart + GameCanvas.HEIGHT / (TileSet.SPRITE_SIZE * SCALE) + 2;
+		// xStart = Math.max(0, Math.min(map.getWidth(), xStart));
+		// yStart = Math.max(0, Math.min(map.getHeight(), yStart));
+		// xEnd = Math.max(0, Math.min(map.getWidth(), xEnd));
+		// yEnd = Math.max(0, Math.min(map.getWidth(), yEnd));
 
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = xStart; x < xEnd; x++) {
