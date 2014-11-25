@@ -11,13 +11,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-<<<<<<< HEAD
 import java.util.HashMap;
-=======
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
->>>>>>> refs/heads/master
 import java.util.Map;
 
 import util.log.Log;
