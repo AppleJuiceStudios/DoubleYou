@@ -175,8 +175,7 @@
             <y>0</y>
             <inverted>true</inverted>
             <targetID>36</targetID>
-            <in1>33</in1>
-            <in2>35</in2>
+            <in>ISM=</in>
         </mapObjectLogicOr>
         <mapObjectGroundswtich>
             <height>1</height>
@@ -198,8 +197,7 @@
             <y>0</y>
             <inverted>true</inverted>
             <targetID>42</targetID>
-            <in1>39</in1>
-            <in2>40</in2>
+            <in>Jyg=</in>
         </mapObjectLogicAndKeeping>
         <mapObjectLogicAndKeeping>
             <height>0</height>
@@ -210,8 +208,7 @@
             <y>0</y>
             <inverted>true</inverted>
             <targetID>43</targetID>
-            <in1>50</in1>
-            <in2>41</in2>
+            <in>Mik=</in>
         </mapObjectLogicAndKeeping>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>

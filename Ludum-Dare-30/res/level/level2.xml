@@ -162,8 +162,7 @@
             <y>0</y>
             <inverted>true</inverted>
             <targetID>37</targetID>
-            <in1>35</in1>
-            <in2>36</in2>
+            <in>IyQ=</in>
         </mapObjectLogicAndKeeping>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>

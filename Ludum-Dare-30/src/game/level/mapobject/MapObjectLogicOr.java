@@ -7,13 +7,11 @@ import game.level.LevelMap;
 @XmlRootElement
 public class MapObjectLogicOr extends MapObjectLogic {
 
-	private byte in1;
-	private byte in2;
+	private byte[] in;
 
-	public MapObjectLogicOr(byte id, byte in1, byte in2, byte targetID, boolean inverted, boolean power) {
+	public MapObjectLogicOr(byte id, byte targetID, boolean inverted, boolean power, byte... in) {
 		super(id, targetID, inverted, power);
-		this.in1 = in1;
-		this.in2 = in2;
+		this.in = in;
 	}
 
 	public MapObjectLogicOr() {
@@ -21,25 +19,20 @@ public class MapObjectLogicOr extends MapObjectLogic {
 	}
 
 	public boolean update(LevelMap map) {
-		boolean b1 = map.getMapObject(in1).getPower();
-		boolean b2 = map.getMapObject(in2).getPower();
-		return b1 | b2;
+		for (int i = 0; i < in.length; i++) {
+			if (map.getMapObject(in[i]).getPower()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public byte getIn1() {
-		return in1;
+	public byte[] getIn() {
+		return in;
 	}
 
-	public void setIn1(byte in1) {
-		this.in1 = in1;
-	}
-
-	public byte getIn2() {
-		return in2;
-	}
-
-	public void setIn2(byte in2) {
-		this.in2 = in2;
+	public void setIn(byte[] in) {
+		this.in = in;
 	}
 
 }

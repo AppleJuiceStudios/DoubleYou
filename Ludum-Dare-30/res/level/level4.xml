@@ -195,8 +195,7 @@
             <y>0</y>
             <inverted>true</inverted>
             <targetID>44</targetID>
-            <in1>45</in1>
-            <in2>50</in2>
+            <in>LTI=</in>
         </mapObjectLogicOr>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>

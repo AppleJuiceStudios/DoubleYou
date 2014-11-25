@@ -7,14 +7,12 @@ import game.level.LevelMap;
 @XmlRootElement
 public class MapObjectLogicAndKeeping extends MapObjectLogic {
 
-	private byte in1;
-	private byte in2;
+	private byte[] in;
 	private boolean islocked;
 
-	public MapObjectLogicAndKeeping(byte id, byte in1, byte in2, byte targetID, boolean inverted, boolean power) {
+	public MapObjectLogicAndKeeping(byte id, byte targetID, boolean inverted, boolean power, byte... in) {
 		super(id, targetID, inverted, power);
-		this.in1 = in1;
-		this.in2 = in2;
+		this.in = in;
 	}
 
 	public MapObjectLogicAndKeeping() {
@@ -22,28 +20,24 @@ public class MapObjectLogicAndKeeping extends MapObjectLogic {
 	}
 
 	public boolean update(LevelMap map) {
-		boolean b1 = map.getMapObject(in1).getPower();
-		boolean b2 = map.getMapObject(in2).getPower();
-		if (b1 & b2) {
+		boolean b = true;
+		for (int i = 0; i < in.length; i++) {
+			if (!map.getMapObject(in[i]).getPower()) {
+				b = false;
+			}
+		}
+		if (b) {
 			islocked = true;
 		}
 		return islocked;
 	}
 
-	public byte getIn1() {
-		return in1;
+	public byte[] getIn() {
+		return in;
 	}
 
-	public void setIn1(byte in1) {
-		this.in1 = in1;
-	}
-
-	public byte getIn2() {
-		return in2;
-	}
-
-	public void setIn2(byte in2) {
-		this.in2 = in2;
+	public void setIn(byte[] in) {
+		this.in = in;
 	}
 
 }
