@@ -57,9 +57,9 @@ public class LevelMap {
 
 	}
 
-	public void drawObjects(Graphics2D g2) {
+	public void drawObjects(Graphics2D g2, int size) {
 		for (int i = 0; i < objects.length; i++) {
-			objects[i].draw(g2);
+			objects[i].draw(g2, size);
 		}
 	}
 

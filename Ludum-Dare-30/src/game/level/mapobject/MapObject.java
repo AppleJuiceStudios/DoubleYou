@@ -31,7 +31,7 @@ public class MapObject {
 
 	}
 
-	public void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2, int size) {
 
 	}
 

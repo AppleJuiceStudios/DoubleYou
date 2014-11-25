@@ -112,10 +112,10 @@ public class StageLevel extends Stage {
 		g2.setTransform(at);
 		int spriteSize = TileSet.SPRITE_SIZE * SCALE;
 
-		int xStart = (int) (xOffset / (TileSet.SPRITE_SIZE * SCALE));
-		int yStart = (int) (yOffset / (TileSet.SPRITE_SIZE * SCALE));
-		int xEnd = xStart + GameCanvas.WIDTH / (TileSet.SPRITE_SIZE * SCALE) + 2;
-		int yEnd = yStart + GameCanvas.HEIGHT / (TileSet.SPRITE_SIZE * SCALE) + 2;
+		int xStart = (int) (xOffset / spriteSize);
+		int yStart = (int) (yOffset / spriteSize);
+		int xEnd = xStart + GameCanvas.WIDTH / spriteSize + 2;
+		int yEnd = yStart + GameCanvas.HEIGHT / spriteSize + 2;
 
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = xStart; x < xEnd; x++) {
@@ -136,7 +136,7 @@ public class StageLevel extends Stage {
 				playerClone.draw(g2, true);
 			}
 		} catch (NullPointerException e) {}
-		map.drawObjects(g2);
+		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
 		/**
 		 * GUI
