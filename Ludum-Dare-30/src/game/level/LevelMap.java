@@ -1,17 +1,7 @@
 package game.level;
 
 import game.level.entity.EntityPlayer;
-import game.level.mapobject.MapObject;
-import game.level.mapobject.MapObjectGroundswtich;
-import game.level.mapobject.MapObjectLasergate;
-import game.level.mapobject.MapObjectLasergateClone;
-import game.level.mapobject.MapObjectLasergateHorizontal;
-import game.level.mapobject.MapObjectLasergateHorizontalClone;
-import game.level.mapobject.MapObjectLogicAndKeeping;
-import game.level.mapobject.MapObjectLogicOr;
-import game.level.mapobject.MapObjectTriggerLevel12;
-import game.level.mapobject.MapObjectTriggerTextbox;
-import game.level.mapobject.MapObjectTriggerWinning;
+import game.level.mapobject.*;
 import game.main.GameCanvas;
 import game.res.SaveGame;
 import game.res.SoundManager;
@@ -49,8 +39,8 @@ public class LevelMap {
 			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
 			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
 			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class),
-			@XmlElementRef(type = MapObjectTriggerWinning.class) })
+			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
+			@XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
