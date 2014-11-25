@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,7 +55,11 @@ public class StageLevel extends Stage {
 		super(stageManager, data);
 		tileSet = new TileSet();
 		try {
-			map = LevelMap.loadLevel(Integer.parseInt(data.get("level")));
+			if (data.get("level").matches("\\d*")) {
+				map = LevelMap.loadLevel(Integer.parseInt(data.get("level")));
+			} else {
+				map = LevelMap.loadLevel(new File(data.get("level")));
+			}
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(e);
 		}
