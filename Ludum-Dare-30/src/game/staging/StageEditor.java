@@ -23,7 +23,7 @@ import javax.xml.bind.JAXB;
 
 public class StageEditor extends Stage {
 
-	public static final int SCALE = 2;
+	private int scale = 3;
 	private double xOffset = 0;
 	private double yOffset = 0;
 	private double movementSpeed = 5;
@@ -70,7 +70,7 @@ public class StageEditor extends Stage {
 		AffineTransform at = new AffineTransform();
 		at.translate((int) -xOffset, (int) -yOffset);
 		g2.setTransform(at);
-		int spriteSize = TileSet.SPRITE_SIZE * SCALE;
+		int spriteSize = TileSet.SPRITE_SIZE * scale;
 
 		int xStart = (int) (xOffset / (spriteSize));
 		int yStart = (int) (yOffset / (spriteSize));
@@ -93,11 +93,11 @@ public class StageEditor extends Stage {
 		int selectedX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
 		int selectedY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
 		g2.setColor(Color.BLUE);
-		for (int i = 1; i <= 4; i++) {
+		for (int i = 1; i <= 1 + scale; i++) {
 			g2.drawRect(selectedX * (spriteSize) - i, selectedY * (spriteSize) - i, (spriteSize) + i * 2 - 1, (spriteSize) + i * 2 - 1);
 		}
 
-		map.drawObjects(g2);
+		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
 		/**
 		 * GUI
@@ -127,6 +127,22 @@ public class StageEditor extends Stage {
 		updateTimer.cancel();
 	}
 
+	public void scaleUp() {
+		if (scale < 4) {
+			xOffset = (xOffset + 400) * (scale + 1) / scale - 400;
+			yOffset = (yOffset + 300) * (scale + 1) / scale - 300;
+			scale++;
+		}
+	}
+
+	public void scaleDown() {
+		if (scale > 1) {
+			xOffset = (xOffset + 400) * (scale - 1) / scale - 400;
+			yOffset = (yOffset + 300) * (scale - 1) / scale - 300;
+			scale--;
+		}
+	}
+
 	private class ControlListener implements MouseListener, KeyListener, MouseMotionListener {
 
 		private double mouse_X;
@@ -140,7 +156,13 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			keyUpdate(e.getKeyCode(), true);
+			if (e.getKeyCode() == KeyEvent.VK_PLUS) {
+				scaleUp();
+			} else if (e.getKeyCode() == KeyEvent.VK_MINUS) {
+				scaleDown();
+			} else {
+				keyUpdate(e.getKeyCode(), true);
+			}
 		}
 
 		@Override
