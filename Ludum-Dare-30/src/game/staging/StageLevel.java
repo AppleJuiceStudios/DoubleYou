@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.xml.bind.UnmarshalException;
+
 public class StageLevel extends Stage {
 
 	public static final int SCALE = 3;
@@ -53,7 +55,11 @@ public class StageLevel extends Stage {
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		tileSet = new TileSet();
-		map = LevelMap.loadLevel(data.get("level"));
+		try {
+			map = LevelMap.loadLevel(Integer.parseInt(data.get("level")));
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e);
+		}
 		map.setStageLevel(this);
 		map.start();
 		SoundManager.loadClipInCache("soundTrack", map.getSoundTrack());

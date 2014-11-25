@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Map;
 
+import util.log.Log;
+
 public class StageManager {
 
 	private Stage stage;
@@ -46,19 +48,24 @@ public class StageManager {
 		mouseListener = null;
 		SoundManager.stopAll();
 		SoundManager.clearCache();
-		
-		if (stageID == STAGE_LEVEL) {
-			stage = new StageLevel(this, data);
-		} else if (stageID == STAGE_MAIN_MENUE) {
-			stage = new StageMainMenue(this, data);
-		} else if (stageID == STAGE_OPTIONS) {
-			stage = new StageOptions(this, data);
-		} else if (stageID == STAGE_CREDITS) {
-			stage = new StageCredits(this, data);
-		} else if (stageID == STAGE_CHOOSE_LEVEL) {
-			stage = new StageChoseLevel(this, data);
-		} else if (stageID == STAGE_WON) {
-			stage = new StageWon(this, data);
+		try {
+			if (stageID == STAGE_LEVEL) {
+				stage = new StageLevel(this, data);
+			} else if (stageID == STAGE_MAIN_MENUE) {
+				stage = new StageMainMenue(this, data);
+			} else if (stageID == STAGE_OPTIONS) {
+				stage = new StageOptions(this, data);
+			} else if (stageID == STAGE_CREDITS) {
+				stage = new StageCredits(this, data);
+			} else if (stageID == STAGE_CHOOSE_LEVEL) {
+				stage = new StageChoseLevel(this, data);
+			} else if (stageID == STAGE_WON) {
+				stage = new StageWon(this, data);
+			}
+		} catch (IllegalArgumentException e) {
+			stage = new StageMainMenue(this, null);
+			e.printStackTrace();
+			Log.error("IllegalArgumentException by opening Stage: " + stageID + "   " + data.toString());
 		}
 		oldStage.stop();
 	}

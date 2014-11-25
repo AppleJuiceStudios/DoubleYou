@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LevelMap {
 
 	private StageLevel stageLevel;
-	private static int levelID;
+	private int levelID;
 	private String soundTrack;
 
 	private boolean isCloneAllowed;
@@ -136,23 +136,10 @@ public class LevelMap {
 		JAXB.marshal(this, new File("res/level/" + name + ".xml"));
 	}
 
-	public static LevelMap loadLevel(String name) {
-		if (name.equals("S1L1")) {
-			levelID = 1;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level11.xml"), LevelMap.class);
-		} else if (name.equals("S1L2")) {
-			levelID = 2;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level12.xml"), LevelMap.class);
-		} else if (name.equals("S1L3")) {
-			levelID = 3;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level13.xml"), LevelMap.class);
-		} else if (name.equals("S1L4")) {
-			levelID = 4;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level14.xml"), LevelMap.class);
-		} else {
-			levelID = -1;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMap.class);
-		}
+	public static LevelMap loadLevel(int levelID) {
+		LevelMap map = JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level" + levelID + ".xml"), LevelMap.class);
+		map.levelID = levelID;
+		return map;
 	}
 
 	public MapObject getMapObject(byte id) {
