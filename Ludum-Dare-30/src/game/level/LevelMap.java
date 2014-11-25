@@ -142,6 +142,12 @@ public class LevelMap {
 		return map;
 	}
 
+	public static LevelMap loadLevel(File level) {
+		LevelMap map = JAXB.unmarshal(level, LevelMap.class);
+		map.levelID = -1;
+		return map;
+	}
+
 	public MapObject getMapObject(byte id) {
 		return objects[id - 32];
 	}
