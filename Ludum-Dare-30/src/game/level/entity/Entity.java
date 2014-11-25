@@ -1,6 +1,6 @@
 package game.level.entity;
 
-import game.level.map.LevelMap;
+import game.level.LevelMap;
 import game.staging.StageLevel;
 
 import java.awt.Graphics2D;

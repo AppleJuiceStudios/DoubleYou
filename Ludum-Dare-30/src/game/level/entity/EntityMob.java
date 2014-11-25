@@ -1,6 +1,6 @@
 package game.level.entity;
 
-import game.level.map.LevelMap;
+import game.level.LevelMap;
 
 import java.awt.image.BufferedImage;
 

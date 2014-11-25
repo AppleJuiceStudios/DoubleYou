@@ -1,14 +1,15 @@
 package game.staging;
 
+import game.level.LevelMap;
 import game.level.Textbox;
 import game.level.TileSet;
 import game.level.entity.EntityPlayer;
 import game.level.entity.EntityPlayerClone;
 import game.level.entity.EntityPlayerRecord;
-import game.level.map.LevelMap;
 import game.main.GameCanvas;
 import game.main.Monitoring;
 import game.res.ResourceManager;
+import game.res.SoundManager;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -37,7 +38,7 @@ public class StageLevel extends Stage {
 
 	private Timer updateTimer;
 
-	public boolean isCloneAllowed = true;
+	private boolean isCloneAllowed;
 
 	private boolean isRecording;
 	private boolean isCloneMoving;
@@ -55,6 +56,10 @@ public class StageLevel extends Stage {
 		map = LevelMap.loadLevel(data.get("level"));
 		map.setStageLevel(this);
 		map.start();
+		SoundManager.loadClipInCache("soundTrack", map.getSoundTrack());
+		SoundManager.play("soundTrack", true);
+		isCloneAllowed = map.getIsCloneAllowed();
+		textbox = map.getStartTextbox();
 		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
 		healthbar = ResourceManager.getImage("/Healthbar.png");

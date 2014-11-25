@@ -1,7 +1,7 @@
 package game.level.entity;
 
 import game.level.Animation;
-import game.level.map.LevelMap;
+import game.level.LevelMap;
 import game.res.ResourceManager;
 
 public class EntityEnemyMars extends EntityEnemy {

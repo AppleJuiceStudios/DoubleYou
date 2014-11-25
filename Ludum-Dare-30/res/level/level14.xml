@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap14>
+	<soundTrack>mars_4.wav</soundTrack>
+	<isCloneAllowed>true</isCloneAllowed>
+	<startTextbox>
+		<content>
+        	<item>These blue doors are different!</item>
+        	<item>You're clone can walk through them</item>
+        	<item>even when you are not programming him...</item>
+    	</content>
+	</startTextbox>
     <mapObjects>
         <mapObjectLasergateClone>
             <height>3</height>

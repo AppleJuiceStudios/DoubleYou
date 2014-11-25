@@ -2,9 +2,9 @@ package game.level.mapobject;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import game.level.LevelMap;
 import game.level.Textbox;
 import game.level.entity.EntityPlayer;
-import game.level.map.LevelMap;
 
 @XmlRootElement
 public class MapObjectTriggerLevel12 extends MapObject {

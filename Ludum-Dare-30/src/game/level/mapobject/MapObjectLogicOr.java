@@ -2,7 +2,7 @@ package game.level.mapobject;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import game.level.map.LevelMap;
+import game.level.LevelMap;
 
 @XmlRootElement
 public class MapObjectLogicOr extends MapObjectLogic {

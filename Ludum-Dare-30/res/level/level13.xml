@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap13>
+	<soundTrack>mars_3.wav</soundTrack>
+	<isCloneAllowed>true</isCloneAllowed>
     <mapObjects>
         <mapObjectLasergate>
             <height>2</height>

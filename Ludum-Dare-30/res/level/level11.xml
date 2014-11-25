@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap11>
+	<soundTrack>mars_1.wav</soundTrack>
+	<isCloneAllowed>false</isCloneAllowed>
+	<startTextbox>
+		<content>
+        	<item>Hey!</item>
+        	<item>Glad you made it!</item>
+        	<item>            (Press enter to continue...)</item>
+    	</content>
+    	<content>
+    		<item>You are currently on Mars so ahead go and</item>
+    		<item>experiment with the low gravity...</item>
+    		<item>Use W,A,D to move around.</item>
+    	</content>
+    	<content>
+    	<item>If you see red laser beams those are doors!</item>
+    	<item>Usually there is a plate to open them...</item>
+    	</content>
+	</startTextbox>
     <mapObjects>
         <mapObjectLasergate>
             <height>3</height>

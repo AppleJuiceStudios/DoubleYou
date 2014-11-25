@@ -1,4 +1,4 @@
-package game.level.map;
+package game.level;
 
 import game.level.entity.EntityPlayer;
 import game.level.mapobject.MapObject;
@@ -14,6 +14,7 @@ import game.level.mapobject.MapObjectTriggerTextbox;
 import game.level.mapobject.MapObjectTriggerWinning;
 import game.main.GameCanvas;
 import game.res.SaveGame;
+import game.res.SoundManager;
 import game.staging.StageLevel;
 import game.staging.StageManager;
 
@@ -31,6 +32,10 @@ public class LevelMap {
 
 	private StageLevel stageLevel;
 	private static int levelID;
+	private String soundTrack;
+
+	private boolean isCloneAllowed;
+	private Textbox startTextbox;
 
 	private int playerSpawnX;
 	private int playerSpawnY;
@@ -40,11 +45,18 @@ public class LevelMap {
 	private int height;
 
 	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class), @XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
+			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
+			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
+			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
+			@XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class),
+			@XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
 		init();
+		SoundManager.loadClipInCache("Mars 1", "mars_1.wav");
+		SoundManager.play("Mars 1", true);
 	}
 
 	public void init() {
@@ -127,19 +139,19 @@ public class LevelMap {
 	public static LevelMap loadLevel(String name) {
 		if (name.equals("S1L1")) {
 			levelID = 1;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level11.xml"), LevelMap11.class);
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level11.xml"), LevelMap.class);
 		} else if (name.equals("S1L2")) {
 			levelID = 2;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level12.xml"), LevelMap12.class);
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level12.xml"), LevelMap.class);
 		} else if (name.equals("S1L3")) {
 			levelID = 3;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level13.xml"), LevelMap13.class);
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level13.xml"), LevelMap.class);
 		} else if (name.equals("S1L4")) {
 			levelID = 4;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level14.xml"), LevelMap14.class);
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/level14.xml"), LevelMap.class);
 		} else {
 			levelID = -1;
-			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMapTest.class);
+			return JAXB.unmarshal(LevelMap.class.getResourceAsStream("/level/test.xml"), LevelMap.class);
 		}
 	}
 
@@ -169,6 +181,30 @@ public class LevelMap {
 
 	public StageLevel getStageLevel() {
 		return stageLevel;
+	}
+
+	public String getSoundTrack() {
+		return soundTrack;
+	}
+
+	public void setSoundTrack(String soundTrack) {
+		this.soundTrack = soundTrack;
+	}
+
+	public boolean getIsCloneAllowed() {
+		return isCloneAllowed;
+	}
+
+	public void setIsCloneAllowed(boolean isCloneAllowed) {
+		this.isCloneAllowed = isCloneAllowed;
+	}
+
+	public Textbox getStartTextbox() {
+		return startTextbox;
+	}
+
+	public void setStartTextbox(Textbox startTextbox) {
+		this.startTextbox = startTextbox;
 	}
 
 	public void hasWon() {
