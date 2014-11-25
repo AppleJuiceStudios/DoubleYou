@@ -24,8 +24,7 @@ public class StageEditor extends Stage {
 	public static final int SCALE = 3;
 	private double xOffset = 0;
 	private double yOffset = 0;
-	private double maxXOffset;
-	private double maxYOffset;
+	private double movementSpeed = 5;
 
 	private BufferedImage background;
 	private BufferedImage mountains;
@@ -41,8 +40,6 @@ public class StageEditor extends Stage {
 		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
 		tileSet = new TileSet();
-		maxXOffset = (map.getWidth() * TileSet.SPRITE_SIZE * SCALE) - 800;
-		maxYOffset = (map.getHeight() * TileSet.SPRITE_SIZE * SCALE) - 600;
 		controls = new ControlListener();
 		getStageManager().setMouseListener(controls);
 		getStageManager().setKeyListener(controls);
@@ -66,9 +63,7 @@ public class StageEditor extends Stage {
 
 	public void draw(Graphics2D g2) {
 		g2.drawImage(background, 0, 0, 800, 600, null);
-		double mountainsOffset = -xOffset * 0.3;
-		g2.drawImage(mountains, (int) (mountainsOffset % 800) + 800, -190, 800, 800, null);
-		g2.drawImage(mountains, (int) (mountainsOffset % 800), -190, 800, 800, null);
+		g2.drawImage(mountains, 0, -190, 800, 800, null);
 		AffineTransform at = new AffineTransform();
 		at.translate((int) -xOffset, (int) -yOffset);
 		g2.setTransform(at);
@@ -78,10 +73,10 @@ public class StageEditor extends Stage {
 		int yStart = (int) (yOffset / (TileSet.SPRITE_SIZE * SCALE));
 		int xEnd = xStart + GameCanvas.WIDTH / (TileSet.SPRITE_SIZE * SCALE) + 2;
 		int yEnd = yStart + GameCanvas.HEIGHT / (TileSet.SPRITE_SIZE * SCALE) + 2;
-		// xStart = Math.max(0, Math.min(map.getWidth(), xStart));
-		// yStart = Math.max(0, Math.min(map.getHeight(), yStart));
-		// xEnd = Math.max(0, Math.min(map.getWidth(), xEnd));
-		// yEnd = Math.max(0, Math.min(map.getWidth(), yEnd));
+		xStart = Math.max(0, xStart);
+		yStart = Math.max(0, yStart);
+		xEnd = Math.min(map.getWidth(), xEnd);
+		yEnd = Math.min(map.getHeight(), yEnd);
 
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = xStart; x < xEnd; x++) {
@@ -100,16 +95,16 @@ public class StageEditor extends Stage {
 
 	public void update() {
 		if (controls.Key_W) {
-			yOffset -= 2;
+			yOffset -= movementSpeed;
 		}
 		if (controls.Key_A) {
-			xOffset -= 2;
+			xOffset -= movementSpeed;
 		}
 		if (controls.Key_S) {
-			yOffset += 2;
+			yOffset += movementSpeed;
 		}
 		if (controls.Key_D) {
-			xOffset += 2;
+			xOffset += movementSpeed;
 		}
 	}
 
