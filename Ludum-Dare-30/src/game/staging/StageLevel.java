@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.xml.bind.UnmarshalException;
-
 public class StageLevel extends Stage {
 
 	public static final int SCALE = 3;
