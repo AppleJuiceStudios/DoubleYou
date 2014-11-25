@@ -5,11 +5,13 @@ import game.level.TileSet;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,7 +23,7 @@ import javax.xml.bind.JAXB;
 
 public class StageEditor extends Stage {
 
-	public static final int SCALE = 3;
+	public static final int SCALE = 2;
 	private double xOffset = 0;
 	private double yOffset = 0;
 	private double movementSpeed = 5;
@@ -43,6 +45,7 @@ public class StageEditor extends Stage {
 		controls = new ControlListener();
 		getStageManager().setMouseListener(controls);
 		getStageManager().setKeyListener(controls);
+		getStageManager().setMouseMotionListener(controls);
 		updateTimer = new Timer();
 		updateTimer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
@@ -69,10 +72,10 @@ public class StageEditor extends Stage {
 		g2.setTransform(at);
 		int spriteSize = TileSet.SPRITE_SIZE * SCALE;
 
-		int xStart = (int) (xOffset / (TileSet.SPRITE_SIZE * SCALE));
-		int yStart = (int) (yOffset / (TileSet.SPRITE_SIZE * SCALE));
-		int xEnd = xStart + GameCanvas.WIDTH / (TileSet.SPRITE_SIZE * SCALE) + 2;
-		int yEnd = yStart + GameCanvas.HEIGHT / (TileSet.SPRITE_SIZE * SCALE) + 2;
+		int xStart = (int) (xOffset / (spriteSize));
+		int yStart = (int) (yOffset / (spriteSize));
+		int xEnd = xStart + GameCanvas.WIDTH / (spriteSize) + 2;
+		int yEnd = yStart + GameCanvas.HEIGHT / (spriteSize) + 2;
 		xStart = Math.max(0, xStart);
 		yStart = Math.max(0, yStart);
 		xEnd = Math.min(map.getWidth(), xEnd);
@@ -86,6 +89,14 @@ public class StageEditor extends Stage {
 				}
 			}
 		}
+
+		int selectedX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
+		int selectedY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
+		g2.setColor(Color.BLUE);
+		for (int i = 1; i <= 4; i++) {
+			g2.drawRect(selectedX * (spriteSize) - i, selectedY * (spriteSize) - i, (spriteSize) + i * 2 - 1, (spriteSize) + i * 2 - 1);
+		}
+
 		map.drawObjects(g2);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -94,17 +105,21 @@ public class StageEditor extends Stage {
 	}
 
 	public void update() {
+		double speed = this.movementSpeed;
+		if (controls.Key_Shift) {
+			speed *= 3;
+		}
 		if (controls.Key_W) {
-			yOffset -= movementSpeed;
+			yOffset -= speed;
 		}
 		if (controls.Key_A) {
-			xOffset -= movementSpeed;
+			xOffset -= speed;
 		}
 		if (controls.Key_S) {
-			yOffset += movementSpeed;
+			yOffset += speed;
 		}
 		if (controls.Key_D) {
-			xOffset += movementSpeed;
+			xOffset += speed;
 		}
 	}
 
@@ -112,36 +127,38 @@ public class StageEditor extends Stage {
 		updateTimer.cancel();
 	}
 
-	private class ControlListener implements MouseListener, KeyListener {
+	private class ControlListener implements MouseListener, KeyListener, MouseMotionListener {
+
+		private double mouse_X;
+		private double mouse_Y;
 
 		private boolean Key_W;
 		private boolean Key_A;
 		private boolean Key_S;
 		private boolean Key_D;
+		private boolean Key_Shift;
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_W) {
-				Key_W = true;
-			} else if (e.getKeyCode() == KeyEvent.VK_A) {
-				Key_A = true;
-			} else if (e.getKeyCode() == KeyEvent.VK_S) {
-				Key_S = true;
-			} else if (e.getKeyCode() == KeyEvent.VK_D) {
-				Key_D = true;
-			}
+			keyUpdate(e.getKeyCode(), true);
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_W) {
-				Key_W = false;
-			} else if (e.getKeyCode() == KeyEvent.VK_A) {
-				Key_A = false;
-			} else if (e.getKeyCode() == KeyEvent.VK_S) {
-				Key_S = false;
-			} else if (e.getKeyCode() == KeyEvent.VK_D) {
-				Key_D = false;
+			keyUpdate(e.getKeyCode(), false);
+		}
+
+		private void keyUpdate(int keyCode, boolean pressed) {
+			if (keyCode == KeyEvent.VK_W) {
+				Key_W = pressed;
+			} else if (keyCode == KeyEvent.VK_A) {
+				Key_A = pressed;
+			} else if (keyCode == KeyEvent.VK_S) {
+				Key_S = pressed;
+			} else if (keyCode == KeyEvent.VK_D) {
+				Key_D = pressed;
+			} else if (keyCode == KeyEvent.VK_SHIFT) {
+				Key_Shift = pressed;
 			}
 		}
 
@@ -173,6 +190,18 @@ public class StageEditor extends Stage {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			mouse_X = e.getX();
+			mouse_Y = e.getY();
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			mouse_X = e.getX();
+			mouse_Y = e.getY();
 		}
 
 	}
