@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
 import java.util.Map;
 
 import util.log.Log;
@@ -35,7 +36,9 @@ public class StageManager {
 			SaveGame.load();
 		ResourceManager.load();
 		SoundManager.init();
-		stage = new StageMainMenue(this, null);
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("file", "res/level/levelTest.xml");
+		stage = new StageEditor(this, data);
 	}
 
 	public void setStage(int stageID) {
