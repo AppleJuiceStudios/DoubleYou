@@ -51,7 +51,7 @@ public class SaveGame {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			JAXB.marshal(saveGame, path);
+			JAXB.marshal(saveGame, new File(path));
 		}
 	}
 
@@ -65,14 +65,20 @@ public class SaveGame {
 
 	public static String getPath() {
 		String path;
-		String OS = (System.getProperty("os.name")).toUpperCase();
+		String OS;
+		try {
+			OS = (System.getenv("OS")).toUpperCase();
+		} catch (Exception e) {
+			OS = "NULL";
+		}
 		if (OS.contains("WIN")) {
 			path = System.getenv("AppData");
+			path += "/DoubleYou";
 		} else {
-			path = System.getProperty("user.home");
-			path += "/Library/Application Support";
+			path = System.getenv("HOME");
+			path += "/.doubleYou";
 		}
-		path += "/DoubleYou";
+		new File(path).mkdir();
 		return path;
 	}
 

@@ -27,7 +27,7 @@ public class StageLevel extends Stage {
 
 	public static final int SCALE = 3;
 	private double xOffset = 0;
-	private double yOffset = 10;
+	private double yOffset = 0;
 	private double maxXOffset;
 	private double maxYOffset;
 
@@ -190,7 +190,7 @@ public class StageLevel extends Stage {
 	}
 
 	public void stop() {
-
+		updateTimer.cancel();
 	}
 
 	private void initListeners() {
