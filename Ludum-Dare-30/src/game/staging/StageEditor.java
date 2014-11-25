@@ -122,7 +122,6 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			System.out.println("W");
 			if (e.getKeyCode() == KeyEvent.VK_W) {
 				Key_W = true;
 			} else if (e.getKeyCode() == KeyEvent.VK_A) {
