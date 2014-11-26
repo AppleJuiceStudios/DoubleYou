@@ -22,7 +22,7 @@ public class ResourceManager {
 	private static Map<String, Clip> clips;
 
 	public static void load() {
-		Log.debug("Loading res!");
+		Log.info("Loading res!");
 		images = new HashMap<>();
 		clips = new HashMap<>();
 		long startTime = System.currentTimeMillis();
@@ -36,15 +36,14 @@ public class ResourceManager {
 			}
 		}
 		scanner.close();
-		Log.debug("Loading res took " + (System.currentTimeMillis() - startTime) + " ms!");
-		Log.debug("Done with ResourceManager!");
+		Log.info("Loading res took " + (System.currentTimeMillis() - startTime) + " ms!");
 	}
 
 	private static void loadImage(String path) {
 		try {
 			BufferedImage image = ImageIO.read(ResourceManager.class.getResourceAsStream(path));
 			images.put(path, image);
-			Log.info("Load image: " + path);
+			Log.debug("Load image: " + path);
 		} catch (IOException e) {
 			Log.error("Can not load image: " + path);
 			e.printStackTrace();
@@ -58,7 +57,7 @@ public class ResourceManager {
 			AudioInputStream audioIn = AudioSystem.getAudioInputStream(inStream);
 			clip.open(audioIn);
 			audioIn.close();
-			Log.info("Load clip: " + path);
+			Log.debug("Load clip: " + path);
 			clips.put(path, clip);
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
