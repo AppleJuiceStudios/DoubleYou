@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import util.log.Log;
+
 public class StageLevel extends Stage {
 
 	public static final int SCALE = 3;
@@ -60,7 +62,9 @@ public class StageLevel extends Stage {
 			} else {
 				map = LevelMap.loadLevel(new File(data.get("level")));
 			}
+			Log.info("Loaded Level " + data.get("level"));
 		} catch (IllegalArgumentException e) {
+			Log.error("Error loading Level: " + data.get("level"));
 			throw new IllegalArgumentException(e);
 		}
 		map.setStageLevel(this);
@@ -135,7 +139,8 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -185,7 +190,8 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		Monitoring.stopPhysics();
 	}
 

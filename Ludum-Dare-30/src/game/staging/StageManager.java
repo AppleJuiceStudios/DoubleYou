@@ -51,6 +51,7 @@ public class StageManager {
 	}
 
 	public void setStage(int stageID, Map<String, String> data) {
+		long start = System.currentTimeMillis();
 		Stage oldStage = stage;
 		keyListener = null;
 		mouseListener = null;
@@ -78,6 +79,7 @@ public class StageManager {
 			Log.error("IllegalArgumentException by opening Stage: " + stageID + "   " + data.toString());
 		}
 		oldStage.stop();
+		Log.info("Loading Stage " + stageID + " took " + (System.currentTimeMillis() - start) + " ms");
 	}
 
 	public void draw(Graphics2D g2) {

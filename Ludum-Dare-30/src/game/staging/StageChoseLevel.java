@@ -21,54 +21,13 @@ public class StageChoseLevel extends Stage {
 
 	private int nextLevel;
 
-	/**
-	 * Buttons
-	 */
-	// Stage 1
-	private Rectangle btnS1L1;
-	private Rectangle btnS1L2;
-	private Rectangle btnS1L3;
-	private Rectangle btnS1L4;
-	// Stage 2
-	private Rectangle btnS2L1;
-	private Rectangle btnS2L2;
-	private Rectangle btnS2L3;
-	private Rectangle btnS2L4;
-	// Stage 3
-	private Rectangle btnS3L1;
-	private Rectangle btnS3L2;
-	private Rectangle btnS3L3;
-	private Rectangle btnS3L4;
-	// Stage 4
-	private Rectangle btnS4L1;
-	private Rectangle btnS4L2;
-	private Rectangle btnS4L3;
-	private Rectangle btnS4L4;
+	// Buttons
+	private Rectangle[] btnsLevel;
 
-	/**
-	 * Images
-	 */
+	// Images
 	private BufferedImage imgLock;
-	// Stage 1
-	private BufferedImage imgS1L1;
-	private BufferedImage imgS1L2;
-	private BufferedImage imgS1L3;
-	private BufferedImage imgS1L4;
-	// Stage 2
-	private BufferedImage imgS2L1;
-	private BufferedImage imgS2L2;
-	private BufferedImage imgS2L3;
-	private BufferedImage imgS2L4;
-	// Stage 3
-	private BufferedImage imgS3L1;
-	private BufferedImage imgS3L2;
-	private BufferedImage imgS3L3;
-	private BufferedImage imgS3L4;
-	// Stage 4
-	private BufferedImage imgS4L1;
-	private BufferedImage imgS4L2;
-	private BufferedImage imgS4L3;
-	private BufferedImage imgS4L4;
+	private BufferedImage[] imgsLevel;
+
 	// Background
 	private BufferedImage imgBGS1;
 	private BufferedImage imgBGS2;
@@ -83,9 +42,11 @@ public class StageChoseLevel extends Stage {
 			SoundManager.play("Space Commando", true);
 		}
 
-		nextLevel = 16;
-		if (!GameCanvas.IS_APPLET)
-			nextLevel = SaveGame.saveGame.getNextLevel();
+		nextLevel = !GameCanvas.IS_APPLET ? SaveGame.saveGame.getNextLevel() : 16;
+
+		btnsLevel = new Rectangle[16];
+		imgsLevel = new BufferedImage[16];
+
 		initMouse();
 		initKey();
 		initRecs();
@@ -105,39 +66,9 @@ public class StageChoseLevel extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				if (btnS1L1.contains(point)) { // Stage 1
-					send("1");
-				} else if (btnS1L2.contains(point) && nextLevel >= 2) {
-					send("2");
-				} else if (btnS1L3.contains(point) && nextLevel >= 3) {
-					send("3");
-				} else if (btnS1L4.contains(point) && nextLevel >= 4) {
-					send("4");
-				} else if (btnS2L1.contains(point) && nextLevel >= 5) { // Stage 2
-					send("5");
-				} else if (btnS2L2.contains(point) && nextLevel >= 6) {
-					send("6");
-				} else if (btnS2L3.contains(point) && nextLevel >= 7) {
-					send("7");
-				} else if (btnS2L4.contains(point) && nextLevel >= 8) {
-					send("8");
-				} else if (btnS3L1.contains(point) && nextLevel >= 9) { // Stage 3
-					send("9");
-				} else if (btnS3L2.contains(point) && nextLevel >= 10) {
-					send("10");
-				} else if (btnS3L3.contains(point) && nextLevel >= 11) {
-					send("11");
-				} else if (btnS3L4.contains(point) && nextLevel >= 12) {
-					send("12");
-				} else if (btnS4L1.contains(point) && nextLevel >= 13) { // Stage 4
-					send("13");
-				} else if (btnS4L2.contains(point) && nextLevel >= 14) {
-					send("14");
-				} else if (btnS4L3.contains(point) && nextLevel >= 15) {
-					send("15");
-				} else if (btnS4L4.contains(point) && nextLevel >= 16) {
-					send("16");
-				}
+				for (int i = 1; i <= btnsLevel.length; i++)
+					if (btnsLevel[i - 1].contains(point) && nextLevel >= i)
+						send(Integer.toString(i));
 			}
 
 			@Override
@@ -173,50 +104,21 @@ public class StageChoseLevel extends Stage {
 	}
 
 	private void initRecs() {
-		// Stage 1
-		btnS1L1 = new Rectangle(100, 66, 50, 50);
-		btnS1L2 = new Rectangle(250, 66, 50, 50);
-		btnS1L3 = new Rectangle(100, 182, 50, 50);
-		btnS1L4 = new Rectangle(250, 182, 50, 50);
-		// Stage 2
-		btnS2L1 = new Rectangle(500, 66, 50, 50);
-		btnS2L2 = new Rectangle(650, 66, 50, 50);
-		btnS2L3 = new Rectangle(500, 182, 50, 50);
-		btnS2L4 = new Rectangle(650, 182, 50, 50);
-		// Stage 3
-		btnS3L1 = new Rectangle(100, 364, 50, 50);
-		btnS3L2 = new Rectangle(250, 364, 50, 50);
-		btnS3L3 = new Rectangle(100, 480, 50, 50);
-		btnS3L4 = new Rectangle(250, 480, 50, 50);
-		// Stage 4
-		btnS4L1 = new Rectangle(500, 364, 50, 50);
-		btnS4L2 = new Rectangle(650, 364, 50, 50);
-		btnS4L3 = new Rectangle(500, 480, 50, 50);
-		btnS4L4 = new Rectangle(650, 480, 50, 50);
+		for (int y = 0; y < 4; y++)
+			for (int x = 0; x < 4; x++) {
+				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
+				int xx = 100 + (x / 2) * 400 + (x % 2) * 150;
+				int yy = 66 + (y / 2) * 298 + (y % 2) * 116;
+				btnsLevel[current] = new Rectangle(xx, yy, 50, 50);
+			}
 	}
 
 	private void loadTextures() {
 		imgLock = ResourceManager.getImage("/buttons/Lock.png");
-		// Stage 1
-		imgS1L1 = ResourceManager.getImage("/buttons/Mars-1.png");
-		imgS1L2 = ResourceManager.getImage("/buttons/Mars-2.png");
-		imgS1L3 = ResourceManager.getImage("/buttons/Mars-3.png");
-		imgS1L4 = ResourceManager.getImage("/buttons/Mars-4.png");
-		// Stage 2
-		imgS2L1 = ResourceManager.getImage("/buttons/Mars-1.png");
-		imgS2L2 = ResourceManager.getImage("/buttons/Mars-2.png");
-		imgS2L3 = ResourceManager.getImage("/buttons/Mars-3.png");
-		imgS2L4 = ResourceManager.getImage("/buttons/Mars-4.png");
-		// Stage 3
-		imgS3L1 = ResourceManager.getImage("/buttons/Mars-1.png");
-		imgS3L2 = ResourceManager.getImage("/buttons/Mars-2.png");
-		imgS3L3 = ResourceManager.getImage("/buttons/Mars-3.png");
-		imgS3L4 = ResourceManager.getImage("/buttons/Mars-4.png");
-		// Stage 4
-		imgS4L1 = ResourceManager.getImage("/buttons/Mars-1.png");
-		imgS4L2 = ResourceManager.getImage("/buttons/Mars-2.png");
-		imgS4L3 = ResourceManager.getImage("/buttons/Mars-3.png");
-		imgS4L4 = ResourceManager.getImage("/buttons/Mars-4.png");
+
+		for (int i = 1; i <= imgsLevel.length; i++)
+			imgsLevel[i - 1] = ResourceManager.getImage("/buttons/Level-" + i + ".png");
+
 		// Backgrounds
 		imgBGS1 = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 		imgBGS2 = ResourceManager.getImage("/backgrounds/Saturn-Background.png");
@@ -235,46 +137,22 @@ public class StageChoseLevel extends Stage {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(397, 0, 6, 600);
 		g2.fillRect(0, 297, 800, 6);
-		// Stage 1
-		g2.drawImage(imgS1L1, 100, 66, 50, 50, null);
-		g2.drawImage(imgS1L2, 250, 66, 50, 50, null);
-		g2.drawImage(imgS1L3, 100, 182, 50, 50, null);
-		g2.drawImage(imgS1L4, 250, 182, 50, 50, null);
-		// Stage 2
-		g2.drawImage(imgS2L1, 500, 66, 50, 50, null);
-		g2.drawImage(imgS2L2, 650, 66, 50, 50, null);
-		g2.drawImage(imgS2L3, 500, 182, 50, 50, null);
-		g2.drawImage(imgS2L4, 650, 182, 50, 50, null);
-		// Stage 3
-		g2.drawImage(imgS3L1, 100, 364, 50, 50, null);
-		g2.drawImage(imgS3L2, 250, 364, 50, 50, null);
-		g2.drawImage(imgS3L3, 100, 480, 50, 50, null);
-		g2.drawImage(imgS3L4, 250, 480, 50, 50, null);
-		// Stage 4
-		g2.drawImage(imgS4L1, 500, 364, 50, 50, null);
-		g2.drawImage(imgS4L2, 650, 364, 50, 50, null);
-		g2.drawImage(imgS4L3, 500, 480, 50, 50, null);
-		g2.drawImage(imgS4L4, 650, 480, 50, 50, null);
-		// Overlay
-		for (int y = 0; y < 4; y++) {
+
+		// Level & Overlay
+		for (int y = 0; y < 4; y++)
 			for (int x = 0; x < 4; x++) {
 				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
 				int xx = 100 + (x / 2) * 400 + (x % 2) * 150;
 				int yy = 66 + (y / 2) * 298 + (y % 2) * 116;
-				if (current >= nextLevel) {
+				g2.drawImage(imgsLevel[current], xx, yy, 50, 50, null);
+				if (current >= nextLevel)
 					g2.drawImage(imgLock, xx, yy, 50, 50, null);
-				}
 			}
-		}
 	}
 
 	private void send(String level) {
 		Map<String, String> send = new HashMap<String, String>();
 		send.put("level", level);
-		SoundManager.stopAll();
-		SoundManager.clearCache();
-		// SoundManager.loadClipInCache("Mars 1", "mars_1.wav");
-		// SoundManager.play("Mars 1", true);
 		getStageManager().setStage(StageManager.STAGE_LEVEL, send);
 	}
 
@@ -287,5 +165,4 @@ public class StageChoseLevel extends Stage {
 	public void stop() {
 
 	}
-
 }

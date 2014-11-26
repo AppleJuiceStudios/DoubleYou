@@ -58,4 +58,8 @@ Ludum-Dare-30
 		<td><b>Distribution</b></td>
 		<td>Github.com<br>Dropbox.com</td>
 	</tr>
+	<tr>
+		<td><b>Contact</b></td>
+		<td>DoubleYouGame@gmail.com</td>
+	</tr>
 </table>
