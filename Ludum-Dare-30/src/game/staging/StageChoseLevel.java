@@ -271,10 +271,6 @@ public class StageChoseLevel extends Stage {
 	private void send(String level) {
 		Map<String, String> send = new HashMap<String, String>();
 		send.put("level", level);
-		SoundManager.stopAll();
-		SoundManager.clearCache();
-		// SoundManager.loadClipInCache("Mars 1", "mars_1.wav");
-		// SoundManager.play("Mars 1", true);
 		getStageManager().setStage(StageManager.STAGE_LEVEL, send);
 	}
 

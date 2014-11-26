@@ -32,8 +32,6 @@ public class StageWon extends Stage {
 
 	public StageWon(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
-		SoundManager.stopAll();
-		SoundManager.clearCache();
 		SoundManager.loadClipInCache("Won", "you_win.wav");
 		SoundManager.play("Won");
 
