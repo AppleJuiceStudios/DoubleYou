@@ -165,6 +165,50 @@ public class StageEditor extends Stage {
 		updateTile(x, y - 1);
 	}
 
+	public void fillRect(int x1, int y1, int x2, int y2) {
+		int startX = Math.min(x1, x2);
+		int startY = Math.min(y1, y2);
+		int endX = Math.max(x1, x2);
+		int endY = Math.max(y1, y2);
+		for (int x = startX; x <= endX; x++) {
+			for (int y = startY; y <= endY; y++) {
+				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
+			}
+		}
+		for (int x = startX; x <= endX; x++) {
+			updateTile(x, startY);
+			updateTile(x, endY);
+			updateTile(x, startY - 1);
+			updateTile(x, endY + 1);
+		}
+		for (int y = startY; y <= endY; y++) {
+			updateTile(startX, y);
+			updateTile(endX, y);
+			updateTile(startX - 1, y);
+			updateTile(endX + 1, y);
+		}
+	}
+
+	public void clearRect(int x1, int y1, int x2, int y2) {
+		int startX = Math.min(x1, x2);
+		int startY = Math.min(y1, y2);
+		int endX = Math.max(x1, x2);
+		int endY = Math.max(y1, y2);
+		for (int x = startX; x <= endX; x++) {
+			for (int y = startY; y <= endY; y++) {
+				map.getSpritesheet()[x][y] = TileSet.TILE_AIR;
+			}
+		}
+		for (int x = startX; x <= endX; x++) {
+			updateTile(x, startY - 1);
+			updateTile(x, endY + 1);
+		}
+		for (int y = startY; y <= endY; y++) {
+			updateTile(startX - 1, y);
+			updateTile(endX + 1, y);
+		}
+	}
+
 	public void updateTile(int x, int y) {
 		if (map.isBlock(x, y) && (x >= 0 & x < map.getWidth()) && (y >= 0 & y < map.getHeight())) {
 			boolean north = map.isBlock(x, y - 1);
@@ -173,36 +217,26 @@ public class StageEditor extends Stage {
 			boolean east = map.isBlock(x + 1, y);
 			if (!north && !south && !west && !east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
-			if (!north && !south && !west && east)
+			if (!north && !west && east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_WEST;
-			if (!north && !south && west && !east)
+			if (!north && west && !east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_EAST;
-			if (!north && !south && west && east)
+			if (!north && west && east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
 			if (!north && south && !west && !east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
-			if (!north && south && !west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_WEST;
-			if (!north && south && west && !east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_EAST;
-			if (!north && south && west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
-			if (north && !south && !west && !east)
+			if (north && !south && west == east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH;
 			if (north && !south && !west && east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH_WEST;
 			if (north && !south && west && !east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH_EAST;
-			if (north && !south && west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH;
-			if (north && south && !west && !east)
+			if (north && south && west == east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
 			if (north && south && !west && east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_WEST;
 			if (north && south && west && !east)
 				map.getSpritesheet()[x][y] = TileSet.TILE_EAST;
-			if (north && south && west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
 		}
 	}
 
@@ -308,9 +342,8 @@ public class StageEditor extends Stage {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
-				int spriteSize = TileSet.SPRITE_SIZE * scale;
-				lastSelectionX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
-				lastSelectionY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
+				lastSelectionX = selectedX;
+				lastSelectionY = selectedY;
 				isSelecting = true;
 			}
 
@@ -325,6 +358,12 @@ public class StageEditor extends Stage {
 				} else if (e.getButton() == MouseEvent.BUTTON3) {
 					removeTile(selectedX, selectedY);
 				}
+			} else {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					fillRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
+				} else if (e.getButton() == MouseEvent.BUTTON3) {
+					clearRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
+				}
 			}
 		}
 
@@ -332,18 +371,30 @@ public class StageEditor extends Stage {
 		public void mouseDragged(MouseEvent e) {
 			mouse_X = e.getX();
 			mouse_Y = e.getY();
-			int spriteSize = TileSet.SPRITE_SIZE * scale;
-			selectedX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
-			selectedY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
+			updateSelection();
 		}
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			mouse_X = e.getX();
 			mouse_Y = e.getY();
+			updateSelection();
+		}
+
+		private void updateSelection() {
 			int spriteSize = TileSet.SPRITE_SIZE * scale;
 			selectedX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
 			selectedY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
+			if (selectedX < 0) {
+				selectedX = 0;
+			} else if (selectedX >= map.getWidth()) {
+				selectedX = map.getWidth() - 1;
+			}
+			if (selectedY < 0) {
+				selectedY = 0;
+			} else if (selectedY >= map.getHeight()) {
+				selectedY = map.getHeight() - 1;
+			}
 		}
 
 	}
