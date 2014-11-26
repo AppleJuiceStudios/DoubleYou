@@ -36,6 +36,12 @@ public class StageEditor extends Stage {
 	private ControlListener controls;
 	private Timer updateTimer;
 
+	private int selectedX;
+	private int selectedY;
+	private int lastSelectionX;
+	private int lastSelectionY;
+	private boolean isSelecting;
+
 	public StageEditor(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		loadMap(data);
@@ -90,11 +96,20 @@ public class StageEditor extends Stage {
 			}
 		}
 
-		int selectedX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
-		int selectedY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
 		g2.setColor(Color.BLUE);
-		for (int i = 1; i <= 1 + scale; i++) {
-			g2.drawRect(selectedX * (spriteSize) - i, selectedY * (spriteSize) - i, (spriteSize) + i * 2 - 1, (spriteSize) + i * 2 - 1);
+		if (isSelecting) {
+			int selectionStartX = Math.min(selectedX, lastSelectionX);
+			int selectionStartY = Math.min(selectedY, lastSelectionY);
+			int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
+			int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
+			for (int i = 1; i <= 1 + scale; i++) {
+				g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+						selectionHeight * spriteSize + i * 2 - 1);
+			}
+		} else {
+			for (int i = 1; i <= 1 + scale; i++) {
+				g2.drawRect(selectedX * spriteSize - i, selectedY * spriteSize - i, spriteSize + i * 2 - 1, spriteSize + i * 2 - 1);
+			}
 		}
 
 		map.drawObjects(g2, spriteSize);
@@ -126,6 +141,72 @@ public class StageEditor extends Stage {
 	public void stop() {
 		updateTimer.cancel();
 	}
+
+	// MapEdit
+
+	public void setTileID(int x, int y, byte tileID) {
+		map.getSpritesheet()[x][y] = tileID;
+	}
+
+	public void setTile(int x, int y) {
+		map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
+		updateTile(x, y);
+		updateTile(x + 1, y);
+		updateTile(x - 1, y);
+		updateTile(x, y + 1);
+		updateTile(x, y - 1);
+	}
+
+	public void removeTile(int x, int y) {
+		map.getSpritesheet()[x][y] = TileSet.TILE_AIR;
+		updateTile(x + 1, y);
+		updateTile(x - 1, y);
+		updateTile(x, y + 1);
+		updateTile(x, y - 1);
+	}
+
+	public void updateTile(int x, int y) {
+		if (map.isBlock(x, y) && (x >= 0 & x < map.getWidth()) && (y >= 0 & y < map.getHeight())) {
+			boolean north = map.isBlock(x, y - 1);
+			boolean south = map.isBlock(x, y + 1);
+			boolean west = map.isBlock(x - 1, y);
+			boolean east = map.isBlock(x + 1, y);
+			if (!north && !south && !west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
+			if (!north && !south && !west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_WEST;
+			if (!north && !south && west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_EAST;
+			if (!north && !south && west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
+			if (!north && south && !west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
+			if (!north && south && !west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_WEST;
+			if (!north && south && west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_EAST;
+			if (!north && south && west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
+			if (north && !south && !west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH;
+			if (north && !south && !west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH_WEST;
+			if (north && !south && west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH_EAST;
+			if (north && !south && west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH;
+			if (north && south && !west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
+			if (north && south && !west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_WEST;
+			if (north && south && west && !east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_EAST;
+			if (north && south && west && east)
+				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
+		}
+	}
+
+	// Scale
 
 	public void scaleUp() {
 		if (scale < 4) {
@@ -160,6 +241,26 @@ public class StageEditor extends Stage {
 				scaleUp();
 			} else if (e.getKeyCode() == KeyEvent.VK_MINUS) {
 				scaleDown();
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
+				setTileID(selectedX, selectedY, TileSet.TILE_AIR);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD1) {
+				setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_WEST);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
+				setTileID(selectedX, selectedY, TileSet.TILE_SOUTH);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
+				setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_EAST);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD4) {
+				setTileID(selectedX, selectedY, TileSet.TILE_WEST);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD5) {
+				setTileID(selectedX, selectedY, TileSet.TILE_CENTER);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD6) {
+				setTileID(selectedX, selectedY, TileSet.TILE_EAST);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD7) {
+				setTileID(selectedX, selectedY, TileSet.TILE_NORTH_WEST);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
+				setTileID(selectedX, selectedY, TileSet.TILE_NORTH);
+			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD9) {
+				setTileID(selectedX, selectedY, TileSet.TILE_NORTH_EAST);
 			} else {
 				keyUpdate(e.getKeyCode(), true);
 			}
@@ -206,24 +307,43 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
+			if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
+				int spriteSize = TileSet.SPRITE_SIZE * scale;
+				lastSelectionX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
+				lastSelectionY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
+				isSelecting = true;
+			}
 
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-
+			isSelecting = false;
+			if (selectedX == lastSelectionX && selectedY == lastSelectionY) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					setTile(selectedX, selectedY);
+				} else if (e.getButton() == MouseEvent.BUTTON3) {
+					removeTile(selectedX, selectedY);
+				}
+			}
 		}
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			mouse_X = e.getX();
 			mouse_Y = e.getY();
+			int spriteSize = TileSet.SPRITE_SIZE * scale;
+			selectedX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
+			selectedY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
 		}
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
 			mouse_X = e.getX();
 			mouse_Y = e.getY();
+			int spriteSize = TileSet.SPRITE_SIZE * scale;
+			selectedX = (int) ((controls.mouse_X + xOffset) / (spriteSize));
+			selectedY = (int) ((controls.mouse_Y + yOffset) / (spriteSize));
 		}
 
 	}
