@@ -2,6 +2,7 @@ package game.staging;
 
 import game.level.LevelMap;
 import game.level.TileSet;
+import game.level.mapobject.MapObject;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 
@@ -265,7 +266,10 @@ public class StageEditor extends Stage {
 				spritesheet[x][y + expandY] = oldSpritesheet[x][y];
 			}
 		}
-
+		MapObject[] objects = map.getObjects();
+		for (int i = 0; i < objects.length; i++) {
+			objects[i].setY(objects[i].getY() + expandY);
+		}
 		map.setSpritesheet(spritesheet);
 	}
 
