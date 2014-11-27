@@ -198,11 +198,11 @@ public class LevelMap {
 		this.startTextbox = startTextbox;
 	}
 
-	public MapObject[] getObjects() {
+	public MapObject[] getMapObjects() {
 		return objects;
 	}
 
-	public void setObjects(MapObject[] objects) {
+	public void setMapObjects(MapObject[] objects) {
 		this.objects = objects;
 	}
 
