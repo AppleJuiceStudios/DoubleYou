@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.SwingUtilities;
 import javax.xml.bind.JAXB;
 
 public class StageEditor extends Stage {
@@ -96,6 +97,11 @@ public class StageEditor extends Stage {
 			}
 		}
 
+		g2.setColor(Color.YELLOW);
+		for (int i = 1; i <= 1 + scale; i++) {
+			g2.drawRect(0 - i, 0 - i, map.getWidth() * spriteSize + i * 2 - 1, map.getHeight() * spriteSize + i * 2 - 1);
+		}
+
 		g2.setColor(Color.BLUE);
 		if (isSelecting) {
 			int selectionStartX = Math.min(selectedX, lastSelectionX);
@@ -114,7 +120,7 @@ public class StageEditor extends Stage {
 
 		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
-		/**
+		/*
 		 * GUI
 		 */
 	}
@@ -142,7 +148,7 @@ public class StageEditor extends Stage {
 		updateTimer.cancel();
 	}
 
-	// MapEdit
+	// region MapEdit
 
 	public void setTileID(int x, int y, byte tileID) {
 		map.getSpritesheet()[x][y] = tileID;
@@ -240,7 +246,36 @@ public class StageEditor extends Stage {
 		}
 	}
 
-	// Scale
+	public void expandMapX(int expandX) {
+		byte[][] oldSpritesheet = map.getSpritesheet();
+		byte[][] spritesheet = new byte[map.getWidth() + expandX][map.getHeight()];
+		for (int x = 0; x < oldSpritesheet.length; x++) {
+			for (int y = 0; y < oldSpritesheet[0].length; y++) {
+				spritesheet[x][y] = oldSpritesheet[x][y];
+			}
+		}
+		map.setSpritesheet(spritesheet);
+	}
+
+	public void expandMapY(int expandY) {
+		byte[][] oldSpritesheet = map.getSpritesheet();
+		byte[][] spritesheet = new byte[map.getWidth()][map.getHeight() + expandY];
+		for (int x = 0; x < oldSpritesheet.length; x++) {
+			for (int y = 0; y < oldSpritesheet[0].length; y++) {
+				spritesheet[x][y + expandY] = oldSpritesheet[x][y];
+			}
+		}
+
+		map.setSpritesheet(spritesheet);
+	}
+
+	public void rescale() {
+
+	}
+
+	// endregion MapEdit
+
+	// region Scale
 
 	public void scaleUp() {
 		if (scale < 4) {
@@ -258,6 +293,8 @@ public class StageEditor extends Stage {
 		}
 	}
 
+	// endregion Scale
+
 	private class ControlListener implements MouseListener, KeyListener, MouseMotionListener {
 
 		private double mouse_X;
@@ -268,6 +305,8 @@ public class StageEditor extends Stage {
 		private boolean Key_S;
 		private boolean Key_D;
 		private boolean Key_Shift;
+
+		// region Keys
 
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -295,6 +334,10 @@ public class StageEditor extends Stage {
 				setTileID(selectedX, selectedY, TileSet.TILE_NORTH);
 			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD9) {
 				setTileID(selectedX, selectedY, TileSet.TILE_NORTH_EAST);
+			} else if (e.getKeyCode() == KeyEvent.VK_X) {
+				expandMapX(10);
+			} else if (e.getKeyCode() == KeyEvent.VK_Y) {
+				expandMapY(10);
 			} else {
 				keyUpdate(e.getKeyCode(), true);
 			}
@@ -323,6 +366,10 @@ public class StageEditor extends Stage {
 		public void keyTyped(KeyEvent e) {
 
 		}
+
+		// endregion Keys
+
+		// region Mouse
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -369,6 +416,10 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
+			if (SwingUtilities.isMiddleMouseButton(e)) {
+				xOffset += mouse_X - e.getX();
+				yOffset += mouse_Y - e.getY();
+			}
 			mouse_X = e.getX();
 			mouse_Y = e.getY();
 			updateSelection();
@@ -396,6 +447,8 @@ public class StageEditor extends Stage {
 				selectedY = map.getHeight() - 1;
 			}
 		}
+
+		// endregion Mouse
 
 	}
 
