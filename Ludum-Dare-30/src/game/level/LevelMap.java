@@ -1,10 +1,20 @@
 package game.level;
 
 import game.level.entity.EntityPlayer;
-import game.level.mapobject.*;
+import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectGroundswtich;
+import game.level.mapobject.MapObjectLasergate;
+import game.level.mapobject.MapObjectLasergateClone;
+import game.level.mapobject.MapObjectLasergateHorizontal;
+import game.level.mapobject.MapObjectLasergateHorizontalClone;
+import game.level.mapobject.MapObjectLogicAnd;
+import game.level.mapobject.MapObjectLogicAndKeeping;
+import game.level.mapobject.MapObjectLogicOr;
+import game.level.mapobject.MapObjectTriggerLevel12;
+import game.level.mapobject.MapObjectTriggerTextbox;
+import game.level.mapobject.MapObjectTriggerWinning;
 import game.main.GameCanvas;
 import game.res.SaveGame;
-import game.res.SoundManager;
 import game.staging.StageLevel;
 import game.staging.StageManager;
 
@@ -35,18 +45,11 @@ public class LevelMap {
 	private int height;
 
 	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
-			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
-			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
-			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
-			@XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class), @XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class), @XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
 		init();
-		SoundManager.loadClipInCache("Mars 1", "mars_1.wav");
-		SoundManager.play("Mars 1", true);
 	}
 
 	public void init() {
@@ -57,9 +60,9 @@ public class LevelMap {
 
 	}
 
-	public void drawObjects(Graphics2D g2) {
+	public void drawObjects(Graphics2D g2, int size) {
 		for (int i = 0; i < objects.length; i++) {
-			objects[i].draw(g2);
+			objects[i].draw(g2, size);
 		}
 	}
 

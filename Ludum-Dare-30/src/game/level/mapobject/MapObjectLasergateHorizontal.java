@@ -39,20 +39,19 @@ public class MapObjectLasergateHorizontal extends MapObject {
 		return power;
 	}
 
-	public void draw(Graphics2D g2) {
-		int scale = 16 * 3;
+	public void draw(Graphics2D g2, int size) {
 		if (power) {
-			g2.drawImage(images[0], x * scale, y * scale, scale, scale, null);
+			g2.drawImage(images[0], x * size, y * size, size, size, null);
 			for (int i = 1; i < width - 1; i++) {
-				g2.drawImage(images[1], (x + i) * scale, y * scale, scale, scale, null);
+				g2.drawImage(images[1], (x + i) * size, y * size, size, size, null);
 			}
-			g2.drawImage(images[2], (x + width - 1) * scale, y * scale, scale, scale, null);
+			g2.drawImage(images[2], (x + width - 1) * size, y * size, size, size, null);
 		} else {
-			g2.drawImage(images[3], x * scale, y * scale, scale, scale, null);
+			g2.drawImage(images[3], x * size, y * size, size, size, null);
 			for (int i = 1; i < width - 1; i++) {
-				g2.drawImage(images[4], (x + i) * scale, y * scale, scale, scale, null);
+				g2.drawImage(images[4], (x + i) * size, y * size, size, size, null);
 			}
-			g2.drawImage(images[5], (x + width - 1) * scale, y * scale, scale, scale, null);
+			g2.drawImage(images[5], (x + width - 1) * size, y * size, size, size, null);
 		}
 	}
 

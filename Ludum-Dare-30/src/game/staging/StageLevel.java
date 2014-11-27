@@ -23,11 +23,13 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import util.log.Log;
+
 public class StageLevel extends Stage {
 
 	public static final int SCALE = 3;
 	private double xOffset = 0;
-	private double yOffset = 10;
+	private double yOffset = 0;
 	private double maxXOffset;
 	private double maxYOffset;
 
@@ -60,7 +62,9 @@ public class StageLevel extends Stage {
 			} else {
 				map = LevelMap.loadLevel(new File(data.get("level")));
 			}
+			Log.info("Loaded Level " + data.get("level"));
 		} catch (IllegalArgumentException e) {
+			Log.error("Error loading Level: " + data.get("level"));
 			throw new IllegalArgumentException(e);
 		}
 		map.setStageLevel(this);
@@ -112,10 +116,10 @@ public class StageLevel extends Stage {
 		g2.setTransform(at);
 		int spriteSize = TileSet.SPRITE_SIZE * SCALE;
 
-		int xStart = (int) (xOffset / (TileSet.SPRITE_SIZE * SCALE));
-		int yStart = (int) (yOffset / (TileSet.SPRITE_SIZE * SCALE));
-		int xEnd = xStart + GameCanvas.WIDTH / (TileSet.SPRITE_SIZE * SCALE) + 2;
-		int yEnd = yStart + GameCanvas.HEIGHT / (TileSet.SPRITE_SIZE * SCALE) + 2;
+		int xStart = (int) (xOffset / spriteSize);
+		int yStart = (int) (yOffset / spriteSize);
+		int xEnd = xStart + GameCanvas.WIDTH / spriteSize + 2;
+		int yEnd = yStart + GameCanvas.HEIGHT / spriteSize + 2;
 
 		for (int y = yStart; y < yEnd; y++) {
 			for (int x = xStart; x < xEnd; x++) {
@@ -135,8 +139,9 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {}
-		map.drawObjects(g2);
+		} catch (NullPointerException e) {
+		}
+		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
 		/**
 		 * GUI
@@ -185,12 +190,13 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		Monitoring.stopPhysics();
 	}
 
 	public void stop() {
-
+		updateTimer.cancel();
 	}
 
 	private void initListeners() {

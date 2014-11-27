@@ -51,7 +51,7 @@ public class SoundManager {
 			stop(id);
 		}
 		cacheClips.clear();
-		Log.info(" Clearing cache.");
+		Log.debug("Clearing cache.");
 	}
 
 	public static void play(String id) {
