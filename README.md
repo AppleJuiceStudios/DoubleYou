@@ -1,4 +1,4 @@
-Double You  <a href="https://github.com/TobiasBodewig/Ludum-Dare-30/raw/master/Ludum-Dare-30/resource/Launcher/DoubleYou%20Launcher.exe"><img src = "https://raw.githubusercontent.com/TobiasBodewig/Ludum-Dare-30/master/Ludum-Dare-30/resource/Launcher/illustrations/GetLauncher.png"></a>
+Double You<br><a href="https://github.com/TobiasBodewig/Ludum-Dare-30/raw/master/Ludum-Dare-30/resource/Launcher/DoubleYou%20Launcher.exe"><img src = "https://raw.githubusercontent.com/TobiasBodewig/Ludum-Dare-30/master/Ludum-Dare-30/resource/Launcher/illustrations/GetLauncher.png"></a>
 =============
 <table cellspacing="0" cellpadding="3">
 	<tr>
