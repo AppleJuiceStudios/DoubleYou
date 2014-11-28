@@ -282,6 +282,12 @@ public class StageEditor extends Stage {
 		while (isRowEmpty(map.getHeight() - height)) {
 			height--;
 		}
+		if (width < 1) {
+			width = 1;
+		}
+		if (height < 1) {
+			height = 1;
+		}
 		int heightDif = map.getHeight() - height;
 		byte[][] oldSpritesheet = map.getSpritesheet();
 		byte[][] spritesheet = new byte[width][height];
