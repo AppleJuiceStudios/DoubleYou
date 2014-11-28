@@ -16,6 +16,7 @@ import java.util.Scanner;
 import util.log.GeneralUtils;
 
 public class StageMainMenue extends Stage {
+	// region Variables
 	// Buttons
 	private Rectangle btnPlay;
 	private Rectangle btnOptions;
@@ -30,7 +31,8 @@ public class StageMainMenue extends Stage {
 	private BufferedImage imgExit;
 
 	private final String VERSION;
-
+	// endregion Variables
+	
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
