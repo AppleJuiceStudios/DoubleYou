@@ -27,6 +27,7 @@ public class GameCanvas extends Canvas {
 
 	public GameCanvas() {
 		Log.openLog(SaveGame.getPath());
+		Log.info("Starting Log!");
 		stageManager = new StageManager(this);
 		fpsManager = new FpsManager();
 	}
