@@ -135,8 +135,8 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgBGS4, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
 		// Border
 		g2.setColor(Color.BLACK);
-		g2.fillRect(397, 0, 6, 600);
-		g2.fillRect(0, 297, 800, 6);
+		g2.fillRect(397, 0, 6, GameCanvas.HEIGHT);
+		g2.fillRect(0, 297, GameCanvas.WIDTH, 6);
 
 		// Level & Overlay
 		for (int y = 0; y < 4; y++)

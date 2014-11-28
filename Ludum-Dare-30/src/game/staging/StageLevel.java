@@ -85,17 +85,17 @@ public class StageLevel extends Stage {
 			}
 		}, 0, 1000 / 60);
 		initListeners();
-		maxXOffset = (map.getWidth() * TileSet.SPRITE_SIZE * SCALE) - 800;
-		maxYOffset = (map.getHeight() * TileSet.SPRITE_SIZE * SCALE) - 600;
+		maxXOffset = (map.getWidth() * TileSet.SPRITE_SIZE * SCALE) - GameCanvas.WIDTH;
+		maxYOffset = (map.getHeight() * TileSet.SPRITE_SIZE * SCALE) - GameCanvas.HEIGHT;
 	}
 
 	public void draw(Graphics2D g2) {
 		if (isRecording) {
-			xOffset += (playerRecord.getXPos() * SCALE - (800 / 2) - xOffset) * 0.2;
-			yOffset += (playerRecord.getYPos() * SCALE - (600 / 3) - yOffset) * 0.2;
+			xOffset += (playerRecord.getXPos() * SCALE - (GameCanvas.WIDTH / 2) - xOffset) * 0.2;
+			yOffset += (playerRecord.getYPos() * SCALE - (GameCanvas.HEIGHT / 3) - yOffset) * 0.2;
 		} else {
-			xOffset += (player.getXPos() * SCALE - (800 / 2) - xOffset) * 0.2;
-			yOffset += (player.getYPos() * SCALE - (600 / 3) - yOffset) * 0.2;
+			xOffset += (player.getXPos() * SCALE - (GameCanvas.WIDTH / 2) - xOffset) * 0.2;
+			yOffset += (player.getYPos() * SCALE - (GameCanvas.HEIGHT / 3) - yOffset) * 0.2;
 		}
 		if (xOffset > maxXOffset) {
 			xOffset = maxXOffset;
@@ -107,10 +107,10 @@ public class StageLevel extends Stage {
 		} else if (yOffset < 0) {
 			yOffset = 0;
 		}
-		g2.drawImage(background, 0, 0, 800, 600, null);
+		g2.drawImage(background, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
 		double mountainsOffset = -xOffset * 0.3;
-		g2.drawImage(mountains, (int) (mountainsOffset % 800) + 800, -190, 800, 800, null);
-		g2.drawImage(mountains, (int) (mountainsOffset % 800), -190, 800, 800, null);
+		g2.drawImage(mountains, (int) (mountainsOffset % GameCanvas.WIDTH) + GameCanvas.WIDTH, -190, GameCanvas.WIDTH, GameCanvas.WIDTH, null);
+		g2.drawImage(mountains, (int) (mountainsOffset % GameCanvas.WIDTH), -190, GameCanvas.WIDTH, GameCanvas.WIDTH, null);
 		AffineTransform at = new AffineTransform();
 		at.translate((int) -xOffset, (int) -yOffset);
 		g2.setTransform(at);
@@ -139,8 +139,7 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -156,7 +155,7 @@ public class StageLevel extends Stage {
 			if (textbox.hasNextPage()) {
 				hasTextbox = true;
 
-				g2.drawImage(imgTextbox, 100, 425, 600, 150, null);
+				g2.drawImage(imgTextbox, 100, 425, GameCanvas.HEIGHT, 150, null);
 				g2.setColor(Color.WHITE);
 				g2.setFont(new Font("Garamond", Font.BOLD, 30));
 				String[] line = textbox.getPage();
@@ -190,8 +189,7 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		Monitoring.stopPhysics();
 	}
 
