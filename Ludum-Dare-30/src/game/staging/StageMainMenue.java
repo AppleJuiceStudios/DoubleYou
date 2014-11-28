@@ -32,7 +32,8 @@ public class StageMainMenue extends Stage {
 	private BufferedImage imgCredits;
 	private BufferedImage imgExit;
 
-	private final String VERSION;
+	private static String VERSION;
+	private static boolean firstStart;
 
 	// endregion Variables
 
@@ -41,17 +42,21 @@ public class StageMainMenue extends Stage {
 		SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
 		SoundManager.play("Space Commando", true);
 
-		Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/VERSION"));
-		if (scanner.hasNextLine())
-			VERSION = scanner.nextLine();
-		else
-			VERSION = "No Version found!";
-		scanner.close();
-
 		initMouse();
 		initRecs();
 		loadTextures();
-		Log.info("Starting game took a total of " + (System.currentTimeMillis() - GameFrame.GAMESTARTTIME) + "ms!");
+
+		if (firstStart == false) {
+			Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/VERSION"));
+			if (scanner.hasNextLine())
+				VERSION = scanner.nextLine();
+			else
+				VERSION = "No Version found!";
+			scanner.close();
+
+			Log.info("Starting game took a total of " + (System.currentTimeMillis() - GameFrame.GAMESTARTTIME) + " ms!");
+			firstStart = true;
+		}
 	}
 
 	private void initMouse() {
