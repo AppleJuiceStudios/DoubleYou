@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 4260463266395801740L;
+	public static long GAMESTARTTIME;
 
 	private GameCanvas gameCanvas;
 
@@ -41,6 +42,7 @@ public class GameFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		GAMESTARTTIME = System.currentTimeMillis();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				GameFrame gf = new GameFrame();

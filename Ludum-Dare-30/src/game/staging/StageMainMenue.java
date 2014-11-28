@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.main.GameFrame;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import util.log.GeneralUtils;
+import util.log.Log;
 
 public class StageMainMenue extends Stage {
 	// region Variables
@@ -31,8 +33,9 @@ public class StageMainMenue extends Stage {
 	private BufferedImage imgExit;
 
 	private final String VERSION;
+
 	// endregion Variables
-	
+
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
@@ -48,6 +51,7 @@ public class StageMainMenue extends Stage {
 		initMouse();
 		initRecs();
 		loadTextures();
+		Log.info("Starting game took a total of " + (System.currentTimeMillis() - GameFrame.GAMESTARTTIME) + "ms!");
 	}
 
 	private void initMouse() {
@@ -126,7 +130,7 @@ public class StageMainMenue extends Stage {
 
 	}
 
-	//Actions
+	// Actions
 	private void play() {
 		getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 	}
