@@ -34,7 +34,6 @@ public class SaveGame {
 				saveGame = JAXB.unmarshal(file, SaveGame.class);
 			} else {
 				saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/SaveGame.xml"), SaveGame.class);
-				System.out.println();
 				SaveGame.save();
 			}
 			writeVersion();
