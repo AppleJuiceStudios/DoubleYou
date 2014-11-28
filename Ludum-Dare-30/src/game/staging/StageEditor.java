@@ -266,15 +266,53 @@ public class StageEditor extends Stage {
 				spritesheet[x][y + expandY] = oldSpritesheet[x][y];
 			}
 		}
-		MapObject[] objects = map.getObjects();
+		MapObject[] objects = map.getMapObjects();
 		for (int i = 0; i < objects.length; i++) {
 			objects[i].setY(objects[i].getY() + expandY);
 		}
 		map.setSpritesheet(spritesheet);
 	}
 
-	public void rescale() {
+	public void rescaleMap() {
+		int width = map.getWidth();
+		int height = map.getHeight();
+		while (isColumEmpty(width - 1)) {
+			width--;
+		}
+		while (isRowEmpty(map.getHeight() - height)) {
+			height--;
+		}
+		int heightDif = map.getHeight() - height;
+		byte[][] oldSpritesheet = map.getSpritesheet();
+		byte[][] spritesheet = new byte[width][height];
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				spritesheet[x][y] = oldSpritesheet[x][y + heightDif];
+			}
+		}
+		MapObject[] objects = map.getMapObjects();
+		for (int i = 0; i < objects.length; i++) {
+			objects[i].setY(objects[i].getY() - heightDif);
+		}
+		map.setSpritesheet(spritesheet);
+	}
 
+	private boolean isColumEmpty(int x) {
+		for (int y = 0; y < map.getHeight(); y++) {
+			if (map.isBlock(x, y)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isRowEmpty(int y) {
+		for (int x = 0; x < map.getWidth(); x++) {
+			if (map.isBlock(x, y)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	// endregion MapEdit
@@ -342,6 +380,8 @@ public class StageEditor extends Stage {
 				expandMapX(10);
 			} else if (e.getKeyCode() == KeyEvent.VK_Y) {
 				expandMapY(10);
+			} else if (e.getKeyCode() == KeyEvent.VK_R) {
+				rescaleMap();
 			} else {
 				keyUpdate(e.getKeyCode(), true);
 			}
