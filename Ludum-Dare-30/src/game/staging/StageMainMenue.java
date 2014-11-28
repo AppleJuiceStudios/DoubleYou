@@ -124,9 +124,7 @@ public class StageMainMenue extends Stage {
 
 	}
 
-	/**
-	 * Actions
-	 */
+	//Actions
 	private void play() {
 		getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 	}
