@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -20,11 +23,13 @@ public class ResourceManager {
 
 	private static Map<String, BufferedImage> images;
 	private static Map<String, Clip> clips;
+	private static Map<String, Sequence> midis;
 
 	public static void load() {
 		Log.info("Loading res!");
 		images = new HashMap<>();
 		clips = new HashMap<>();
+		midis = new HashMap<>();
 		long startTime = System.currentTimeMillis();
 		Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/res.data"));
 		while (scanner.hasNextLine()) {
@@ -33,6 +38,8 @@ public class ResourceManager {
 				loadImage(path);
 			} else if (path.endsWith(".wav")) {
 				loadClip(path);
+			} else if (path.endsWith(".mid")) {
+				loadMidi(path);
 			}
 		}
 		scanner.close();
@@ -69,12 +76,28 @@ public class ResourceManager {
 		}
 	}
 
+	private static void loadMidi(String path) {
+		try {
+			Sequence sequence = MidiSystem.getSequence(SoundManager.class.getResourceAsStream(path));
+
+			Log.debug("Load Midi: " + path);
+			midis.put(path, sequence);
+		} catch (IOException | InvalidMidiDataException e) {
+			Log.error("Can not load clip: " + path);
+			e.printStackTrace();
+		}
+	}
+
 	public static BufferedImage getImage(String path) {
 		return images.get(path);
 	}
 
 	public static Clip getClip(String path) {
 		return clips.get(path);
+	}
+
+	public static Sequence getMidi(String path) {
+		return midis.get(path);
 	}
 
 }
