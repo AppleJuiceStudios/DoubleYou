@@ -44,6 +44,8 @@ public class StageEditor extends Stage {
 	private int lastSelectionY;
 	private boolean isSelecting;
 
+	// region Stage
+
 	public StageEditor(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		loadMap(data);
@@ -148,6 +150,8 @@ public class StageEditor extends Stage {
 	public void stop() {
 		updateTimer.cancel();
 	}
+
+	// endregion Stage
 
 	// region MapEdit
 
