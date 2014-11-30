@@ -16,6 +16,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,19 +31,26 @@ public class StageEditor extends Stage {
 	private double yOffset = 0;
 	private double movementSpeed = 5;
 
+	private ControlListener controls;
+	private Timer updateTimer;
+
 	private BufferedImage background;
 	private BufferedImage mountains;
 	private LevelMap map;
 	private TileSet tileSet;
-
-	private ControlListener controls;
-	private Timer updateTimer;
 
 	private int selectedX;
 	private int selectedY;
 	private int lastSelectionX;
 	private int lastSelectionY;
 	private boolean isSelecting;
+
+	public static final int EDITMODE_MAP = 0;
+	public static final int EDITMODE_OBJECT = 1;
+	public static final int EDITMODE_LOGIC = 2;
+	private int editMode = EDITMODE_MAP;
+	// EDITMODE_OBJECT
+	private MapObject selectedMapObject;
 
 	// region Stage
 
@@ -105,20 +113,36 @@ public class StageEditor extends Stage {
 			g2.drawRect(0 - i, 0 - i, map.getWidth() * spriteSize + i * 2 - 1, map.getHeight() * spriteSize + i * 2 - 1);
 		}
 
-		g2.setColor(Color.BLUE);
-		if (isSelecting) {
-			int selectionStartX = Math.min(selectedX, lastSelectionX);
-			int selectionStartY = Math.min(selectedY, lastSelectionY);
-			int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
-			int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
-			for (int i = 1; i <= 1 + scale; i++) {
-				g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-						selectionHeight * spriteSize + i * 2 - 1);
+		if (editMode == EDITMODE_MAP) {
+			g2.setColor(Color.BLUE);
+			if (isSelecting) {
+				int selectionStartX = Math.min(selectedX, lastSelectionX);
+				int selectionStartY = Math.min(selectedY, lastSelectionY);
+				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
+				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
+				for (int i = 1; i <= 1 + scale; i++) {
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+							selectionHeight * spriteSize + i * 2 - 1);
+				}
+			} else {
+				for (int i = 1; i <= 1 + scale; i++) {
+					g2.drawRect(selectedX * spriteSize - i, selectedY * spriteSize - i, spriteSize + i * 2 - 1, spriteSize + i * 2 - 1);
+				}
+			}
+		} else if (editMode == EDITMODE_OBJECT) {
+			g2.setColor(Color.BLUE);
+			if (selectedMapObject != null) {
+				int selectionStartX = selectedMapObject.getX();
+				int selectionStartY = selectedMapObject.getY();
+				int selectionWidth = selectedMapObject.getWidth();
+				int selectionHeight = selectedMapObject.getHeight();
+				for (int i = 1; i <= 1 + scale; i++) {
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+							selectionHeight * spriteSize + i * 2 - 1);
+				}
 			}
 		} else {
-			for (int i = 1; i <= 1 + scale; i++) {
-				g2.drawRect(selectedX * spriteSize - i, selectedY * spriteSize - i, spriteSize + i * 2 - 1, spriteSize + i * 2 - 1);
-			}
+
 		}
 
 		map.drawObjects(g2, spriteSize);
@@ -327,7 +351,22 @@ public class StageEditor extends Stage {
 
 	// endregion MapEdit
 
-	// region Scale
+	// region ObjectEdit
+
+	// endregion ObjectEdit
+
+	// region Utility
+
+	public void swichEditMode() {
+		if (editMode == EDITMODE_MAP) {
+			editMode = EDITMODE_OBJECT;
+		} else if (editMode == EDITMODE_OBJECT) {
+			editMode = EDITMODE_LOGIC;
+		} else {
+			editMode = EDITMODE_MAP;
+		}
+		System.out.println(editMode);
+	}
 
 	public void scaleUp() {
 		if (scale < 4) {
@@ -345,7 +384,7 @@ public class StageEditor extends Stage {
 		}
 	}
 
-	// endregion Scale
+	// endregion Utility
 
 	private class ControlListener implements MouseListener, KeyListener, MouseMotionListener {
 
@@ -362,39 +401,45 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			if (editMode == EDITMODE_MAP) {
+				if (e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
+					setTileID(selectedX, selectedY, TileSet.TILE_AIR);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD1) {
+					setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_WEST);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
+					setTileID(selectedX, selectedY, TileSet.TILE_SOUTH);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
+					setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_EAST);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD4) {
+					setTileID(selectedX, selectedY, TileSet.TILE_WEST);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD5) {
+					setTileID(selectedX, selectedY, TileSet.TILE_CENTER);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD6) {
+					setTileID(selectedX, selectedY, TileSet.TILE_EAST);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD7) {
+					setTileID(selectedX, selectedY, TileSet.TILE_NORTH_WEST);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
+					setTileID(selectedX, selectedY, TileSet.TILE_NORTH);
+				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD9) {
+					setTileID(selectedX, selectedY, TileSet.TILE_NORTH_EAST);
+				} else if (e.getKeyCode() == KeyEvent.VK_X) {
+					expandMapX(10);
+				} else if (e.getKeyCode() == KeyEvent.VK_Y) {
+					expandMapY(10);
+				} else if (e.getKeyCode() == KeyEvent.VK_R) {
+					rescaleMap();
+				}
+			} else if (editMode == EDITMODE_OBJECT) {
+
+			}
 			if (e.getKeyCode() == KeyEvent.VK_PLUS) {
 				scaleUp();
 			} else if (e.getKeyCode() == KeyEvent.VK_MINUS) {
 				scaleDown();
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
-				setTileID(selectedX, selectedY, TileSet.TILE_AIR);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD1) {
-				setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_WEST);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
-				setTileID(selectedX, selectedY, TileSet.TILE_SOUTH);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
-				setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_EAST);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD4) {
-				setTileID(selectedX, selectedY, TileSet.TILE_WEST);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD5) {
-				setTileID(selectedX, selectedY, TileSet.TILE_CENTER);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD6) {
-				setTileID(selectedX, selectedY, TileSet.TILE_EAST);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD7) {
-				setTileID(selectedX, selectedY, TileSet.TILE_NORTH_WEST);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
-				setTileID(selectedX, selectedY, TileSet.TILE_NORTH);
-			} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD9) {
-				setTileID(selectedX, selectedY, TileSet.TILE_NORTH_EAST);
-			} else if (e.getKeyCode() == KeyEvent.VK_X) {
-				expandMapX(10);
-			} else if (e.getKeyCode() == KeyEvent.VK_Y) {
-				expandMapY(10);
-			} else if (e.getKeyCode() == KeyEvent.VK_R) {
-				rescaleMap();
-			} else {
-				keyUpdate(e.getKeyCode(), true);
+			} else if (e.getKeyCode() == KeyEvent.VK_Q) {
+				swichEditMode();
 			}
+			keyUpdate(e.getKeyCode(), true);
 		}
 
 		@Override
@@ -453,17 +498,29 @@ public class StageEditor extends Stage {
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			isSelecting = false;
-			if (selectedX == lastSelectionX && selectedY == lastSelectionY) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					setTile(selectedX, selectedY);
-				} else if (e.getButton() == MouseEvent.BUTTON3) {
-					removeTile(selectedX, selectedY);
+			if (editMode == EDITMODE_MAP) {
+				if (selectedX == lastSelectionX && selectedY == lastSelectionY) {
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						setTile(selectedX, selectedY);
+					} else if (e.getButton() == MouseEvent.BUTTON3) {
+						removeTile(selectedX, selectedY);
+					}
+				} else {
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						fillRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
+					} else if (e.getButton() == MouseEvent.BUTTON3) {
+						clearRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
+					}
 				}
-			} else {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					fillRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
-				} else if (e.getButton() == MouseEvent.BUTTON3) {
-					clearRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
+			} else if (editMode == EDITMODE_OBJECT) {
+				selectedMapObject = null;
+				MapObject[] objects = map.getMapObjects();
+				for (int i = 0; i < objects.length; i++) {
+					if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
+						if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
+							selectedMapObject = objects[i];
+						}
+					}
 				}
 			}
 		}
