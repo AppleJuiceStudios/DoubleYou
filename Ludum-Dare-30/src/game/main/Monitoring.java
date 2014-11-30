@@ -1,7 +1,5 @@
 package game.main;
 
-import game.main.GameCanvas.FpsManager;
-
 public class Monitoring {
 
 	public final static boolean DISPLAY = false;
@@ -13,7 +11,7 @@ public class Monitoring {
 	private static void print() {
 		if (DISPLAY) {
 			System.out.println("################################");
-			System.out.println("FPS: \t\t\t" + FpsManager.getFps());
+			// System.out.println("FPS: \t\t\t" + FpsManager.getFps());
 			System.out.println("Drawing time:\t\t" + String.format("%02d", draw) + " ms");
 			System.out.println("Physics time:\t\t" + String.format("%02d", physics) + " ms");
 			System.out.println("Physics-Sleep:\t\t" + String.format("%02d", physicsSleep) + " ms");
