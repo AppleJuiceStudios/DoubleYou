@@ -22,15 +22,11 @@ import java.util.Map;
 
 public class StageOptions extends Stage {
 
-	/**
-	 * Buttons
-	 */
+	// Buttons
 	private Rectangle btnBack;
 	private Rectangle btnWebsite;
 
-	/**
-	 * Images
-	 */
+	// Images
 	private BufferedImage background;
 	private BufferedImage imgBack;
 	private BufferedImage imgWebsite;
@@ -123,9 +119,7 @@ public class StageOptions extends Stage {
 
 	}
 
-	/**
-	 * Actions
-	 */
+	// Actions
 	private void back() {
 		getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 	}

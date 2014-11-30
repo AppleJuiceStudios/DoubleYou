@@ -16,15 +16,11 @@ import java.util.Map;
 
 public class StageWon extends Stage {
 
-	/**
-	 * Buttons
-	 */
+	// Buttons
 	private Rectangle btnLevel;
 	private Rectangle btnMenu;
 
-	/**
-	 * Images
-	 */
+	// Images
 	private BufferedImage imgBackground;
 	private BufferedImage imgWon;
 	private BufferedImage imgLevel;
@@ -88,6 +84,9 @@ public class StageWon extends Stage {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 				}
 			}
 		});

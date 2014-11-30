@@ -57,11 +57,11 @@ public class StageLevel extends Stage {
 		super(stageManager, data);
 		tileSet = new TileSet();
 		try {
-			if (data.get("level").matches("\\d*")) {
+			if (data.get("level").matches("\\d*"))
 				map = LevelMap.loadLevel(Integer.parseInt(data.get("level")));
-			} else {
+			else
 				map = LevelMap.loadLevel(new File(data.get("level")));
-			}
+
 			Log.info("Loaded Level " + data.get("level"));
 		} catch (IllegalArgumentException e) {
 			Log.error("Error loading Level: " + data.get("level"));
@@ -69,22 +69,29 @@ public class StageLevel extends Stage {
 		}
 		map.setStageLevel(this);
 		map.start();
+
 		SoundManager.loadClipInCache("soundTrack", map.getSoundTrack());
 		SoundManager.play("soundTrack", true);
+
 		isCloneAllowed = map.getIsCloneAllowed();
 		textbox = map.getStartTextbox();
+
 		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
 		healthbar = ResourceManager.getImage("/Healthbar.png");
 		imgTextbox = ResourceManager.getImage("/backgrounds/Textbox.png");
+
 		player = new EntityPlayer(map.getPlayerSpawnX(), map.getPlayerSpawnY());
+
 		updateTimer = new Timer();
 		updateTimer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
 				update();
 			}
 		}, 0, 1000 / 60);
+
 		initListeners();
+
 		maxXOffset = (map.getWidth() * TileSet.SPRITE_SIZE * SCALE) - GameCanvas.WIDTH;
 		maxYOffset = (map.getHeight() * TileSet.SPRITE_SIZE * SCALE) - GameCanvas.HEIGHT;
 	}
@@ -143,9 +150,8 @@ public class StageLevel extends Stage {
 		}
 		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
-		/**
-		 * GUI
-		 */
+
+		// GUI
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
 		drawTextbox(g2);
