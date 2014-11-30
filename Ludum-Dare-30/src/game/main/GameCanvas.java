@@ -70,7 +70,6 @@ public class GameCanvas extends Canvas {
 	}
 
 	public void close() {
-		System.out.println("Exit");
 		thread.interrupt();
 		try {
 			thread.join();
