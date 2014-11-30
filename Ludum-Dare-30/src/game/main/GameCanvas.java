@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import util.log.Log;
+import de.Auch.Monitoring;
 
 @SuppressWarnings("serial")
 public class GameCanvas extends Canvas {
@@ -59,7 +60,6 @@ public class GameCanvas extends Canvas {
 				while (!Thread.interrupted()) {
 					draw();
 					fpsManager.limit();
-					Monitoring.tick();
 				}
 			}
 		});
@@ -95,8 +95,6 @@ public class GameCanvas extends Canvas {
 		private long lastTime;
 		private long time;
 
-		private int fps;
-
 		private void init() {
 			startTime = System.currentTimeMillis();
 			delay = 0;
@@ -107,7 +105,7 @@ public class GameCanvas extends Canvas {
 		}
 
 		private void limit() {
-			Monitoring.startSleep();
+			Monitoring.start(1);
 			delay = waitTime - (System.currentTimeMillis() - startTime);
 			if (delay > 0) {
 				try {
@@ -118,15 +116,10 @@ public class GameCanvas extends Canvas {
 			}
 
 			time = System.nanoTime();
-			fps = (int) (1000000000d / (time - lastTime));
-			// System.out.println("FPS: " + fps);
+			Monitoring.updateInformation(0, (int) (1000000000d / (time - lastTime)));
 			lastTime = time;
 			startTime = System.currentTimeMillis();
-			Monitoring.stopSleep();
-		}
-
-		public int getFps() {
-			return fps;
+			Monitoring.stop(1);
 		}
 	}
 

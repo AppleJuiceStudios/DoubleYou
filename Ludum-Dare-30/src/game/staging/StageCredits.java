@@ -21,15 +21,11 @@ import java.net.URL;
 import java.util.Map;
 
 public class StageCredits extends Stage {
-	/**
-	 * Buttons
-	 */
+	// Buttons
 	private Rectangle btnBack;
 	private Rectangle btnWebsite;
 
-	/**
-	 * Images
-	 */
+	// Images
 	private BufferedImage imgBackground;
 	private BufferedImage imgContributors;
 	private BufferedImage imgBack;
@@ -125,9 +121,7 @@ public class StageCredits extends Stage {
 
 	}
 
-	/**
-	 * Actions
-	 */
+	// Actions
 	private void back() {
 		getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 	}
