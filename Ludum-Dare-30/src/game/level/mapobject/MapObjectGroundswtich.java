@@ -12,13 +12,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class MapObjectGroundswtich extends MapObject {
 
-	private byte targetID;
+	private int targetID;
 
 	private BufferedImage[] images;
 	private boolean keep;
 	private boolean inverted;
 
-	public MapObjectGroundswtich(byte id, int x, int y, byte targetID, boolean inverted, boolean keep) {
+	public MapObjectGroundswtich(int id, int x, int y, int targetID, boolean inverted, boolean keep) {
 		super(id, x, y, 1, 1, false);
 		this.targetID = targetID;
 		this.inverted = inverted;
@@ -66,11 +66,11 @@ public class MapObjectGroundswtich extends MapObject {
 		}
 	}
 
-	public byte getTargetID() {
+	public int getTargetID() {
 		return targetID;
 	}
 
-	public void setTargetID(byte targetID) {
+	public void setTargetID(int targetID) {
 		this.targetID = targetID;
 	}
 

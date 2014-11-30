@@ -12,7 +12,7 @@ public class MapObjectTriggerLevel12 extends MapObject {
 	private boolean detect;
 	private int remainingTime;
 
-	public MapObjectTriggerLevel12(byte id, int x, int y, int width, int height) {
+	public MapObjectTriggerLevel12(int id, int x, int y, int width, int height) {
 		super(id, x, y, width, height, false);
 	}
 

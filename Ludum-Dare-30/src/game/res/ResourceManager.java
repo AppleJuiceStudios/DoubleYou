@@ -100,4 +100,8 @@ public class ResourceManager {
 		return midis.get(path);
 	}
 
+	public static void close() {
+
+	}
+
 }

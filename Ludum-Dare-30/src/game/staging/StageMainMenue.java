@@ -155,6 +155,6 @@ public class StageMainMenue extends Stage {
 
 	private void exit() {
 		Log.info("Exit from MainMenue");
-		System.exit(0);
+		getStageManager().exitGame();
 	}
 }

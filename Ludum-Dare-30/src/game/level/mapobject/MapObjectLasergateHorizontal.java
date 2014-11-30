@@ -12,7 +12,7 @@ public class MapObjectLasergateHorizontal extends MapObject {
 
 	protected BufferedImage[] images;
 
-	public MapObjectLasergateHorizontal(byte id, int x, int y, int width, boolean closed) {
+	public MapObjectLasergateHorizontal(int id, int x, int y, int width, boolean closed) {
 		super(id, x, y, width, 1, closed);
 		if (width < 2) {
 			width = 2;

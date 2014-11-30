@@ -22,6 +22,7 @@ import util.log.Log;
 public class StageManager {
 
 	private Stage stage;
+	private GameCanvas gameCanvas;
 
 	private KeyListener keyListener;
 	private MouseListener mouseListener;
@@ -36,6 +37,7 @@ public class StageManager {
 	public static final int STAGE_WON = 6;
 
 	public StageManager(GameCanvas gameCanvas) {
+		this.gameCanvas = gameCanvas;
 		initListener(gameCanvas);
 		if (!GameCanvas.IS_APPLET)
 			SaveGame.load();
@@ -181,6 +183,14 @@ public class StageManager {
 				}
 			}
 		});
+	}
+
+	public void exitGame() {
+		gameCanvas.close();
+	}
+
+	public void close() {
+		stage.stop();
 	}
 
 }

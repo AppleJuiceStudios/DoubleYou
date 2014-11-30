@@ -30,7 +30,7 @@ public class GameFrame extends JFrame {
 		pack();
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-				stop();
+				close();
 				System.exit(0);
 			}
 		});
@@ -53,8 +53,8 @@ public class GameFrame extends JFrame {
 		});
 	}
 
-	public void stop() {
-		gameCanvas.stop();
+	public void close() {
+		gameCanvas.close();
 	}
 
 }

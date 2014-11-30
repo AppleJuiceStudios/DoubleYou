@@ -8,7 +8,7 @@ import game.level.entity.EntityPlayer;
 @XmlRootElement
 public class MapObjectTrigger extends MapObject {
 
-	public MapObjectTrigger(byte id, int x, int y, int width, int height) {
+	public MapObjectTrigger(int id, int x, int y, int width, int height) {
 		super(id, x, y, width, height, false);
 	}
 

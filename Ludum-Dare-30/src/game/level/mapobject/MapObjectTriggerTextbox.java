@@ -11,7 +11,7 @@ public class MapObjectTriggerTextbox extends MapObjectTrigger {
 
 	private Textbox textbox;
 
-	public MapObjectTriggerTextbox(byte id, int x, int y, int width, int height, Textbox textbox) {
+	public MapObjectTriggerTextbox(int id, int x, int y, int width, int height, Textbox textbox) {
 		super(id, x, y, width, height);
 		this.textbox = textbox;
 	}

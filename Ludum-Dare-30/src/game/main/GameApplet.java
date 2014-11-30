@@ -9,7 +9,7 @@ import javax.swing.JApplet;
 
 public class GameApplet extends JApplet {
 	private static final long serialVersionUID = 922363733377328646L;
-	
+
 	private GameCanvas gameCanvas;
 	public static AppletContext appletContext;
 
@@ -27,7 +27,7 @@ public class GameApplet extends JApplet {
 	}
 
 	public void stop() {
-		gameCanvas.stop();
+		gameCanvas.close();
 		SoundManager.stopAll();
 	}
 

@@ -1,6 +1,8 @@
 package game.main;
 
+import game.res.ResourceManager;
 import game.res.SaveGame;
+import game.res.SoundManager;
 import game.staging.StageManager;
 
 import java.awt.Canvas;
@@ -54,7 +56,7 @@ public class GameCanvas extends Canvas {
 		thread = new Thread(new Runnable() {
 			public void run() {
 				fpsManager.init();
-				while (true) {
+				while (!Thread.interrupted()) {
 					draw();
 					fpsManager.limit();
 					Monitoring.tick();
@@ -67,15 +69,25 @@ public class GameCanvas extends Canvas {
 		thread.start();
 	}
 
-	public void stop() {
+	public void close() {
+		thread.interrupt();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		stageManager.close();
+		SoundManager.close();
+		ResourceManager.close();
 		Log.closeLog();
+		System.exit(0);
 	}
 
 	public void destroy() {
 
 	}
 
-	static class FpsManager {
+	public class FpsManager {
 		private long startTime;
 		private long delay;
 		private long waitTime;
@@ -83,7 +95,7 @@ public class GameCanvas extends Canvas {
 		private long lastTime;
 		private long time;
 
-		private static int fps;
+		private int fps;
 
 		private void init() {
 			startTime = System.currentTimeMillis();
@@ -98,11 +110,11 @@ public class GameCanvas extends Canvas {
 			Monitoring.startSleep();
 			delay = waitTime - (System.currentTimeMillis() - startTime);
 			if (delay > 0) {
-				// try {
-				// Thread.sleep(delay);
-				// } catch (InterruptedException e) {
-				// e.printStackTrace();
-				// }
+				try {
+					Thread.sleep(delay);
+				} catch (InterruptedException e) {
+					thread.interrupt();
+				}
 			}
 
 			time = System.nanoTime();
@@ -113,8 +125,9 @@ public class GameCanvas extends Canvas {
 			Monitoring.stopSleep();
 		}
 
-		public static int getFps() {
+		public int getFps() {
 			return fps;
 		}
 	}
+
 }

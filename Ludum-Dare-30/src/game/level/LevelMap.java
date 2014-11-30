@@ -77,7 +77,7 @@ public class LevelMap {
 		}
 	}
 
-	public void powerObject(byte id, boolean power) {
+	public void powerObject(int id, boolean power) {
 		objects[id - 32].setPower(power, this);
 	}
 
@@ -146,7 +146,7 @@ public class LevelMap {
 		return map;
 	}
 
-	public MapObject getMapObject(byte id) {
+	public MapObject getMapObject(int id) {
 		return objects[id - 32];
 	}
 
