@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class MapObject {
 
-	protected byte id;
+	protected int id;
 	protected int x;
 	protected int y;
 	protected int width;
@@ -18,7 +18,7 @@ public class MapObject {
 
 	protected boolean power;
 
-	public MapObject(byte id, int x, int y, int width, int height, boolean power) {
+	public MapObject(int id, int x, int y, int width, int height, boolean power) {
 		this.id = id;
 		this.x = x;
 		this.y = y;
@@ -95,11 +95,11 @@ public class MapObject {
 		return power;
 	}
 
-	public byte getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(byte id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

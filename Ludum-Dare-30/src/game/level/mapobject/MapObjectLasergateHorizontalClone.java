@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class MapObjectLasergateHorizontalClone extends MapObjectLasergateHorizontal {
 
-	public MapObjectLasergateHorizontalClone(byte id, int x, int y, int width, boolean closed) {
+	public MapObjectLasergateHorizontalClone(int id, int x, int y, int width, boolean closed) {
 		super(id, x, y, width, closed);
 	}
 

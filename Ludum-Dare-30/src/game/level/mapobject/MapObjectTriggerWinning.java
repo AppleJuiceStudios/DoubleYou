@@ -8,7 +8,7 @@ import game.level.entity.EntityPlayer;
 @XmlRootElement
 public class MapObjectTriggerWinning extends MapObjectTrigger {
 
-	public MapObjectTriggerWinning(byte id, int x, int y, int width, int height) {
+	public MapObjectTriggerWinning(int id, int x, int y, int width, int height) {
 		super(id, x, y, width, height);
 	}
 

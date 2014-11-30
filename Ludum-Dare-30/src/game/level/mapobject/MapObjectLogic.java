@@ -8,9 +8,9 @@ import game.level.LevelMap;
 public class MapObjectLogic extends MapObject {
 
 	private boolean inverted;
-	private byte targetID;
+	private int targetID;
 
-	public MapObjectLogic(byte id, byte targetID, boolean inverted, boolean power) {
+	public MapObjectLogic(int id, int targetID, boolean inverted, boolean power) {
 		super(id, 0, 0, 0, 0, power);
 		this.targetID = targetID;
 		this.inverted = inverted;
@@ -39,11 +39,11 @@ public class MapObjectLogic extends MapObject {
 		this.inverted = inverted;
 	}
 
-	public byte getTargetID() {
+	public int getTargetID() {
 		return targetID;
 	}
 
-	public void setTargetID(byte targetID) {
+	public void setTargetID(int targetID) {
 		this.targetID = targetID;
 	}
 

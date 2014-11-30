@@ -12,7 +12,7 @@ public class MapObjectLasergate extends MapObject {
 
 	protected BufferedImage[] images;
 
-	public MapObjectLasergate(byte id, int x, int y, int height, boolean closed) {
+	public MapObjectLasergate(int id, int x, int y, int height, boolean closed) {
 		super(id, x, y, 1, height, closed);
 		if (height < 2) {
 			height = 2;
