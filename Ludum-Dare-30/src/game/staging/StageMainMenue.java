@@ -1,5 +1,7 @@
 package game.staging;
 
+import game.main.GameCanvas;
+import game.main.GameFrame;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
@@ -10,33 +12,56 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.Map;
+import java.util.Scanner;
+
+import util.log.GeneralUtils;
+import util.log.Log;
 
 public class StageMainMenue extends Stage {
-	/**
-	 * Buttons
-	 */
+	// region Variables
+	// Buttons
 	private Rectangle btnPlay;
 	private Rectangle btnOptions;
 	private Rectangle btnCredits;
 	private Rectangle btnExit;
 
-	/**
-	 * Images
-	 */
+	// Images
 	private BufferedImage imgBackground;
 	private BufferedImage imgPlay;
 	private BufferedImage imgOptions;
 	private BufferedImage imgCredits;
 	private BufferedImage imgExit;
 
+	private static String VERSION;
+	private static boolean firstStart;
+
+	// endregion Variables
+
 	public StageMainMenue(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
-		SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
-		SoundManager.play("Space Commando", true);
+		if (GeneralUtils.isDevMode()) {
+			SoundManager.loadMidi("Take5", "take5.mid");
+			SoundManager.startMidi("Take5");
+		} else {
+			SoundManager.loadClipInCache("Space Commando", "space_commando.wav");
+			SoundManager.play("Space Commando", true);
+		}
 
 		initMouse();
 		initRecs();
 		loadTextures();
+
+		if (firstStart == false) {
+			Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/VERSION"));
+			if (scanner.hasNextLine())
+				VERSION = scanner.nextLine();
+			else
+				VERSION = "No Version found!";
+			scanner.close();
+
+			Log.info("Starting game took a total of " + (System.currentTimeMillis() - GameFrame.GAMESTARTTIME) + " ms!");
+			firstStart = true;
+		}
 	}
 
 	private void initMouse() {
@@ -99,6 +124,10 @@ public class StageMainMenue extends Stage {
 		g2.drawImage(imgOptions, btnOptions.x, btnOptions.y, btnOptions.width, btnOptions.height, null);
 		g2.drawImage(imgCredits, btnCredits.x, btnCredits.y, btnCredits.width, btnCredits.height, null);
 		g2.drawImage(imgExit, btnExit.x, btnExit.y, btnExit.width, btnExit.height, null);
+		if (GeneralUtils.isDevMode())
+			g2.drawString("DevMODE!! | " + VERSION, GameCanvas.WIDTH - 120, GameCanvas.HEIGHT - 20);
+		else
+			g2.drawString(VERSION, GameCanvas.WIDTH - 50, GameCanvas.HEIGHT - 20);
 	}
 
 	@Override
@@ -111,9 +140,7 @@ public class StageMainMenue extends Stage {
 
 	}
 
-	/**
-	 * Actions
-	 */
+	// Actions
 	private void play() {
 		getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 	}
@@ -127,6 +154,7 @@ public class StageMainMenue extends Stage {
 	}
 
 	private void exit() {
+		Log.info("Exit from MainMenue");
 		System.exit(0);
 	}
 }

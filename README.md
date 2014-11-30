@@ -1,4 +1,4 @@
-Ludum-Dare-30
+Double You<br><a href="https://github.com/TobiasBodewig/Ludum-Dare-30/raw/master/Ludum-Dare-30/resource/Launcher/DoubleYou%20Launcher.exe"><img src = "https://raw.githubusercontent.com/TobiasBodewig/Ludum-Dare-30/master/Ludum-Dare-30/resource/Launcher/illustrations/GetLauncher.png"></a>
 =============
 <table cellspacing="0" cellpadding="3">
 	<tr>
@@ -6,7 +6,7 @@ Ludum-Dare-30
 			<table style="margin: 6px 0 0 0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td colspan="2" style="text-align:center;">
-					<img src="https://github.com/TobiasBodewig/Ludum-Dare-30/blob/master/Ludum-Dare-30/resource/illustartions/logo_oh.png">
+					<a href="https://github.com/TobiasBodewig/Ludum-Dare-30/raw/master/Ludum-Dare-30/resource/Launcher/DoubleYou%20Launcher.exe"><img src="https://github.com/TobiasBodewig/Ludum-Dare-30/blob/master/Ludum-Dare-30/resource/illustartions/logo_oh.png"></a>
 					<br />
 						Logo
 					</td>

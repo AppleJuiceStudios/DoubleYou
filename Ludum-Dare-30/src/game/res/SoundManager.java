@@ -3,6 +3,10 @@ package game.res;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.MidiUnavailableException;
+import javax.sound.midi.Sequencer;
 import javax.sound.sampled.Clip;
 
 import util.log.Log;
@@ -15,13 +19,34 @@ public class SoundManager {
 
 	private static Map<String, Clip> staticClips;
 	private static Map<String, Clip> cacheClips;
+	private static Map<String, Sequencer> midiClips;
 
 	private static String soundPath;
 
 	public static void init() {
 		staticClips = new HashMap<>();
 		cacheClips = new HashMap<>();
+		midiClips = new HashMap<>();
 		soundPath = "/music/";
+	}
+
+	public static void startMidi(String id) {
+		midiClips.get(id).start();
+	}
+
+	public static void loadMidi(String id, String path) {
+		try {
+			Sequencer sequencer = MidiSystem.getSequencer();
+			sequencer.open();
+			sequencer.setSequence(ResourceManager.getMidi(soundPath + path));
+			midiClips.put(id, sequencer);
+		} catch (MidiUnavailableException | InvalidMidiDataException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void stopMidi(String id) {
+		midiClips.get(id).stop();
 	}
 
 	public static void loadStaticClips() {
@@ -88,12 +113,12 @@ public class SoundManager {
 	}
 
 	public static void stopAll() {
-		for (String id : staticClips.keySet()) {
+		for (String id : staticClips.keySet())
 			stop(id);
-		}
-		for (String id : cacheClips.keySet()) {
+		for (String id : cacheClips.keySet())
 			stop(id);
-		}
+		for (String id : midiClips.keySet())
+			stopMidi(id);
 	}
 
 	public static void close() {
@@ -102,6 +127,8 @@ public class SoundManager {
 			stop(id);
 			staticClips.get(id).close();
 		}
+		for (String id : midiClips.keySet())
+			midiClips.get(id).close();
 		staticClips.clear();
 	}
 
