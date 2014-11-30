@@ -7,7 +7,6 @@ import game.level.entity.EntityPlayer;
 import game.level.entity.EntityPlayerClone;
 import game.level.entity.EntityPlayerRecord;
 import game.main.GameCanvas;
-import game.main.Monitoring;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
@@ -24,6 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import util.log.Log;
+import de.Auch.Monitoring;
 
 public class StageLevel extends Stage {
 
@@ -139,7 +139,8 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
 		/**
@@ -170,7 +171,7 @@ public class StageLevel extends Stage {
 	}
 
 	public void update() {
-		Monitoring.startPhysics();
+		Monitoring.start(2);
 		try {
 			if (isRecording) {
 				playerRecord.update(map);
@@ -189,8 +190,9 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {}
-		Monitoring.stopPhysics();
+		} catch (NullPointerException e) {
+		}
+		Monitoring.stop(2);
 	}
 
 	public void stop() {

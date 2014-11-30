@@ -1,7 +1,6 @@
 package game.staging;
 
 import game.main.GameCanvas;
-import game.main.Monitoring;
 import game.res.ResourceManager;
 import game.res.SaveGame;
 import game.res.SoundManager;
@@ -17,6 +16,7 @@ import java.awt.event.MouseWheelListener;
 import java.util.Map;
 
 import util.log.Log;
+import de.Auch.Monitoring;
 
 public class StageManager {
 
@@ -82,9 +82,9 @@ public class StageManager {
 	}
 
 	public void draw(Graphics2D g2) {
-		Monitoring.startDraw();
+		Monitoring.start(0);
 		stage.draw(g2);
-		Monitoring.stopDraw();
+		Monitoring.stop(0);
 	}
 
 	public void update() {

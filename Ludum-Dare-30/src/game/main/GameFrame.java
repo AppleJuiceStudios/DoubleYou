@@ -7,6 +7,10 @@ import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 
+import util.log.GeneralUtils;
+import util.log.Log;
+import de.Auch.Monitoring;
+
 public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 4260463266395801740L;
 	public static long GAMESTARTTIME;
@@ -38,6 +42,18 @@ public class GameFrame extends JFrame {
 	}
 
 	public void start() {
+		Monitoring.init();
+		Monitoring.setUpdateTime(10);
+		Monitoring.addMonitoring("Draw", false);
+		Monitoring.addMonitoring("Sleep", false);
+		Monitoring.addMonitoring("Update", false);
+		Monitoring.addInformation("FPS");
+
+		if (GeneralUtils.isDevMode()) {
+			Monitoring.startMonitoring();
+			Log.info("Monitoring is running!");
+		}
+
 		gameCanvas.start();
 	}
 
