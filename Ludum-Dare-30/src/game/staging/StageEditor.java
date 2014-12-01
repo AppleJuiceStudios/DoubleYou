@@ -13,6 +13,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -63,6 +65,7 @@ public class StageEditor extends Stage {
 		getStageManager().setMouseListener(controls);
 		getStageManager().setKeyListener(controls);
 		getStageManager().setMouseMotionListener(controls);
+		getStageManager().setMouseWheelListener(controls);
 		updateTimer = new Timer();
 		updateTimer.scheduleAtFixedRate(new TimerTask() {
 			public void run() {
@@ -120,8 +123,7 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -136,8 +138,7 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
 				}
 			}
 		} else {
@@ -206,7 +207,7 @@ public class StageEditor extends Stage {
 
 	// endregion Utility
 
-	private class ControlListener implements MouseListener, KeyListener, MouseMotionListener {
+	private class ControlListener implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener {
 
 		private double mouse_X;
 		private double mouse_Y;
@@ -382,6 +383,15 @@ public class StageEditor extends Stage {
 			} else if (selectedY >= map.getHeight()) {
 				selectedY = map.getHeight() - 1;
 			}
+		}
+
+		@Override
+		public void mouseWheelMoved(MouseWheelEvent e) {
+			int rotation = e.getWheelRotation();
+			if (rotation < 0)
+				scaleUp();
+			if (rotation > 0)
+				scaleDown();
 		}
 
 		// endregion Mouse
