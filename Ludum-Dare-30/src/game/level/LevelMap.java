@@ -22,12 +22,15 @@ import java.awt.Graphics2D;
 import java.io.File;
 
 import javax.xml.bind.JAXB;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "levelMap")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class LevelMap {
 
 	private StageLevel stageLevel;
@@ -40,17 +43,10 @@ public class LevelMap {
 	private int playerSpawnX;
 	private int playerSpawnY;
 
-	private byte[][] spritesheet;
+	protected byte[][] spritesheet;
 	private int width;
 	private int height;
 
-	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
-			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
-			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
-			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
-			@XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
@@ -198,6 +194,13 @@ public class LevelMap {
 		this.startTextbox = startTextbox;
 	}
 
+	@XmlElementWrapper(name = "mapObjects")
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
+			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
+			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
+			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
+			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
+			@XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
 	public MapObject[] getMapObjects() {
 		return objects;
 	}

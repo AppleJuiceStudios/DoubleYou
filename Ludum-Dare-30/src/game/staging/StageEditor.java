@@ -1,6 +1,6 @@
 package game.staging;
 
-import game.level.LevelMap;
+import game.level.LevelMapEditor;
 import game.level.TileSet;
 import game.level.mapobject.MapObject;
 import game.main.GameCanvas;
@@ -16,7 +16,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,7 +35,7 @@ public class StageEditor extends Stage {
 
 	private BufferedImage background;
 	private BufferedImage mountains;
-	private LevelMap map;
+	private LevelMapEditor map;
 	private TileSet tileSet;
 
 	private int selectedX;
@@ -76,7 +75,7 @@ public class StageEditor extends Stage {
 	private void loadMap(Map<String, String> data) {
 		File file = new File(data.get("file"));
 		if (file.exists()) {
-			map = JAXB.unmarshal(file, LevelMap.class);
+			map = JAXB.unmarshal(file, LevelMapEditor.class);
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -177,184 +176,6 @@ public class StageEditor extends Stage {
 
 	// endregion Stage
 
-	// region MapEdit
-
-	public void setTileID(int x, int y, byte tileID) {
-		map.getSpritesheet()[x][y] = tileID;
-	}
-
-	public void setTile(int x, int y) {
-		map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
-		updateTile(x, y);
-		updateTile(x + 1, y);
-		updateTile(x - 1, y);
-		updateTile(x, y + 1);
-		updateTile(x, y - 1);
-	}
-
-	public void removeTile(int x, int y) {
-		map.getSpritesheet()[x][y] = TileSet.TILE_AIR;
-		updateTile(x + 1, y);
-		updateTile(x - 1, y);
-		updateTile(x, y + 1);
-		updateTile(x, y - 1);
-	}
-
-	public void fillRect(int x1, int y1, int x2, int y2) {
-		int startX = Math.min(x1, x2);
-		int startY = Math.min(y1, y2);
-		int endX = Math.max(x1, x2);
-		int endY = Math.max(y1, y2);
-		for (int x = startX; x <= endX; x++) {
-			for (int y = startY; y <= endY; y++) {
-				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
-			}
-		}
-		for (int x = startX; x <= endX; x++) {
-			updateTile(x, startY);
-			updateTile(x, endY);
-			updateTile(x, startY - 1);
-			updateTile(x, endY + 1);
-		}
-		for (int y = startY; y <= endY; y++) {
-			updateTile(startX, y);
-			updateTile(endX, y);
-			updateTile(startX - 1, y);
-			updateTile(endX + 1, y);
-		}
-	}
-
-	public void clearRect(int x1, int y1, int x2, int y2) {
-		int startX = Math.min(x1, x2);
-		int startY = Math.min(y1, y2);
-		int endX = Math.max(x1, x2);
-		int endY = Math.max(y1, y2);
-		for (int x = startX; x <= endX; x++) {
-			for (int y = startY; y <= endY; y++) {
-				map.getSpritesheet()[x][y] = TileSet.TILE_AIR;
-			}
-		}
-		for (int x = startX; x <= endX; x++) {
-			updateTile(x, startY - 1);
-			updateTile(x, endY + 1);
-		}
-		for (int y = startY; y <= endY; y++) {
-			updateTile(startX - 1, y);
-			updateTile(endX + 1, y);
-		}
-	}
-
-	public void updateTile(int x, int y) {
-		if (map.isBlock(x, y) && (x >= 0 & x < map.getWidth()) && (y >= 0 & y < map.getHeight())) {
-			boolean north = map.isBlock(x, y - 1);
-			boolean south = map.isBlock(x, y + 1);
-			boolean west = map.isBlock(x - 1, y);
-			boolean east = map.isBlock(x + 1, y);
-			if (!north && !south && !west && !east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
-			if (!north && !west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_WEST;
-			if (!north && west && !east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH_EAST;
-			if (!north && west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
-			if (!north && south && !west && !east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_NORTH;
-			if (north && !south && west == east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH;
-			if (north && !south && !west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH_WEST;
-			if (north && !south && west && !east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_SOUTH_EAST;
-			if (north && south && west == east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_CENTER;
-			if (north && south && !west && east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_WEST;
-			if (north && south && west && !east)
-				map.getSpritesheet()[x][y] = TileSet.TILE_EAST;
-		}
-	}
-
-	public void expandMapX(int expandX) {
-		byte[][] oldSpritesheet = map.getSpritesheet();
-		byte[][] spritesheet = new byte[map.getWidth() + expandX][map.getHeight()];
-		for (int x = 0; x < oldSpritesheet.length; x++) {
-			for (int y = 0; y < oldSpritesheet[0].length; y++) {
-				spritesheet[x][y] = oldSpritesheet[x][y];
-			}
-		}
-		map.setSpritesheet(spritesheet);
-	}
-
-	public void expandMapY(int expandY) {
-		byte[][] oldSpritesheet = map.getSpritesheet();
-		byte[][] spritesheet = new byte[map.getWidth()][map.getHeight() + expandY];
-		for (int x = 0; x < oldSpritesheet.length; x++) {
-			for (int y = 0; y < oldSpritesheet[0].length; y++) {
-				spritesheet[x][y + expandY] = oldSpritesheet[x][y];
-			}
-		}
-		MapObject[] objects = map.getMapObjects();
-		for (int i = 0; i < objects.length; i++) {
-			objects[i].setY(objects[i].getY() + expandY);
-		}
-		map.setSpritesheet(spritesheet);
-	}
-
-	public void rescaleMap() {
-		int width = map.getWidth();
-		int height = map.getHeight();
-		while (isColumEmpty(width - 1)) {
-			width--;
-		}
-		while (isRowEmpty(map.getHeight() - height)) {
-			height--;
-		}
-		if (width < 1) {
-			width = 1;
-		}
-		if (height < 1) {
-			height = 1;
-		}
-		int heightDif = map.getHeight() - height;
-		byte[][] oldSpritesheet = map.getSpritesheet();
-		byte[][] spritesheet = new byte[width][height];
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				spritesheet[x][y] = oldSpritesheet[x][y + heightDif];
-			}
-		}
-		MapObject[] objects = map.getMapObjects();
-		for (int i = 0; i < objects.length; i++) {
-			objects[i].setY(objects[i].getY() - heightDif);
-		}
-		map.setSpritesheet(spritesheet);
-	}
-
-	private boolean isColumEmpty(int x) {
-		for (int y = 0; y < map.getHeight(); y++) {
-			if (map.isBlock(x, y)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean isRowEmpty(int y) {
-		for (int x = 0; x < map.getWidth(); x++) {
-			if (map.isBlock(x, y)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	// endregion MapEdit
-
-	// region ObjectEdit
-
-	// endregion ObjectEdit
-
 	// region Utility
 
 	public void swichEditMode() {
@@ -365,7 +186,6 @@ public class StageEditor extends Stage {
 		} else {
 			editMode = EDITMODE_MAP;
 		}
-		System.out.println(editMode);
 	}
 
 	public void scaleUp() {
@@ -403,34 +223,39 @@ public class StageEditor extends Stage {
 		public void keyPressed(KeyEvent e) {
 			if (editMode == EDITMODE_MAP) {
 				if (e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
-					setTileID(selectedX, selectedY, TileSet.TILE_AIR);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_AIR);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD1) {
-					setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_WEST);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_WEST);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
-					setTileID(selectedX, selectedY, TileSet.TILE_SOUTH);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_SOUTH);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
-					setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_EAST);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_SOUTH_EAST);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD4) {
-					setTileID(selectedX, selectedY, TileSet.TILE_WEST);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_WEST);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD5) {
-					setTileID(selectedX, selectedY, TileSet.TILE_CENTER);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_CENTER);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD6) {
-					setTileID(selectedX, selectedY, TileSet.TILE_EAST);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_EAST);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD7) {
-					setTileID(selectedX, selectedY, TileSet.TILE_NORTH_WEST);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_NORTH_WEST);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
-					setTileID(selectedX, selectedY, TileSet.TILE_NORTH);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_NORTH);
 				} else if (e.getKeyCode() == KeyEvent.VK_NUMPAD9) {
-					setTileID(selectedX, selectedY, TileSet.TILE_NORTH_EAST);
+					map.setTileID(selectedX, selectedY, TileSet.TILE_NORTH_EAST);
 				} else if (e.getKeyCode() == KeyEvent.VK_X) {
-					expandMapX(10);
+					map.expandMapX(10);
 				} else if (e.getKeyCode() == KeyEvent.VK_Y) {
-					expandMapY(10);
+					map.expandMapY(10);
 				} else if (e.getKeyCode() == KeyEvent.VK_R) {
-					rescaleMap();
+					map.rescaleMap();
 				}
 			} else if (editMode == EDITMODE_OBJECT) {
-
+				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+					if (selectedMapObject != null) {
+						map.removeMapObject(selectedMapObject);
+						selectedMapObject = null;
+					}
+				}
 			}
 			if (e.getKeyCode() == KeyEvent.VK_PLUS) {
 				scaleUp();
@@ -501,15 +326,15 @@ public class StageEditor extends Stage {
 			if (editMode == EDITMODE_MAP) {
 				if (selectedX == lastSelectionX && selectedY == lastSelectionY) {
 					if (e.getButton() == MouseEvent.BUTTON1) {
-						setTile(selectedX, selectedY);
+						map.setTile(selectedX, selectedY);
 					} else if (e.getButton() == MouseEvent.BUTTON3) {
-						removeTile(selectedX, selectedY);
+						map.removeTile(selectedX, selectedY);
 					}
 				} else {
 					if (e.getButton() == MouseEvent.BUTTON1) {
-						fillRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
+						map.fillRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
 					} else if (e.getButton() == MouseEvent.BUTTON3) {
-						clearRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
+						map.clearRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
 					}
 				}
 			} else if (editMode == EDITMODE_OBJECT) {

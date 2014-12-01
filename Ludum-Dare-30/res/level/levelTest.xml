@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<levelMap11>
+<levelMap>
 	<soundTrack>mars_1.wav</soundTrack>
 	<isCloneAllowed>false</isCloneAllowed>
 	<startTextbox>
@@ -176,4 +176,4 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAUFBQUF</spritesheet>
-</levelMap11>
+</levelMap>

@@ -50,7 +50,7 @@ public class GameFrame extends JFrame {
 		Monitoring.addInformation("FPS");
 
 		if (GeneralUtils.isDevMode()) {
-			Monitoring.startMonitoring();
+			// Monitoring.startMonitoring();
 			Log.info("Monitoring is running!");
 		}
 
