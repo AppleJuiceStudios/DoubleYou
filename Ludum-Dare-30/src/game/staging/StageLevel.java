@@ -36,6 +36,9 @@ public class StageLevel extends Stage {
 	private BufferedImage background;
 	private BufferedImage mountains;
 	private BufferedImage healthbar;
+
+	private BufferedImage[] chooseClone;
+
 	private LevelMap map;
 	private TileSet tileSet;
 
@@ -48,6 +51,7 @@ public class StageLevel extends Stage {
 	private EntityPlayer player;
 	private EntityPlayerRecord playerRecord;
 	private EntityPlayerClone playerClone;
+	private int selectedClone;
 
 	public Textbox textbox;
 	private BufferedImage imgTextbox;
@@ -78,8 +82,13 @@ public class StageLevel extends Stage {
 
 		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
-		healthbar = ResourceManager.getImage("/Healthbar.png");
+		healthbar = ResourceManager.getImage("/gui/Healthbar.png");
 		imgTextbox = ResourceManager.getImage("/backgrounds/Textbox.png");
+
+		chooseClone = new BufferedImage[4];
+		for (int i = 0; i < 4; i++)
+			chooseClone[i] = ResourceManager.getImage("/gui/CloneChoose" + (i + 1) + ".png");
+		selectedClone = 1;
 
 		player = new EntityPlayer(map.getPlayerSpawnX(), map.getPlayerSpawnY());
 
@@ -154,6 +163,7 @@ public class StageLevel extends Stage {
 		// GUI
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
