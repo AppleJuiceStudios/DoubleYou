@@ -85,7 +85,7 @@ public class StageOptions extends Stage {
 
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					getStageManager().setStage(StageManager.STAGE_LEVEL);
+					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 				}
 			}
 		});
