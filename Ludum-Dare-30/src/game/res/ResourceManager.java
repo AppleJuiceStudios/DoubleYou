@@ -2,15 +2,14 @@ package game.res;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -23,7 +22,7 @@ public class ResourceManager {
 
 	private static Map<String, BufferedImage> images;
 	private static Map<String, Clip> clips;
-	private static Map<String, Sequence> midis;
+	private static Map<String, Sequencer> midis;
 
 	public static void load() {
 		Log.info("Loading res!");
@@ -51,7 +50,7 @@ public class ResourceManager {
 			BufferedImage image = ImageIO.read(ResourceManager.class.getResourceAsStream(path));
 			images.put(path, image);
 			Log.debug("Load image: " + path);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Log.error("Can not load image: " + path);
 			e.printStackTrace();
 		}
@@ -70,7 +69,7 @@ public class ResourceManager {
 			e.printStackTrace();
 		} catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Log.error("Can not load clip: " + path);
 			e.printStackTrace();
 		}
@@ -79,25 +78,37 @@ public class ResourceManager {
 	private static void loadMidi(String path) {
 		try {
 			Sequence sequence = MidiSystem.getSequence(SoundManager.class.getResourceAsStream(path));
+			Sequencer sequencer = MidiSystem.getSequencer();
+			sequencer.open();
+			sequencer.setSequence(sequence);
 
 			Log.debug("Load Midi: " + path);
-			midis.put(path, sequence);
-		} catch (IOException | InvalidMidiDataException e) {
+			midis.put(path, sequencer);
+		} catch (Exception e) {
 			Log.error("Can not load clip: " + path);
 			e.printStackTrace();
 		}
 	}
 
 	public static BufferedImage getImage(String path) {
-		return images.get(path);
+		BufferedImage img = images.get(path);
+		if (img == null)
+			Log.error("Accessed Image wasn't loaded: " + path);
+		return img;
 	}
 
 	public static Clip getClip(String path) {
-		return clips.get(path);
+		Clip clip = clips.get(path);
+		if (clip == null)
+			Log.error("Accessed Clip wasn't loaded: " + path);
+		return clip;
 	}
 
-	public static Sequence getMidi(String path) {
-		return midis.get(path);
+	public static Sequencer getMidi(String path) {
+		Sequencer seq = midis.get(path);
+		if (seq == null)
+			Log.error("Accessed Midi wasn't loaded: " + path);
+		return seq;
 	}
 
 	public static void close() {
