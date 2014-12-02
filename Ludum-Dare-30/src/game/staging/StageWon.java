@@ -1,12 +1,12 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.res.Button;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -17,14 +17,12 @@ import java.util.Map;
 public class StageWon extends Stage {
 
 	// Buttons
-	private Rectangle btnLevel;
-	private Rectangle btnMenu;
+	private Button btnLevel;
+	private Button btnMenu;
 
 	// Images
 	private BufferedImage imgBackground;
-	private BufferedImage imgWon;
-	private BufferedImage imgLevel;
-	private BufferedImage imgMenu;
+	private BufferedImage imgContributors;
 
 	public StageWon(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
@@ -33,7 +31,7 @@ public class StageWon extends Stage {
 
 		initMouse();
 		initKey();
-		initRecs();
+		initButtons();
 		loadTextures();
 	}
 
@@ -92,24 +90,23 @@ public class StageWon extends Stage {
 		});
 	}
 
-	private void initRecs() {
-		btnLevel = new Rectangle(190, 500, 200, 40);
-		btnMenu = new Rectangle(410, 500, 200, 40);
+	private void initButtons() {
+		btnLevel = new Button("LEVEL SELECTION", 190, 500);
+		btnMenu = new Button("MENUE", 410, 500);
 	}
 
 	private void loadTextures() {
 		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
-		imgWon = ResourceManager.getImage("/Contributors.png");
-		imgLevel = ResourceManager.getImage("/buttons/Play-Button.png");
-		imgMenu = ResourceManager.getImage("/buttons/Back-Button.png");
+		imgContributors = ResourceManager.getImage("/Contributors.png");
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
-		g2.drawImage(imgWon, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 200, null);
-		g2.drawImage(imgLevel, btnLevel.x, btnLevel.y, btnLevel.width, btnLevel.height, null);
-		g2.drawImage(imgMenu, btnMenu.x, btnMenu.y, btnMenu.width, btnMenu.height, null);
+		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 200, null);
+
+		btnLevel.draw(g2);
+		btnMenu.draw(g2);
 	}
 
 	@Override

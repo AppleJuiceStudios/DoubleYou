@@ -2,14 +2,13 @@ package game.staging;
 
 import game.main.GameCanvas;
 import game.main.GameFrame;
+import game.res.Button;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -22,14 +21,13 @@ import util.log.Log;
 public class StageMainMenue extends Stage {
 	// region Variables
 	// Buttons
-	private Rectangle btnPlay;
-	private Rectangle btnOptions;
-	private Rectangle btnCredits;
-	private Rectangle btnExit;
+	private Button btnPlay;
+	private Button btnOptions;
+	private Button btnCredits;
+	private Button btnExit;
 
 	// Images
 	private BufferedImage imgBackground;
-	private BufferedImage imgButton;
 
 	private static String VERSION;
 	private static boolean firstStart;
@@ -47,7 +45,7 @@ public class StageMainMenue extends Stage {
 		}
 
 		initMouse();
-		initRecs();
+		initButtons();
 		loadTextures();
 
 		if (firstStart == false) {
@@ -101,36 +99,25 @@ public class StageMainMenue extends Stage {
 		});
 	}
 
-	private void initRecs() {
-		btnPlay = new Rectangle(30, 350, 200, 40);
-		btnOptions = new Rectangle(30, 400, 200, 40);
-		btnCredits = new Rectangle(30, 450, 200, 40);
-		btnExit = new Rectangle(30, 500, 200, 40);
+	private void initButtons() {
+		btnPlay = new Button("PLAY", 30, 350);
+		btnOptions = new Button("OPTIONS", 30, 400);
+		btnCredits = new Button("CREDITS", 30, 450);
+		btnExit = new Button("EXIT", 30, 500);
 	}
 
 	private void loadTextures() {
 		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
-		imgButton = ResourceManager.getImage("/buttons/button.png");
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
 
-		g2.setColor(Color.WHITE);
-		g2.setFont(new Font("Impact", Font.BOLD, 24));
-
-		g2.drawImage(imgButton, btnPlay.x, btnPlay.y, btnPlay.width, btnPlay.height, null);
-		g2.drawString("START", btnPlay.x + 20, btnPlay.y + 29);
-
-		g2.drawImage(imgButton, btnOptions.x, btnOptions.y, btnOptions.width, btnOptions.height, null);
-		g2.drawString("OPTIONS", btnOptions.x + 20, btnOptions.y + 29);
-
-		g2.drawImage(imgButton, btnCredits.x, btnCredits.y, btnCredits.width, btnCredits.height, null);
-		g2.drawString("CREDITS", btnCredits.x + 20, btnCredits.y + 29);
-
-		g2.drawImage(imgButton, btnExit.x, btnExit.y, btnExit.width, btnExit.height, null);
-		g2.drawString("EXIT", btnExit.x + 20, btnExit.y + 29);
+		btnPlay.draw(g2);
+		btnOptions.draw(g2);
+		btnCredits.draw(g2);
+		btnExit.draw(g2);
 
 		if (GeneralUtils.isDevMode()) {
 			g2.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -149,7 +136,7 @@ public class StageMainMenue extends Stage {
 
 	}
 
-	// Actions
+	// region Actions
 	private void play() {
 		getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 	}
@@ -166,4 +153,5 @@ public class StageMainMenue extends Stage {
 		Log.info("Exit from MainMenue");
 		getStageManager().exitGame();
 	}
+	// endregion Actions
 }
