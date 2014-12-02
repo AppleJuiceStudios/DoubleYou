@@ -7,8 +7,8 @@ import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 
-import util.log.GeneralUtils;
-import util.log.Log;
+import util.GeneralUtils;
+import util.Log;
 import de.Auch.Monitoring;
 
 public class GameFrame extends JFrame {

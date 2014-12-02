@@ -9,7 +9,7 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequencer;
 import javax.sound.sampled.Clip;
 
-import util.log.Log;
+import util.Log;
 
 public class SoundManager {
 

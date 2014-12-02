@@ -1,4 +1,4 @@
-package util.log;
+package util;
 
 public class GeneralUtils {
 

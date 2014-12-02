@@ -14,8 +14,8 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.Scanner;
 
-import util.log.GeneralUtils;
-import util.log.Log;
+import util.GeneralUtils;
+import util.Log;
 
 public class StageMainMenue extends Stage {
 	// region Variables
