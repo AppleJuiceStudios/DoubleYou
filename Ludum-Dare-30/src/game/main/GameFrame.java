@@ -50,7 +50,7 @@ public class GameFrame extends JFrame {
 		Monitoring.addInformation("FPS");
 
 		if (GeneralUtils.isDevMode()) {
-			if (System.getenv("USERNAME") == "Philipp") {
+			if (System.getenv("USERNAME").trim().equals("Philipp")) {
 				Monitoring.startMonitoring();
 				Log.info("Monitoring is running!");
 			}
@@ -65,7 +65,6 @@ public class GameFrame extends JFrame {
 			public void run() {
 				GameFrame gf = new GameFrame();
 				gf.setVisible(true);
-				gf.requestFocus();
 				gf.start();
 			}
 		});
