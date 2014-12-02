@@ -1,0 +1,5 @@
+1. Create MapObject
+2. Register MO in LevelMap.objects Annotion
+3. merge in level-editor
+4. (Add grawLogic() method)
+5. Add to one Hud
