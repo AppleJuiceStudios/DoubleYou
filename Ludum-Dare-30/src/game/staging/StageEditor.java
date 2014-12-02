@@ -25,6 +25,9 @@ import java.util.TimerTask;
 import javax.swing.SwingUtilities;
 import javax.xml.bind.JAXB;
 
+import util.hud.Hud;
+import util.hud.LogicHud;
+
 public class StageEditor extends Stage {
 
 	private int scale = 3;
@@ -53,6 +56,8 @@ public class StageEditor extends Stage {
 	// EDITMODE_OBJECT
 	private MapObject selectedMapObject;
 
+	private Hud logicHud;
+
 	// region Stage
 
 	public StageEditor(StageManager stageManager, Map<String, String> data) {
@@ -73,6 +78,7 @@ public class StageEditor extends Stage {
 			}
 		}, 0, 1000 / 60);
 
+		logicHud = new LogicHud();
 	}
 
 	private void loadMap(Map<String, String> data) {
@@ -155,6 +161,7 @@ public class StageEditor extends Stage {
 		/*
 		 * GUI
 		 */
+		logicHud.draw(g2);
 	}
 
 	public void update() {
