@@ -216,6 +216,13 @@ public class LevelMapEditor extends LevelMap {
 		}
 	}
 
+	public void drawLogicObjects(Graphics2D g2, int size) {
+		Object[] keys = objectsMap.keySet().toArray();
+		for (int i = 0; i < keys.length; i++) {
+			objectsMap.get(keys[i]).drawLogic(g2, size);
+		}
+	}
+
 	public MapObject getMapObject(int id) {
 		return objectsMap.get(id);
 	}

@@ -1,5 +1,8 @@
 package game.level.mapobject;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import game.level.LevelMap;
@@ -25,6 +28,11 @@ public class MapObjectTrigger extends MapObject {
 				action(player[0], map);
 			}
 		}
+	}
+
+	public void drawLogic(Graphics2D g2, int size) {
+		g2.setColor(Color.LIGHT_GRAY);
+		g2.fillRect(x * size, y * size, width * size, height * size);
 	}
 
 	protected void action(EntityPlayer player, LevelMap map) {

@@ -35,6 +35,10 @@ public class MapObject {
 
 	}
 
+	public void drawLogic(Graphics2D g2, int size) {
+
+	}
+
 	public boolean isSolid() {
 		return false;
 	}

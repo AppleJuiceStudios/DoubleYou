@@ -123,7 +123,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+							selectionHeight * spriteSize + i * 2 - 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -138,7 +139,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+							selectionHeight * spriteSize + i * 2 - 1);
 				}
 			}
 		} else {
@@ -146,6 +148,9 @@ public class StageEditor extends Stage {
 		}
 
 		map.drawObjects(g2, spriteSize);
+		if (editMode == EDITMODE_LOGIC) {
+			map.drawLogicObjects(g2, spriteSize);
+		}
 		g2.setTransform(new AffineTransform());
 		/*
 		 * GUI
@@ -191,16 +196,16 @@ public class StageEditor extends Stage {
 
 	public void scaleUp() {
 		if (scale < 4) {
-			xOffset = (xOffset + 400) * (scale + 1) / scale - 400;
-			yOffset = (yOffset + 300) * (scale + 1) / scale - 300;
+			xOffset = (xOffset + controls.mouse_X) * (scale + 1) / scale - controls.mouse_X;
+			yOffset = (yOffset + controls.mouse_Y) * (scale + 1) / scale - controls.mouse_Y;
 			scale++;
 		}
 	}
 
 	public void scaleDown() {
 		if (scale > 1) {
-			xOffset = (xOffset + 400) * (scale - 1) / scale - 400;
-			yOffset = (yOffset + 300) * (scale - 1) / scale - 300;
+			xOffset = (xOffset + controls.mouse_X) * (scale - 1) / scale - controls.mouse_X;
+			yOffset = (yOffset + controls.mouse_Y) * (scale - 1) / scale - controls.mouse_Y;
 			scale--;
 		}
 	}
