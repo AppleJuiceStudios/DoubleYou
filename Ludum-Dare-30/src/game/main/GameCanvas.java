@@ -10,7 +10,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
-import util.log.Log;
+import util.Log;
 import de.Auch.Monitoring;
 
 @SuppressWarnings("serial")
