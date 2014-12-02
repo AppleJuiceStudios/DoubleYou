@@ -5,6 +5,8 @@ import game.main.GameFrame;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -27,10 +29,7 @@ public class StageMainMenue extends Stage {
 
 	// Images
 	private BufferedImage imgBackground;
-	private BufferedImage imgPlay;
-	private BufferedImage imgOptions;
-	private BufferedImage imgCredits;
-	private BufferedImage imgExit;
+	private BufferedImage imgButton;
 
 	private static String VERSION;
 	private static boolean firstStart;
@@ -111,22 +110,32 @@ public class StageMainMenue extends Stage {
 
 	private void loadTextures() {
 		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
-		imgPlay = ResourceManager.getImage("/buttons/Play-Button.png");
-		imgOptions = ResourceManager.getImage("/buttons/Settings-Button.png");
-		imgCredits = ResourceManager.getImage("/buttons/Credits-Button.png");
-		imgExit = ResourceManager.getImage("/buttons/Exit-Button.png");
+		imgButton = ResourceManager.getImage("/buttons/button.png");
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
-		g2.drawImage(imgPlay, btnPlay.x, btnPlay.y, btnPlay.width, btnPlay.height, null);
-		g2.drawImage(imgOptions, btnOptions.x, btnOptions.y, btnOptions.width, btnOptions.height, null);
-		g2.drawImage(imgCredits, btnCredits.x, btnCredits.y, btnCredits.width, btnCredits.height, null);
-		g2.drawImage(imgExit, btnExit.x, btnExit.y, btnExit.width, btnExit.height, null);
-		if (GeneralUtils.isDevMode())
+
+		g2.setColor(Color.WHITE);
+		g2.setFont(new Font("Impact", Font.BOLD, 24));
+
+		g2.drawImage(imgButton, btnPlay.x, btnPlay.y, btnPlay.width, btnPlay.height, null);
+		g2.drawString("START", btnPlay.x + 20, btnPlay.y + 29);
+
+		g2.drawImage(imgButton, btnOptions.x, btnOptions.y, btnOptions.width, btnOptions.height, null);
+		g2.drawString("OPTIONS", btnOptions.x + 20, btnOptions.y + 29);
+
+		g2.drawImage(imgButton, btnCredits.x, btnCredits.y, btnCredits.width, btnCredits.height, null);
+		g2.drawString("CREDITS", btnCredits.x + 20, btnCredits.y + 29);
+
+		g2.drawImage(imgButton, btnExit.x, btnExit.y, btnExit.width, btnExit.height, null);
+		g2.drawString("EXIT", btnExit.x + 20, btnExit.y + 29);
+
+		if (GeneralUtils.isDevMode()) {
+			g2.setFont(new Font("Dialog", Font.PLAIN, 12));
 			g2.drawString("DevMODE!! | " + VERSION, GameCanvas.WIDTH - 120, GameCanvas.HEIGHT - 20);
-		else
+		} else
 			g2.drawString(VERSION, GameCanvas.WIDTH - 50, GameCanvas.HEIGHT - 20);
 	}
 

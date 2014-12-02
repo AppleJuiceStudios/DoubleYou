@@ -3,9 +3,7 @@
 /backgrounds/Saturn-Background.png
 /backgrounds/Space-Background.png
 /backgrounds/Textbox.png
-/buttons/Back-Button.png
-/buttons/Credits-Button.png
-/buttons/Exit-Button.png
+/buttons/button.png
 /buttons/Lock.png
 /buttons/Level-1.png
 /buttons/Level-2.png
@@ -23,9 +21,6 @@
 /buttons/Level-14.png
 /buttons/Level-15.png
 /buttons/Level-16.png
-/buttons/Play-Button.png
-/buttons/Settings-Button.png
-/buttons/Web-Button.png
 /Contributors.png
 /gui/Healthbar.png
 /gui/CloneChoose1.png
