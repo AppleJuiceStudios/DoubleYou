@@ -14,7 +14,9 @@ public class Button {
 	private int x;
 	private int y;
 
+	private boolean highlighted;
 	private BufferedImage image;
+	private BufferedImage imageHighlight;
 	private Color color;
 	private Font font;
 	private int offset;
@@ -34,7 +36,9 @@ public class Button {
 		this.setY(y);
 		rectangle.setLocation(x, y);
 
+		this.setHighlighted(false);
 		this.setImage(ResourceManager.getImage("/buttons/button.png"));
+		this.setImageHighlight(ResourceManager.getImage("/buttons/button-Highlight.png"));
 		this.setColor(Color.WHITE);
 		this.setFont(new Font("Impact", Font.BOLD, 24));
 		this.setOffset(20);
@@ -44,7 +48,10 @@ public class Button {
 		g2.setColor(color);
 		g2.setFont(font);
 
-		g2.drawImage(image, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
+		if (isHighlighted())
+			g2.drawImage(imageHighlight, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
+		else
+			g2.drawImage(image, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
 		g2.drawString(text, x + offset, y + 29);
 	}
 
@@ -85,6 +92,14 @@ public class Button {
 		this.image = image;
 	}
 
+	public BufferedImage getImageHighlight() {
+		return imageHighlight;
+	}
+
+	public void setImageHighlight(BufferedImage imageHighlight) {
+		this.imageHighlight = imageHighlight;
+	}
+
 	public Font getFont() {
 		return font;
 	}
@@ -115,6 +130,26 @@ public class Button {
 
 	public void setOffset(int offset) {
 		this.offset = offset;
+	}
+
+	public boolean isHighlighted() {
+		return highlighted;
+	}
+
+	public void setHighlighted(boolean highlighted) {
+		this.highlighted = highlighted;
+	}
+
+	public void highlight() {
+		setHighlighted(true);
+	}
+
+	public void deHighlight() {
+		setHighlighted(false);
+	}
+
+	public void toogleHighlight() {
+		setHighlighted(!isHighlighted());
 	}
 
 	// endregion Getters/Setters

@@ -9,8 +9,11 @@ import game.res.SoundManager;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.Scanner;
@@ -21,10 +24,8 @@ import util.log.Log;
 public class StageMainMenue extends Stage {
 	// region Variables
 	// Buttons
-	private Button btnPlay;
-	private Button btnOptions;
-	private Button btnCredits;
-	private Button btnExit;
+	private Button[] btns;
+	private int selectedButton;
 
 	// Images
 	private BufferedImage imgBackground;
@@ -45,6 +46,7 @@ public class StageMainMenue extends Stage {
 		}
 
 		initMouse();
+		initKeyControll();
 		initButtons();
 		loadTextures();
 
@@ -74,13 +76,13 @@ public class StageMainMenue extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				if (btnPlay.contains(point)) {
+				if (btns[0].contains(point)) {
 					play();
-				} else if (btnOptions.contains(point)) {
+				} else if (btns[1].contains(point)) {
 					options();
-				} else if (btnCredits.contains(point)) {
+				} else if (btns[2].contains(point)) {
 					credits();
-				} else if (btnExit.contains(point)) {
+				} else if (btns[3].contains(point)) {
 					exit();
 				}
 			}
@@ -97,13 +99,79 @@ public class StageMainMenue extends Stage {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
+		getStageManager().setMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				Point point = new Point(x, y);
+
+				for (int i = 0; i < btns.length; i++) {
+					if (btns[i].contains(point)) {
+						btns[i].setHighlighted(true);
+						selectedButton = i;
+					} else
+						btns[i].setHighlighted(false);
+				}
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+
+			}
+		});
+	}
+
+	private void initKeyControll() {
+		selectedButton = -1;
+		getStageManager().setKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (selectedButton <= 0) {
+						play();
+					} else if (selectedButton == 1) {
+						options();
+					} else if (selectedButton == 2) {
+						credits();
+					} else if (selectedButton == 3) {
+						exit();
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
+					selectedButton++;
+					selectedButton %= 4;
+				} else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
+					selectedButton--;
+					if (selectedButton < 0)
+						selectedButton = 3;
+				}
+				for (Button button : btns) {
+					button.setHighlighted(false);
+				}
+				btns[selectedButton].setHighlighted(true);
+
+			}
+		});
 	}
 
 	private void initButtons() {
-		btnPlay = new Button("PLAY", 30, 350);
-		btnOptions = new Button("OPTIONS", 30, 400);
-		btnCredits = new Button("CREDITS", 30, 450);
-		btnExit = new Button("EXIT", 30, 500);
+		btns = new Button[4];
+		btns[0] = new Button("PLAY", 30, 350);
+		btns[1] = new Button("OPTIONS", 30, 400);
+		btns[2] = new Button("CREDITS", 30, 450);
+		btns[3] = new Button("EXIT", 30, 500);
 	}
 
 	private void loadTextures() {
@@ -114,10 +182,8 @@ public class StageMainMenue extends Stage {
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
 
-		btnPlay.draw(g2);
-		btnOptions.draw(g2);
-		btnCredits.draw(g2);
-		btnExit.draw(g2);
+		for (Button button : btns)
+			button.draw(g2);
 
 		if (GeneralUtils.isDevMode()) {
 			g2.setFont(new Font("Dialog", Font.PLAIN, 12));
