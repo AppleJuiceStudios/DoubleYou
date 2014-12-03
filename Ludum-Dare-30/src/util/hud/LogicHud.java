@@ -1,15 +1,13 @@
 package util.hud;
 
-import java.awt.Graphics2D;
+import game.res.ResourceManager;
 
 public class LogicHud extends Hud {
 
 	public LogicHud() {
+		super();
+		items = new HudItem[1];
 
-	}
-
-	@Override
-	public void draw(Graphics2D g2) {
-		super.draw(g2);
+		items[0] = new HudItem(ResourceManager.getImage("/level/object/Lasergate.png"), null);
 	}
 }

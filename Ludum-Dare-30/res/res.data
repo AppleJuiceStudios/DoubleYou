@@ -33,8 +33,8 @@
 /gui/CloneChoose3.png
 /gui/CloneChoose4.png
 /level/object/Groundswitch.png
-/level/object/Lasergate-Hrizontal.png
-/level/object/Lasergate-HrizontalOnlyClone.png
+/level/object/Lasergate-Horizontal.png
+/level/object/Lasergate-HorizontalOnlyClone.png
 /level/object/Lasergate-OnlyClone.png
 /level/object/Lasergate.png
 /model/clone/Jump-Animation.png
