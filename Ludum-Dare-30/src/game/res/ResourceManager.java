@@ -2,8 +2,13 @@ package game.res;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -24,12 +29,16 @@ public class ResourceManager {
 	private static Map<String, Clip> clips;
 	private static Map<String, Sequencer> midis;
 
+	private static ResourceBundle langFile;
+
 	public static void load() {
+		long startTime = System.currentTimeMillis();
 		Log.info("Loading res!");
 		images = new HashMap<>();
 		clips = new HashMap<>();
 		midis = new HashMap<>();
-		long startTime = System.currentTimeMillis();
+		loadLang(new Locale("de", "DE"));
+		Log.info("Loading lang took " + (System.currentTimeMillis() - startTime) + " ms!");
 		Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/res.data"));
 		while (scanner.hasNextLine()) {
 			String path = scanner.nextLine();
@@ -43,6 +52,27 @@ public class ResourceManager {
 		}
 		scanner.close();
 		Log.info("Loading res took " + (System.currentTimeMillis() - startTime) + " ms!");
+	}
+
+	private static void loadLang(Locale local) {
+		InputStream input = null;
+		try {
+			langFile = ResourceBundle.getBundle("lang.lang", local);
+			Log.info("Loaded Language \"" + local.toString() + "\"");
+			Log.debug("Language-Name \"" + getString("language.name") + "\"");
+			Log.debug("Language-Region \"" + getString("language.region") + "\"");
+		} catch (NullPointerException e) {
+			Log.error("Couldn't read lang file: \"" + local.toString() + "\"!");
+			e.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	private static void loadImage(String path) {
@@ -88,6 +118,21 @@ public class ResourceManager {
 			Log.error("Can not load clip: " + path);
 			e.printStackTrace();
 		}
+	}
+
+	public static String getString(String key) {
+		String raw = langFile.getString(key);
+		String str = null;
+		try {
+			str = new String(raw.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		if (str == null) {
+			Log.error("Accessed Language-String wasn't loaded: " + key);
+			str = "Error!";
+		}
+		return str;
 	}
 
 	public static BufferedImage getImage(String path) {

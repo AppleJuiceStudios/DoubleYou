@@ -91,8 +91,8 @@ public class StageWon extends Stage {
 	}
 
 	private void initButtons() {
-		btnLevel = new Button("LEVEL SELECTION", 190, 500);
-		btnMenu = new Button("MENUE", 410, 500);
+		btnLevel = new Button(ResourceManager.getString("gui.chooseLevel"), 190, 500);
+		btnMenu = new Button(ResourceManager.getString("gui.menue"), 410, 500);
 	}
 
 	private void loadTextures() {

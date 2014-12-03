@@ -90,8 +90,8 @@ public class StageOptions extends Stage {
 	}
 
 	private void initButtons() {
-		btnBack = new Button("BACK", 190, 500);
-		btnWebsite = new Button("WEBSITE", 410, 500);
+		btnBack = new Button(ResourceManager.getString("gui.back"), 190, 500);
+		btnWebsite = new Button(ResourceManager.getString("gui.website"), 410, 500);
 	}
 
 	private void loadTextures() {

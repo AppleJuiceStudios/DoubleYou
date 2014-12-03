@@ -6,6 +6,7 @@ import game.res.Button;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -168,10 +169,10 @@ public class StageMainMenue extends Stage {
 
 	private void initButtons() {
 		btns = new Button[4];
-		btns[0] = new Button("PLAY", 30, 350);
-		btns[1] = new Button("OPTIONS", 30, 400);
-		btns[2] = new Button("CREDITS", 30, 450);
-		btns[3] = new Button("EXIT", 30, 500);
+		btns[0] = new Button(ResourceManager.getString("gui.play"), 30, 350);
+		btns[1] = new Button(ResourceManager.getString("gui.options"), 30, 400);
+		btns[2] = new Button(ResourceManager.getString("gui.credits"), 30, 450);
+		btns[3] = new Button(ResourceManager.getString("gui.exit"), 30, 500);
 	}
 
 	private void loadTextures() {
@@ -185,10 +186,11 @@ public class StageMainMenue extends Stage {
 		for (Button button : btns)
 			button.draw(g2);
 
-		if (GeneralUtils.isDevMode()) {
-			g2.setFont(new Font("Dialog", Font.PLAIN, 12));
-			g2.drawString("DevMODE!! | " + VERSION, GameCanvas.WIDTH - 120, GameCanvas.HEIGHT - 20);
-		} else
+		g2.setColor(Color.GRAY);
+		g2.setFont(new Font("Dialog", Font.PLAIN, 12));
+		if (GeneralUtils.isDevMode())
+			g2.drawString("DevMODE | " + VERSION, GameCanvas.WIDTH - 120, GameCanvas.HEIGHT - 20);
+		else
 			g2.drawString(VERSION, GameCanvas.WIDTH - 50, GameCanvas.HEIGHT - 20);
 	}
 
