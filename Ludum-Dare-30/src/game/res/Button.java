@@ -15,6 +15,7 @@ public class Button {
 	private int y;
 
 	private boolean highlighted;
+	private boolean highlightReplaces;
 	private BufferedImage image;
 	private BufferedImage imageHighlight;
 	private Color color;
@@ -36,7 +37,8 @@ public class Button {
 		this.setY(y);
 		rectangle.setLocation(x, y);
 
-		this.setHighlighted(false);
+		this.setHighlighted(true);
+		this.setHighlightReplaces(false);
 		this.setImage(ResourceManager.getImage("/buttons/button.png"));
 		this.setImageHighlight(ResourceManager.getImage("/buttons/button-Highlight.png"));
 		this.setColor(Color.WHITE);
@@ -48,9 +50,11 @@ public class Button {
 		g2.setColor(color);
 		g2.setFont(font);
 
-		if (isHighlighted())
+		if (isHighlighted()) {
+			if (!isHighlightReplaces())
+				g2.drawImage(image, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
 			g2.drawImage(imageHighlight, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
-		else
+		} else
 			g2.drawImage(image, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
 		g2.drawString(text, x + offset, y + 29);
 	}
@@ -150,6 +154,14 @@ public class Button {
 
 	public void toogleHighlight() {
 		setHighlighted(!isHighlighted());
+	}
+
+	public boolean isHighlightReplaces() {
+		return highlightReplaces;
+	}
+
+	public void setHighlightReplaces(boolean highlightReplaces) {
+		this.highlightReplaces = highlightReplaces;
 	}
 
 	// endregion Getters/Setters

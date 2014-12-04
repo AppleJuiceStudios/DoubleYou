@@ -37,7 +37,7 @@ public class ResourceManager {
 		images = new HashMap<>();
 		clips = new HashMap<>();
 		midis = new HashMap<>();
-		loadLang(new Locale("de", "DE"));
+		loadLang(new Locale("de", "DE")); // To be loaded from config
 		Log.info("Loading lang took " + (System.currentTimeMillis() - startTime) + " ms!");
 		Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/res.data"));
 		while (scanner.hasNextLine()) {

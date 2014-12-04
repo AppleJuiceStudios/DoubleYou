@@ -161,8 +161,8 @@ public class StageMainMenue extends Stage {
 				for (Button button : btns) {
 					button.setHighlighted(false);
 				}
-				btns[selectedButton].setHighlighted(true);
-
+				if (selectedButton > -1)
+					btns[selectedButton].setHighlighted(true);
 			}
 		});
 	}
@@ -173,6 +173,9 @@ public class StageMainMenue extends Stage {
 		btns[1] = new Button(ResourceManager.getString("gui.options"), 30, 400);
 		btns[2] = new Button(ResourceManager.getString("gui.credits"), 30, 450);
 		btns[3] = new Button(ResourceManager.getString("gui.exit"), 30, 500);
+
+		for (Button button : btns)
+			button.setHighlighted(false);
 	}
 
 	private void loadTextures() {
