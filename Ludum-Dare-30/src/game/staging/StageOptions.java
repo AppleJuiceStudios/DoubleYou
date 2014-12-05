@@ -134,10 +134,12 @@ public class StageOptions extends Stage {
 					} else if (selectedButton == 1) {
 						website();
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_DOWN
+						|| e.getKeyCode() == KeyEvent.VK_S) {
 					selectedButton++;
 					selectedButton %= 2;
-				} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_UP
+						|| e.getKeyCode() == KeyEvent.VK_W) {
 					selectedButton--;
 					if (selectedButton < 0)
 						selectedButton = 1;
@@ -224,7 +226,7 @@ public class StageOptions extends Stage {
 	private void website() {
 		URL url = null;
 		try {
-			url = new URL("http://philipp-auch.de/?page_id=14");
+			url = new URL("https://github.com/TobiasBodewig/Ludum-Dare-30");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
