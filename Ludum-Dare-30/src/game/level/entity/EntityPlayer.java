@@ -49,6 +49,12 @@ public class EntityPlayer extends EntityMob {
 			key_D = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_W) {
 			key_W = true;
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			key_A = true;
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			key_D = true;
+		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
+			key_W = true;
 		}
 	}
 
@@ -58,6 +64,12 @@ public class EntityPlayer extends EntityMob {
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
 			key_D = false;
 		} else if (e.getKeyCode() == KeyEvent.VK_SPACE | e.getKeyCode() == KeyEvent.VK_W) {
+			key_W = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			key_A = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			key_D = false;
+		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 			key_W = false;
 		}
 	}

@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.res.Button;
 import game.res.ResourceManager;
 import game.res.SaveGame;
 import game.res.SoundManager;
@@ -13,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +24,11 @@ public class StageChoseLevel extends Stage {
 	private int nextLevel;
 
 	// Buttons
-	private Rectangle[] btnsLevel;
+	private Button[] btns;
+	private int selectedLevel;
 
 	// Images
 	private BufferedImage imgLock;
-	private BufferedImage[] imgsLevel;
 
 	// Background
 	private BufferedImage imgBGS1;
@@ -44,12 +46,12 @@ public class StageChoseLevel extends Stage {
 
 		nextLevel = !GameCanvas.IS_APPLET ? SaveGame.saveGame.getNextLevel() : 16;
 
-		btnsLevel = new Rectangle[16];
-		imgsLevel = new BufferedImage[16];
+		btns = new Button[16];
+		selectedLevel = 0;
 
 		initMouse();
 		initKey();
-		initRecs();
+		initButtons();
 		loadTextures();
 	}
 
@@ -66,8 +68,8 @@ public class StageChoseLevel extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				for (int i = 1; i <= btnsLevel.length; i++)
-					if (btnsLevel[i - 1].contains(point) && nextLevel >= i)
+				for (int i = 1; i <= btns.length; i++)
+					if (btns[i - 1].contains(point) && nextLevel >= i)
 						send(Integer.toString(i));
 			}
 
@@ -81,6 +83,28 @@ public class StageChoseLevel extends Stage {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		getStageManager().setMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				Point point = new Point(x, y);
+
+				for (int i = 0; i < btns.length; i++) {
+					if (btns[i].contains(point)) {
+						btns[i].setHighlighted(true);
+						selectedLevel = i;
+					} else
+						btns[i].setHighlighted(false);
+				}
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+
 			}
 		});
 	}
@@ -99,25 +123,46 @@ public class StageChoseLevel extends Stage {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (nextLevel >= selectedLevel)
+						send(Integer.toString(selectedLevel));
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
+					selectedLevel %= 16;
+					selectedLevel++;
+				} else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
+					selectedLevel--;
+					if (selectedLevel <= 0)
+						selectedLevel = 16;
+				}
+				for (Button button : btns) {
+					button.setHighlighted(false);
+				}
+				if (selectedLevel > 0)
+					btns[selectedLevel - 1].setHighlighted(true);
 			}
 		});
 	}
 
-	private void initRecs() {
+	private void initButtons() {
 		for (int y = 0; y < 4; y++)
 			for (int x = 0; x < 4; x++) {
 				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
 				int xx = 100 + (x / 2) * 400 + (x % 2) * 150;
 				int yy = 66 + (y / 2) * 298 + (y % 2) * 116;
-				btnsLevel[current] = new Rectangle(xx, yy, 50, 50);
+				Rectangle rec = new Rectangle();
+				rec.width = 50;
+				rec.height = 50;
+				Button btn = new Button("", rec, xx, yy);
+				btn.setImage(ResourceManager.getImage("/buttons/Level-" + (current + 1) + ".png"));
+				btn.setImageHighlight(ResourceManager.getImage("/buttons/selectedLevel.png"));
+				btn.setHighlightReplaces(false);
+				btn.setHighlighted(false);
+				btns[current] = btn;
 			}
 	}
 
 	private void loadTextures() {
 		imgLock = ResourceManager.getImage("/buttons/Lock.png");
-
-		for (int i = 1; i <= imgsLevel.length; i++)
-			imgsLevel[i - 1] = ResourceManager.getImage("/buttons/Level-" + i + ".png");
 
 		// Backgrounds
 		imgBGS1 = ResourceManager.getImage("/backgrounds/Mars-Background.png");
@@ -134,7 +179,7 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgBGS3, 0, GameCanvas.HEIGHT / 2, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
 		g2.drawImage(imgBGS4, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
 		// Border
-		g2.setColor(Color.BLACK);
+		g2.setColor(Color.WHITE);
 		g2.fillRect(397, 0, 6, GameCanvas.HEIGHT);
 		g2.fillRect(0, 297, GameCanvas.WIDTH, 6);
 
@@ -144,7 +189,7 @@ public class StageChoseLevel extends Stage {
 				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
 				int xx = 100 + (x / 2) * 400 + (x % 2) * 150;
 				int yy = 66 + (y / 2) * 298 + (y % 2) * 116;
-				g2.drawImage(imgsLevel[current], xx, yy, 50, 50, null);
+				btns[current].draw(g2);
 				if (current >= nextLevel)
 					g2.drawImage(imgLock, xx, yy, 50, 50, null);
 			}

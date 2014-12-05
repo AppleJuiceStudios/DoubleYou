@@ -3,9 +3,6 @@ package game.res;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequencer;
 import javax.sound.sampled.Clip;
 
@@ -35,14 +32,7 @@ public class SoundManager {
 	}
 
 	public static void loadMidi(String id, String path) {
-		try {
-			Sequencer sequencer = MidiSystem.getSequencer();
-			sequencer.open();
-			sequencer.setSequence(ResourceManager.getMidi(soundPath + path));
-			midiClips.put(id, sequencer);
-		} catch (MidiUnavailableException | InvalidMidiDataException e) {
-			e.printStackTrace();
-		}
+		midiClips.put(id, ResourceManager.getMidi(soundPath + path));
 	}
 
 	private static void stopMidi(String id) {

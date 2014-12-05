@@ -53,6 +53,8 @@ public class GameCanvas extends Canvas {
 
 	public void init() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		setFocusable(true);
+		requestFocus();
 
 		thread = new Thread(new Runnable() {
 			public void run() {

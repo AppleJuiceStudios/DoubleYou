@@ -2,7 +2,9 @@ package game.staging;
 
 import game.main.GameApplet;
 import game.main.GameCanvas;
+import game.res.Button;
 import game.res.ResourceManager;
+import game.res.SaveGame;
 
 import java.applet.AppletContext;
 import java.awt.Desktop;
@@ -13,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -23,23 +26,48 @@ import java.util.Map;
 public class StageOptions extends Stage {
 
 	// Buttons
-	private Rectangle btnBack;
-	private Rectangle btnWebsite;
+	private Button[] btns;
+	private int selectedButton;
+
+	// Languages
+	private Button[] langs;
+	private int selectedLang;
 
 	// Images
 	private BufferedImage background;
-	private BufferedImage imgBack;
-	private BufferedImage imgWebsite;
 
 	public StageOptions(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		initMouse();
 		initKey();
-		initRecs();
+		initButtons();
 		loadTextures();
+		initLang();
 	}
 
 	private void initMouse() {
+		getStageManager().setMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				Point point = new Point(x, y);
+
+				for (int i = 0; i < btns.length; i++) {
+					if (btns[i].contains(point)) {
+						btns[i].setHighlighted(true);
+						selectedButton = i;
+					} else
+						btns[i].setHighlighted(false);
+				}
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+
+			}
+		});
 		getStageManager().setMouseListener(new MouseListener() {
 
 			@Override
@@ -52,10 +80,21 @@ public class StageOptions extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				if (btnBack.contains(point)) {
+				if (btns[0].contains(point)) {
 					back();
-				} else if (btnWebsite.contains(point)) {
+				} else if (btns[1].contains(point)) {
 					website();
+				}
+
+				for (int i = 0; i < langs.length; i++) {
+					if (langs[i].contains(point)) {
+						langs[i].highlight();
+						SaveGame.saveGame.setLang(langs[i].getText());
+						SaveGame.save();
+						selectedLang = i;
+					} else {
+						langs[i].deHighlight();
+					}
 				}
 			}
 
@@ -85,28 +124,84 @@ public class StageOptions extends Stage {
 
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					getStageManager().setStage(StageManager.STAGE_LEVEL);
+					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (selectedButton <= 0) {
+						back();
+					} else if (selectedButton == 1) {
+						website();
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+					selectedButton++;
+					selectedButton %= 2;
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+					selectedButton--;
+					if (selectedButton < 0)
+						selectedButton = 1;
+				}
+				for (Button button : btns) {
+					button.setHighlighted(false);
+				}
+				if (selectedButton > -1)
+					btns[selectedButton].setHighlighted(true);
 			}
 		});
 	}
 
-	private void initRecs() {
-		btnBack = new Rectangle(190, 500, 200, 40);
-		btnWebsite = new Rectangle(410, 500, 200, 40);
+	private void initButtons() {
+		selectedButton = -1;
+		btns = new Button[2];
+		btns[0] = new Button(ResourceManager.getString("gui.back"), 190, 500);
+		btns[1] = new Button(ResourceManager.getString("gui.website"), 410, 500);
+
+		for (Button button : btns)
+			button.setHighlighted(false);
 	}
 
 	private void loadTextures() {
 		background = ResourceManager.getImage("/backgrounds/Menu-Background.png");
-		imgBack = ResourceManager.getImage("/buttons/Back-Button.png");
-		imgWebsite = ResourceManager.getImage("/buttons/Web-Button.png");
+	}
+
+	private void initLang() {
+		String lang = SaveGame.saveGame.getLang();
+
+		if (lang.contains("de_DE"))
+			selectedLang = 1;
+		else
+			selectedLang = 0;
+
+		langs = new Button[2];
+
+		Button btn = new Button("en_US", new Rectangle(80, 80), 100, 200);
+		btn.setImage(ResourceManager.getImage("/buttons/gb.png"));
+		btn.setImageHighlight(ResourceManager.getImage("/buttons/selectedLang.png"));
+		btn.setHighlightReplaces(false);
+		btn.setTextIsHidden(true);
+		langs[0] = btn;
+
+		Button btn2 = new Button("de_DE", new Rectangle(80, 80), 200, 200);
+		btn2.setImage(ResourceManager.getImage("/buttons/ger.png"));
+		btn2.setImageHighlight(ResourceManager.getImage("/buttons/selectedLang.png"));
+		btn2.setHighlightReplaces(false);
+		btn2.setTextIsHidden(true);
+		langs[1] = btn2;
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
-		g2.drawImage(imgBack, btnBack.x, btnBack.y, btnBack.width, btnBack.height, null);
-		g2.drawImage(imgWebsite, btnWebsite.x, btnWebsite.y, btnWebsite.width, btnWebsite.height, null);
+
+		for (Button button : btns)
+			button.draw(g2);
+
+		for (int i = 0; i < langs.length; i++) {
+			langs[i].draw(g2);
+			if (i == selectedLang)
+				langs[i].highlight();
+			else
+				langs[i].deHighlight();
+		}
 	}
 
 	@Override
