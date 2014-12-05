@@ -38,8 +38,8 @@ public class MapObjectLogic extends MapObject {
 		g2.setColor(Color.GREEN);
 		g2.fillRect(x * size, y * size + (size / 8), size, size * 3 / 4);
 		g2.setColor(Color.BLACK);
-		g2.drawRect(x * size, y * size + (size / 8), size, size * 3 / 4);
-		g2.drawRect(x * size + 1, y * size + (size / 8) + 1, size - 2, size * 3 / 4 - 2);
+		g2.drawRect(x * size, y * size + (size / 8), size - 1, size * 3 / 4 - 1);
+		g2.drawRect(x * size + 1, y * size + (size / 8) + 1, size - 3, size * 3 / 4 - 3);
 	}
 
 	public boolean isInverted() {
