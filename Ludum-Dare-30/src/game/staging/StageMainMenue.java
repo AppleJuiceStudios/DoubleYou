@@ -125,7 +125,6 @@ public class StageMainMenue extends Stage {
 	}
 
 	private void initKeyControll() {
-		selectedButton = -1;
 		getStageManager().setKeyListener(new KeyListener() {
 
 			@Override
@@ -168,6 +167,7 @@ public class StageMainMenue extends Stage {
 	}
 
 	private void initButtons() {
+		selectedButton = -1;
 		btns = new Button[4];
 		btns[0] = new Button(ResourceManager.getString("gui.play"), 30, 350);
 		btns[1] = new Button(ResourceManager.getString("gui.options"), 30, 400);

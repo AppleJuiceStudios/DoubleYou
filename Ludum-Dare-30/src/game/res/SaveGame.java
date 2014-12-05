@@ -5,10 +5,13 @@ import game.main.GameCanvas;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Locale;
 import java.util.Scanner;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import util.log.Log;
 
 @XmlRootElement
 public class SaveGame {
@@ -16,6 +19,7 @@ public class SaveGame {
 	public static SaveGame saveGame;
 
 	private int nextLevel;
+	private String lang;
 	private static String path;
 
 	public static SaveGame getSaveGame() {
@@ -34,6 +38,12 @@ public class SaveGame {
 				saveGame = JAXB.unmarshal(file, SaveGame.class);
 			} else {
 				saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/SaveGame.xml"), SaveGame.class);
+				try {
+					saveGame.lang = Locale.getDefault().getDisplayName();
+				} catch (Exception e) {
+					e.printStackTrace();
+					Log.warning("Unable to detect system lang! Using engl.");
+				}
 				SaveGame.save();
 			}
 			writeVersion();
@@ -60,6 +70,14 @@ public class SaveGame {
 
 	public void setNextLevel(int nextLevel) {
 		this.nextLevel = nextLevel;
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 
 	public static String getPath() {

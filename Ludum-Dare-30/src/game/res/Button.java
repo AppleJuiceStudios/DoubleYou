@@ -16,6 +16,7 @@ public class Button {
 
 	private boolean highlighted;
 	private boolean highlightReplaces;
+	private boolean textIsHidden;
 	private BufferedImage image;
 	private BufferedImage imageHighlight;
 	private Color color;
@@ -39,6 +40,7 @@ public class Button {
 
 		this.setHighlighted(true);
 		this.setHighlightReplaces(false);
+		this.setTextIsHidden(false);
 		this.setImage(ResourceManager.getImage("/buttons/button.png"));
 		this.setImageHighlight(ResourceManager.getImage("/buttons/button-Highlight.png"));
 		this.setColor(Color.WHITE);
@@ -56,7 +58,8 @@ public class Button {
 			g2.drawImage(imageHighlight, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
 		} else
 			g2.drawImage(image, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
-		g2.drawString(text, x + offset, y + 29);
+		if (!isTextIsHidden())
+			g2.drawString(text, x + offset, y + 29);
 	}
 
 	public boolean contains(Point p) {
@@ -118,6 +121,7 @@ public class Button {
 
 	public void setX(int x) {
 		this.x = x;
+		rectangle.setLocation(x, y);
 	}
 
 	public int getY() {
@@ -126,6 +130,8 @@ public class Button {
 
 	public void setY(int y) {
 		this.y = y;
+		rectangle.setLocation(x, y);
+
 	}
 
 	public int getOffset() {
@@ -162,6 +168,14 @@ public class Button {
 
 	public void setHighlightReplaces(boolean highlightReplaces) {
 		this.highlightReplaces = highlightReplaces;
+	}
+
+	public boolean isTextIsHidden() {
+		return textIsHidden;
+	}
+
+	public void setTextIsHidden(boolean textIsHidden) {
+		this.textIsHidden = textIsHidden;
 	}
 
 	// endregion Getters/Setters

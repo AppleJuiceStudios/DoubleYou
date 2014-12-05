@@ -37,7 +37,7 @@ public class ResourceManager {
 		images = new HashMap<>();
 		clips = new HashMap<>();
 		midis = new HashMap<>();
-		loadLang(new Locale("de", "DE")); // To be loaded from config
+		loadLang();
 		Log.info("Loading lang took " + (System.currentTimeMillis() - startTime) + " ms!");
 		Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream("/res.data"));
 		while (scanner.hasNextLine()) {
@@ -54,7 +54,12 @@ public class ResourceManager {
 		Log.info("Loading res took " + (System.currentTimeMillis() - startTime) + " ms!");
 	}
 
-	private static void loadLang(Locale local) {
+	private static void loadLang() {
+		Locale local = null;
+		for (Locale loc : Locale.getAvailableLocales()) {
+			if (loc.toString().contains(SaveGame.saveGame.getLang()))
+				local = loc;
+		}
 		InputStream input = null;
 		try {
 			langFile = ResourceBundle.getBundle("lang.lang", local);
