@@ -88,16 +88,16 @@ public class MapObject {
 		return 0;
 	}
 
-	public int outputCount() {
-		return 0;
+	public boolean hasOutput() {
+		return false;
 	}
 
 	public int[] getInputs() {
 		return null;
 	}
 
-	public int[] getOutputs() {
-		return null;
+	public int getOutput() {
+		return -1;
 	}
 
 	public int getX() {

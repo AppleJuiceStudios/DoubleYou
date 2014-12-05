@@ -59,4 +59,8 @@ public class MapObjectLasergate extends MapObject {
 		drawInput(g2, (int) (6.5 * size / 16) + size * x, size * y, size / 16 * 3, power);
 	}
 
+	public int inputCount() {
+		return 1;
+	}
+
 }

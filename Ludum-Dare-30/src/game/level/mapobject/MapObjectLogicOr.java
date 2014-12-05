@@ -27,6 +27,14 @@ public class MapObjectLogicOr extends MapObjectLogic {
 		return false;
 	}
 
+	public int inputCount() {
+		return in.length;
+	}
+
+	public int[] getInputs() {
+		return in;
+	}
+
 	public int[] getIn() {
 		return in;
 	}

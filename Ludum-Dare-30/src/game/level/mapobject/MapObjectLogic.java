@@ -52,6 +52,14 @@ public class MapObjectLogic extends MapObject {
 		drawOutput(g2, (int) (6.5 * size / 16) + size * x, size * 13 / 16 + size * y, size / 16 * 3, true);
 	}
 
+	public boolean hasOutput() {
+		return true;
+	}
+
+	public int getOutput() {
+		return targetID;
+	}
+
 	public boolean isInverted() {
 		return inverted;
 	}

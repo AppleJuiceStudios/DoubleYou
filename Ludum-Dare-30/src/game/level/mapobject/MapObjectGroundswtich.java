@@ -70,6 +70,14 @@ public class MapObjectGroundswtich extends MapObject {
 		}
 	}
 
+	public boolean hasOutput() {
+		return true;
+	}
+
+	public int getOutput() {
+		return targetID;
+	}
+
 	public int getTargetID() {
 		return targetID;
 	}

@@ -32,6 +32,14 @@ public class MapObjectLogicAndKeeping extends MapObjectLogic {
 		return islocked;
 	}
 
+	public int inputCount() {
+		return in.length;
+	}
+
+	public int[] getInputs() {
+		return in;
+	}
+
 	public int[] getIn() {
 		return in;
 	}

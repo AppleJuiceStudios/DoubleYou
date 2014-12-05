@@ -35,4 +35,12 @@ public class MapObjectLogicAnd extends MapObjectLogic {
 		this.in = in;
 	}
 
+	public int inputCount() {
+		return in.length;
+	}
+
+	public int[] getInputs() {
+		return in;
+	}
+
 }
