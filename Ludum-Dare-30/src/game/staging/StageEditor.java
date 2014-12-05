@@ -27,6 +27,7 @@ import javax.xml.bind.JAXB;
 
 import util.hud.Hud;
 import util.hud.LogicHud;
+import util.hud.ObjectHud;
 
 public class StageEditor extends Stage {
 
@@ -57,6 +58,7 @@ public class StageEditor extends Stage {
 	private MapObject selectedMapObject;
 
 	private Hud logicHud;
+	private Hud objectHud;
 
 	// region Stage
 
@@ -79,6 +81,7 @@ public class StageEditor extends Stage {
 		}, 0, 1000 / 60);
 
 		logicHud = new LogicHud();
+		objectHud = new ObjectHud();
 	}
 
 	private void loadMap(Map<String, String> data) {
@@ -129,8 +132,7 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -145,8 +147,7 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
 				}
 			}
 		} else {
@@ -158,10 +159,11 @@ public class StageEditor extends Stage {
 			map.drawLogicObjects(g2, spriteSize);
 		}
 		g2.setTransform(new AffineTransform());
-		/*
-		 * GUI
-		 */
-		logicHud.draw(g2);
+		// GUI
+		if (editMode == EDITMODE_LOGIC)
+			logicHud.draw(g2);
+		else if (editMode == EDITMODE_OBJECT)
+			objectHud.draw(g2);
 	}
 
 	public void update() {
