@@ -33,6 +33,11 @@ public class MapObjectTrigger extends MapObject {
 	public void drawLogic(Graphics2D g2, int size) {
 		g2.setColor(Color.LIGHT_GRAY);
 		g2.fillRect(x * size, y * size, width * size, height * size);
+		drawIO(g2, size);
+	}
+
+	protected void drawIO(Graphics2D g2, int size) {
+		drawOutput(g2, width * size / 2 - (int) (1.5 * size / 16) + size * x, (y + height) * size - size * 3 / 16, size / 16 * 3, false);
 	}
 
 	protected void action(EntityPlayer player, LevelMap map) {

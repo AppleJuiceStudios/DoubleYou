@@ -35,11 +35,21 @@ public class MapObjectLogic extends MapObject {
 	}
 
 	public void drawLogic(Graphics2D g2, int size) {
-		g2.setColor(Color.GREEN);
-		g2.fillRect(x * size, y * size + (size / 8), size, size * 3 / 4);
+		if (isPower()) {
+			g2.setColor(Color.GREEN);
+		} else {
+			g2.setColor(Color.RED);
+		}
+		g2.fillRect(x * size, y * size + (size / 16 * 3), size, size * 10 / 16);
 		g2.setColor(Color.BLACK);
-		g2.drawRect(x * size, y * size + (size / 8), size - 1, size * 3 / 4 - 1);
-		g2.drawRect(x * size + 1, y * size + (size / 8) + 1, size - 3, size * 3 / 4 - 3);
+		g2.drawRect(x * size, y * size + (size / 16 * 3), size - 1, size * 10 / 16 - 1);
+		g2.drawRect(x * size + 1, y * size + (size / 16 * 3) + 1, size - 3, size * 10 / 16 - 3);
+		drawIO(g2, size);
+	}
+
+	protected void drawIO(Graphics2D g2, int size) {
+		drawInput(g2, (int) (6.5 * size / 16) + size * x, size * y, size / 16 * 3, false);
+		drawOutput(g2, (int) (6.5 * size / 16) + size * x, size * 13 / 16 + size * y, size / 16 * 3, true);
 	}
 
 	public boolean isInverted() {

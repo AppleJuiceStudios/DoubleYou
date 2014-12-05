@@ -45,6 +45,10 @@ public class MapObjectGroundswtich extends MapObject {
 		}
 	}
 
+	protected void drawIO(Graphics2D g2, int size) {
+		drawOutput(g2, (int) (6.5 * size / 16) + size * x, size * 13 / 16 + size * y, size / 16 * 3, inverted);
+	}
+
 	public void updateTriger(EntityPlayer[] player, LevelMap map) {
 		boolean t = false;
 		for (int i = 0; i < player.length; i++) {

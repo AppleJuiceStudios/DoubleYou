@@ -3,6 +3,7 @@ package game.level.mapobject;
 import game.level.LevelMap;
 import game.level.entity.EntityPlayer;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,7 +37,39 @@ public class MapObject {
 	}
 
 	public void drawLogic(Graphics2D g2, int size) {
+		drawIO(g2, size);
+	}
 
+	protected void drawIO(Graphics2D g2, int size) {
+
+	}
+
+	protected void drawInput(Graphics2D g2, int x, int y, int size, boolean power) {
+		if (power) {
+			g2.setColor(Color.GREEN);
+		} else {
+			g2.setColor(Color.RED);
+		}
+		g2.fillRect(x, y, size, size);
+		g2.setColor(Color.BLACK);
+		g2.drawRect(x, y, size - 1, size - 1);
+	}
+
+	protected void drawOutput(Graphics2D g2, int x, int y, int size, boolean inverted) {
+		if (power) {
+			g2.setColor(Color.GREEN);
+		} else {
+			g2.setColor(Color.RED);
+		}
+		if (inverted) {
+			g2.fillOval(x, y, size - 1, size - 1);
+			g2.setColor(Color.BLACK);
+			g2.drawOval(x, y, size - 1, size - 1);
+		} else {
+			g2.fillRect(x, y, size, size);
+			g2.setColor(Color.BLACK);
+			g2.drawRect(x, y, size - 1, size - 1);
+		}
 	}
 
 	public boolean isSolid() {
@@ -49,6 +82,22 @@ public class MapObject {
 
 	public void updateTriger(EntityPlayer[] player, LevelMap map) {
 
+	}
+
+	public int inputCount() {
+		return 0;
+	}
+
+	public int outputCount() {
+		return 0;
+	}
+
+	public int[] getInputs() {
+		return null;
+	}
+
+	public int[] getOutputs() {
+		return null;
 	}
 
 	public int getX() {
