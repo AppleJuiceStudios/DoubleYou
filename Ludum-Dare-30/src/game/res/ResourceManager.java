@@ -28,7 +28,6 @@ public class ResourceManager {
 	private static Map<String, BufferedImage> images;
 	private static Map<String, Clip> clips;
 	private static Map<String, Sequencer> midis;
-
 	private static ResourceBundle langFile;
 
 	public static void load() {
@@ -78,6 +77,10 @@ public class ResourceManager {
 				}
 			}
 		}
+	}
+
+	public static void reloadLang() {
+		loadLang();
 	}
 
 	private static void loadImage(String path) {
