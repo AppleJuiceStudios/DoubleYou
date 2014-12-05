@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -21,9 +22,10 @@ import java.net.URL;
 import java.util.Map;
 
 public class StageCredits extends Stage {
+
 	// Buttons
-	private Button btnBack;
-	private Button btnWebsite;
+	private Button[] btns;
+	private int selectedButton;
 
 	// Images
 	private BufferedImage imgBackground;
@@ -38,6 +40,28 @@ public class StageCredits extends Stage {
 	}
 
 	private void initMouse() {
+		getStageManager().setMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				Point point = new Point(x, y);
+
+				for (int i = 0; i < btns.length; i++) {
+					if (btns[i].contains(point)) {
+						btns[i].setHighlighted(true);
+						selectedButton = i;
+					} else
+						btns[i].setHighlighted(false);
+				}
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+
+			}
+		});
 		getStageManager().setMouseListener(new MouseListener() {
 
 			@Override
@@ -50,9 +74,9 @@ public class StageCredits extends Stage {
 				int y = e.getY();
 				Point point = new Point(x, y);
 
-				if (btnBack.contains(point)) {
+				if (btns[0].contains(point)) {
 					back();
-				} else if (btnWebsite.contains(point)) {
+				} else if (btns[1].contains(point)) {
 					website();
 				}
 			}
@@ -85,13 +109,39 @@ public class StageCredits extends Stage {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 				}
+				if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (selectedButton <= 0) {
+						back();
+					} else if (selectedButton == 1) {
+						website();
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_DOWN
+						|| e.getKeyCode() == KeyEvent.VK_S) {
+					selectedButton++;
+					selectedButton %= 2;
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_UP
+						|| e.getKeyCode() == KeyEvent.VK_W) {
+					selectedButton--;
+					if (selectedButton < 0)
+						selectedButton = 1;
+				}
+				for (Button button : btns) {
+					button.setHighlighted(false);
+				}
+				if (selectedButton > -1)
+					btns[selectedButton].setHighlighted(true);
 			}
 		});
 	}
 
 	private void initButtons() {
-		btnBack = new Button(ResourceManager.getString("gui.back"), 190, 500);
-		btnWebsite = new Button(ResourceManager.getString("gui.website"), 410, 500);
+		selectedButton = -1;
+		btns = new Button[2];
+		btns[0] = new Button(ResourceManager.getString("gui.back"), 190, 500);
+		btns[1] = new Button(ResourceManager.getString("gui.website"), 410, 500);
+
+		for (Button button : btns)
+			button.setHighlighted(false);
 	}
 
 	private void loadTextures() {
@@ -104,8 +154,8 @@ public class StageCredits extends Stage {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
 		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 150, null);
 
-		btnBack.draw(g2);
-		btnWebsite.draw(g2);
+		for (Button button : btns)
+			button.draw(g2);
 	}
 
 	@Override
