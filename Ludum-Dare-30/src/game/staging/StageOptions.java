@@ -91,6 +91,8 @@ public class StageOptions extends Stage {
 						langs[i].highlight();
 						SaveGame.saveGame.setLang(langs[i].getText());
 						SaveGame.save();
+						ResourceManager.reloadLang();
+						initButtons();
 						selectedLang = i;
 					} else {
 						langs[i].deHighlight();
