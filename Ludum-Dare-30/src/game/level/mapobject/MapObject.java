@@ -32,6 +32,8 @@ public class MapObject {
 
 	}
 
+	// region Draw
+
 	public void draw(Graphics2D g2, int size) {
 
 	}
@@ -123,6 +125,8 @@ public class MapObject {
 		}
 	}
 
+	// endregion Draw
+
 	public boolean isSolid() {
 		return false;
 	}
@@ -157,6 +161,14 @@ public class MapObject {
 
 	public boolean moreInputs() {
 		return false;
+	}
+
+	public void setInput(int index, int id) {
+
+	}
+
+	public void setOutput(int id) {
+
 	}
 
 	public int getX() {

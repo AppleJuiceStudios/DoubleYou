@@ -78,6 +78,10 @@ public class MapObjectGroundswtich extends MapObject {
 		return inverted;
 	}
 
+	public void setOutput(int id) {
+		targetID = id;
+	}
+
 	public int getTargetID() {
 		return targetID;
 	}
