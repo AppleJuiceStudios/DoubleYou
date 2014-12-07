@@ -42,7 +42,7 @@ public class MapObject {
 
 	protected void drawIO(Graphics2D g2, int size) {
 		// Inputs
-		if (inputCount() == 1) {
+		if (inputCount() == 1 && !moreInputs()) {
 			int xPos = width * size / 2 - (int) (1.5 * size / 16) + size * x;
 			int yPos = size * y;
 			drawInput(g2, xPos, yPos, size / 16 * 3, power);
@@ -60,6 +60,24 @@ public class MapObject {
 				}
 				int yPso = y * size;
 				drawInput(g2, xPos, yPso, size / 16 * 3, power);
+			}
+			if (moreInputs()) {
+				int xPos;
+				if (width == 0) {
+					xPos = (int) (x * size + size / (inputCount * 2.0) * (2 * inputCount - 1) - size / 16 * 1.5);
+				} else {
+					xPos = (int) (x * size + size * width / (inputCount * 2.0) * (2 * inputCount - 1) - size / 16 * 1.5);
+				}
+				int yPos = y * size;
+				g2.setColor(Color.ORANGE);
+				g2.fillRect(xPos, yPos, size / 16 * 3, size / 16 * 3);
+				g2.setColor(Color.BLACK);
+				g2.drawLine(xPos, yPos + size * 3 / 32, xPos + size / 16 * 3 - 1, yPos + size * 3 / 32);
+				g2.drawLine(xPos + size * 3 / 32, yPos, xPos + size * 3 / 32, yPos + size / 16 * 3 - 1);
+				if ((size / 16 * 3) % 2 == 0) {
+					g2.drawLine(xPos, yPos + size * 3 / 32 - 1, xPos + size / 16 * 3 - 1, yPos + size * 3 / 32 - 1);
+					g2.drawLine(xPos + size * 3 / 32 - 1, yPos, xPos + size * 3 / 32 - 1, yPos + size / 16 * 3 - 1);
+				}
 			}
 		}
 		// Output
