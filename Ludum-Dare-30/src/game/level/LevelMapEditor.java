@@ -2,6 +2,7 @@ package game.level;
 
 import game.level.mapobject.MapObject;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.File;
 import java.util.HashMap;
@@ -220,6 +221,40 @@ public class LevelMapEditor extends LevelMap {
 		Object[] keys = objectsMap.keySet().toArray();
 		for (int i = 0; i < keys.length; i++) {
 			objectsMap.get(keys[i]).drawLogic(g2, size);
+		}
+	}
+
+	public void drawLogicConnections(Graphics2D g2, int size) {
+		Object[] keys = objectsMap.keySet().toArray();
+		g2.setColor(Color.BLUE);
+		for (int i = 0; i < keys.length; i++) {
+			MapObject object = objectsMap.get(keys[i]);
+			if (object.hasOutput()) {
+				MapObject target = objectsMap.get(object.getOutput());
+				if (target != null) {
+					int x1 = object.getX() * size + (object.getWidth() != 0 ? object.getWidth() * size / 2 : size / 2);
+					int y1 = (object.getY() + object.getHeight()) * size + (object.getHeight() != 0 ? 0 : size);
+					int x2;
+					int y2 = target.getY() * size;
+					if (target.inputCount() == 1 && !target.moreInputs()) {
+						x2 = target.getX() * size + (target.getWidth() != 0 ? target.getWidth() * size / 2 : size / 2);
+					} else {
+						int inputs = target.moreInputs() ? target.inputCount() + 1 : target.inputCount();
+						int input = 0;
+						for (int j = 0; j < target.getInputs().length; j++) {
+							if (target.getInputs()[j] == object.getId()) {
+								input = j;
+							}
+						}
+						x2 = target.getX() * size + (target.getWidth() != 0 ? target.getWidth() : 1) * size / (inputs * 2) * (input * 2 + 1);
+					}
+					g2.drawLine(x1, y1, x2, y2);
+					g2.drawLine(x1 + 1, y1, x2 + 1, y2);
+					g2.drawLine(x1 - 1, y1, x2 - 1, y2);
+					g2.drawLine(x1, y1 + 1, x2, y2 + 1);
+					g2.drawLine(x1, y1 - 1, x2, y2 - 1);
+				}
+			}
 		}
 	}
 

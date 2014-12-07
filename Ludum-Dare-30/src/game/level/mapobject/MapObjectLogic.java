@@ -47,10 +47,6 @@ public class MapObjectLogic extends MapObject {
 		drawIO(g2, size);
 	}
 
-	protected void drawIO(Graphics2D g2, int size) {
-		drawInput(g2, (int) (6.5 * size / 16) + size * x, size * y, size / 16 * 3, false);
-	}
-
 	public boolean hasOutput() {
 		return true;
 	}

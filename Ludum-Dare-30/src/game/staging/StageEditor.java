@@ -101,6 +101,7 @@ public class StageEditor extends Stage {
 		g2.setTransform(at);
 		int spriteSize = TileSet.SPRITE_SIZE * scale;
 
+		// Map
 		int xStart = (int) (xOffset / (spriteSize));
 		int yStart = (int) (yOffset / (spriteSize));
 		int xEnd = xStart + GameCanvas.WIDTH / (spriteSize) + 2;
@@ -119,11 +120,13 @@ public class StageEditor extends Stage {
 			}
 		}
 
+		// Border
 		g2.setColor(Color.YELLOW);
 		for (int i = 1; i <= 1 + scale; i++) {
 			g2.drawRect(0 - i, 0 - i, map.getWidth() * spriteSize + i * 2 - 1, map.getHeight() * spriteSize + i * 2 - 1);
 		}
 
+		// Selection
 		if (editMode == EDITMODE_MAP) {
 			g2.setColor(Color.BLUE);
 			if (isSelecting) {
@@ -132,7 +135,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+							selectionHeight * spriteSize + i * 2 - 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -147,23 +151,28 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+							selectionHeight * spriteSize + i * 2 - 1);
 				}
 			}
 		} else {
 
 		}
 
+		// Objects
 		map.drawObjects(g2, spriteSize);
 		if (editMode == EDITMODE_LOGIC) {
 			map.drawLogicObjects(g2, spriteSize);
+			map.drawLogicConnections(g2, spriteSize);
 		}
 		g2.setTransform(new AffineTransform());
+
 		// GUI
-		if (editMode == EDITMODE_LOGIC)
+		if (editMode == EDITMODE_LOGIC) {
 			logicHud.draw(g2);
-		else if (editMode == EDITMODE_OBJECT)
+		} else if (editMode == EDITMODE_OBJECT) {
 			objectHud.draw(g2);
+		}
 	}
 
 	public void update() {
