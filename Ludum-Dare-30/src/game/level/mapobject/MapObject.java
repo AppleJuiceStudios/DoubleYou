@@ -41,7 +41,40 @@ public class MapObject {
 	}
 
 	protected void drawIO(Graphics2D g2, int size) {
-
+		// Inputs
+		if (inputCount() == 1) {
+			int xPos = width * size / 2 - (int) (1.5 * size / 16) + size * x;
+			int yPos = size * y;
+			drawInput(g2, xPos, yPos, size / 16 * 3, power);
+		} else if (inputCount() > 1) {
+			int inputCount = inputCount();
+			if (moreInputs()) {
+				inputCount++;
+			}
+			for (int i = 0; i < getInputs().length; i++) {
+				int xPos;
+				if (width == 0) {
+					xPos = (int) (x * size + size / (inputCount * 2.0) * (2 * i + 1) - size / 16 * 1.5);
+				} else {
+					xPos = (int) (x * size + size * width / (inputCount * 2.0) * (2 * i + 1) - size / 16 * 1.5);
+				}
+				int yPso = y * size;
+				drawInput(g2, xPos, yPso, size / 16 * 3, power);
+			}
+		}
+		// Output
+		if (hasOutput()) {
+			int xPos;
+			int yPos;
+			if (width == 0 || height == 0) {
+				xPos = (int) (6.5 * size / 16) + size * x;
+				yPos = size * 13 / 16 + size * y;
+			} else {
+				xPos = width * size / 2 - (int) (1.5 * size / 16) + size * x;
+				yPos = (y + height) * size - size * 3 / 16;
+			}
+			drawOutput(g2, xPos, yPos, size / 16 * 3, isOutputInverted());
+		}
 	}
 
 	protected void drawInput(Graphics2D g2, int x, int y, int size, boolean power) {
@@ -98,6 +131,14 @@ public class MapObject {
 
 	public int getOutput() {
 		return -1;
+	}
+
+	public boolean isOutputInverted() {
+		return false;
+	}
+
+	public boolean moreInputs() {
+		return false;
 	}
 
 	public int getX() {

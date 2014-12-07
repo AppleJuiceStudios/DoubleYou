@@ -49,7 +49,6 @@ public class MapObjectLogic extends MapObject {
 
 	protected void drawIO(Graphics2D g2, int size) {
 		drawInput(g2, (int) (6.5 * size / 16) + size * x, size * y, size / 16 * 3, false);
-		drawOutput(g2, (int) (6.5 * size / 16) + size * x, size * 13 / 16 + size * y, size / 16 * 3, true);
 	}
 
 	public boolean hasOutput() {
@@ -58,6 +57,10 @@ public class MapObjectLogic extends MapObject {
 
 	public int getOutput() {
 		return targetID;
+	}
+
+	public boolean isOutputInverted() {
+		return inverted;
 	}
 
 	public boolean isInverted() {

@@ -27,20 +27,24 @@ public class MapObjectLogicAnd extends MapObjectLogic {
 		return true;
 	}
 
-	public int[] getIn() {
-		return in;
-	}
-
-	public void setIn(int[] in) {
-		this.in = in;
-	}
-
 	public int inputCount() {
 		return in.length;
 	}
 
 	public int[] getInputs() {
 		return in;
+	}
+
+	public boolean moreInputs() {
+		return true;
+	}
+
+	public int[] getIn() {
+		return in;
+	}
+
+	public void setIn(int[] in) {
+		this.in = in;
 	}
 
 }

@@ -35,6 +35,10 @@ public class MapObjectLogicOr extends MapObjectLogic {
 		return in;
 	}
 
+	public boolean moreInputs() {
+		return true;
+	}
+
 	public int[] getIn() {
 		return in;
 	}

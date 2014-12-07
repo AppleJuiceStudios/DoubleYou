@@ -55,10 +55,6 @@ public class MapObjectLasergateHorizontal extends MapObject {
 		}
 	}
 
-	protected void drawIO(Graphics2D g2, int size) {
-		drawInput(g2, width * size / 2 - (int) (1.5 * size / 16) + size * x, size * y, size / 16 * 3, power);
-	}
-
 	public int inputCount() {
 		return 1;
 	}
