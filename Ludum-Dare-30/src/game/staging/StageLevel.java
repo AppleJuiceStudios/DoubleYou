@@ -59,7 +59,6 @@ public class StageLevel extends Stage {
 
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
-		tileSet = new TileSet();
 		try {
 			if (data.get("level").matches("\\d*"))
 				map = LevelMap.loadLevel(Integer.parseInt(data.get("level")));
@@ -80,8 +79,16 @@ public class StageLevel extends Stage {
 		isCloneAllowed = map.getIsCloneAllowed();
 		textbox = map.getStartTextbox();
 
-		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
-		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
+		System.out.println(Integer.parseInt(data.get("level")));
+		if (Integer.parseInt(data.get("level")) <= 4) {
+			tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
+			background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
+			mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
+		} else {
+			tileSet = new TileSet("/planets/saturn/Saturn-TileSet.png");
+			background = ResourceManager.getImage("/backgrounds/Saturn-Background.png");
+			mountains = ResourceManager.getImage("/planets/saturn/Saturn-Outlands.png");
+		}
 		healthbar = ResourceManager.getImage("/gui/Healthbar.png");
 		imgTextbox = ResourceManager.getImage("/backgrounds/Textbox.png");
 
@@ -163,7 +170,8 @@ public class StageLevel extends Stage {
 		// GUI
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
-		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
+				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
