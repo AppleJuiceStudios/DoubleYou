@@ -54,7 +54,11 @@ public class ResourceManager {
 	}
 
 	private static void loadLang() {
-		Locale local = new Locale(SaveGame.saveGame.getLang());
+		Locale local = null;
+		for (Locale loc : Locale.getAvailableLocales()) {
+			if (loc.toString().contains(SaveGame.saveGame.getLang()))
+				local = loc;
+		}
 		InputStream input = null;
 		try {
 			langFile = ResourceBundle.getBundle("lang.lang", local);
