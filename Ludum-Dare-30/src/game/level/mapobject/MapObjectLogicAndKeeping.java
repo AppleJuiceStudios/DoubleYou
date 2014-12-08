@@ -47,6 +47,12 @@ public class MapObjectLogicAndKeeping extends MapObjectLogic {
 	public void setInput(int index, int id) {
 		if (id != 0 && id != -1) {
 			in[index] = id;
+		} else if (index == in.length) {
+			int[] newIn = new int[in.length + 1];
+			for (int i = 0; i < newIn.length; i++) {
+				newIn[i] = in[i];
+			}
+			in = newIn;
 		} else {
 			int[] newIn = new int[in.length - 1];
 			for (int i = 0; i < newIn.length; i++) {
