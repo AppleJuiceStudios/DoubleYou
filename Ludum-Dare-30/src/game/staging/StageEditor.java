@@ -3,6 +3,12 @@ package game.staging;
 import game.level.LevelMapEditor;
 import game.level.TileSet;
 import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectGroundswtich;
+import game.level.mapobject.MapObjectLasergate;
+import game.level.mapobject.MapObjectLasergateHorizontal;
+import game.level.mapobject.MapObjectLogic;
+import game.level.mapobject.MapObjectTrigger;
+import game.level.mapobject.MapObjectTriggerTextbox;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 
@@ -49,13 +55,15 @@ public class StageEditor extends Stage {
 	private int lastSelectionX;
 	private int lastSelectionY;
 	private boolean isSelecting;
+	// EDITMODE_OBJECT
+	private MapObject selectedMapObject;
+
+	private int nextID = 30000;
 
 	public static final int EDITMODE_MAP = 0;
 	public static final int EDITMODE_OBJECT = 1;
 	public static final int EDITMODE_LOGIC = 2;
 	private int editMode = EDITMODE_MAP;
-	// EDITMODE_OBJECT
-	private MapObject selectedMapObject;
 
 	private Hud logicHud;
 	private Hud objectHud;
@@ -129,23 +137,26 @@ public class StageEditor extends Stage {
 		// Selection
 		if (editMode == EDITMODE_MAP) {
 			g2.setColor(Color.BLUE);
-			if (isSelecting) {
-				int selectionStartX = Math.min(selectedX, lastSelectionX);
-				int selectionStartY = Math.min(selectedY, lastSelectionY);
-				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
-				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
-				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
-				}
-			} else {
-				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectedX * spriteSize - i, selectedY * spriteSize - i, spriteSize + i * 2 - 1, spriteSize + i * 2 - 1);
-				}
+		} else {
+			g2.setColor(Color.LIGHT_GRAY);
+		}
+		if (isSelecting) {
+			int selectionStartX = Math.min(selectedX, lastSelectionX);
+			int selectionStartY = Math.min(selectedY, lastSelectionY);
+			int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
+			int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
+			for (int i = 1; i <= 1 + scale; i++) {
+				g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
+						selectionHeight * spriteSize + i * 2 - 1);
 			}
-		} else if (editMode == EDITMODE_OBJECT) {
-			g2.setColor(Color.BLUE);
+		} else {
+			for (int i = 1; i <= 1 + scale; i++) {
+				g2.drawRect(selectedX * spriteSize - i, selectedY * spriteSize - i, spriteSize + i * 2 - 1, spriteSize + i * 2 - 1);
+			}
+		}
+		if (editMode == EDITMODE_OBJECT) {
 			if (selectedMapObject != null) {
+				g2.setColor(Color.BLUE);
 				int selectionStartX = selectedMapObject.getX();
 				int selectionStartY = selectedMapObject.getY();
 				int selectionWidth = selectedMapObject.getWidth();
@@ -155,8 +166,6 @@ public class StageEditor extends Stage {
 							selectionHeight * spriteSize + i * 2 - 1);
 				}
 			}
-		} else {
-
 		}
 
 		// Objects
@@ -200,9 +209,36 @@ public class StageEditor extends Stage {
 
 	// endregion Stage
 
+	// region ObjectPlacement
+
+	public void placeObject(MapObject object) {
+		object.setId(getNextID());
+		object.setX(selectedX);
+		object.setY(selectedY);
+		object.setWidth(1);
+		object.setHeight(1);
+		if (object instanceof MapObjectTrigger) {
+			object.setX(Math.min(selectedX, lastSelectionX));
+			object.setY(Math.min(selectedY, lastSelectionY));
+			object.setWidth(Math.abs(selectedX - lastSelectionX) + 1);
+			object.setHeight(Math.abs(selectedY - lastSelectionY) + 1);
+		} else if (object instanceof MapObjectLasergate) {
+			object.setY(Math.min(selectedY, lastSelectionY));
+			object.setHeight(Math.abs(selectedY - lastSelectionY) + 1);
+		} else if (object instanceof MapObjectLasergateHorizontal) {
+			object.setX(Math.min(selectedX, lastSelectionX));
+			object.setWidth(Math.abs(selectedX - lastSelectionX) + 1);
+		}
+		map.addMapObject(object);
+	}
+
+	// endregion ObjectPlacement
+
 	// region Utility
 
 	public void swichEditMode() {
+		selectedMapObject = null;
+		isSelecting = false;
 		if (editMode == EDITMODE_MAP) {
 			editMode = EDITMODE_OBJECT;
 		} else if (editMode == EDITMODE_OBJECT) {
@@ -226,6 +262,17 @@ public class StageEditor extends Stage {
 			yOffset = (yOffset + controls.mouse_Y) * (scale - 1) / scale - controls.mouse_Y;
 			scale--;
 		}
+	}
+
+	public boolean isLogicMapObject(MapObject object) {
+		return object instanceof MapObjectLogic || object instanceof MapObjectTrigger;
+	}
+
+	public int getNextID() {
+		while (map.getMapObject(nextID) != null) {
+			nextID++;
+		}
+		return nextID;
 	}
 
 	// endregion Utility
@@ -367,8 +414,30 @@ public class StageEditor extends Stage {
 				for (int i = 0; i < objects.length; i++) {
 					if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
 						if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
-							selectedMapObject = objects[i];
+							if (!isLogicMapObject(objects[i])) {
+								selectedMapObject = objects[i];
+							}
 						}
+					}
+				}
+				if (selectedMapObject == null) {
+					placeObject(new MapObjectLasergate());
+				}
+			} else if (editMode == EDITMODE_LOGIC) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					selectedMapObject = null;
+					MapObject[] objects = map.getMapObjects();
+					for (int i = 0; i < objects.length; i++) {
+						if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
+							if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
+								if (isLogicMapObject(objects[i])) {
+									selectedMapObject = objects[i];
+								}
+							}
+						}
+					}
+					if (selectedMapObject == null) {
+						placeObject(new MapObjectTriggerTextbox());
 					}
 				}
 			}
