@@ -172,10 +172,12 @@ public class StageOptions extends Stage {
 
 		if (lang.contains("de_DE"))
 			selectedLang = 1;
+		else if (lang.contains("es_ES"))
+			selectedLang = 2;
 		else
 			selectedLang = 0;
 
-		langs = new Button[2];
+		langs = new Button[3];
 
 		Button btn = new Button("en_US", new Rectangle(80, 80), 100, 200);
 		btn.setImage(ResourceManager.getImage("/buttons/gb.png"));
@@ -190,6 +192,14 @@ public class StageOptions extends Stage {
 		btn2.setHighlightReplaces(false);
 		btn2.setTextIsHidden(true);
 		langs[1] = btn2;
+
+		Button btn3 = new Button("es_ES", new Rectangle(80, 80), 300, 200);
+		btn3.setImage(ResourceManager.getImage("/buttons/es.png"));
+		btn3.setImageHighlight(ResourceManager.getImage("/buttons/selectedLang.png"));
+		btn3.setHighlightReplaces(false);
+		btn3.setTextIsHidden(true);
+		langs[2] = btn3;
+
 	}
 
 	@Override
