@@ -12,9 +12,10 @@ public class HudItem {
 
 	private BufferedImage image;
 	private Class<? extends MapObject> object;
-	public static final int SIZE = 40;
+	private final int SIZE;
 
-	public HudItem(BufferedImage image, Class<? extends MapObject> object) {
+	public HudItem(BufferedImage image, int size, Class<? extends MapObject> object) {
+		this.SIZE = size;
 		this.setImage(image);
 		this.setObject(object);
 	}
