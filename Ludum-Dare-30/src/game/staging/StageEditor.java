@@ -210,6 +210,9 @@ public class StageEditor extends Stage {
 	// region ObjectPlacement
 
 	public void placeObject(MapObject object) {
+		if (object == null) {
+			return;
+		}
 		object.setId(getNextID());
 		object.setX(selectedX);
 		object.setY(selectedY);
@@ -440,8 +443,10 @@ public class StageEditor extends Stage {
 					selectedMapObject = null;
 					MapObject[] objects = map.getMapObjects();
 					for (int i = 0; i < objects.length; i++) {
-						if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
-							if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
+						if (selectedX >= objects[i].getX()
+								&& selectedX < objects[i].getX() + objects[i].getWidth() + (objects[i].getWidth() == 0 ? 1 : 0)) {
+							if (selectedY >= objects[i].getY()
+									&& selectedY < objects[i].getY() + objects[i].getHeight() + (objects[i].getHeight() == 0 ? 1 : 0)) {
 								if (isLogicMapObject(objects[i])) {
 									selectedMapObject = objects[i];
 								}
