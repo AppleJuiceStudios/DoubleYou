@@ -14,5 +14,4 @@ public class ObjectHud extends Hud {
 		items[3] = new HudItem(ResourceManager.getImage("/level/object/Lasergate-HorizontalOnlyClone.png"), null);
 		items[4] = new HudItem(ResourceManager.getImage("/level/object/Lasergate-OnlyClone.png"), null);
 	}
-
 }

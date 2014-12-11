@@ -3,12 +3,10 @@ package game.staging;
 import game.level.LevelMapEditor;
 import game.level.TileSet;
 import game.level.mapobject.MapObject;
-import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateHorizontal;
 import game.level.mapobject.MapObjectLogic;
 import game.level.mapobject.MapObjectTrigger;
-import game.level.mapobject.MapObjectTriggerTextbox;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 
@@ -146,8 +144,8 @@ public class StageEditor extends Stage {
 			int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 			int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 			for (int i = 1; i <= 1 + scale; i++) {
-				g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-						selectionHeight * spriteSize + i * 2 - 1);
+				g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+						* spriteSize + i * 2 - 1);
 			}
 		} else {
 			for (int i = 1; i <= 1 + scale; i++) {
@@ -162,8 +160,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+							* spriteSize + i * 2 - 1);
 				}
 			}
 		}
@@ -383,16 +381,30 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
-				lastSelectionX = selectedX;
-				lastSelectionY = selectedY;
-				isSelecting = true;
+			if (e.getY() > GameCanvas.HEIGHT - logicHud.getHeight()) {
+				if (editMode == EDITMODE_LOGIC)
+					logicHud.mousePressed(e);
+				if (editMode == EDITMODE_OBJECT)
+					objectHud.mousePressed(e);
+			} else {
+				if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
+					lastSelectionX = selectedX;
+					lastSelectionY = selectedY;
+					isSelecting = true;
+				}
 			}
-
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			if (e.getY() > GameCanvas.HEIGHT - logicHud.getHeight()) {
+				if (editMode == EDITMODE_LOGIC)
+					logicHud.mouseReleased(e);
+				if (editMode == EDITMODE_OBJECT)
+					objectHud.mouseReleased(e);
+				return;
+			}
+
 			isSelecting = false;
 			if (editMode == EDITMODE_MAP) {
 				if (selectedX == lastSelectionX && selectedY == lastSelectionY) {
@@ -421,7 +433,7 @@ public class StageEditor extends Stage {
 					}
 				}
 				if (selectedMapObject == null) {
-					placeObject(new MapObjectLasergate());
+					placeObject(objectHud.getObject());
 				}
 			} else if (editMode == EDITMODE_LOGIC) {
 				if (e.getButton() == MouseEvent.BUTTON1) {
@@ -437,7 +449,7 @@ public class StageEditor extends Stage {
 						}
 					}
 					if (selectedMapObject == null) {
-						placeObject(new MapObjectTriggerTextbox());
+						placeObject(logicHud.getObject());
 					}
 				}
 			}
