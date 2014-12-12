@@ -77,7 +77,7 @@ public class StageEditor extends Stage {
 		loadMap(data);
 		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
-		tileSet = new TileSet();
+		tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
 		controls = new ControlListener();
 		getStageManager().setMouseListener(controls);
 		getStageManager().setKeyListener(controls);
