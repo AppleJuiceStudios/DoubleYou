@@ -7,7 +7,6 @@ import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateHorizontal;
 import game.level.mapobject.MapObjectLogic;
 import game.level.mapobject.MapObjectTrigger;
-import game.level.mapobject.MapObjectTriggerTextbox;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 
@@ -151,8 +150,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
-							- 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+							* spriteSize + i * 2 - 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -169,8 +168,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
-							- 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+							* spriteSize + i * 2 - 1);
 				}
 			}
 		}
@@ -501,8 +500,8 @@ public class StageEditor extends Stage {
 								startLogicLine.setOutput(mouseObject.getId());
 								if (mouseObject.inputCount() != 1 || mouseObject.moreInputs()) {
 									int inputcount = mouseObject.inputCount() + (mouseObject.moreInputs() ? 1 : 0);
-									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize : mouseObject
-											.getWidth() * spriteSize) / inputcount));
+									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize
+											: mouseObject.getWidth() * spriteSize) / inputcount));
 									mouseObject.setInput(input, startLogicLine.getId());
 								}
 								connectingLogicLine = false;
