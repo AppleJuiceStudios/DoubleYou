@@ -504,7 +504,6 @@ public class StageEditor extends Stage {
 									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize : mouseObject
 											.getWidth() * spriteSize) / inputcount));
 									mouseObject.setInput(input, startLogicLine.getId());
-									System.out.println(input);
 								}
 								connectingLogicLine = false;
 							} else {
