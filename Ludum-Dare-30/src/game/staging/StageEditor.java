@@ -142,20 +142,8 @@ public class StageEditor extends Stage {
 		} else {
 			g2.setColor(Color.LIGHT_GRAY);
 		}
-<<<<<<< HEAD
 		if (connectingLogicLine) {
 			// Draw Line
-=======
-		if (isSelecting) {
-			int selectionStartX = Math.min(selectedX, lastSelectionX);
-			int selectionStartY = Math.min(selectedY, lastSelectionY);
-			int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
-			int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
-			for (int i = 1; i <= 1 + scale; i++) {
-				g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
-						* spriteSize + i * 2 - 1);
-			}
->>>>>>> branch 'level-editor' of https://github.com/TobiasBodewig/Ludum-Dare-30.git
 		} else {
 			if (isSelecting) {
 				int selectionStartX = Math.min(selectedX, lastSelectionX);
@@ -181,8 +169,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
+							- 1);
 				}
 			}
 		}
@@ -410,14 +398,13 @@ public class StageEditor extends Stage {
 					logicHud.mousePressed(e);
 				if (editMode == EDITMODE_OBJECT)
 					objectHud.mousePressed(e);
-			} else {
-				if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
-					lastSelectionX = selectedX;
-					lastSelectionY = selectedY;
-					isSelecting = true;
-				}
+				return;
 			}
-<<<<<<< HEAD
+			if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
+				lastSelectionX = selectedX;
+				lastSelectionY = selectedY;
+				isSelecting = true;
+			}
 			if (editMode == EDITMODE_LOGIC && e.getButton() == MouseEvent.BUTTON3) {
 				int spriteSize = TileSet.SPRITE_SIZE * scale;
 				if ((mouse_X + xOffset) % spriteSize < spriteSize - (spriteSize / 16 * 3)) {
@@ -455,8 +442,6 @@ public class StageEditor extends Stage {
 					}
 				}
 			}
-=======
->>>>>>> branch 'level-editor' of https://github.com/TobiasBodewig/Ludum-Dare-30.git
 		}
 
 		@Override
@@ -494,12 +479,11 @@ public class StageEditor extends Stage {
 						}
 					}
 				}
-<<<<<<< HEAD
 				if (editMode == EDITMODE_OBJECT) {
 					if (!isLogicMapObject(mouseObject)) {
 						selectedMapObject = mouseObject;
 						if (selectedMapObject == null) {
-							placeObject(new MapObjectLasergate());// Hud
+							placeObject(objectHud.getObject());
 						}
 					}
 				} else if (editMode == EDITMODE_LOGIC) {
@@ -507,7 +491,7 @@ public class StageEditor extends Stage {
 						if (isLogicMapObject(mouseObject)) {
 							selectedMapObject = mouseObject;
 							if (selectedMapObject == null) {
-								placeObject(new MapObjectTriggerTextbox());// Hud
+								placeObject(logicHud.getObject());
 							}
 						}
 					} else if (e.getButton() == MouseEvent.BUTTON3) {
@@ -532,34 +516,11 @@ public class StageEditor extends Stage {
 									mouseObject.invertOutput();
 								} else {
 									mouseObject.onEditorRightClick();
-=======
-				if (selectedMapObject == null) {
-					placeObject(objectHud.getObject());
-				}
-			} else if (editMode == EDITMODE_LOGIC) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					selectedMapObject = null;
-					MapObject[] objects = map.getMapObjects();
-					for (int i = 0; i < objects.length; i++) {
-						if (selectedX >= objects[i].getX()
-								&& selectedX < objects[i].getX() + objects[i].getWidth() + (objects[i].getWidth() == 0 ? 1 : 0)) {
-							if (selectedY >= objects[i].getY()
-									&& selectedY < objects[i].getY() + objects[i].getHeight() + (objects[i].getHeight() == 0 ? 1 : 0)) {
-								if (isLogicMapObject(objects[i])) {
-									selectedMapObject = objects[i];
->>>>>>> branch 'level-editor' of https://github.com/TobiasBodewig/Ludum-Dare-30.git
 								}
 							}
 						} else {
 							connectingLogicLine = false;
 						}
-<<<<<<< HEAD
-
-=======
-					}
-					if (selectedMapObject == null) {
-						placeObject(logicHud.getObject());
->>>>>>> branch 'level-editor' of https://github.com/TobiasBodewig/Ludum-Dare-30.git
 					}
 				}
 			}
