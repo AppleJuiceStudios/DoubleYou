@@ -1,8 +1,8 @@
 package game.level.mapobject;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import game.level.LevelMap;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class MapObjectLogicAnd extends MapObjectLogic {
@@ -15,7 +15,7 @@ public class MapObjectLogicAnd extends MapObjectLogic {
 	}
 
 	public MapObjectLogicAnd() {
-
+		in = new int[0];
 	}
 
 	public boolean update(LevelMap map) {
@@ -40,20 +40,21 @@ public class MapObjectLogicAnd extends MapObjectLogic {
 	}
 
 	public void setInput(int index, int id) {
-		if (id != 0 && id != -1) {
-			in[index] = id;
-		} else if (index == in.length) {
+		if (index == in.length) {
 			int[] newIn = new int[in.length + 1];
-			for (int i = 0; i < newIn.length; i++) {
+			for (int i = 0; i < in.length; i++) {
 				newIn[i] = in[i];
 			}
+			newIn[in.length] = id;
 			in = newIn;
-		} else {
+		} else if (id == 0 || id == -1) {
 			int[] newIn = new int[in.length - 1];
 			for (int i = 0; i < newIn.length; i++) {
 				newIn[i] = i < index ? in[i] : in[i + 1];
 			}
 			in = newIn;
+		} else {
+			in[index] = id;
 		}
 	}
 

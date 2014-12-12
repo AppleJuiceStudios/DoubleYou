@@ -48,7 +48,7 @@ public class MapObject {
 			int xPos = width * size / 2 - (int) (1.5 * size / 16) + size * x;
 			int yPos = size * y;
 			drawInput(g2, xPos, yPos, size / 16 * 3, power);
-		} else if (inputCount() > 1) {
+		} else if (inputCount() > 0 || moreInputs()) {
 			int inputCount = inputCount();
 			if (moreInputs()) {
 				inputCount++;
@@ -109,7 +109,7 @@ public class MapObject {
 	}
 
 	protected void drawOutput(Graphics2D g2, int x, int y, int size, boolean inverted) {
-		if (power) {
+		if (power ^ inverted) {
 			g2.setColor(Color.GREEN);
 		} else {
 			g2.setColor(Color.RED);
@@ -159,6 +159,10 @@ public class MapObject {
 		return false;
 	}
 
+	public void invertOutput() {
+
+	}
+
 	public boolean moreInputs() {
 		return false;
 	}
@@ -169,6 +173,10 @@ public class MapObject {
 
 	public void setOutput(int id) {
 
+	}
+
+	public void onEditorRightClick() {
+		setPower(!getPower());
 	}
 
 	public int getX() {

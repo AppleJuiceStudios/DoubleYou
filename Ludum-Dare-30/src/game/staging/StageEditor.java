@@ -56,6 +56,9 @@ public class StageEditor extends Stage {
 	private boolean isSelecting;
 	// EDITMODE_OBJECT
 	private MapObject selectedMapObject;
+	// EDITMODE_LOGIC
+	private boolean connectingLogicLine;
+	private MapObject startLogicLine;
 
 	private int nextID = 30000;
 
@@ -139,20 +142,25 @@ public class StageEditor extends Stage {
 		} else {
 			g2.setColor(Color.LIGHT_GRAY);
 		}
-		if (isSelecting) {
-			int selectionStartX = Math.min(selectedX, lastSelectionX);
-			int selectionStartY = Math.min(selectedY, lastSelectionY);
-			int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
-			int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
-			for (int i = 1; i <= 1 + scale; i++) {
-				g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-						selectionHeight * spriteSize + i * 2 - 1);
-			}
+		if (connectingLogicLine) {
+			// Draw Line
 		} else {
-			for (int i = 1; i <= 1 + scale; i++) {
-				g2.drawRect(selectedX * spriteSize - i, selectedY * spriteSize - i, spriteSize + i * 2 - 1, spriteSize + i * 2 - 1);
+			if (isSelecting) {
+				int selectionStartX = Math.min(selectedX, lastSelectionX);
+				int selectionStartY = Math.min(selectedY, lastSelectionY);
+				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
+				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
+				for (int i = 1; i <= 1 + scale; i++) {
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
+							- 1);
+				}
+			} else {
+				for (int i = 1; i <= 1 + scale; i++) {
+					g2.drawRect(selectedX * spriteSize - i, selectedY * spriteSize - i, spriteSize + i * 2 - 1, spriteSize + i * 2 - 1);
+				}
 			}
 		}
+
 		if (editMode == EDITMODE_OBJECT) {
 			if (selectedMapObject != null) {
 				g2.setColor(Color.BLUE);
@@ -161,8 +169,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1,
-							selectionHeight * spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
+							- 1);
 				}
 			}
 		}
@@ -390,7 +398,43 @@ public class StageEditor extends Stage {
 				lastSelectionY = selectedY;
 				isSelecting = true;
 			}
-
+			if (editMode == EDITMODE_LOGIC && e.getButton() == MouseEvent.BUTTON3) {
+				int spriteSize = TileSet.SPRITE_SIZE * scale;
+				if ((mouse_X + xOffset) % spriteSize < spriteSize - (spriteSize / 16 * 3)) {
+					MapObject mouseObject = null;
+					MapObject[] objects = map.getMapObjects();
+					for (int i = 0; i < objects.length; i++) {
+						if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
+							if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
+								if (!isLogicMapObject(objects[i])) {
+									mouseObject = objects[i];
+								}
+							}
+						}
+					}
+					if (mouseObject != null && mouseObject.hasOutput()) {
+						if (((mouse_Y + yOffset) % spriteSize) > (spriteSize - (spriteSize / 16 * 3))
+								&& (selectedY - mouseObject.getY() == (mouseObject.getHeight() == 0 ? 0 : mouseObject.getHeight() - 1))) {
+							connectingLogicLine = true;
+							startLogicLine = mouseObject;
+							int output = startLogicLine.getOutput();
+							if (output != 0 && output != -1) {
+								int[] input = map.getMapObject(output).getInputs();
+								if (input == null) {
+									map.getMapObject(output).setInput(0, -1);
+								} else {
+									for (int i = 0; i < input.length; i++) {
+										if (input[i] == startLogicLine.getId()) {
+											map.getMapObject(output).setInput(i, -1);
+										}
+									}
+								}
+							}
+							startLogicLine.setOutput(-1);
+						}
+					}
+				}
+			}
 		}
 
 		@Override
@@ -410,38 +454,59 @@ public class StageEditor extends Stage {
 						map.clearRect(selectedX, selectedY, lastSelectionX, lastSelectionY);
 					}
 				}
-			} else if (editMode == EDITMODE_OBJECT) {
-				selectedMapObject = null;
+			} else {
+				MapObject mouseObject = null;
 				MapObject[] objects = map.getMapObjects();
 				for (int i = 0; i < objects.length; i++) {
-					if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
-						if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
-							if (!isLogicMapObject(objects[i])) {
-								selectedMapObject = objects[i];
-							}
+					if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth() + (objects[i].getWidth() == 0 ? 1 : 0)) {
+						if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight() + (objects[i].getHeight() == 0 ? 1 : 0)) {
+							mouseObject = objects[i];
 						}
 					}
 				}
-				if (selectedMapObject == null) {
-					placeObject(new MapObjectLasergate());
-				}
-			} else if (editMode == EDITMODE_LOGIC) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					selectedMapObject = null;
-					MapObject[] objects = map.getMapObjects();
-					for (int i = 0; i < objects.length; i++) {
-						if (selectedX >= objects[i].getX()
-								&& selectedX < objects[i].getX() + objects[i].getWidth() + (objects[i].getWidth() == 0 ? 1 : 0)) {
-							if (selectedY >= objects[i].getY()
-									&& selectedY < objects[i].getY() + objects[i].getHeight() + (objects[i].getHeight() == 0 ? 1 : 0)) {
-								if (isLogicMapObject(objects[i])) {
-									selectedMapObject = objects[i];
+				if (editMode == EDITMODE_OBJECT) {
+					if (!isLogicMapObject(mouseObject)) {
+						selectedMapObject = mouseObject;
+						if (selectedMapObject == null) {
+							placeObject(new MapObjectLasergate());// Hud
+						}
+					}
+				} else if (editMode == EDITMODE_LOGIC) {
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						if (isLogicMapObject(mouseObject)) {
+							selectedMapObject = mouseObject;
+							if (selectedMapObject == null) {
+								placeObject(new MapObjectTriggerTextbox());// Hud
+							}
+						}
+					} else if (e.getButton() == MouseEvent.BUTTON3) {
+						if (mouseObject != null) {
+							int spriteSize = TileSet.SPRITE_SIZE * scale;
+							if (connectingLogicLine && mouseObject != startLogicLine && (mouseObject.inputCount() > 0 || mouseObject.moreInputs())) {
+								startLogicLine.setOutput(mouseObject.getId());
+								if (mouseObject.inputCount() != 1 || mouseObject.moreInputs()) {
+									int inputcount = mouseObject.inputCount() + (mouseObject.moreInputs() ? 1 : 0);
+									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize : mouseObject
+											.getWidth() * spriteSize) / inputcount));
+									mouseObject.setInput(input, startLogicLine.getId());
+									System.out.println(input);
+								}
+								connectingLogicLine = false;
+							} else {
+								connectingLogicLine = false;
+								if (((mouse_Y + yOffset) % spriteSize) < (spriteSize / 16 * 3)) {
+
+								} else if (((mouse_Y + yOffset) % spriteSize) > (spriteSize - (spriteSize / 16 * 3))
+										&& (selectedY - mouseObject.getY() == (mouseObject.getHeight() == 0 ? 0 : mouseObject.getHeight() - 1))) {
+									mouseObject.invertOutput();
+								} else {
+									mouseObject.onEditorRightClick();
 								}
 							}
+						} else {
+							connectingLogicLine = false;
 						}
-					}
-					if (selectedMapObject == null) {
-						placeObject(new MapObjectTriggerTextbox());
+
 					}
 				}
 			}

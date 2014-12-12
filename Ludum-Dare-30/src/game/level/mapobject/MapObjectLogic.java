@@ -59,6 +59,10 @@ public class MapObjectLogic extends MapObject {
 		return inverted;
 	}
 
+	public void invertOutput() {
+		inverted = !inverted;
+	}
+
 	public void setOutput(int id) {
 		targetID = id;
 	}
