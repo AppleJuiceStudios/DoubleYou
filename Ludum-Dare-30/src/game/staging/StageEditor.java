@@ -136,22 +136,31 @@ public class StageEditor extends Stage {
 		}
 
 		// Selection
-		if (editMode == EDITMODE_MAP) {
-			g2.setColor(Color.BLUE);
-		} else {
-			g2.setColor(Color.LIGHT_GRAY);
-		}
 		if (connectingLogicLine) {
-			// Draw Line
+			g2.setColor(Color.BLUE);
+			int x1 = startLogicLine.getX() * spriteSize + (startLogicLine.getWidth() != 0 ? startLogicLine.getWidth() * spriteSize / 2 : spriteSize / 2);
+			int y1 = (startLogicLine.getY() + startLogicLine.getHeight()) * spriteSize + (startLogicLine.getHeight() != 0 ? 0 : spriteSize);
+			int x2 = (int) (xOffset + controls.mouse_X);
+			int y2 = (int) (yOffset + controls.mouse_Y);
+			g2.drawLine(x1, y1, x2, y2);
+			g2.drawLine(x1 + 1, y1, x2 + 1, y2);
+			g2.drawLine(x1 - 1, y1, x2 - 1, y2);
+			g2.drawLine(x1, y1 + 1, x2, y2 + 1);
+			g2.drawLine(x1, y1 - 1, x2, y2 - 1);
 		} else {
+			if (editMode == EDITMODE_MAP) {
+				g2.setColor(Color.BLUE);
+			} else {
+				g2.setColor(Color.LIGHT_GRAY);
+			}
 			if (isSelecting) {
 				int selectionStartX = Math.min(selectedX, lastSelectionX);
 				int selectionStartY = Math.min(selectedY, lastSelectionY);
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
-							* spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
+							- 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -168,8 +177,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
-							* spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
+							- 1);
 				}
 			}
 		}
@@ -500,8 +509,8 @@ public class StageEditor extends Stage {
 								startLogicLine.setOutput(mouseObject.getId());
 								if (mouseObject.inputCount() != 1 || mouseObject.moreInputs()) {
 									int inputcount = mouseObject.inputCount() + (mouseObject.moreInputs() ? 1 : 0);
-									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize
-											: mouseObject.getWidth() * spriteSize) / inputcount));
+									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize : mouseObject
+											.getWidth() * spriteSize) / inputcount));
 									mouseObject.setInput(input, startLogicLine.getId());
 								}
 								connectingLogicLine = false;
