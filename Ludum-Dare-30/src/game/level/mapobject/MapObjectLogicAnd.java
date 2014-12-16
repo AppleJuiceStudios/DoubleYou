@@ -12,10 +12,12 @@ public class MapObjectLogicAnd extends MapObjectLogic {
 	public MapObjectLogicAnd(int id, int targetID, boolean inverted, boolean power, int... in) {
 		super(id, targetID, inverted, power);
 		this.in = in;
+		this.name = "&";
 	}
 
 	public MapObjectLogicAnd() {
 		in = new int[0];
+		this.name = "&";
 	}
 
 	public boolean update(LevelMap map) {
