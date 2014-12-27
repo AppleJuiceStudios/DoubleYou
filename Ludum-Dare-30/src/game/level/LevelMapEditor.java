@@ -1,6 +1,7 @@
 package game.level;
 
 import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectLogic;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -18,6 +19,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LevelMapEditor extends LevelMap {
 
 	private Map<Integer, MapObject> objectsMap;
+
+	// Save
+	private boolean isSaving = false;
+	private MapObject[] sortedMapObjects;
 
 	// region MapEdit
 
@@ -263,12 +268,16 @@ public class LevelMapEditor extends LevelMap {
 	}
 
 	public MapObject[] getMapObjects() {
-		MapObject[] objectsArray = new MapObject[objectsMap.size()];
-		Object[] keys = objectsMap.keySet().toArray();
-		for (int i = 0; i < keys.length; i++) {
-			objectsArray[i] = objectsMap.get(keys[i]);
+		if (isSaving) {
+			return sortedMapObjects;
+		} else {
+			MapObject[] objectsArray = new MapObject[objectsMap.size()];
+			Object[] keys = objectsMap.keySet().toArray();
+			for (int i = 0; i < keys.length; i++) {
+				objectsArray[i] = objectsMap.get(keys[i]);
+			}
+			return objectsArray;
 		}
-		return objectsArray;
 	}
 
 	public void setMapObjects(MapObject[] objects) {
@@ -284,5 +293,40 @@ public class LevelMapEditor extends LevelMap {
 	}
 
 	// endregion LevelMap
+
+	// region Save
+
+	public void save(File file) {
+		// MapObjects sortieren
+		sortedMapObjects = new MapObject[objectsMap.size()];
+		int index = 0;
+		for (Integer i : objectsMap.keySet()) {
+			if (!(objectsMap.get(i) instanceof MapObjectLogic)) {
+				sortedMapObjects[index] = objectsMap.get(i);
+				index++;
+			}
+		}
+		for (Integer i : objectsMap.keySet()) {
+			if (objectsMap.get(i) instanceof MapObjectLogic) {
+				sortedMapObjects[index] = objectsMap.get(i);
+				index++;
+			}
+		}
+		// Map überarbeiten
+		for (int i = 0; i < sortedMapObjects.length; i++) {
+			MapObject object = sortedMapObjects[i];
+			for (int y = 0; y < object.getHeight(); y++) {
+				for (int x = 0; x < object.getWidth(); x++) {
+					setTileID(object.getX() + x, object.getY() + y, (byte) (i + 32));
+				}
+			}
+		}
+		// Speichern
+		// ID zuordnung erstellen
+		// Platzhalter einfügen
+		// Platzhalter ersätzen
+	}
+
+	// endregion Save
 
 }

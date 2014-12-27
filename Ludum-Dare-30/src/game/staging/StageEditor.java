@@ -169,13 +169,13 @@ public class StageEditor extends Stage {
 			}
 		}
 
-		if (editMode == EDITMODE_OBJECT) {
+		if (editMode == EDITMODE_OBJECT || editMode == EDITMODE_LOGIC) {
 			if (selectedMapObject != null) {
 				g2.setColor(Color.BLUE);
 				int selectionStartX = selectedMapObject.getX();
 				int selectionStartY = selectedMapObject.getY();
-				int selectionWidth = selectedMapObject.getWidth();
-				int selectionHeight = selectedMapObject.getHeight();
+				int selectionWidth = selectedMapObject.getWidth() == 0 ? 1 : selectedMapObject.getWidth();
+				int selectionHeight = selectedMapObject.getHeight() == 0 ? 1 : selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
 					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
 							- 1);
@@ -338,7 +338,7 @@ public class StageEditor extends Stage {
 				} else if (e.getKeyCode() == KeyEvent.VK_R) {
 					map.rescaleMap();
 				}
-			} else if (editMode == EDITMODE_OBJECT) {
+			} else if (editMode == EDITMODE_OBJECT || editMode == EDITMODE_LOGIC) {
 				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
 					if (selectedMapObject != null) {
 						map.removeMapObject(selectedMapObject);
@@ -488,6 +488,7 @@ public class StageEditor extends Stage {
 					}
 				}
 				if (editMode == EDITMODE_OBJECT) {
+					selectedMapObject = null;
 					if (!isLogicMapObject(mouseObject)) {
 						selectedMapObject = mouseObject;
 						if (selectedMapObject == null) {
@@ -496,6 +497,7 @@ public class StageEditor extends Stage {
 					}
 				} else if (editMode == EDITMODE_LOGIC) {
 					if (e.getButton() == MouseEvent.BUTTON1) {
+						selectedMapObject = null;
 						if (isLogicMapObject(mouseObject)) {
 							selectedMapObject = mouseObject;
 							if (selectedMapObject == null) {
