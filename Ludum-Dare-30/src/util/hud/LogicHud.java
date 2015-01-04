@@ -8,7 +8,7 @@ import game.res.ResourceManager;
 public class LogicHud extends Hud {
 
 	public LogicHud() {
-		super(50);
+		super(40);
 		items = new HudItem[3];
 
 		items[0] = new HudItem(ResourceManager.getImage("/buttons/LogicAnd.png"), SIZE, MapObjectLogicAnd.class);
