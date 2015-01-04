@@ -5,63 +5,98 @@ import game.main.GameCanvas;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 
 public abstract class Hud {
 
+	public final static int ORIENTATION_TOP_RIGHT = 0;
+	public final static int ORIENTATION_TOP_LEFT = 1;
+	public final static int ORIENTATION_TOP_CENTER = 2;
+	public final static int ORIENTATION_BOTTOM_CENTER = 3;
+
 	private final Color HUD_COLOR;
 
 	protected HudItem[] items;
 	private int selected;
+	private final int ORIENTATION;
 	private final int OFFSET;
 	protected final int SIZE;
 
 	private final int X_STEP;
 	private int xStart;
 	private final int Y;
+	private final int CORNER_Y;
 	private final int CORNER_WIDTH;
 	private final int CORNER_HEIGHT;
 
+	private final int CORNER_START_ANGLE_LEFT;
+	private final int CORNER_START_ANGLE_RIGHT;
+
 	private final int ITEM_HEIGHT;
 
-	public Hud(int size, int cornerOffset) {
+	public Hud(int size, int orientation) {
 		this.SIZE = size;
-		HUD_COLOR = new Color(255, 255, 255, 200);
+		this.ORIENTATION = orientation;
+		HUD_COLOR = new Color(255, 255, 255, 150);
 		selected = -1;
 
 		OFFSET = (int) (size * 0.25);
 		X_STEP = size + OFFSET;
-		Y = GameCanvas.HEIGHT - size - OFFSET;
+
+		if (orientation == ORIENTATION_TOP_RIGHT) {
+			Y = 0;
+			CORNER_Y = -X_STEP;
+			ITEM_HEIGHT = OFFSET / 2;
+			CORNER_START_ANGLE_LEFT = 180;
+			CORNER_START_ANGLE_RIGHT = 270;
+		} else if (orientation == ORIENTATION_TOP_LEFT) {
+			Y = 0;
+			CORNER_Y = -X_STEP;
+			ITEM_HEIGHT = OFFSET / 2;
+			CORNER_START_ANGLE_LEFT = 180;
+			CORNER_START_ANGLE_RIGHT = 270;
+		} else if (orientation == ORIENTATION_TOP_CENTER) {
+			Y = 0;
+			CORNER_Y = -X_STEP;
+			ITEM_HEIGHT = OFFSET / 2;
+			CORNER_START_ANGLE_LEFT = 180;
+			CORNER_START_ANGLE_RIGHT = 270;
+		} else {
+			Y = GameCanvas.HEIGHT - size - OFFSET;
+			CORNER_Y = Y;
+			ITEM_HEIGHT = GameCanvas.HEIGHT - size - (OFFSET / 2);
+			CORNER_START_ANGLE_LEFT = 90;
+			CORNER_START_ANGLE_RIGHT = 0;
+		}
 
 		CORNER_WIDTH = size * 2;
 		CORNER_HEIGHT = X_STEP * 2;
 
-		ITEM_HEIGHT = GameCanvas.HEIGHT - size - (OFFSET / 2);
-
-		if (cornerOffset < 0) {
-			xStart = -1;
-		} else {
-			xStart = cornerOffset + size;
-		}
-	}
-
-	public Hud(int size) {
-		this(size, -1);
+		xStart = -1;
 	}
 
 	public void draw(Graphics2D g2) {
 		if (xStart < 0) {
-			xStart = (GameCanvas.WIDTH - items.length * X_STEP) / 2;
+			if (ORIENTATION == ORIENTATION_TOP_RIGHT) {
+				xStart = GameCanvas.WIDTH - (items.length * X_STEP + CORNER_WIDTH / 2);
+			} else if (ORIENTATION == ORIENTATION_TOP_LEFT) {
+				xStart = CORNER_WIDTH / 2;
+			} else if (ORIENTATION == ORIENTATION_TOP_CENTER) {
+				xStart = (GameCanvas.WIDTH - items.length * X_STEP) / 2;
+			} else {
+				xStart = (GameCanvas.WIDTH - items.length * X_STEP) / 2;
+			}
 		}
 
 		g2.setColor(HUD_COLOR);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		g2.fillArc(xStart - SIZE, Y, CORNER_WIDTH, CORNER_HEIGHT, 90, 90);
-		g2.fillArc(GameCanvas.WIDTH - (xStart - SIZE + CORNER_WIDTH), Y, CORNER_WIDTH, CORNER_HEIGHT, 0, 90);
+		g2.fillArc(xStart - SIZE, CORNER_Y, CORNER_WIDTH, CORNER_HEIGHT, CORNER_START_ANGLE_LEFT, 90);
+		g2.fillArc(xStart + X_STEP * items.length - CORNER_WIDTH / 2, CORNER_Y, CORNER_WIDTH, CORNER_HEIGHT, CORNER_START_ANGLE_RIGHT, 90);
 
-		g2.fillRect(xStart, Y, GameCanvas.WIDTH - (2 * xStart), X_STEP);
+		g2.fillRect(xStart, Y, X_STEP * items.length, X_STEP);
 
 		if (items != null) {
 			for (int i = 0; i < items.length; i++) {
@@ -93,11 +128,35 @@ public abstract class Hud {
 		return SIZE;
 	}
 
+	public int getY() {
+		return Y;
+	}
+
+	public int getLeftBorder() {
+		if (xStart - SIZE < 0)
+			return 0;
+		return xStart - SIZE;
+	}
+
+	public int getRightBorder() {
+		return xStart + X_STEP * items.length + CORNER_WIDTH / 2;
+	}
+
+	public boolean contains(Point p) {
+		return p.getY() > getY() && p.getY() < getY() + getHeight() && p.getX() < getRightBorder() && p.getX() > getLeftBorder();
+	}
+
 	public MapObject getObject() {
 		if (selected == -1) {
 			return null;
 		}
 		MapObject res = items[selected].getObject();
+		selected = -1;
+		return res;
+	}
+
+	public int getSelected() {
+		int res = selected;
 		selected = -1;
 		return res;
 	}

@@ -29,8 +29,10 @@ import java.util.TimerTask;
 import javax.swing.SwingUtilities;
 import javax.xml.bind.JAXB;
 
+import util.hud.FileHud;
 import util.hud.Hud;
 import util.hud.LogicHud;
+import util.hud.NavigationHud;
 import util.hud.ObjectHud;
 
 public class StageEditor extends Stage {
@@ -68,6 +70,8 @@ public class StageEditor extends Stage {
 
 	private Hud logicHud;
 	private Hud objectHud;
+	private Hud navigationHud;
+	private Hud fileHud;
 
 	// region Stage
 
@@ -91,6 +95,8 @@ public class StageEditor extends Stage {
 
 		logicHud = new LogicHud();
 		objectHud = new ObjectHud();
+		navigationHud = new NavigationHud();
+		fileHud = new FileHud();
 	}
 
 	private void loadMap(Map<String, String> data) {
@@ -197,6 +203,8 @@ public class StageEditor extends Stage {
 		} else if (editMode == EDITMODE_OBJECT) {
 			objectHud.draw(g2);
 		}
+		navigationHud.draw(g2);
+		fileHud.draw(g2);
 	}
 
 	public void update() {
@@ -401,13 +409,27 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			if (e.getY() > GameCanvas.HEIGHT - logicHud.getHeight()) {
-				if (editMode == EDITMODE_LOGIC)
+			if (logicHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_LOGIC) {
 					logicHud.mousePressed(e);
-				if (editMode == EDITMODE_OBJECT)
+					return;
+				}
+			}
+			if (objectHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_OBJECT) {
 					objectHud.mousePressed(e);
+					return;
+				}
+			}
+			if (navigationHud.contains(e.getPoint())) {
+				navigationHud.mousePressed(e);
 				return;
 			}
+			if (fileHud.contains(e.getPoint())) {
+				fileHud.mousePressed(e);
+				return;
+			}
+
 			if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
 				lastSelectionX = selectedX;
 				lastSelectionY = selectedY;
@@ -454,11 +476,32 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			if (e.getY() > GameCanvas.HEIGHT - logicHud.getHeight()) {
-				if (editMode == EDITMODE_LOGIC)
+			if (logicHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_LOGIC) {
 					logicHud.mouseReleased(e);
-				if (editMode == EDITMODE_OBJECT)
+					return;
+				}
+			}
+			if (objectHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_OBJECT) {
 					objectHud.mouseReleased(e);
+					return;
+				}
+			}
+			if (navigationHud.contains(e.getPoint())) {
+				navigationHud.mouseReleased(e);
+				navigationHud.getSelected();
+				swichEditMode();
+				return;
+			}
+			if (fileHud.contains(e.getPoint())) {
+				fileHud.mouseReleased(e);
+				int selected = fileHud.getSelected();
+				if (selected == 0) {
+					System.out.println("LOAD");
+				} else if (selected == 1) {
+					System.out.println("SAVE");
+				}
 				return;
 			}
 
