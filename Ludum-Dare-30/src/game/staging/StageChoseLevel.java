@@ -155,7 +155,7 @@ public class StageChoseLevel extends Stage {
 				rec.width = 50;
 				rec.height = 50;
 				Button btn = new Button("", rec, xx, yy);
-				btn.setImage(ResourceManager.getImage("/buttons/Level-" + (current + 1) + ".png"));
+				btn.setImage(ResourceManager.getImage("/buttons/Level" + (current % 4 + 1) + ".png"));
 				btn.setImageHighlight(ResourceManager.getImage("/buttons/selectedLevel.png"));
 				btn.setHighlightReplaces(false);
 				btn.setHighlighted(false);
