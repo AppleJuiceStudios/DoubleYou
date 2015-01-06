@@ -22,6 +22,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -175,13 +176,13 @@ public class StageEditor extends Stage {
 			}
 		}
 
-		if (editMode == EDITMODE_OBJECT) {
+		if (editMode == EDITMODE_OBJECT || editMode == EDITMODE_LOGIC) {
 			if (selectedMapObject != null) {
 				g2.setColor(Color.BLUE);
 				int selectionStartX = selectedMapObject.getX();
 				int selectionStartY = selectedMapObject.getY();
-				int selectionWidth = selectedMapObject.getWidth();
-				int selectionHeight = selectedMapObject.getHeight();
+				int selectionWidth = selectedMapObject.getWidth() == 0 ? 1 : selectedMapObject.getWidth();
+				int selectionHeight = selectedMapObject.getHeight() == 0 ? 1 : selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
 					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
 							- 1);
@@ -346,7 +347,7 @@ public class StageEditor extends Stage {
 				} else if (e.getKeyCode() == KeyEvent.VK_R) {
 					map.rescaleMap();
 				}
-			} else if (editMode == EDITMODE_OBJECT) {
+			} else if (editMode == EDITMODE_OBJECT || editMode == EDITMODE_LOGIC) {
 				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
 					if (selectedMapObject != null) {
 						map.removeMapObject(selectedMapObject);
@@ -499,8 +500,12 @@ public class StageEditor extends Stage {
 				int selected = fileHud.getSelected();
 				if (selected == 0) {
 					System.out.println("LOAD");
+					Map<String, String> data = new HashMap<>();
+					data.put("file", "res/level/levelTestSave.xml");
+					getStageManager().setStage(StageManager.STAGE_LEVEL_EDITOR, data);
 				} else if (selected == 1) {
-					System.out.println("SAVE");
+					System.out.println("Save");
+					map.save(new File("res/level/levelTestSave.xml"));
 				}
 				return;
 			}
@@ -531,6 +536,7 @@ public class StageEditor extends Stage {
 					}
 				}
 				if (editMode == EDITMODE_OBJECT) {
+					selectedMapObject = null;
 					if (!isLogicMapObject(mouseObject)) {
 						selectedMapObject = mouseObject;
 						if (selectedMapObject == null) {
@@ -539,6 +545,7 @@ public class StageEditor extends Stage {
 					}
 				} else if (editMode == EDITMODE_LOGIC) {
 					if (e.getButton() == MouseEvent.BUTTON1) {
+						selectedMapObject = null;
 						if (isLogicMapObject(mouseObject)) {
 							selectedMapObject = mouseObject;
 							if (selectedMapObject == null) {

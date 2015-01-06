@@ -6,8 +6,11 @@ import game.level.mapobject.MapObjectLogic;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -312,9 +315,12 @@ public class LevelMapEditor extends LevelMap {
 				index++;
 			}
 		}
-		// Map überarbeiten
+		System.out.println("size: " + sortedMapObjects.length);
+		// Map überarbeiten // ID zuordnung erstellen
+		Map<Integer, Integer> ids = new HashMap<>();
 		for (int i = 0; i < sortedMapObjects.length; i++) {
 			MapObject object = sortedMapObjects[i];
+			ids.put(object.getId(), i + 32);
 			for (int y = 0; y < object.getHeight(); y++) {
 				for (int x = 0; x < object.getWidth(); x++) {
 					setTileID(object.getX() + x, object.getY() + y, (byte) (i + 32));
@@ -322,9 +328,31 @@ public class LevelMapEditor extends LevelMap {
 			}
 		}
 		// Speichern
-		// ID zuordnung erstellen
-		// Platzhalter einfügen
-		// Platzhalter ersätzen
+		isSaving = true;
+		File tempFile = new File(file.getPath() + ".temp");
+		JAXB.marshal(this, tempFile);
+		isSaving = false;
+		// IDs ersätzen
+		try {
+			Scanner scanner = new Scanner(tempFile);
+			PrintStream out = new PrintStream(file);
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				if (line.matches("\\s*<(id)?(in)?(targetID)?>\\d+</(id)?(in)?(targetID)?>\\s*")) {
+					System.out.println("fined:   " + line);
+					String idString = line.trim().replaceAll("</?(id)?(in)?(targetID)?>", "");
+					Integer id = ids.get(Integer.parseInt(idString));
+					line = line.replaceAll("\\d+", id.toString());
+					System.out.println("replace: " + line);
+				}
+				out.println(line);
+			}
+			scanner.close();
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		tempFile.delete();
 	}
 
 	// endregion Save
