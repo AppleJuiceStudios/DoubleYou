@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<levelMap>
+    <isCloneAllowed>true</isCloneAllowed>
+    <mapObjects/>
+    <playerSpawnX>32</playerSpawnX>
+    <playerSpawnY>112</playerSpawnY>
+    <soundTrack>mars_4.wav</soundTrack>
+    <spritesheet>BgYGBgYGBgYGBQ==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAg==</spritesheet>
+    <spritesheet>BAQEBAQEBAQEBQ==</spritesheet>
+    <startTextbox>
+        <content>
+            <item>These blue doors are different!</item>
+            <item>You're clone can walk through them</item>
+            <item>even when you are not programming him...</item>
+        </content>
+    </startTextbox>
+</levelMap>

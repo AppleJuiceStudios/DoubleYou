@@ -27,7 +27,9 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXB;
 
 import util.hud.FileHud;
@@ -37,6 +39,8 @@ import util.hud.NavigationHud;
 import util.hud.ObjectHud;
 
 public class StageEditor extends Stage {
+
+	private File levelFile;
 
 	private int scale = 3;
 	private double xOffset = 0;
@@ -48,6 +52,7 @@ public class StageEditor extends Stage {
 
 	private BufferedImage background;
 	private BufferedImage mountains;
+	private BufferedImage player;
 	private LevelMapEditor map;
 	private TileSet tileSet;
 
@@ -81,6 +86,7 @@ public class StageEditor extends Stage {
 		loadMap(data);
 		background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
+		player = ResourceManager.getImage("/model/player/Player-Model.png");
 		tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
 		controls = new ControlListener();
 		getStageManager().setMouseListener(controls);
@@ -102,6 +108,7 @@ public class StageEditor extends Stage {
 
 	private void loadMap(Map<String, String> data) {
 		File file = new File(data.get("file"));
+		levelFile = file;
 		if (file.exists()) {
 			map = JAXB.unmarshal(file, LevelMapEditor.class);
 		} else {
@@ -135,6 +142,9 @@ public class StageEditor extends Stage {
 				}
 			}
 		}
+
+		// Player Spawn
+		g2.drawImage(player, map.getPlayerSpawnX() * spriteSize / 16, map.getPlayerSpawnY() * spriteSize / 16, spriteSize, spriteSize * 2, null);
 
 		// Border
 		g2.setColor(Color.YELLOW);
@@ -361,6 +371,9 @@ public class StageEditor extends Stage {
 				scaleDown();
 			} else if (e.getKeyCode() == KeyEvent.VK_Q) {
 				swichEditMode();
+			} else if (e.getKeyCode() == KeyEvent.VK_P) {
+				map.setPlayerSpawnX(selectedX * TileSet.SPRITE_SIZE);
+				map.setPlayerSpawnY((selectedY - 1) * TileSet.SPRITE_SIZE);
 			}
 			keyUpdate(e.getKeyCode(), true);
 		}
@@ -500,12 +513,19 @@ public class StageEditor extends Stage {
 				int selected = fileHud.getSelected();
 				if (selected == 0) {
 					System.out.println("LOAD");
-					Map<String, String> data = new HashMap<>();
-					data.put("file", "res/level/levelTestSave.xml");
-					getStageManager().setStage(StageManager.STAGE_LEVEL_EDITOR, data);
+					JFileChooser chooser = new JFileChooser();
+					FileNameExtensionFilter filter = new FileNameExtensionFilter("Level", "xml");
+					chooser.setCurrentDirectory(levelFile.getParentFile());
+					chooser.setFileFilter(filter);
+					int returnVal = chooser.showOpenDialog(getStageManager().gameCanvas);
+					if (returnVal == JFileChooser.APPROVE_OPTION) {
+						Map<String, String> data = new HashMap<>();
+						data.put("file", chooser.getSelectedFile().getPath());
+						getStageManager().setStage(StageManager.STAGE_LEVEL_EDITOR, data);
+					}
 				} else if (selected == 1) {
 					System.out.println("Save");
-					map.save(new File("res/level/levelTestSave.xml"));
+					map.save(levelFile);
 				}
 				return;
 			}

@@ -22,7 +22,7 @@ import de.Auch.Monitoring;
 public class StageManager {
 
 	private Stage stage;
-	private GameCanvas gameCanvas;
+	public GameCanvas gameCanvas;
 
 	private KeyListener keyListener;
 	private MouseListener mouseListener;
@@ -45,7 +45,7 @@ public class StageManager {
 		ResourceManager.load();
 		SoundManager.init();
 		Map<String, String> data = new HashMap<String, String>();
-		data.put("file", "res/level/levelTest.xml");
+		data.put("file", "res/level/levelEmpty.xml");
 		stage = new StageEditor(this, data);
 	}
 

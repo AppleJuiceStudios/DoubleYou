@@ -147,6 +147,7 @@ public class LevelMapEditor extends LevelMap {
 			MapObject o = objectsMap.get(keys[i]);
 			o.setY(o.getY() + expandY);
 		}
+		setPlayerSpawnY(getPlayerSpawnY() + expandY * TileSet.SPRITE_SIZE);
 		setSpritesheet(spritesheet);
 	}
 
@@ -177,6 +178,7 @@ public class LevelMapEditor extends LevelMap {
 			MapObject o = objectsMap.get(keys[i]);
 			o.setY(o.getY() - heightDif);
 		}
+		setPlayerSpawnY(getPlayerSpawnY() - heightDif * TileSet.SPRITE_SIZE);
 		setSpritesheet(spritesheet);
 	}
 
@@ -315,7 +317,6 @@ public class LevelMapEditor extends LevelMap {
 				index++;
 			}
 		}
-		System.out.println("size: " + sortedMapObjects.length);
 		// Map überarbeiten // ID zuordnung erstellen
 		Map<Integer, Integer> ids = new HashMap<>();
 		for (int i = 0; i < sortedMapObjects.length; i++) {
@@ -339,11 +340,9 @@ public class LevelMapEditor extends LevelMap {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				if (line.matches("\\s*<(id)?(in)?(targetID)?>\\d+</(id)?(in)?(targetID)?>\\s*")) {
-					System.out.println("fined:   " + line);
 					String idString = line.trim().replaceAll("</?(id)?(in)?(targetID)?>", "");
 					Integer id = ids.get(Integer.parseInt(idString));
 					line = line.replaceAll("\\d+", id.toString());
-					System.out.println("replace: " + line);
 				}
 				out.println(line);
 			}

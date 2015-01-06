@@ -2,30 +2,9 @@
 <levelMap>
     <isCloneAllowed>true</isCloneAllowed>
     <mapObjects>
-        <mapObjectLasergateHorizontalClone>
-            <height>1</height>
-            <id>32</id>
-            <output>-1</output>
-            <power>true</power>
-            <width>5</width>
-            <x>22</x>
-            <y>16</y>
-        </mapObjectLasergateHorizontalClone>
-        <mapObjectGroundswtich>
-            <height>1</height>
-            <id>33</id>
-            <output>34</output>
-            <power>false</power>
-            <width>1</width>
-            <x>24</x>
-            <y>18</y>
-            <inverted>true</inverted>
-            <keep>false</keep>
-            <targetID>32</targetID>
-        </mapObjectGroundswtich>
         <mapObjectLasergateClone>
             <height>3</height>
-            <id>34</id>
+            <id>32</id>
             <output>-1</output>
             <power>true</power>
             <width>1</width>
@@ -34,40 +13,40 @@
         </mapObjectLasergateClone>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>35</id>
-            <output>32</output>
+            <id>33</id>
+            <output>34</output>
             <power>false</power>
             <width>1</width>
             <x>16</x>
             <y>16</y>
             <inverted>true</inverted>
             <keep>true</keep>
-            <targetID>34</targetID>
+            <targetID>32</targetID>
         </mapObjectGroundswtich>
-        <mapObjectGroundswtich>
+        <mapObjectLasergateHorizontalClone>
             <height>1</height>
-            <id>36</id>
-            <output>37</output>
-            <power>false</power>
-            <width>1</width>
-            <x>29</x>
-            <y>14</y>
-            <inverted>true</inverted>
-            <keep>false</keep>
-            <targetID>39</targetID>
-        </mapObjectGroundswtich>
-        <mapObjectLasergateClone>
-            <height>2</height>
-            <id>37</id>
+            <id>34</id>
             <output>-1</output>
             <power>true</power>
+            <width>5</width>
+            <x>22</x>
+            <y>16</y>
+        </mapObjectLasergateHorizontalClone>
+        <mapObjectGroundswtich>
+            <height>1</height>
+            <id>35</id>
+            <output>32</output>
+            <power>false</power>
             <width>1</width>
-            <x>44</x>
-            <y>17</y>
-        </mapObjectLasergateClone>
+            <x>24</x>
+            <y>18</y>
+            <inverted>true</inverted>
+            <keep>false</keep>
+            <targetID>34</targetID>
+        </mapObjectGroundswtich>
         <mapObjectLasergateClone>
             <height>3</height>
-            <id>38</id>
+            <id>36</id>
             <output>-1</output>
             <power>true</power>
             <width>1</width>
@@ -76,37 +55,37 @@
         </mapObjectLasergateClone>
         <mapObjectLasergate>
             <height>3</height>
-            <id>39</id>
+            <id>37</id>
             <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>38</x>
             <y>15</y>
         </mapObjectLasergate>
-        <mapObjectLasergate>
-            <height>3</height>
-            <id>40</id>
+        <mapObjectGroundswtich>
+            <height>1</height>
+            <id>38</id>
+            <output>39</output>
+            <power>false</power>
+            <width>1</width>
+            <x>29</x>
+            <y>14</y>
+            <inverted>true</inverted>
+            <keep>false</keep>
+            <targetID>37</targetID>
+        </mapObjectGroundswtich>
+        <mapObjectLasergateClone>
+            <height>2</height>
+            <id>39</id>
             <output>-1</output>
             <power>true</power>
             <width>1</width>
-            <x>49</x>
-            <y>12</y>
-        </mapObjectLasergate>
-        <mapObjectGroundswtich>
-            <height>1</height>
-            <id>41</id>
-            <output>42</output>
-            <power>false</power>
-            <width>1</width>
-            <x>49</x>
-            <y>18</y>
-            <inverted>true</inverted>
-            <keep>false</keep>
-            <targetID>40</targetID>
-        </mapObjectGroundswtich>
+            <x>44</x>
+            <y>17</y>
+        </mapObjectLasergateClone>
         <mapObjectLasergate>
             <height>2</height>
-            <id>42</id>
+            <id>40</id>
             <output>-1</output>
             <power>true</power>
             <width>1</width>
@@ -115,12 +94,33 @@
         </mapObjectLasergate>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>43</id>
-            <output>40</output>
+            <id>41</id>
+            <output>42</output>
             <power>false</power>
             <width>1</width>
             <x>46</x>
             <y>14</y>
+            <inverted>true</inverted>
+            <keep>false</keep>
+            <targetID>40</targetID>
+        </mapObjectGroundswtich>
+        <mapObjectLasergate>
+            <height>3</height>
+            <id>42</id>
+            <output>-1</output>
+            <power>true</power>
+            <width>1</width>
+            <x>49</x>
+            <y>12</y>
+        </mapObjectLasergate>
+        <mapObjectGroundswtich>
+            <height>1</height>
+            <id>43</id>
+            <output>40</output>
+            <power>false</power>
+            <width>1</width>
+            <x>49</x>
+            <y>18</y>
             <inverted>true</inverted>
             <keep>false</keep>
             <targetID>42</targetID>
@@ -131,33 +131,12 @@
             <output>-1</output>
             <power>true</power>
             <width>1</width>
-            <x>65</x>
-            <y>17</y>
-        </mapObjectLasergate>
-        <mapObjectGroundswtich>
-            <height>1</height>
-            <id>45</id>
-            <output>46</output>
-            <power>false</power>
-            <width>1</width>
-            <x>64</x>
-            <y>11</y>
-            <inverted>true</inverted>
-            <keep>false</keep>
-            <targetID>44</targetID>
-        </mapObjectGroundswtich>
-        <mapObjectLasergate>
-            <height>2</height>
-            <id>46</id>
-            <output>-1</output>
-            <power>true</power>
-            <width>1</width>
             <x>58</x>
             <y>13</y>
         </mapObjectLasergate>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>47</id>
+            <id>45</id>
             <output>51</output>
             <power>false</power>
             <width>1</width>
@@ -167,18 +146,36 @@
             <keep>false</keep>
             <targetID>51</targetID>
         </mapObjectGroundswtich>
+        <mapObjectLasergate>
+            <height>2</height>
+            <id>46</id>
+            <output>-1</output>
+            <power>true</power>
+            <width>1</width>
+            <x>65</x>
+            <y>17</y>
+        </mapObjectLasergate>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>48</id>
-            <output>51</output>
+            <id>47</id>
+            <output>44</output>
             <power>false</power>
             <width>1</width>
             <x>64</x>
             <y>11</y>
             <inverted>true</inverted>
             <keep>false</keep>
-            <targetID>51</targetID>
+            <targetID>46</targetID>
         </mapObjectGroundswtich>
+        <mapObjectLasergateHorizontalClone>
+            <height>1</height>
+            <id>48</id>
+            <output>-1</output>
+            <power>true</power>
+            <width>3</width>
+            <x>60</x>
+            <y>12</y>
+        </mapObjectLasergateHorizontalClone>
         <mapObjectTriggerWinning>
             <height>4</height>
             <id>49</id>
@@ -188,27 +185,30 @@
             <x>68</x>
             <y>15</y>
         </mapObjectTriggerWinning>
-        <mapObjectLasergateHorizontalClone>
+        <mapObjectGroundswtich>
             <height>1</height>
             <id>50</id>
-            <output>-1</output>
-            <power>true</power>
-            <width>3</width>
-            <x>60</x>
-            <y>12</y>
-        </mapObjectLasergateHorizontalClone>
+            <output>51</output>
+            <power>false</power>
+            <width>1</width>
+            <x>64</x>
+            <y>11</y>
+            <inverted>true</inverted>
+            <keep>false</keep>
+            <targetID>51</targetID>
+        </mapObjectGroundswtich>
         <mapObjectLogicOr>
             <height>0</height>
             <id>51</id>
-            <output>44</output>
+            <output>46</output>
             <power>true</power>
             <width>0</width>
             <x>58</x>
             <y>11</y>
             <inverted>true</inverted>
-            <targetID>46</targetID>
-            <in>47</in>
-            <in>48</in>
+            <targetID>44</targetID>
+            <in>45</in>
+            <in>50</in>
         </mapObjectLogicOr>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>
@@ -227,43 +227,43 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAcAAAACBQUF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFBQgiIiICBQUF</spritesheet>
+    <spritesheet>AgUFBQUFBQUFBQUFBQggICACBQUF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgkAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAACMCBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAACECBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAEFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAMGBgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAACAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAACAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAACAAIQIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAACAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAACAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAACIAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAACIAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAACIAIwIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAACIAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAACIAAAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAcAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFBQYGBQgAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFCQAkAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUIAAAAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUIJiYmAwkAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUIAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUIAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFBwAAAAAAAQUF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFCAAAAAAAAgUF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFBQcAAAAAAgUF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFBQUHAAAAAgUF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFBQUIJycnAgUF</spritesheet>
+    <spritesheet>AgUGBgYGBgYGBgUFBQYGBQgAAAIF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIFCQAmAggAAAIF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIIAAAAAggAAAIF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIIJCQkAwkAAAIF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIIAAAAAAAAAAIF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIIAAAAAAAAAAIF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIFBwAAAAAAAQUF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIFCAAAAAAAAgUF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIFBQcAAAAAAgUF</spritesheet>
+    <spritesheet>AggAAAAAAAAAAAIFBQUHAAAAAgUF</spritesheet>
+    <spritesheet>AgUEBAQEBAQEBAUFBQUIJSUlAgUF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYJAAAAAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAwUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAQclJQIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAQcnJwIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAggAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAArAggqKgIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAApAggoKAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAggAAAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQHAAAAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUIKCgoAggAKQIF</spritesheet>
+    <spritesheet>AgUFBQUFBQUFBQUIKioqAggAKwIF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYJAAAAAgUEBAUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAwYFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAADBgUF</spritesheet>
@@ -272,14 +272,14 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAQcAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAggAAAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBwAAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBQUFCC4uAggALwIF</spritesheet>
+    <spritesheet>AgUFBQUFBQUFBQUFCCwsAggALQIF</spritesheet>
     <spritesheet>AgUFBQUFBQUFBgYGCQAAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUJAAAAMgAAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQgAAAAAMgAAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQgAAAAAMgAAAggAAAIF</spritesheet>
+    <spritesheet>AgUFBQUFBQUJAAAAMAAAAggAAAIF</spritesheet>
+    <spritesheet>AgUFBQUFBQgAAAAAMAAAAggAAAIF</spritesheet>
+    <spritesheet>AgUFBQUFBQgAAAAAMAAAAggAAAIF</spritesheet>
     <spritesheet>AgUFBQUFBQgAAAAAAQcAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUHAAAwAgUEBQgAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUFBAQEBQUFBQgsLAIF</spritesheet>
+    <spritesheet>AgUFBQUFBQUHAAAyAgUEBQgAAAIF</spritesheet>
+    <spritesheet>AgUFBQUFBQUFBAQEBQUFBQguLgIF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgkAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAMTExMQIF</spritesheet>

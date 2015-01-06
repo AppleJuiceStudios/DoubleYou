@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<levelMap14>
-	<soundTrack>mars_4.wav</soundTrack>
-	<isCloneAllowed>true</isCloneAllowed>
-	<startTextbox>
-		<content>
-        	<item>These blue doors are different!</item>
-        	<item>You're clone can walk through them</item>
-        	<item>even when you are not programming him...</item>
-    	</content>
-	</startTextbox>
+<levelMap>
+    <isCloneAllowed>true</isCloneAllowed>
     <mapObjects>
         <mapObjectLasergateClone>
             <height>3</height>
             <id>32</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>13</x>
@@ -21,6 +14,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>33</id>
+            <output>34</output>
             <power>false</power>
             <width>1</width>
             <x>16</x>
@@ -32,6 +26,7 @@
         <mapObjectLasergateHorizontalClone>
             <height>1</height>
             <id>34</id>
+            <output>-1</output>
             <power>true</power>
             <width>5</width>
             <x>22</x>
@@ -40,6 +35,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>35</id>
+            <output>32</output>
             <power>false</power>
             <width>1</width>
             <x>24</x>
@@ -51,6 +47,7 @@
         <mapObjectLasergateClone>
             <height>3</height>
             <id>36</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>31</x>
@@ -59,6 +56,7 @@
         <mapObjectLasergate>
             <height>3</height>
             <id>37</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>38</x>
@@ -67,6 +65,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>38</id>
+            <output>39</output>
             <power>false</power>
             <width>1</width>
             <x>29</x>
@@ -78,6 +77,7 @@
         <mapObjectLasergateClone>
             <height>2</height>
             <id>39</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>44</x>
@@ -86,6 +86,7 @@
         <mapObjectLasergate>
             <height>2</height>
             <id>40</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>46</x>
@@ -94,6 +95,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>41</id>
+            <output>42</output>
             <power>false</power>
             <width>1</width>
             <x>46</x>
@@ -105,6 +107,7 @@
         <mapObjectLasergate>
             <height>3</height>
             <id>42</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>49</x>
@@ -113,6 +116,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>43</id>
+            <output>40</output>
             <power>false</power>
             <width>1</width>
             <x>49</x>
@@ -124,6 +128,7 @@
         <mapObjectLasergate>
             <height>2</height>
             <id>44</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>58</x>
@@ -132,6 +137,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>45</id>
+            <output>51</output>
             <power>false</power>
             <width>1</width>
             <x>58</x>
@@ -143,6 +149,7 @@
         <mapObjectLasergate>
             <height>2</height>
             <id>46</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>65</x>
@@ -151,6 +158,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>47</id>
+            <output>44</output>
             <power>false</power>
             <width>1</width>
             <x>64</x>
@@ -162,6 +170,7 @@
         <mapObjectLasergateHorizontalClone>
             <height>1</height>
             <id>48</id>
+            <output>-1</output>
             <power>true</power>
             <width>3</width>
             <x>60</x>
@@ -170,6 +179,7 @@
         <mapObjectTriggerWinning>
             <height>4</height>
             <id>49</id>
+            <output>-1</output>
             <power>false</power>
             <width>1</width>
             <x>68</x>
@@ -178,6 +188,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>50</id>
+            <output>51</output>
             <power>false</power>
             <width>1</width>
             <x>64</x>
@@ -189,6 +200,7 @@
         <mapObjectLogicOr>
             <height>0</height>
             <id>51</id>
+            <output>46</output>
             <power>true</power>
             <width>0</width>
             <x>58</x>
@@ -201,6 +213,7 @@
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>
     <playerSpawnY>240</playerSpawnY>
+    <soundTrack>mars_4.wav</soundTrack>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
@@ -265,7 +278,7 @@
     <spritesheet>AgUFBQUFBQgAAAAAMAAAAggAAAIF</spritesheet>
     <spritesheet>AgUFBQUFBQgAAAAAMAAAAggAAAIF</spritesheet>
     <spritesheet>AgUFBQUFBQgAAAAAAQcAAggAAAIF</spritesheet>
-    <spritesheet>AgUFBQUFBQUHAAAvAgUEBQgAAAIF</spritesheet>
+    <spritesheet>AgUFBQUFBQUHAAAyAgUEBQgAAAIF</spritesheet>
     <spritesheet>AgUFBQUFBQUFBAQEBQUFBQguLgIF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgkAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
@@ -277,4 +290,11 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAQEBAUF</spritesheet>
-</levelMap14>
+    <startTextbox>
+        <content>
+            <item>These blue doors are different!</item>
+            <item>You're clone can walk through them</item>
+            <item>even when you are not programming him...</item>
+        </content>
+    </startTextbox>
+</levelMap>
