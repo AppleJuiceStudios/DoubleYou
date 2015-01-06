@@ -1,8 +1,8 @@
 package game.level.mapobject;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import game.level.LevelMap;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class MapObjectLogicAndKeeping extends MapObjectLogic {
@@ -13,10 +13,12 @@ public class MapObjectLogicAndKeeping extends MapObjectLogic {
 	public MapObjectLogicAndKeeping(int id, int targetID, boolean inverted, boolean power, int... in) {
 		super(id, targetID, inverted, power);
 		this.in = in;
+		this.name = "& K";
 	}
 
 	public MapObjectLogicAndKeeping() {
 		in = new int[0];
+		this.name = "& K";
 	}
 
 	public boolean update(LevelMap map) {

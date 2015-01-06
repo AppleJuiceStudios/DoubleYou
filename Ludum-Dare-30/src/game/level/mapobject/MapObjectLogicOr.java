@@ -12,10 +12,12 @@ public class MapObjectLogicOr extends MapObjectLogic {
 	public MapObjectLogicOr(int id, int targetID, boolean inverted, boolean power, int... in) {
 		super(id, targetID, inverted, power);
 		this.in = in;
+		this.name = ">=1";
 	}
 
 	public MapObjectLogicOr() {
 		in = new int[0];
+		this.name = ">=1";
 	}
 
 	public boolean update(LevelMap map) {

@@ -10,7 +10,7 @@ import game.res.ResourceManager;
 public class ObjectHud extends Hud {
 
 	public ObjectHud() {
-		super(50);
+		super(40, ORIENTATION_BOTTOM_CENTER);
 		items = new HudItem[5];
 
 		items[0] = new HudItem(ResourceManager.getImage("/level/object/Groundswitch.png"), SIZE, MapObjectGroundswtich.class);

@@ -20,6 +20,10 @@ public class HudItem {
 		this.setObject(object);
 	}
 
+	public HudItem(BufferedImage image, int size) {
+		this(image, size, null);
+	}
+
 	public BufferedImage getImage() {
 		return image;
 	}
@@ -30,6 +34,8 @@ public class HudItem {
 
 	public MapObject getObject() {
 		try {
+			if (object == null)
+				return null;
 			return object.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();

@@ -9,6 +9,9 @@
 /buttons/es.png
 /buttons/button-Highlight.png
 /buttons/Lock.png
+/buttons/save.png
+/buttons/load.png
+/buttons/switch.png
 /buttons/selectedLevel.png
 /buttons/selectedLang.png
 /buttons/Level-1.png
@@ -27,6 +30,9 @@
 /buttons/Level-14.png
 /buttons/Level-15.png
 /buttons/Level-16.png
+/buttons/LogicAnd.png
+/buttons/LogicAndKeeping.png
+/buttons/LogicOr.png
 /Contributors.png
 /gui/Healthbar.png
 /gui/CloneChoose1.png

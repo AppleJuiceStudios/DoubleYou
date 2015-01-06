@@ -29,8 +29,10 @@ import java.util.TimerTask;
 import javax.swing.SwingUtilities;
 import javax.xml.bind.JAXB;
 
+import util.hud.FileHud;
 import util.hud.Hud;
 import util.hud.LogicHud;
+import util.hud.NavigationHud;
 import util.hud.ObjectHud;
 
 public class StageEditor extends Stage {
@@ -68,6 +70,8 @@ public class StageEditor extends Stage {
 
 	private Hud logicHud;
 	private Hud objectHud;
+	private Hud navigationHud;
+	private Hud fileHud;
 
 	// region Stage
 
@@ -91,6 +95,8 @@ public class StageEditor extends Stage {
 
 		logicHud = new LogicHud();
 		objectHud = new ObjectHud();
+		navigationHud = new NavigationHud();
+		fileHud = new FileHud();
 	}
 
 	private void loadMap(Map<String, String> data) {
@@ -169,13 +175,13 @@ public class StageEditor extends Stage {
 			}
 		}
 
-		if (editMode == EDITMODE_OBJECT || editMode == EDITMODE_LOGIC) {
+		if (editMode == EDITMODE_OBJECT) {
 			if (selectedMapObject != null) {
 				g2.setColor(Color.BLUE);
 				int selectionStartX = selectedMapObject.getX();
 				int selectionStartY = selectedMapObject.getY();
-				int selectionWidth = selectedMapObject.getWidth() == 0 ? 1 : selectedMapObject.getWidth();
-				int selectionHeight = selectedMapObject.getHeight() == 0 ? 1 : selectedMapObject.getHeight();
+				int selectionWidth = selectedMapObject.getWidth();
+				int selectionHeight = selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
 					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
 							- 1);
@@ -197,6 +203,8 @@ public class StageEditor extends Stage {
 		} else if (editMode == EDITMODE_OBJECT) {
 			objectHud.draw(g2);
 		}
+		navigationHud.draw(g2);
+		fileHud.draw(g2);
 	}
 
 	public void update() {
@@ -338,7 +346,7 @@ public class StageEditor extends Stage {
 				} else if (e.getKeyCode() == KeyEvent.VK_R) {
 					map.rescaleMap();
 				}
-			} else if (editMode == EDITMODE_OBJECT || editMode == EDITMODE_LOGIC) {
+			} else if (editMode == EDITMODE_OBJECT) {
 				if (e.getKeyCode() == KeyEvent.VK_DELETE) {
 					if (selectedMapObject != null) {
 						map.removeMapObject(selectedMapObject);
@@ -401,13 +409,27 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			if (e.getY() > GameCanvas.HEIGHT - logicHud.getHeight()) {
-				if (editMode == EDITMODE_LOGIC)
+			if (logicHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_LOGIC) {
 					logicHud.mousePressed(e);
-				if (editMode == EDITMODE_OBJECT)
+					return;
+				}
+			}
+			if (objectHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_OBJECT) {
 					objectHud.mousePressed(e);
+					return;
+				}
+			}
+			if (navigationHud.contains(e.getPoint())) {
+				navigationHud.mousePressed(e);
 				return;
 			}
+			if (fileHud.contains(e.getPoint())) {
+				fileHud.mousePressed(e);
+				return;
+			}
+
 			if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
 				lastSelectionX = selectedX;
 				lastSelectionY = selectedY;
@@ -454,11 +476,32 @@ public class StageEditor extends Stage {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			if (e.getY() > GameCanvas.HEIGHT - logicHud.getHeight()) {
-				if (editMode == EDITMODE_LOGIC)
+			if (logicHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_LOGIC) {
 					logicHud.mouseReleased(e);
-				if (editMode == EDITMODE_OBJECT)
+					return;
+				}
+			}
+			if (objectHud.contains(e.getPoint())) {
+				if (editMode == EDITMODE_OBJECT) {
 					objectHud.mouseReleased(e);
+					return;
+				}
+			}
+			if (navigationHud.contains(e.getPoint())) {
+				navigationHud.mouseReleased(e);
+				navigationHud.getSelected();
+				swichEditMode();
+				return;
+			}
+			if (fileHud.contains(e.getPoint())) {
+				fileHud.mouseReleased(e);
+				int selected = fileHud.getSelected();
+				if (selected == 0) {
+					System.out.println("LOAD");
+				} else if (selected == 1) {
+					System.out.println("SAVE");
+				}
 				return;
 			}
 
@@ -488,7 +531,6 @@ public class StageEditor extends Stage {
 					}
 				}
 				if (editMode == EDITMODE_OBJECT) {
-					selectedMapObject = null;
 					if (!isLogicMapObject(mouseObject)) {
 						selectedMapObject = mouseObject;
 						if (selectedMapObject == null) {
@@ -497,7 +539,6 @@ public class StageEditor extends Stage {
 					}
 				} else if (editMode == EDITMODE_LOGIC) {
 					if (e.getButton() == MouseEvent.BUTTON1) {
-						selectedMapObject = null;
 						if (isLogicMapObject(mouseObject)) {
 							selectedMapObject = mouseObject;
 							if (selectedMapObject == null) {
