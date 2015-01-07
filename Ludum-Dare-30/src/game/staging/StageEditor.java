@@ -566,7 +566,7 @@ public class StageEditor extends Stage {
 				} else if (editMode == EDITMODE_LOGIC) {
 					if (e.getButton() == MouseEvent.BUTTON1) {
 						selectedMapObject = null;
-						if (isLogicMapObject(mouseObject)) {
+						if (isLogicMapObject(mouseObject) || mouseObject == null) {
 							selectedMapObject = mouseObject;
 							if (selectedMapObject == null) {
 								placeObject(logicHud.getObject());
