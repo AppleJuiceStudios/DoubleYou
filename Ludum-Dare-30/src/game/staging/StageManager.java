@@ -1,7 +1,6 @@
 package game.staging;
 
 import game.main.GameCanvas;
-import game.res.ResourceManager;
 import game.res.SaveGame;
 import game.res.SoundManager;
 
@@ -28,6 +27,7 @@ public class StageManager {
 	private MouseMotionListener mouseMotionListener;
 	private MouseWheelListener mouseWheelListener;
 
+	public static final int STAGE_LOADING = 0;
 	public static final int STAGE_LEVEL = 1;
 	public static final int STAGE_MAIN_MENUE = 2;
 	public static final int STAGE_OPTIONS = 3;
@@ -40,9 +40,9 @@ public class StageManager {
 		initListener(gameCanvas);
 		if (!GameCanvas.IS_APPLET)
 			SaveGame.load();
-		ResourceManager.load();
 		SoundManager.init();
-		stage = new StageMainMenue(this, null);
+		// stage = new StageMainMenue(this, null);
+		stage = new StageLoading(this, null);
 	}
 
 	public void setStage(int stageID) {
