@@ -1,5 +1,7 @@
 package game.level;
 
+import game.level.entity.Entity;
+import game.level.entity.EntityEnemyMars;
 import game.level.entity.EntityPlayer;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectGroundswtich;
@@ -20,6 +22,8 @@ import game.staging.StageManager;
 
 import java.awt.Graphics2D;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -45,12 +49,11 @@ public class LevelMap {
 	private int height;
 
 	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
-			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
-			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
-			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
-			@XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class), @XmlElementRef(type = MapObject.class),
+			@XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class),
+			@XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
+			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class),
+			@XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
@@ -62,7 +65,6 @@ public class LevelMap {
 	}
 
 	public void start() {
-
 	}
 
 	public void drawObjects(Graphics2D g2, int size) {

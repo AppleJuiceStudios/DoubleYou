@@ -18,8 +18,8 @@ public class EntityPlayerClone extends EntityPlayer {
 
 	public EntityPlayerClone(double x, double y, Byte[] recording) {
 		super(x, y);
-		animationRun = new Animation();
-		animationJump = new Animation();
+		animationRun = new Animation(14, 31);
+		animationJump = new Animation(14, 31);
 		if (imageIdel == null) {
 			imageIdel = ResourceManager.getImage("/model/player/Player-Model.png");
 			imageRun = ResourceManager.getImage("/model/player/Run-Animation.png");

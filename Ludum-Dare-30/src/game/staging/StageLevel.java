@@ -3,6 +3,8 @@ package game.staging;
 import game.level.LevelMap;
 import game.level.Textbox;
 import game.level.TileSet;
+import game.level.entity.Entity;
+import game.level.entity.EntityEnemyMars;
 import game.level.entity.EntityPlayer;
 import game.level.entity.EntityPlayerClone;
 import game.level.entity.EntityPlayerRecord;
@@ -18,6 +20,8 @@ import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,6 +56,8 @@ public class StageLevel extends Stage {
 	private EntityPlayerRecord playerRecord;
 	private EntityPlayerClone playerClone;
 	private int selectedClone;
+
+	protected List<Entity> entities;
 
 	public Textbox textbox;
 	private BufferedImage imgTextbox;
@@ -98,6 +104,7 @@ public class StageLevel extends Stage {
 		selectedClone = 1;
 
 		player = new EntityPlayer(map.getPlayerSpawnX(), map.getPlayerSpawnY());
+		entities = new ArrayList<>();
 
 		updateTimer = new Timer();
 		updateTimer.scheduleAtFixedRate(new TimerTask() {
@@ -162,16 +169,19 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {
+		} catch (NullPointerException e) {}
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).draw(g2, true);
 		}
+
 		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
 
 		// GUI
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
-		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
-				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2,
+				chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
@@ -214,7 +224,9 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {
+		} catch (NullPointerException e) {}
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).update(map);
 		}
 		Monitoring.stop(2);
 	}

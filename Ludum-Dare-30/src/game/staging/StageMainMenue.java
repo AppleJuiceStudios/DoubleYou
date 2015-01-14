@@ -46,9 +46,9 @@ public class StageMainMenue extends Stage {
 			SoundManager.play("Space Commando", true);
 		}
 
+		initButtons();
 		initMouse();
 		initKeyControll();
-		initButtons();
 		loadTextures();
 
 		if (firstStart == false) {
