@@ -52,11 +52,11 @@ Double You<br><a href="https://github.com/TobiasBodewig/Ludum-Dare-30/raw/master
 	</tr>
 	<tr>
 		<td><b>Platforms</b></td>
-		<td>Windows<br>Linux<br>OS X<br><i>Browser (Java-Applet)</i></td>
+		<td>Windows<br>Linux<br>OS X</td>
 	</tr>
 	<tr>
 		<td><b>Distribution</b></td>
-		<td>Github.com<br>Dropbox.com</td>
+		<td>Github.com</td>
 	</tr>
 	<tr>
 		<td><b>Contact</b></td>
