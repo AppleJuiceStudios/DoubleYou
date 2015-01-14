@@ -85,7 +85,6 @@ public class StageLevel extends Stage {
 		isCloneAllowed = map.getIsCloneAllowed();
 		textbox = map.getStartTextbox();
 
-		System.out.println(Integer.parseInt(data.get("level")));
 		if (Integer.parseInt(data.get("level")) <= 4) {
 			tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
 			background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
