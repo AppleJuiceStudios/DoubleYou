@@ -1,0 +1,16 @@
+Programmer                     Tobias Bodewig
+Developer                      Philipp Auch
+Graphics                       Gianluca Rubino
+Sound                          Gianluca Rubino
+Illustration Designer          Michael Bujotzek
+Writer(s)                      Gianluca Rubino
+                               Philipp Auch
+Website Adminstation           Philipp Auch
+Release date                   23. August 2014
+Genres                         Puzzle
+                               Jump 'n' Run
+Platforms                      Windows
+                               Linux
+                               OS X
+Distribution                   Github.com
+Contact                        DoubleYouGame@gmail.com

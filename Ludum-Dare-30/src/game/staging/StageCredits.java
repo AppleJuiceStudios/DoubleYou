@@ -4,6 +4,7 @@ import game.main.GameApplet;
 import game.main.GameCanvas;
 import game.res.Button;
 import game.res.ResourceManager;
+import game.res.ScrollingAnimation;
 
 import java.applet.AppletContext;
 import java.awt.Desktop;
@@ -29,7 +30,8 @@ public class StageCredits extends Stage {
 
 	// Images
 	private BufferedImage imgBackground;
-	private BufferedImage imgContributors;
+
+	private ScrollingAnimation scroller;
 
 	public StageCredits(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
@@ -37,6 +39,7 @@ public class StageCredits extends Stage {
 		initKey();
 		initButtons();
 		loadTextures();
+		scroller = new ScrollingAnimation("/credits.txt", 30.0, 200, 160, 600, 300);
 	}
 
 	private void initMouse() {
@@ -145,14 +148,13 @@ public class StageCredits extends Stage {
 	}
 
 	private void loadTextures() {
-		imgBackground = ResourceManager.getImage("/backgrounds/Space-Background.png");
-		imgContributors = ResourceManager.getImage("/Contributors.png");
+		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
-		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 150, null);
+		scroller.draw(g2);
 
 		for (Button button : btns)
 			button.draw(g2);
