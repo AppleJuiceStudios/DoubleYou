@@ -4,7 +4,6 @@ import game.level.LevelMap;
 import game.level.Textbox;
 import game.level.TileSet;
 import game.level.entity.Entity;
-import game.level.entity.EntityEnemyMars;
 import game.level.entity.EntityPlayer;
 import game.level.entity.EntityPlayerClone;
 import game.level.entity.EntityPlayerRecord;
@@ -168,7 +167,8 @@ public class StageLevel extends Stage {
 			if (isCloneMoving) {
 				playerClone.draw(g2, true);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).draw(g2, true);
 		}
@@ -179,8 +179,8 @@ public class StageLevel extends Stage {
 		// GUI
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
-		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2,
-				chooseClone[selectedClone].getHeight() * 2, null);
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
+				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
@@ -223,7 +223,8 @@ public class StageLevel extends Stage {
 			} else {
 				map.updateTriger(player);
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map);
 		}
