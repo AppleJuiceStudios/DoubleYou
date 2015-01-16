@@ -21,8 +21,8 @@ public class EntityPlayer extends EntityMob {
 	public EntityPlayer(double x, double y) {
 		super(x, y, 14d, 31d, null);
 		health = 3;
-		animationRun = new Animation();
-		animationJump = new Animation();
+		animationRun = new Animation(14, 31);
+		animationJump = new Animation(14, 31);
 		animationRun.load("/model/player/Run-Animation.png", 2, 150);
 		animationJump.load("/model/player/Jump-Animation.png", 2, 150);
 		image = ResourceManager.getImage("/model/player/Player-Model.png");

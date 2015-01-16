@@ -24,8 +24,8 @@ public class EntityPlayerRecord extends EntityPlayer {
 			imageJump = ResourceManager.getImage("/model/clone/Jump-Animation.png");
 		}
 		image = imageIdel;
-		animationRun = new Animation();
-		animationJump = new Animation();
+		animationRun = new Animation(14, 31);
+		animationJump = new Animation(14, 31);
 		animationRun.load(imageRun, 2, 150);
 		animationJump.load(imageJump, 2, 150);
 		recording = new ArrayList<Byte>();
