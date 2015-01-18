@@ -66,6 +66,7 @@ public class ResourceManager {
 			Log.debug("Language-Name \"" + getString("language.name") + "\"");
 			Log.debug("Language-Region \"" + getString("language.region") + "\"");
 		} catch (NullPointerException e) {
+			System.out.println(local);
 			Log.error("Couldn't read lang file: \"" + local.toString() + "\"!");
 			e.printStackTrace();
 		} finally {

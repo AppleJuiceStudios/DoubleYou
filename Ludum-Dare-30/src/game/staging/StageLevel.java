@@ -84,14 +84,21 @@ public class StageLevel extends Stage {
 		isCloneAllowed = map.getIsCloneAllowed();
 		textbox = map.getStartTextbox();
 
-		if (Integer.parseInt(data.get("level")) <= 4) {
+		try {
+			if (Integer.parseInt(data.get("level")) <= 4) {
+				tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
+				background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
+				mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
+			} else {
+				tileSet = new TileSet("/planets/saturn/Saturn-TileSet.png");
+				background = ResourceManager.getImage("/backgrounds/Saturn-Background.png");
+				mountains = ResourceManager.getImage("/planets/saturn/Saturn-Outlands.png");
+			}
+
+		} catch (NumberFormatException ex) {
 			tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
 			background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 			mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
-		} else {
-			tileSet = new TileSet("/planets/saturn/Saturn-TileSet.png");
-			background = ResourceManager.getImage("/backgrounds/Saturn-Background.png");
-			mountains = ResourceManager.getImage("/planets/saturn/Saturn-Outlands.png");
 		}
 		healthbar = ResourceManager.getImage("/gui/Healthbar.png");
 		imgTextbox = ResourceManager.getImage("/backgrounds/Textbox.png");
