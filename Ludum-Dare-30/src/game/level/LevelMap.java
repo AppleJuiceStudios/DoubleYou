@@ -1,8 +1,6 @@
 package game.level;
 
 import game.level.entity.Entity;
-import game.level.entity.EntityEnemyMars;
-import game.level.entity.EntityPlayer;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
@@ -22,8 +20,6 @@ import game.staging.StageManager;
 
 import java.awt.Graphics2D;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -73,9 +69,9 @@ public class LevelMap {
 		}
 	}
 
-	public void updateTriger(EntityPlayer... player) {
+	public void updateTriger(Entity... entities) {
 		for (int i = 0; i < objects.length; i++) {
-			objects[i].updateTriger(player, this);
+			objects[i].updateTriger(this, entities);
 		}
 	}
 

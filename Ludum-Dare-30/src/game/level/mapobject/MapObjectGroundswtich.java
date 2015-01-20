@@ -1,7 +1,7 @@
 package game.level.mapobject;
 
 import game.level.LevelMap;
-import game.level.entity.EntityPlayer;
+import game.level.entity.Entity;
 import game.res.ResourceManager;
 
 import java.awt.Graphics2D;
@@ -45,12 +45,13 @@ public class MapObjectGroundswtich extends MapObject {
 		}
 	}
 
-	public void updateTriger(EntityPlayer[] player, LevelMap map) {
+	public void updateTriger(LevelMap map, Entity... entities) {
 		boolean t = false;
-		for (int i = 0; i < player.length; i++) {
-			if (x == (int) ((player[i].getXPos() + (player[i].getWidth() / 2)) / 16)
-					& y == (int) ((player[i].getYPos() + player[i].getHeight() - 1) / 16)) {
-				t = true;
+		for (int i = 0; i < entities.length; i++) {
+			if (entities[i] != null) {
+				if (x == (int) ((entities[i].getXPos() + (entities[i].getWidth() / 2)) / 16) & y == (int) ((entities[i].getYPos() + entities[i].getHeight() - 1) / 16)) {
+					t = true;
+				}
 			}
 		}
 		if (t) {

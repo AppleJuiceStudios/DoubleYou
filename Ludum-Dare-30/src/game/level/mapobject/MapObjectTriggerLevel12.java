@@ -1,10 +1,11 @@
 package game.level.mapobject;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import game.level.LevelMap;
 import game.level.Textbox;
+import game.level.entity.Entity;
 import game.level.entity.EntityPlayer;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class MapObjectTriggerLevel12 extends MapObject {
@@ -20,14 +21,15 @@ public class MapObjectTriggerLevel12 extends MapObject {
 
 	}
 
-	public void updateTriger(EntityPlayer[] player, LevelMap map) {
+	public void updateTriger(LevelMap map, Entity... entities) {
+
 		remainingTime--;
-		int pX = (int) ((player[0].getXPos() + (player[0].getWidth() / 2)) / 16);
-		int pY = (int) ((player[0].getYPos() + player[0].getHeight() - 1) / 16);
+		int pX = (int) ((entities[0].getXPos() + (entities[0].getWidth() / 2)) / 16);
+		int pY = (int) ((entities[0].getYPos() + entities[0].getHeight() - 1) / 16);
 		if (pX >= x & pX < x + width & pY >= y & pY < y + height & !map.getStageLevel().isCloneMoving()) {
 			if (detect) {
 				if (remainingTime <= 0) {
-					action(player[0], map);
+					action((EntityPlayer) entities[0], map);
 				}
 			} else {
 				detect = true;
@@ -36,6 +38,7 @@ public class MapObjectTriggerLevel12 extends MapObject {
 		} else {
 			detect = false;
 		}
+
 	}
 
 	protected void action(EntityPlayer player, LevelMap map) {

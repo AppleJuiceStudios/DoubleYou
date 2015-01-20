@@ -27,7 +27,7 @@ public class EntityMob extends Entity {
 			int ytop = (int) (y / 16 + 0.00001);
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
-			if (map.isSolidTile(xright, ytop) | map.isSolidTile(xright, ycenter) | map.isSolidTile(xright, ybottom)) {
+			if (colideWithBlock(map, xright, ytop) | colideWithBlock(map, xright, ycenter) | colideWithBlock(map, xright, ybottom)) {
 				xMovement = (xright * 16) - (x + width);
 			}
 		} else if (xMovement < 0) {
@@ -36,7 +36,7 @@ public class EntityMob extends Entity {
 			int ytop = (int) (y / 16 + 0.00001);
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
-			if (map.isSolidTile(xleft, ytop) | map.isSolidTile(xleft, ycenter) | map.isSolidTile(xleft, ybottom)) {
+			if (colideWithBlock(map, xleft, ytop) | colideWithBlock(map, xleft, ycenter) | colideWithBlock(map, xleft, ybottom)) {
 				xMovement = ((xleft + 1) * 16) - x;
 			}
 		}
@@ -53,7 +53,7 @@ public class EntityMob extends Entity {
 			int ybottom = (int) ((y + height + yMovement) / 16);
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
-			if (map.isSolidTile(xleft, ybottom) | map.isSolidTile(xright, ybottom)) {
+			if (colideWithBlock(map, xleft, ybottom) | colideWithBlock(map, xright, ybottom)) {
 				yMovement = (ybottom * 16) - (y + height);
 				onGround = true;
 			}
@@ -61,11 +61,15 @@ public class EntityMob extends Entity {
 			int ytop = (int) ((y + yMovement) / 16);
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
-			if (map.isSolidTile(xleft, ytop) | map.isSolidTile(xright, ytop)) {
+			if (colideWithBlock(map, xleft, ytop) | colideWithBlock(map, xright, ytop)) {
 				yMovement = ((ytop + 1) * 16) - y;
 			}
 		}
 		y += yMovement;
+	}
+
+	public boolean colideWithBlock(LevelMap map, int x, int y) {
+		return map.isSolidTile(x, y);
 	}
 
 }
