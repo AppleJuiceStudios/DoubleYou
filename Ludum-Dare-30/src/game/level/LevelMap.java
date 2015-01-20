@@ -45,11 +45,12 @@ public class LevelMap {
 	private int height;
 
 	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class), @XmlElementRef(type = MapObject.class),
-			@XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class),
-			@XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTriggerTextbox.class),
-			@XmlElementRef(type = MapObjectTriggerWinning.class) })
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
+			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
+			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
+			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
+			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
+			@XmlElementRef(type = MapObjectTriggerTextbox.class), @XmlElementRef(type = MapObjectTriggerWinning.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {

@@ -90,14 +90,21 @@ public class StageLevel extends Stage {
 		isCloneAllowed[0] = map.getIsCloneAllowed();
 		textbox = map.getStartTextbox();
 
-		if (Integer.parseInt(data.get("level")) <= 4) {
+		try {
+			if (Integer.parseInt(data.get("level")) <= 4) {
+				tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
+				background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
+				mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
+			} else {
+				tileSet = new TileSet("/planets/saturn/Saturn-TileSet.png");
+				background = ResourceManager.getImage("/backgrounds/Saturn-Background.png");
+				mountains = ResourceManager.getImage("/planets/saturn/Saturn-Outlands.png");
+			}
+
+		} catch (NumberFormatException ex) {
 			tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
 			background = ResourceManager.getImage("/backgrounds/Mars-Background.png");
 			mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
-		} else {
-			tileSet = new TileSet("/planets/saturn/Saturn-TileSet.png");
-			background = ResourceManager.getImage("/backgrounds/Saturn-Background.png");
-			mountains = ResourceManager.getImage("/planets/saturn/Saturn-Outlands.png");
 		}
 		healthbar = ResourceManager.getImage("/gui/Healthbar.png");
 		imgTextbox = ResourceManager.getImage("/backgrounds/Textbox.png");
@@ -174,7 +181,6 @@ public class StageLevel extends Stage {
 					playerClone[i].draw(g2, true);
 				}
 			}
-
 		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).draw(g2, true);
@@ -186,8 +192,8 @@ public class StageLevel extends Stage {
 		// GUI
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
-		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2,
-				chooseClone[selectedClone].getHeight() * 2, null);
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
+				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
@@ -226,11 +232,9 @@ public class StageLevel extends Stage {
 						}
 					}
 				}
-
 			}
 			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2] : null,
 					isCloneMoving[3] ? playerClone[3] : null);
-
 		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map);
