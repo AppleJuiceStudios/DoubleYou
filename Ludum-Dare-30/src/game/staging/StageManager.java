@@ -78,7 +78,7 @@ public class StageManager {
 		} catch (IllegalArgumentException e) {
 			stage = new StageMainMenue(this, null);
 			e.printStackTrace();
-			Log.error("IllegalArgumentException by opening Stage: " + stageID + "   " + data.toString());
+			Log.error("IllegalArgumentException while opening Stage: " + stageID + "   " + data.toString());
 		}
 		oldStage.stop();
 		Log.info("Loading Stage " + stageID + " took " + (System.currentTimeMillis() - start) + " ms");
