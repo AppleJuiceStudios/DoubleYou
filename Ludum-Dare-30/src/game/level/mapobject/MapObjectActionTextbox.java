@@ -2,6 +2,7 @@ package game.level.mapobject;
 
 import game.level.LevelMap;
 import game.level.Textbox;
+import game.res.ResourceManager;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,6 +18,10 @@ public class MapObjectActionTextbox extends MapObjectAction {
 
 	public MapObjectActionTextbox() {
 
+	}
+
+	protected void loadTexture() {
+		texture = ResourceManager.getImage("/buttons/ActionTextbox.png");
 	}
 
 	public void action(LevelMap map) {

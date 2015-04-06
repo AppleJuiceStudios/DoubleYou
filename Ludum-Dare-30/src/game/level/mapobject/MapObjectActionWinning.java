@@ -1,6 +1,7 @@
 package game.level.mapobject;
 
 import game.level.LevelMap;
+import game.res.ResourceManager;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,6 +14,10 @@ public class MapObjectActionWinning extends MapObjectAction {
 
 	public MapObjectActionWinning() {
 
+	}
+
+	protected void loadTexture() {
+		texture = ResourceManager.getImage("/buttons/ActionWinning.png");
 	}
 
 	public void action(LevelMap map) {

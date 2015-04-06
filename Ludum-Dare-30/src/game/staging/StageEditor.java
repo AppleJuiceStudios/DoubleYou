@@ -3,6 +3,7 @@ package game.staging;
 import game.level.LevelMapEditor;
 import game.level.TileSet;
 import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectAction;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateHorizontal;
 import game.level.mapobject.MapObjectLogic;
@@ -176,8 +177,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
-							* spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
+							- 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -194,8 +195,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth() == 0 ? 1 : selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight() == 0 ? 1 : selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
-							* spriteSize + i * 2 - 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
+							- 1);
 				}
 			}
 		}
@@ -302,7 +303,7 @@ public class StageEditor extends Stage {
 	}
 
 	public boolean isLogicMapObject(MapObject object) {
-		return object instanceof MapObjectLogic || object instanceof MapObjectTrigger;
+		return object instanceof MapObjectLogic || object instanceof MapObjectTrigger || object instanceof MapObjectAction;
 	}
 
 	public int getNextID() {
@@ -451,38 +452,35 @@ public class StageEditor extends Stage {
 			}
 			if (editMode == EDITMODE_LOGIC && e.getButton() == MouseEvent.BUTTON3) {
 				int spriteSize = TileSet.SPRITE_SIZE * scale;
-				if ((mouse_X + xOffset) % spriteSize < spriteSize - (spriteSize / 16 * 3)) {
-					MapObject mouseObject = null;
-					MapObject[] objects = map.getMapObjects();
-					for (int i = 0; i < objects.length; i++) {
-						if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
-							if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
-								if (!isLogicMapObject(objects[i])) {
-									mouseObject = objects[i];
-								}
-							}
+				MapObject mouseObject = null;
+				MapObject[] objects = map.getMapObjects();
+				for (int i = 0; i < objects.length; i++) {
+					if (selectedX >= objects[i].getX() && selectedX < objects[i].getX() + objects[i].getWidth()) {
+						if (selectedY >= objects[i].getY() && selectedY < objects[i].getY() + objects[i].getHeight()) {
+							mouseObject = objects[i];
 						}
 					}
-					if (mouseObject != null && mouseObject.hasOutput()) {
-						if (((mouse_Y + yOffset) % spriteSize) > (spriteSize - (spriteSize / 16 * 3))
-								&& (selectedY - mouseObject.getY() == (mouseObject.getHeight() == 0 ? 0 : mouseObject.getHeight() - 1))) {
-							connectingLogicLine = true;
-							startLogicLine = mouseObject;
-							int output = startLogicLine.getOutput();
-							if (output != 0 && output != -1) {
-								int[] input = map.getMapObject(output).getInputs();
-								if (input == null) {
-									map.getMapObject(output).setInput(0, -1);
-								} else {
-									for (int i = 0; i < input.length; i++) {
-										if (input[i] == startLogicLine.getId()) {
-											map.getMapObject(output).setInput(i, -1);
-										}
+				}
+				System.out.println(mouseObject);
+				if (mouseObject != null && mouseObject.hasOutput()) {
+					if (((mouse_Y + yOffset) % spriteSize) > (spriteSize - (spriteSize / 16 * 3))
+							&& (selectedY - mouseObject.getY() == (mouseObject.getHeight() == 0 ? 0 : mouseObject.getHeight() - 1))) {
+						connectingLogicLine = true;
+						startLogicLine = mouseObject;
+						int output = startLogicLine.getOutput();
+						if (output != 0 && output != -1) {
+							int[] input = map.getMapObject(output).getInputs();
+							if (input == null) {
+								map.getMapObject(output).setInput(0, -1);
+							} else {
+								for (int i = 0; i < input.length; i++) {
+									if (input[i] == startLogicLine.getId()) {
+										map.getMapObject(output).setInput(i, -1);
 									}
 								}
 							}
-							startLogicLine.setOutput(-1);
 						}
+						startLogicLine.setOutput(-1);
 					}
 				}
 			}
@@ -577,8 +575,8 @@ public class StageEditor extends Stage {
 								startLogicLine.setOutput(mouseObject.getId());
 								if (mouseObject.inputCount() != 1 || mouseObject.moreInputs()) {
 									int inputcount = mouseObject.inputCount() + (mouseObject.moreInputs() ? 1 : 0);
-									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize
-											: mouseObject.getWidth() * spriteSize) / inputcount));
+									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize : mouseObject
+											.getWidth() * spriteSize) / inputcount));
 									mouseObject.setInput(input, startLogicLine.getId());
 								}
 								connectingLogicLine = false;

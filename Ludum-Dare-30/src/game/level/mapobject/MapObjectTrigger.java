@@ -1,11 +1,10 @@
 package game.level.mapobject;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-
 import game.level.LevelMap;
 import game.level.entity.Entity;
-import game.level.entity.EntityPlayer;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -39,7 +38,7 @@ public class MapObjectTrigger extends MapObject {
 	}
 
 	public void setOutput(int id) {
-
+		targetID = id;
 	}
 
 	public void drawLogic(Graphics2D g2, int size) {
