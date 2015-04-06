@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.HashMap;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -44,9 +43,7 @@ public class StageManager {
 		if (!GameCanvas.IS_APPLET)
 			SaveGame.load();
 		SoundManager.init();
-		Map<String, String> data = new HashMap<String, String>();
-		data.put("file", "res/level/levelEmpty.xml");
-		stage = new StageEditor(this, data);
+		stage = new StageLoading(this, null);
 	}
 
 	public void setStage(int stageID) {

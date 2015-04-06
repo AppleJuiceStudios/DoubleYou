@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -32,6 +33,9 @@ public class StageLoading extends Stage {
 		loadingThread = new Thread(new Runnable() {
 			public void run() {
 				ResourceManager.load();
+				Map<String, String> data = new HashMap<String, String>();
+				data.put("file", "res/level/levelEmpty.xml");
+				getStageManager().setStage(StageManager.STAGE_LEVEL_EDITOR, data);
 			}
 		});
 		loadingThread.start();
@@ -69,9 +73,6 @@ public class StageLoading extends Stage {
 
 		if (System.currentTimeMillis() - lastMsgChange > messageSpeed)
 			nextMessage();
-
-		if (!loadingThread.isAlive())
-			getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 	}
 
 	private void nextMessage() {
