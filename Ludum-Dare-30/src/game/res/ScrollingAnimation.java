@@ -12,7 +12,8 @@ import java.util.Scanner;
 
 public class ScrollingAnimation {
 
-	private String[] text;
+	private String[] textLeft;
+	private String[] textRight;
 	private double speed;
 	private Font font;
 
@@ -24,9 +25,10 @@ public class ScrollingAnimation {
 		font = new Font("Arial", Font.PLAIN, 20);
 	}
 
-	public ScrollingAnimation(String[] text, double speed, Rectangle rec) {
+	public ScrollingAnimation(String[] textLeft, String[] textRight, double speed, Rectangle rec) {
 		this();
-		this.text = text;
+		this.textLeft = textLeft;
+		this.textRight = textRight;
 		this.speed = speed;
 
 		this.x = rec.x;
@@ -37,24 +39,29 @@ public class ScrollingAnimation {
 		currentY = y;
 	}
 
-	public ScrollingAnimation(String[] text, double speed, int x, int y, int width, int height) {
-		this(text, speed, new Rectangle(x, y, width, height));
+	public ScrollingAnimation(String[] textLeft, String[] textRight, double speed, int x, int y, int width, int height) {
+		this(textLeft, textRight, speed, new Rectangle(x, y, width, height));
 	}
 
 	public ScrollingAnimation(String filename, double speed, Rectangle rec) {
 		this();
 		Scanner scanner = new Scanner(ResourceManager.class.getResourceAsStream(filename));
-		List<String> list = new ArrayList<>();
+		List<String> listLeft = new ArrayList<>();
+		List<String> listRight = new ArrayList<>();
 		while (scanner.hasNextLine()) {
-			list.add(scanner.nextLine());
+			String line = scanner.nextLine();
+			int i = line.indexOf("\t");
+			if (i > 0) {
+				listLeft.add(line.substring(0, i));
+				listRight.add(line.substring(i));
+			}
 		}
-
-		text = list.toArray(new String[0]);
-
 		scanner.close();
 
-		this.speed = speed;
+		textLeft = listLeft.toArray(new String[0]);
+		textRight = listRight.toArray(new String[0]);
 
+		this.speed = speed;
 		this.x = rec.x;
 		this.y = rec.y;
 		this.width = rec.width;
@@ -69,18 +76,19 @@ public class ScrollingAnimation {
 
 	public void draw(Graphics g) {
 		g.setFont(font);
-		g.setColor(Color.LIGHT_GRAY);
+		// g.setColor(Color.LIGHT_GRAY);
 		// g.fillRect(x, y, width, height);
 		g.setColor(Color.WHITE);
 		int lastY = 0;
-		for (int i = 0; i < text.length; i++) {
+		for (int i = 0; i < textLeft.length; i++) {
 			if ((i + 1) * 30 + currentY > y) {
 				if ((i + 1) * 30 + (int) currentY - y < 100) {
 					g.setColor(new Color(1f, 1f, 1f, (float) (((i + 1) * 30 + currentY - y) / 100)));
 				} else {
 					g.setColor(Color.WHITE);
 				}
-				g.drawString(text[i], x, (i + 1) * 30 + (int) currentY);
+				g.drawString(textLeft[i], x, (i + 1) * 30 + (int) currentY);
+				g.drawString(textRight[i], x + 250, (i + 1) * 30 + (int) currentY);
 				if (lastY < (i + 1) * 30 + (int) currentY)
 					lastY = (i + 1) * 30 + (int) currentY;
 			}
@@ -94,11 +102,11 @@ public class ScrollingAnimation {
 	// region Getters-Setters
 
 	public String[] getText() {
-		return text;
+		return textLeft;
 	}
 
 	public void setText(String[] text) {
-		this.text = text;
+		this.textLeft = text;
 	}
 
 	public double getSpeed() {
