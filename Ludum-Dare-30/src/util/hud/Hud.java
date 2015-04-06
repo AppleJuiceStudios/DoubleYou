@@ -2,6 +2,7 @@ package util.hud;
 
 import game.level.mapobject.MapObject;
 import game.main.GameCanvas;
+import game.res.ResourceManager;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -19,6 +20,8 @@ public abstract class Hud {
 	private final Color HUD_COLOR;
 
 	protected HudItem[] items;
+	private boolean scrolling;
+	private int scrollingIndex = 0;
 	private int selected;
 	private final int ORIENTATION;
 	private final int OFFSET;
@@ -91,7 +94,8 @@ public abstract class Hud {
 		}
 
 		g2.setColor(HUD_COLOR);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		if (g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING) == RenderingHints.VALUE_ANTIALIAS_OFF)
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2.fillArc(xStart - SIZE, CORNER_Y, CORNER_WIDTH, CORNER_HEIGHT, CORNER_START_ANGLE_LEFT, 90);
 		g2.fillArc(xStart + X_STEP * items.length - CORNER_WIDTH / 2, CORNER_Y, CORNER_WIDTH, CORNER_HEIGHT, CORNER_START_ANGLE_RIGHT, 90);
@@ -99,12 +103,32 @@ public abstract class Hud {
 		g2.fillRect(xStart, Y, X_STEP * items.length, X_STEP);
 
 		if (items != null) {
-			for (int i = 0; i < items.length; i++) {
-				int pos = (X_STEP * i) + xStart;
-				items[i].draw(g2, pos, ITEM_HEIGHT);
-				if (i == selected) {
-					g2.setColor(Color.RED);
-					g2.drawRect(pos, ITEM_HEIGHT, SIZE, SIZE);
+			if (items.length > 14)
+				scrolling = true;
+			else
+				scrolling = false;
+
+			if (scrolling) {
+				// drawArrows;
+				g2.drawImage(ResourceManager.getImage("/gui/arrow.png"), xStart + SIZE - 10, ITEM_HEIGHT, (int) (-SIZE * 0.6), SIZE, null);
+				g2.drawImage(ResourceManager.getImage("/gui/arrow.png"), (X_STEP * 14) + xStart + 10, ITEM_HEIGHT, (int) (SIZE * 0.6), SIZE, null);
+
+				for (int i = 1; i < 14; i++) {
+					int pos = (X_STEP * i) + xStart;
+					items[i + scrollingIndex].draw(g2, pos, ITEM_HEIGHT);
+					if (i + scrollingIndex == selected) {
+						g2.setColor(Color.RED);
+						g2.drawRect(pos, ITEM_HEIGHT, SIZE, SIZE);
+					}
+				}
+			} else {
+				for (int i = 0; i < items.length; i++) {
+					int pos = (X_STEP * i) + xStart;
+					items[i].draw(g2, pos, ITEM_HEIGHT);
+					if (i == selected) {
+						g2.setColor(Color.RED);
+						g2.drawRect(pos, ITEM_HEIGHT, SIZE, SIZE);
+					}
 				}
 			}
 		}
