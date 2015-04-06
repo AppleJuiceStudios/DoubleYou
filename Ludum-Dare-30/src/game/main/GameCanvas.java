@@ -62,6 +62,7 @@ public class GameCanvas extends Canvas {
 				}
 			}
 		});
+		thread.setName("DrawingThread");
 	}
 
 	public void start() {
