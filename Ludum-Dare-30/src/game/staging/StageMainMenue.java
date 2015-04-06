@@ -46,9 +46,9 @@ public class StageMainMenue extends Stage {
 			SoundManager.play("Space Commando", true);
 		}
 
+		initButtons();
 		initMouse();
 		initKeyControll();
-		initButtons();
 		loadTextures();
 
 		if (firstStart == false) {
@@ -80,10 +80,12 @@ public class StageMainMenue extends Stage {
 				if (btns[0].contains(point)) {
 					play();
 				} else if (btns[1].contains(point)) {
-					options();
+					custom();
 				} else if (btns[2].contains(point)) {
-					credits();
+					options();
 				} else if (btns[3].contains(point)) {
+					credits();
+				} else if (btns[4].contains(point)) {
 					exit();
 				}
 			}
@@ -143,19 +145,21 @@ public class StageMainMenue extends Stage {
 					if (selectedButton <= 0) {
 						play();
 					} else if (selectedButton == 1) {
-						options();
+						custom();
 					} else if (selectedButton == 2) {
-						credits();
+						options();
 					} else if (selectedButton == 3) {
+						credits();
+					} else if (selectedButton == 4) {
 						exit();
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
 					selectedButton++;
-					selectedButton %= 4;
+					selectedButton %= 5;
 				} else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 					selectedButton--;
 					if (selectedButton < 0)
-						selectedButton = 3;
+						selectedButton = 4;
 				}
 				for (Button button : btns) {
 					button.setHighlighted(false);
@@ -168,11 +172,12 @@ public class StageMainMenue extends Stage {
 
 	private void initButtons() {
 		selectedButton = -1;
-		btns = new Button[4];
-		btns[0] = new Button(ResourceManager.getString("gui.play"), 30, 350);
-		btns[1] = new Button(ResourceManager.getString("gui.options"), 30, 400);
-		btns[2] = new Button(ResourceManager.getString("gui.credits"), 30, 450);
-		btns[3] = new Button(ResourceManager.getString("gui.exit"), 30, 500);
+		btns = new Button[5];
+		btns[0] = new Button(ResourceManager.getString("gui.play"), 30, 300);
+		btns[1] = new Button("CUSTOM MAPS", 30, 350);
+		btns[2] = new Button(ResourceManager.getString("gui.options"), 30, 400);
+		btns[3] = new Button(ResourceManager.getString("gui.credits"), 30, 450);
+		btns[4] = new Button(ResourceManager.getString("gui.exit"), 30, 500);
 
 		for (Button button : btns)
 			button.setHighlighted(false);
@@ -210,6 +215,10 @@ public class StageMainMenue extends Stage {
 	// region Actions
 	private void play() {
 		getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
+	}
+
+	private void custom() {
+		getStageManager().setStage(StageManager.STAGE_CUSTOM_MAPS);
 	}
 
 	private void options() {

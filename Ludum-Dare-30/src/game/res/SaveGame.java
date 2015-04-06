@@ -32,6 +32,7 @@ public class SaveGame {
 
 	public static void load() {
 		if (!GameCanvas.IS_APPLET) {
+			getDocumentPath();
 			path = getPath() + "/SaveGame.xml";
 			File file = new File(path);
 			if (file.exists()) {
@@ -39,7 +40,7 @@ public class SaveGame {
 			} else {
 				saveGame = JAXB.unmarshal(SaveGame.class.getResourceAsStream("/SaveGame.xml"), SaveGame.class);
 				try {
-					saveGame.lang = Locale.getDefault().getDisplayName();
+					saveGame.lang = Locale.getDefault().toString();
 				} catch (Exception e) {
 					e.printStackTrace();
 					Log.warning("Unable to detect system lang! Using engl.");
@@ -82,13 +83,7 @@ public class SaveGame {
 
 	public static String getPath() {
 		String path;
-		String OS;
-		try {
-			OS = (System.getenv("OS")).toUpperCase();
-		} catch (Exception e) {
-			OS = "NULL";
-		}
-		if (OS.contains("WIN")) {
+		if (isWindows()) {
 			path = System.getenv("AppData");
 			path += "/DoubleYou";
 		} else {
@@ -97,6 +92,33 @@ public class SaveGame {
 		}
 		new File(path).mkdir();
 		return path;
+	}
+
+	public static String getDocumentPath() {
+		String path;
+		if (isWindows()) {
+			path = System.getenv("userprofile");
+			path += "/Saved Games/DoubleYou/CustomLevels";
+		} else {
+			path = System.getenv("HOME");
+			path += "/.doubleYou/CustomLevels";
+		}
+		new File(path).mkdirs();
+		return path;
+	}
+
+	private static boolean isWindows() {
+		String OS;
+		try {
+			OS = (System.getenv("OS")).toUpperCase();
+		} catch (Exception e) {
+			OS = "NULL";
+		}
+		if (OS.contains("WIN")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private static void writeVersion() {

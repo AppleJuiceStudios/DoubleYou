@@ -5,6 +5,7 @@
 /backgrounds/Textbox.png
 /buttons/button.png
 /buttons/gb.png
+/buttons/pl.png
 /buttons/ger.png
 /buttons/es.png
 /buttons/button-Highlight.png
@@ -32,6 +33,7 @@
 /level/object/Lasergate-HorizontalOnlyClone.png
 /level/object/Lasergate-OnlyClone.png
 /level/object/Lasergate.png
+/model/msfly.png
 /model/clone/Jump-Animation.png
 /model/clone/Player-Model.png
 /model/clone/Run-Animation.png

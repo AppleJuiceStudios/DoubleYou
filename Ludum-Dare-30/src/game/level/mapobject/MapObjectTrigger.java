@@ -3,30 +3,34 @@ package game.level.mapobject;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import game.level.LevelMap;
+import game.level.entity.Entity;
 import game.level.entity.EntityPlayer;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class MapObjectTrigger extends MapObject {
 
-	public MapObjectTrigger(int id, int x, int y, int width, int height) {
+	private boolean wasPowered;
+	private int targetID;
+
+	public MapObjectTrigger(int id, int x, int y, int width, int height, int targetID) {
 		super(id, x, y, width, height, false);
+		this.targetID = targetID;
 	}
 
 	public MapObjectTrigger() {
 
 	}
 
-	public void updateTriger(EntityPlayer[] player, LevelMap map) {
-		if (!power) {
-			int pX = (int) ((player[0].getXPos() + (player[0].getWidth() / 2)) / 16);
-			int pY = (int) ((player[0].getYPos() + player[0].getHeight() - 1) / 16);
-			if (pX >= x & pX < x + width & pY >= y & pY < y + height) {
-				power = true;
-				action(player[0], map);
-			}
+	public void updateTriger(LevelMap map, Entity... entities) {
+		power = false;
+		int pX = (int) ((entities[0].getXPos() + (entities[0].getWidth() / 2)) / 16);
+		int pY = (int) ((entities[0].getYPos() + entities[0].getHeight() - 1) / 16);
+		if (pX >= x & pX < x + width & pY >= y & pY < y + height) {
+			power = true;
+			action(map);
 		}
 	}
 
@@ -44,8 +48,15 @@ public class MapObjectTrigger extends MapObject {
 		drawIO(g2, size);
 	}
 
-	protected void action(EntityPlayer player, LevelMap map) {
-
+	protected void action(LevelMap map) {
+		if (power && !wasPowered) {
+			map.powerObject(targetID, true);
+			wasPowered = true;
+		}
+		if (!power && wasPowered) {
+			map.powerObject(targetID, false);
+			wasPowered = false;
+		}
 	}
 
 }

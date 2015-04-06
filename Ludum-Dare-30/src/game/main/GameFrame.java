@@ -1,5 +1,7 @@
 package game.main;
 
+import game.res.SaveGame;
+
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -63,6 +65,8 @@ public class GameFrame extends JFrame {
 		GAMESTARTTIME = System.currentTimeMillis();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				Log.openLog(SaveGame.getPath());
+				Log.info("Starting Log!");
 				GameFrame gf = new GameFrame();
 				gf.setVisible(true);
 				gf.requestFocus();

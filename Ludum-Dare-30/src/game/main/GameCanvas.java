@@ -1,7 +1,6 @@
 package game.main;
 
 import game.res.ResourceManager;
-import game.res.SaveGame;
 import game.res.SoundManager;
 import game.staging.StageManager;
 
@@ -29,8 +28,6 @@ public class GameCanvas extends Canvas {
 	public static final int FPS_MAX = 60;
 
 	public GameCanvas() {
-		Log.openLog(SaveGame.getPath());
-		Log.info("Starting Log!");
 		stageManager = new StageManager(this);
 		fpsManager = new FpsManager();
 	}
@@ -65,6 +62,7 @@ public class GameCanvas extends Canvas {
 				}
 			}
 		});
+		thread.setName("DrawingThread");
 	}
 
 	public void start() {

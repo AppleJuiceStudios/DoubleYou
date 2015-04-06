@@ -11,12 +11,12 @@ public class EntityEnemyMars extends EntityEnemy {
 
 	private boolean walkLeft;
 
-	public EntityEnemyMars(double x, double y, double width, double height) {
-		super(x, y, width, height, null);
+	public EntityEnemyMars(double x, double y) {
+		super(x, y, 14, 28, null);
 
 		walkLeft = true;
-		animationRun = new Animation();
-		animationFight = new Animation();
+		animationRun = new Animation(14, 28);
+		animationFight = new Animation(16, 28);
 		animationRun.load("/model/enemys/MarsKnight-RunAnimation.png", 2, 150);
 		animationFight.load("/model/enemys/MarsKnight-FightAnimation.png", 2, 150);
 		image = ResourceManager.getImage("/model/enemys/MarsKnight-Model.png");

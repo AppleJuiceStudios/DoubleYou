@@ -1,7 +1,7 @@
 package game.level.mapobject;
 
 import game.level.LevelMap;
-import game.level.entity.EntityPlayer;
+import game.level.entity.Entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -135,7 +135,11 @@ public class MapObject {
 		return isSolid();
 	}
 
-	public void updateTriger(EntityPlayer[] player, LevelMap map) {
+	public void updateTriger(LevelMap map, Entity... player) {
+
+	}
+
+	public void onStart(LevelMap map) {
 
 	}
 

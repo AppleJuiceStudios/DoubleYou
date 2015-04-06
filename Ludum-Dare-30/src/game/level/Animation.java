@@ -5,8 +5,8 @@ import game.res.ResourceManager;
 import java.awt.image.BufferedImage;
 
 public class Animation {
-	public static final int WIDTH = 14;
-	public static final int HEIGHT = 31;
+	private int width = 14;
+	private int height = 31;
 
 	private int index = 0;
 	private int delay = 0;
@@ -14,7 +14,9 @@ public class Animation {
 
 	private long lastChange;
 
-	public Animation() {
+	public Animation(int width, int height) {
+		this.width = width;
+		this.height = height;
 	}
 
 	public void load(String path, int imageAmount, int delay) {
@@ -22,7 +24,7 @@ public class Animation {
 		BufferedImage image = ResourceManager.getImage(path);
 		imgAnimation = new BufferedImage[imageAmount];
 		for (int i = 0; i < imageAmount; i++) {
-			imgAnimation[i] = image.getSubimage(i * WIDTH, 0, WIDTH, HEIGHT);
+			imgAnimation[i] = image.getSubimage(i * width, 0, width, height);
 		}
 	}
 
@@ -30,7 +32,7 @@ public class Animation {
 		this.delay = delay;
 		imgAnimation = new BufferedImage[imageAmount];
 		for (int i = 0; i < imageAmount; i++) {
-			imgAnimation[i] = image.getSubimage(i * WIDTH, 0, WIDTH, HEIGHT);
+			imgAnimation[i] = image.getSubimage(i * width, 0, width, height);
 		}
 
 	}

@@ -1,7 +1,6 @@
 package game.staging;
 
 import game.main.GameCanvas;
-import game.res.ResourceManager;
 import game.res.SaveGame;
 import game.res.SoundManager;
 
@@ -29,12 +28,14 @@ public class StageManager {
 	private MouseMotionListener mouseMotionListener;
 	private MouseWheelListener mouseWheelListener;
 
+	public static final int STAGE_LOADING = 0;
 	public static final int STAGE_LEVEL = 1;
 	public static final int STAGE_MAIN_MENUE = 2;
 	public static final int STAGE_OPTIONS = 3;
 	public static final int STAGE_CREDITS = 4;
 	public static final int STAGE_CHOOSE_LEVEL = 5;
 	public static final int STAGE_WON = 6;
+	public static final int STAGE_CUSTOM_MAPS = 7;
 	public static final int STAGE_LEVEL_EDITOR = 42;
 
 	public StageManager(GameCanvas gameCanvas) {
@@ -42,7 +43,6 @@ public class StageManager {
 		initListener(gameCanvas);
 		if (!GameCanvas.IS_APPLET)
 			SaveGame.load();
-		ResourceManager.load();
 		SoundManager.init();
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("file", "res/level/levelEmpty.xml");
@@ -75,13 +75,15 @@ public class StageManager {
 				stage = new StageChoseLevel(this, data);
 			} else if (stageID == STAGE_WON) {
 				stage = new StageWon(this, data);
+			} else if (stageID == STAGE_CUSTOM_MAPS) {
+				stage = new StageCustomMaps(this, data);
 			} else if (stageID == STAGE_LEVEL_EDITOR) {
 				stage = new StageEditor(this, data);
 			}
 		} catch (IllegalArgumentException e) {
 			stage = new StageMainMenue(this, null);
 			e.printStackTrace();
-			Log.error("IllegalArgumentException by opening Stage: " + stageID + "   " + data.toString());
+			Log.error("IllegalArgumentException while opening Stage: " + stageID + "   " + data.toString());
 		}
 		oldStage.stop();
 		Log.info("Loading Stage " + stageID + " took " + (System.currentTimeMillis() - start) + " ms");
