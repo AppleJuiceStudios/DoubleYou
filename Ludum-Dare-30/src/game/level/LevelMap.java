@@ -77,7 +77,8 @@ public class LevelMap {
 	}
 
 	public void powerObject(int id, boolean power) {
-		objects[id - 32].setPower(power, this);
+		if (id <= 32)
+			objects[id - 32].setPower(power, this);
 	}
 
 	public byte getTileID(int x, int y) {
