@@ -151,7 +151,6 @@ public class StageCredits extends Stage {
 		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
 	}
 
-	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
 		scroller.draw(g2);
@@ -160,12 +159,10 @@ public class StageCredits extends Stage {
 			button.draw(g2);
 	}
 
-	@Override
 	public void update() {
 
 	}
 
-	@Override
 	public void stop() {
 
 	}
