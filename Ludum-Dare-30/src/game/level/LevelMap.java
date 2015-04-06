@@ -203,12 +203,6 @@ public class LevelMap {
 		this.startTextbox = startTextbox;
 	}
 
-	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class), @XmlElementRef(type = MapObject.class),
-			@XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class),
-			@XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectActionTextbox.class),
-			@XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class) })
 	public MapObject[] getMapObjects() {
 		return objects;
 	}

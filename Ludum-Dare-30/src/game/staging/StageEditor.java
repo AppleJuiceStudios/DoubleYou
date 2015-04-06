@@ -461,7 +461,6 @@ public class StageEditor extends Stage {
 						}
 					}
 				}
-				System.out.println(mouseObject);
 				if (mouseObject != null && mouseObject.hasOutput()) {
 					if (((mouse_Y + yOffset) % spriteSize) > (spriteSize - (spriteSize / 16 * 3))
 							&& (selectedY - mouseObject.getY() == (mouseObject.getHeight() == 0 ? 0 : mouseObject.getHeight() - 1))) {

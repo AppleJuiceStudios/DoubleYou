@@ -1,6 +1,7 @@
 package game.level;
 
 import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectAction;
 import game.level.mapobject.MapObjectLogic;
 
 import java.awt.Color;
@@ -306,13 +307,13 @@ public class LevelMapEditor extends LevelMap {
 		sortedMapObjects = new MapObject[objectsMap.size()];
 		int index = 0;
 		for (Integer i : objectsMap.keySet()) {
-			if (!(objectsMap.get(i) instanceof MapObjectLogic)) {
+			if (!(objectsMap.get(i) instanceof MapObjectLogic || objectsMap.get(i) instanceof MapObjectAction)) {
 				sortedMapObjects[index] = objectsMap.get(i);
 				index++;
 			}
 		}
 		for (Integer i : objectsMap.keySet()) {
-			if (objectsMap.get(i) instanceof MapObjectLogic) {
+			if (objectsMap.get(i) instanceof MapObjectLogic || objectsMap.get(i) instanceof MapObjectAction) {
 				sortedMapObjects[index] = objectsMap.get(i);
 				index++;
 			}
@@ -342,6 +343,9 @@ public class LevelMapEditor extends LevelMap {
 				if (line.matches("\\s*<(id)?(in)?(targetID)?>\\d+</(id)?(in)?(targetID)?>\\s*")) {
 					String idString = line.trim().replaceAll("</?(id)?(in)?(targetID)?>", "");
 					Integer id = ids.get(Integer.parseInt(idString));
+					if (id == null) {
+						id = -1;
+					}
 					line = line.replaceAll("\\d+", id.toString());
 				}
 				out.println(line);
