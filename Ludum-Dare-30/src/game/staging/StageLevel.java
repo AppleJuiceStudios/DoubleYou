@@ -76,7 +76,6 @@ public class StageLevel extends Stage {
 			throw new IllegalArgumentException(e);
 		}
 		map.setStageLevel(this);
-		map.start();
 
 		SoundManager.loadClipInCache("soundTrack", map.getSoundTrack());
 		SoundManager.play("soundTrack", true);
@@ -127,6 +126,8 @@ public class StageLevel extends Stage {
 
 		maxXOffset = (map.getWidth() * TileSet.SPRITE_SIZE * SCALE) - GameCanvas.WIDTH;
 		maxYOffset = (map.getHeight() * TileSet.SPRITE_SIZE * SCALE) - GameCanvas.HEIGHT;
+
+		map.start();
 	}
 
 	public void draw(Graphics2D g2) {
@@ -192,8 +193,8 @@ public class StageLevel extends Stage {
 		// GUI
 		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
 		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
-		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
-				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2,
+				chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
@@ -302,6 +303,10 @@ public class StageLevel extends Stage {
 			}
 		}
 		return false;
+	}
+
+	public void spawnEntity(Entity entity) {
+		entities.add(entity);
 	}
 
 }

@@ -47,6 +47,10 @@ public class MapObject {
 
 	}
 
+	public void onStart(LevelMap map) {
+
+	}
+
 	public int getX() {
 		return x;
 	}
