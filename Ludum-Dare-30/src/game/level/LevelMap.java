@@ -2,6 +2,7 @@ package game.level;
 
 import game.level.entity.Entity;
 import game.level.mapobject.MapObject;
+import game.level.mapobject.MapObjectActionSpawner;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateClone;
@@ -49,7 +50,7 @@ public class LevelMap {
 			@XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class),
 			@XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
 			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectActionTextbox.class),
-			@XmlElementRef(type = MapObjectActionWinning.class) })
+			@XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
