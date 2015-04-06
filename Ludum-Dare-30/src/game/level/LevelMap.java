@@ -82,7 +82,6 @@ public class LevelMap {
 	}
 
 	public void powerObject(int id, boolean power) {
-		System.out.println("id: " + id + ":" + power);
 		if (id >= 32)
 			objects[id - 32].setPower(power, this);
 	}
