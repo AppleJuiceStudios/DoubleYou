@@ -6,6 +6,8 @@ import game.res.ResourceManager;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+
+import util.log.GeneralUtils;
 
 public class StageLoading extends Stage {
 
@@ -26,12 +30,16 @@ public class StageLoading extends Stage {
 	private String message;
 	private int messageSpeed;
 	private long lastMsgChange;
+	private boolean finished = false;
 
 	public StageLoading(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
+		initListeners();
+
 		loadingThread = new Thread(new Runnable() {
 			public void run() {
 				ResourceManager.load();
+				finished = true;
 			}
 		});
 		loadingThread.start();
@@ -67,11 +75,13 @@ public class StageLoading extends Stage {
 		g2.setFont(font);
 		g2.drawString(message, 110, 490);
 
+		if (finished)
+			g2.drawString("Press any key to continue.", 110, 530);
+		if (finished && GeneralUtils.isDevMode())
+			getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+
 		if (System.currentTimeMillis() - lastMsgChange > messageSpeed)
 			nextMessage();
-
-		if (!loadingThread.isAlive())
-			getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 	}
 
 	private void nextMessage() {
@@ -85,5 +95,24 @@ public class StageLoading extends Stage {
 
 	public void stop() {
 
+	}
+
+	private void initListeners() {
+		getStageManager().setKeyListener(new KeyListener() {
+
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			public void keyReleased(KeyEvent e) {
+
+			}
+
+			public void keyPressed(KeyEvent e) {
+				if (finished) {
+					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+				}
+			}
+		});
 	}
 }
