@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap>
-    <isCloneAllowed>false</isCloneAllowed>
+    <isCloneAllowed>true</isCloneAllowed>
     <mapObjects>
         <mapObjectLasergate>
             <height>3</height>

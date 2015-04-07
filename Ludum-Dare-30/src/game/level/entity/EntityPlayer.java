@@ -37,6 +37,11 @@ public class EntityPlayer extends EntityMob {
 	}
 
 	public void update(LevelMap map) {
+		move();
+		colision(map);
+	}
+
+	public void move() {
 		xMovement = 0;
 		if (key_A) {
 			xMovement = -2;
@@ -47,11 +52,6 @@ public class EntityPlayer extends EntityMob {
 		if (key_W & onGround) {
 			yMovement = -2.75;
 		}
-		colision(map);
-	}
-
-	public void move() {
-
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -97,8 +97,7 @@ public class EntityPlayer extends EntityMob {
 		return image;
 	}
 
-	public EntityPlayerRecord createRecord() {
-		EntityPlayerRecord rec = new EntityPlayerRecord(x, y);
+	public EntityPlayerRecord createRecord(EntityPlayerRecord rec) {
 		rec.key_A = key_A;
 		rec.key_D = key_D;
 		rec.key_W = key_W;
