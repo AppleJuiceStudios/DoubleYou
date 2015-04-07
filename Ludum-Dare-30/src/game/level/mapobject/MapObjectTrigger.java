@@ -37,4 +37,12 @@ public class MapObjectTrigger extends MapObject {
 		}
 	}
 
+	public int getTargetID() {
+		return targetID;
+	}
+
+	public void setTargetID(int targetID) {
+		this.targetID = targetID;
+	}
+
 }
