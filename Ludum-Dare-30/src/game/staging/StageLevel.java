@@ -6,7 +6,9 @@ import game.level.TileSet;
 import game.level.entity.Entity;
 import game.level.entity.EntityPlayer;
 import game.level.entity.EntityPlayerClone;
+import game.level.entity.EntityPlayerCloneJump;
 import game.level.entity.EntityPlayerRecord;
+import game.level.entity.EntityPlayerRecordJump;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 import game.res.SoundManager;
@@ -20,6 +22,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -43,6 +46,7 @@ public class StageLevel extends Stage {
 	private BufferedImage[] chooseClone;
 
 	private LevelMap map;
+	private String level;
 	private TileSet tileSet;
 
 	private Timer updateTimer;
@@ -52,7 +56,7 @@ public class StageLevel extends Stage {
 	private boolean isRecording;
 	private boolean[] isCloneMoving;
 	private EntityPlayer player;
-	private EntityPlayerRecord[] playerRecord;
+	private EntityPlayerRecord playerRecord;
 	private EntityPlayerClone[] playerClone;
 	private int selectedClone;
 
@@ -65,14 +69,15 @@ public class StageLevel extends Stage {
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		try {
-			if (data.get("level").matches("\\d*"))
-				map = LevelMap.loadLevel(Integer.parseInt(data.get("level")));
+			level = data.get("level");
+			if (level.matches("\\d*"))
+				map = LevelMap.loadLevel(Integer.parseInt(level));
 			else
-				map = LevelMap.loadLevel(new File(data.get("level")));
+				map = LevelMap.loadLevel(new File(level));
 
-			Log.info("Loaded Level " + data.get("level"));
+			Log.info("Loaded Level " + level);
 		} catch (IllegalArgumentException e) {
-			Log.error("Error loading Level: " + data.get("level"));
+			Log.error("Error loading Level: " + level);
 			throw new IllegalArgumentException(e);
 		}
 		map.setStageLevel(this);
@@ -83,10 +88,12 @@ public class StageLevel extends Stage {
 		selectedClone = 0;
 		isCloneAllowed = new boolean[4];
 		isCloneMoving = new boolean[4];
-		playerRecord = new EntityPlayerRecord[4];
 		playerClone = new EntityPlayerClone[4];
 
 		isCloneAllowed[0] = map.getIsCloneAllowed();
+		isCloneAllowed[1] = map.getIsCloneAllowed();
+		isCloneAllowed[2] = false;
+		isCloneAllowed[3] = true;
 		textbox = map.getStartTextbox();
 
 		try {
@@ -132,8 +139,8 @@ public class StageLevel extends Stage {
 
 	public void draw(Graphics2D g2) {
 		if (isRecording) {
-			xOffset += (playerRecord[selectedClone].getXPos() * SCALE - (GameCanvas.WIDTH / 2) - xOffset) * 0.2;
-			yOffset += (playerRecord[selectedClone].getYPos() * SCALE - (GameCanvas.HEIGHT / 3) - yOffset) * 0.2;
+			xOffset += (playerRecord.getXPos() * SCALE - (GameCanvas.WIDTH / 2) - xOffset) * 0.2;
+			yOffset += (playerRecord.getYPos() * SCALE - (GameCanvas.HEIGHT / 3) - yOffset) * 0.2;
 		} else {
 			xOffset += (player.getXPos() * SCALE - (GameCanvas.WIDTH / 2) - xOffset) * 0.2;
 			yOffset += (player.getYPos() * SCALE - (GameCanvas.HEIGHT / 3) - yOffset) * 0.2;
@@ -173,7 +180,7 @@ public class StageLevel extends Stage {
 		try {
 			if (isRecording) {
 				player.draw(g2, false);
-				playerRecord[selectedClone].draw(g2, true);
+				playerRecord.draw(g2, true);
 			} else {
 				player.draw(g2, true);
 			}
@@ -191,10 +198,12 @@ public class StageLevel extends Stage {
 		g2.setTransform(new AffineTransform());
 
 		// GUI
-		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
-		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
-		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2,
-				chooseClone[selectedClone].getHeight() * 2, null);
+		if (player.health > 0) {
+			BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
+			g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
+		}
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
+				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
@@ -221,7 +230,7 @@ public class StageLevel extends Stage {
 		Monitoring.start(2);
 		try {
 			if (isRecording) {
-				playerRecord[selectedClone].update(map);
+				playerRecord.update(map);
 			} else {
 				player.update(map);
 				for (int i = 0; i < isCloneMoving.length; i++) {
@@ -234,17 +243,52 @@ public class StageLevel extends Stage {
 					}
 				}
 			}
-			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2] : null,
-					isCloneMoving[3] ? playerClone[3] : null);
+			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2]
+					: null, isCloneMoving[3] ? playerClone[3] : null);
 		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map);
 		}
+		// Region Entity Interaction
+
+		// Entity Player
+		for (int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			if (entity.getXPos() < player.getXPos() + player.getWidth() //
+					&& player.getXPos() < entity.getXPos() + entity.getWidth() //
+					&& entity.getYPos() < player.getYPos() + player.getHeight() //
+					&& player.getYPos() < entity.getYPos() + entity.getHeight()) {
+				player.interaction(entity, map);
+				entity.interaction(player, map);
+			}
+		}
+
+		// Entity Entity
+		for (int i = 0; i < entities.size(); i++) {
+			for (int j = i + 1; j < entities.size(); j++) {
+				Entity entity1 = entities.get(i);
+				Entity entity2 = entities.get(j);
+				if (entity1.getXPos() < entity2.getXPos() + entity2.getWidth() //
+						&& entity2.getXPos() < entity1.getXPos() + entity1.getWidth() //
+						&& entity1.getYPos() < entity2.getYPos() + entity2.getHeight() //
+						&& entity2.getYPos() < entity1.getYPos() + entity1.getHeight()) {
+					entity1.interaction(entity2, map);
+					entity2.interaction(entity1, map);
+				}
+			}
+		}
+		// EndRegion Entity Interaction
 		Monitoring.stop(2);
 	}
 
 	public void stop() {
 		updateTimer.cancel();
+	}
+
+	public void lose() {
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("level", level);
+		getStageManager().setStage(StageManager.STAGE_LOSE, data);
 	}
 
 	private void initListeners() {
@@ -257,28 +301,58 @@ public class StageLevel extends Stage {
 			public void keyReleased(KeyEvent e) {
 				player.keyReleased(e);
 				if (isRecording) {
-					playerRecord[selectedClone].keyReleased(e);
+					playerRecord.keyReleased(e);
 				}
 			}
 
 			public void keyPressed(KeyEvent e) {
 				player.keyPressed(e);
 				if (isRecording) {
-					playerRecord[selectedClone].keyPressed(e);
+					playerRecord.keyPressed(e);
 				}
-				if (e.getKeyCode() == KeyEvent.VK_SPACE & isCloneAllowed[selectedClone]) {
+				int clonenumber = -1;
+				if (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1 || e.getKeyCode() == KeyEvent.VK_H) {
+					clonenumber = 0;
+				} else if (e.getKeyCode() == KeyEvent.VK_2 || e.getKeyCode() == KeyEvent.VK_NUMPAD2 || e.getKeyCode() == KeyEvent.VK_J) {
+					clonenumber = 1;
+				} else if (e.getKeyCode() == KeyEvent.VK_3 || e.getKeyCode() == KeyEvent.VK_NUMPAD3 || e.getKeyCode() == KeyEvent.VK_K) {
+					clonenumber = 2;
+				} else if (e.getKeyCode() == KeyEvent.VK_4 || e.getKeyCode() == KeyEvent.VK_NUMPAD4 || e.getKeyCode() == KeyEvent.VK_L) {
+					clonenumber = 3;
+				}
+				if (clonenumber != -1) {
+					int lastclonenumber = -1;
 					if (isRecording) {
-						playerClone[selectedClone] = new EntityPlayerClone(player.getXPos(), player.getYPos(), playerRecord[selectedClone].getRecording());
+						lastclonenumber = selectedClone;
+						if (selectedClone == 0) {
+							playerClone[0] = new EntityPlayerClone(player.getXPos(), player.getYPos(), playerRecord.getRecording());
+						} else if (selectedClone == 1) {
+							playerClone[1] = new EntityPlayerCloneJump(player.getXPos(), player.getYPos(), playerRecord.getRecording());
+						} else if (selectedClone == 2) {
+
+						} else if (selectedClone == 3) {
+
+						}
 						isRecording = false;
 						isCloneMoving[selectedClone] = true;
-						playerRecord[selectedClone] = null;
-					} else {
-						if (isCloneMoving[selectedClone]) {
-							isCloneMoving[selectedClone] = false;
-							playerClone[selectedClone] = null;
-						} else {
-							playerRecord[selectedClone] = player.createRecord();
+						playerRecord = null;
+					}
+					if (clonenumber != lastclonenumber) {
+						if (isCloneMoving[clonenumber]) {
+							isCloneMoving[clonenumber] = false;
+							playerClone[clonenumber] = null;
+						} else if (isCloneAllowed[clonenumber]) {
+							if (clonenumber == 0) {
+								playerRecord = player.createRecord(new EntityPlayerRecord(player.getXPos(), player.getYPos()));
+							} else if (clonenumber == 1) {
+								playerRecord = player.createRecord(new EntityPlayerRecordJump(player.getXPos(), player.getYPos()));
+							} else if (clonenumber == 2) {
+
+							} else if (clonenumber == 3) {
+
+							}
 							isRecording = true;
+							selectedClone = clonenumber;
 						}
 					}
 				}

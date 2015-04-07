@@ -22,6 +22,13 @@ public class EntityEnemyMars extends EntityEnemy {
 		image = ResourceManager.getImage("/model/enemys/MarsKnight-Model.png");
 	}
 
+	public void interaction(Entity entity, LevelMap map) {
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			player.damage(1, map);
+		}
+	}
+
 	public void update(LevelMap map) {
 		if (walkLeft) {
 			xMovement = 1;

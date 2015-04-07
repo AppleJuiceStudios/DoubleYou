@@ -100,7 +100,6 @@ public class StageWon extends Stage {
 		imgContributors = ResourceManager.getImage("/Contributors.png");
 	}
 
-	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
 		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 200, null);
@@ -109,12 +108,6 @@ public class StageWon extends Stage {
 		btnMenu.draw(g2);
 	}
 
-	@Override
-	public void update() {
-
-	}
-
-	@Override
 	public void stop() {
 
 	}

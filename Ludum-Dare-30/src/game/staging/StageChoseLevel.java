@@ -126,10 +126,12 @@ public class StageChoseLevel extends Stage {
 				if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER) {
 					if (nextLevel >= selectedLevel && selectedLevel > 0)
 						send(Integer.toString(selectedLevel));
-				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
+				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_DOWN
+						|| e.getKeyCode() == KeyEvent.VK_S) {
 					selectedLevel %= 16;
 					selectedLevel++;
-				} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_UP
+						|| e.getKeyCode() == KeyEvent.VK_W) {
 					selectedLevel--;
 					if (selectedLevel <= 0)
 						selectedLevel = 16;
@@ -171,7 +173,6 @@ public class StageChoseLevel extends Stage {
 		imgBGS4 = ResourceManager.getImage("/backgrounds/Menu-Background.png");
 	}
 
-	@Override
 	public void draw(Graphics2D g2) {
 		// Backgrounds
 		g2.drawImage(imgBGS1, 0, 0, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
@@ -201,12 +202,6 @@ public class StageChoseLevel extends Stage {
 		getStageManager().setStage(StageManager.STAGE_LEVEL, send);
 	}
 
-	@Override
-	public void update() {
-
-	}
-
-	@Override
 	public void stop() {
 
 	}

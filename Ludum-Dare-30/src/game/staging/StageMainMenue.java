@@ -187,7 +187,6 @@ public class StageMainMenue extends Stage {
 		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
 	}
 
-	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
 
@@ -202,12 +201,6 @@ public class StageMainMenue extends Stage {
 			g2.drawString(VERSION, GameCanvas.WIDTH - 50, GameCanvas.HEIGHT - 20);
 	}
 
-	@Override
-	public void update() {
-
-	}
-
-	@Override
 	public void stop() {
 
 	}

@@ -18,9 +18,17 @@ public class EntityPlayer extends EntityMob {
 	protected Animation animationRun;
 	protected Animation animationJump;
 
+	public EntityPlayer(double x, double y, double width, double height) {
+		super(x, y, width, height, null);
+		health = 1;
+		loadResources();
+	}
+
 	public EntityPlayer(double x, double y) {
-		super(x, y, 14d, 31d, null);
-		health = 3;
+		this(x, y, 14d, 31d);
+	}
+
+	public void loadResources() {
 		animationRun = new Animation(14, 31);
 		animationJump = new Animation(14, 31);
 		animationRun.load("/model/player/Run-Animation.png", 2, 150);
@@ -29,6 +37,11 @@ public class EntityPlayer extends EntityMob {
 	}
 
 	public void update(LevelMap map) {
+		move();
+		colision(map);
+	}
+
+	public void move() {
 		xMovement = 0;
 		if (key_A) {
 			xMovement = -2;
@@ -39,7 +52,6 @@ public class EntityPlayer extends EntityMob {
 		if (key_W & onGround) {
 			yMovement = -2.75;
 		}
-		super.update(map);
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -85,8 +97,7 @@ public class EntityPlayer extends EntityMob {
 		return image;
 	}
 
-	public EntityPlayerRecord createRecord() {
-		EntityPlayerRecord rec = new EntityPlayerRecord(x, y);
+	public EntityPlayerRecord createRecord(EntityPlayerRecord rec) {
 		rec.key_A = key_A;
 		rec.key_D = key_D;
 		rec.key_W = key_W;
@@ -95,6 +106,13 @@ public class EntityPlayer extends EntityMob {
 
 	public int getHealth() {
 		return health;
+	}
+
+	public void damage(int amount, LevelMap map) {
+		health -= amount;
+		if (health <= 0) {
+			map.getStageLevel().lose();
+		}
 	}
 
 }
