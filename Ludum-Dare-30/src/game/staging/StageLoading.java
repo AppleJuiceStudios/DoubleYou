@@ -65,7 +65,6 @@ public class StageLoading extends Stage {
 		color = new Color(1f, 1f, 1f, 0.5f);
 		font = GeneralUtils.scaleFont(message, new Rectangle(GameCanvas.WIDTH / 8 + 20, (int) (GameCanvas.HEIGHT * 0.75) + 20, GameCanvas.WIDTH
 				- GameCanvas.WIDTH / 4 - 40, (int) (GameCanvas.HEIGHT * 0.08) - 40), new Font("Dialog", Font.BOLD, 16));
-		System.out.println(font.getSize());
 	}
 
 	public void draw(Graphics2D g2) {
