@@ -35,7 +35,7 @@ import java.util.zip.ZipFile;
 
 import javax.imageio.ImageIO;
 
-import util.log.Log;
+import util.Log;
 
 public class StageCustomMaps extends Stage {
 

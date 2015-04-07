@@ -11,7 +11,7 @@ import java.util.Scanner;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import util.log.Log;
+import util.Log;
 
 @XmlRootElement
 public class SaveGame {

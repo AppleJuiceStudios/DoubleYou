@@ -14,7 +14,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.Map;
 
-import util.log.Log;
+import util.Log;
 import de.Auch.Monitoring;
 
 public class StageManager {

@@ -6,6 +6,7 @@ import game.res.ResourceManager;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -17,7 +18,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import util.log.GeneralUtils;
+import util.GeneralUtils;
 
 public class StageLoading extends Stage {
 
@@ -62,21 +63,23 @@ public class StageLoading extends Stage {
 
 		// Set Color and Font
 		color = new Color(1f, 1f, 1f, 0.5f);
-		font = new Font("Dialog", Font.BOLD, 16);
+		font = GeneralUtils.scaleFont(message, new Rectangle(GameCanvas.WIDTH / 8 + 20, (int) (GameCanvas.HEIGHT * 0.75) + 20, GameCanvas.WIDTH
+				- GameCanvas.WIDTH / 4 - 40, (int) (GameCanvas.HEIGHT * 0.08) - 40), new Font("Dialog", Font.BOLD, 16));
 	}
 
 	public void draw(Graphics2D g2) {
 		g2.drawImage(image, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
 
 		g2.setColor(color);
-		g2.fillRect(100, 450, 600, 50);
+		g2.fillRect(GameCanvas.WIDTH / 8, (int) (GameCanvas.HEIGHT * 0.75), GameCanvas.WIDTH - GameCanvas.WIDTH / 4, (int) (GameCanvas.HEIGHT * 0.08));
 
 		g2.setColor(Color.WHITE);
 		g2.setFont(font);
-		g2.drawString(message, 110, 490);
+		g2.drawString(message, GameCanvas.WIDTH / 8 + 20, (int) (GameCanvas.HEIGHT * 0.83) - 20);
 
-		if (finished)
-			g2.drawString("Press any key to continue.", 110, 530);
+		if (finished) {
+			g2.drawString("Press any key to continue.", GameCanvas.WIDTH / 8 + 20, (int) (GameCanvas.HEIGHT * 0.93));
+		}
 		if (finished && GeneralUtils.isDevMode())
 			getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 
@@ -86,6 +89,8 @@ public class StageLoading extends Stage {
 
 	private void nextMessage() {
 		message = "Please Wait... " + lines.get((int) (Math.random() * lines.size()));
+		font = GeneralUtils.scaleFont(message, new Rectangle(GameCanvas.WIDTH / 8 + 20, (int) (GameCanvas.HEIGHT * 0.75) + 20, GameCanvas.WIDTH
+				- GameCanvas.WIDTH / 4 - 40, (int) (GameCanvas.HEIGHT * 0.08) - 40), new Font("Dialog", Font.BOLD, 16));
 		lastMsgChange = System.currentTimeMillis();
 	}
 

@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import util.log.Log;
+import util.Log;
 import de.Auch.Monitoring;
 
 public class StageLevel extends Stage {

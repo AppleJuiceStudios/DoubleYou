@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -19,8 +20,8 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.Scanner;
 
-import util.log.GeneralUtils;
-import util.log.Log;
+import util.GeneralUtils;
+import util.Log;
 
 public class StageMainMenue extends Stage {
 	// region Variables
@@ -173,11 +174,25 @@ public class StageMainMenue extends Stage {
 	private void initButtons() {
 		selectedButton = -1;
 		btns = new Button[5];
-		btns[0] = new Button(ResourceManager.getString("gui.play"), 30, 300);
-		btns[1] = new Button("CUSTOM MAPS", 30, 350);
-		btns[2] = new Button(ResourceManager.getString("gui.options"), 30, 400);
-		btns[3] = new Button(ResourceManager.getString("gui.credits"), 30, 450);
-		btns[4] = new Button(ResourceManager.getString("gui.exit"), 30, 500);
+
+		int buttonWidth = (int) (GameCanvas.WIDTH * 0.25);
+		int buttonHeight = (int) (GameCanvas.HEIGHT * 0.066);
+		int buttonX = (int) (GameCanvas.WIDTH * 0.1);
+		int startY = (int) (GameCanvas.HEIGHT * 0.5);
+		int buttonGap = (int) (GameCanvas.HEIGHT * 0.01);
+
+		System.out.println(startY * 1 + buttonGap * 0);
+		System.out.println(startY * 2 + buttonGap * 1);
+
+		btns[0] = new Button(ResourceManager.getString("gui.play"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 0 + buttonGap
+				* 0);
+		btns[1] = new Button("CUSTOM MAPS", new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 1 + buttonGap * 1);
+		btns[2] = new Button(ResourceManager.getString("gui.options"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 2 + buttonGap
+				* 2);
+		btns[3] = new Button(ResourceManager.getString("gui.credits"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 3 + buttonGap
+				* 3);
+		btns[4] = new Button(ResourceManager.getString("gui.exit"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 4 + buttonGap
+				* 4);
 
 		for (Button button : btns)
 			button.setHighlighted(false);
@@ -188,7 +203,7 @@ public class StageMainMenue extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
+		g2.drawImage(imgBackground, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
 
 		for (Button button : btns)
 			button.draw(g2);
