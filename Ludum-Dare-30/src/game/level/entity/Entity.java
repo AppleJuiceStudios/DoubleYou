@@ -34,6 +34,14 @@ public class Entity {
 		}
 	}
 
+	public void interaction(Entity entity, LevelMap map) {
+
+	}
+
+	public void damage(int amount, LevelMap map) {
+
+	}
+
 	protected BufferedImage getImage(boolean animated) {
 		return image;
 	}
