@@ -59,7 +59,7 @@ public class EntityPlayer extends EntityMob {
 			key_A = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
 			key_D = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_W) {
+		} else if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_W) {
 			key_W = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			key_A = true;
@@ -84,6 +84,12 @@ public class EntityPlayer extends EntityMob {
 		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 			key_W = false;
 		}
+	}
+
+	public void resetKeys() {
+		key_A = false;
+		key_D = false;
+		key_W = false;
 	}
 
 	protected BufferedImage getImage(boolean animated) {
