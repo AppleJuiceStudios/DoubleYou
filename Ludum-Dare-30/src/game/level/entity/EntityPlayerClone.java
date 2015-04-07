@@ -41,6 +41,10 @@ public class EntityPlayerClone extends EntityPlayer {
 		return isDead;
 	}
 
+	public void damage(int amount, LevelMap map) {
+		isDead = true;
+	}
+
 	public boolean colideWithBlock(LevelMap map, int x, int y) {
 		return map.isCloneSolid(x, y);
 	}

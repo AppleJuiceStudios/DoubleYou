@@ -34,6 +34,7 @@ import de.Auch.Monitoring;
 public class StageLevel extends Stage {
 
 	public static final int SCALE = 3;
+	public static final double SLOW_TIME_FACTOR = 0.1;
 	private double xOffset = 0;
 	private double yOffset = 0;
 	private double maxXOffset;
@@ -179,20 +180,20 @@ public class StageLevel extends Stage {
 		}
 		try {
 			if (isRecording) {
-				player.draw(g2, false);
-				playerRecord.draw(g2, true);
+				player.draw(g2, SLOW_TIME_FACTOR);
+				playerRecord.draw(g2, 1.0);
 			} else {
-				player.draw(g2, true);
+				player.draw(g2, 1.0);
 			}
 			for (int i = 0; i < playerClone.length; i++) {
 				if (isCloneMoving[i]) {
-					playerClone[i].draw(g2, true);
+					playerClone[i].draw(g2, 1.0);
 				}
 			}
 		} catch (NullPointerException e) {
 		}
 		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).draw(g2, true);
+			entities.get(i).draw(g2, 1.0);
 		}
 
 		map.drawObjects(g2, spriteSize);
@@ -229,7 +230,7 @@ public class StageLevel extends Stage {
 
 	public void update() {
 		Monitoring.start(2);
-		double timeFactor = isRecording ? 0.1 : 1;
+		double timeFactor = isRecording ? SLOW_TIME_FACTOR : 1;
 		try {
 			if (isRecording) {
 				playerRecord.update(map, 1.0);
@@ -252,7 +253,7 @@ public class StageLevel extends Stage {
 			entities.get(i).update(map, timeFactor);
 		}
 
-		// Region Entity Interaction
+		// region Entity Interaction
 
 		// Entity Player
 		for (int i = 0; i < entities.size(); i++) {
@@ -263,6 +264,23 @@ public class StageLevel extends Stage {
 					&& player.getYPos() < entity.getYPos() + entity.getHeight()) {
 				player.interaction(entity, map);
 				entity.interaction(player, map);
+			}
+		}
+
+		// Entity Clone
+		for (int i = 0; i < entities.size(); i++) {
+			for (int j = 0; j < playerClone.length; j++) {
+				EntityPlayerClone clone = playerClone[j];
+				if (clone != null) {
+					Entity entity = entities.get(i);
+					if (entity.getXPos() < clone.getXPos() + clone.getWidth() //
+							&& clone.getXPos() < entity.getXPos() + entity.getWidth() //
+							&& entity.getYPos() < clone.getYPos() + clone.getHeight() //
+							&& clone.getYPos() < entity.getYPos() + entity.getHeight()) {
+						clone.interaction(entity, map);
+						entity.interaction(clone, map);
+					}
+				}
 			}
 		}
 
@@ -280,7 +298,8 @@ public class StageLevel extends Stage {
 				}
 			}
 		}
-		// Regionend Entity Interaction
+		// endregion Entity Interaction
+
 		Monitoring.stop(2);
 	}
 

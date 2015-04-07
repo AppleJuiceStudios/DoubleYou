@@ -86,13 +86,11 @@ public class EntityPlayer extends EntityMob {
 		}
 	}
 
-	protected BufferedImage getImage(boolean animated) {
-		if (animated) {
-			if (!onGround) {
-				return animationJump.getImage();
-			} else if (key_A || key_D) {
-				return animationRun.getImage();
-			}
+	protected BufferedImage getImage(double timeFactor) {
+		if (!onGround) {
+			return animationJump.getImage(timeFactor);
+		} else if (key_A || key_D) {
+			return animationRun.getImage(timeFactor);
 		}
 		return image;
 	}
