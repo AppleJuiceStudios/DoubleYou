@@ -18,9 +18,17 @@ public class EntityPlayer extends EntityMob {
 	protected Animation animationRun;
 	protected Animation animationJump;
 
-	public EntityPlayer(double x, double y) {
-		super(x, y, 14d, 31d, null);
+	public EntityPlayer(double x, double y, double width, double height) {
+		super(x, y, width, height, null);
 		health = 1;
+		loadResources();
+	}
+
+	public EntityPlayer(double x, double y) {
+		this(x, y, 14d, 31d);
+	}
+
+	public void loadResources() {
 		animationRun = new Animation(14, 31);
 		animationJump = new Animation(14, 31);
 		animationRun.load("/model/player/Run-Animation.png", 2, 150);
@@ -39,7 +47,11 @@ public class EntityPlayer extends EntityMob {
 		if (key_W & onGround) {
 			yMovement = -2.75;
 		}
-		super.update(map);
+		colision(map);
+	}
+
+	public void move() {
+
 	}
 
 	public void keyPressed(KeyEvent e) {
