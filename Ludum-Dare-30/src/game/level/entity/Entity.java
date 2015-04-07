@@ -46,7 +46,7 @@ public class Entity {
 		return image;
 	}
 
-	public void update(LevelMap map) {
+	public void update(LevelMap map, double timeFactor) {
 
 	}
 

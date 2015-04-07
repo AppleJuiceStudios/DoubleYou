@@ -36,9 +36,9 @@ public class EntityPlayer extends EntityMob {
 		image = ResourceManager.getImage("/model/player/Player-Model.png");
 	}
 
-	public void update(LevelMap map) {
+	public void update(LevelMap map, double timeFactor) {
 		move();
-		colision(map);
+		colision(map, timeFactor);
 	}
 
 	public void move() {

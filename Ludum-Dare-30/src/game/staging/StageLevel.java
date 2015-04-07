@@ -189,7 +189,8 @@ public class StageLevel extends Stage {
 					playerClone[i].draw(g2, true);
 				}
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).draw(g2, true);
 		}
@@ -228,27 +229,29 @@ public class StageLevel extends Stage {
 
 	public void update() {
 		Monitoring.start(2);
+		double timeFactor = isRecording ? 0.1 : 1;
 		try {
 			if (isRecording) {
-				playerRecord.update(map);
-			} else {
-				player.update(map);
-				for (int i = 0; i < isCloneMoving.length; i++) {
-					if (isCloneMoving[i]) {
-						playerClone[i].update(map);
-						if (playerClone[i].isDead()) {
-							isCloneMoving[i] = false;
-							playerClone[i] = null;
-						}
+				playerRecord.update(map, 1.0);
+			}
+			player.update(map, timeFactor);
+			for (int i = 0; i < isCloneMoving.length; i++) {
+				if (isCloneMoving[i]) {
+					playerClone[i].update(map, timeFactor);
+					if (playerClone[i].isDead()) {
+						isCloneMoving[i] = false;
+						playerClone[i] = null;
 					}
 				}
 			}
 			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2]
 					: null, isCloneMoving[3] ? playerClone[3] : null);
-		} catch (NullPointerException e) {}
-		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).update(map);
+		} catch (NullPointerException e) {
 		}
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).update(map, timeFactor);
+		}
+
 		// Region Entity Interaction
 
 		// Entity Player
@@ -277,7 +280,7 @@ public class StageLevel extends Stage {
 				}
 			}
 		}
-		// EndRegion Entity Interaction
+		// Regionend Entity Interaction
 		Monitoring.stop(2);
 	}
 
