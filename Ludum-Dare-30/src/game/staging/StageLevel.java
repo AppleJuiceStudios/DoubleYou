@@ -20,6 +20,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -43,6 +44,7 @@ public class StageLevel extends Stage {
 	private BufferedImage[] chooseClone;
 
 	private LevelMap map;
+	private String level;
 	private TileSet tileSet;
 
 	private Timer updateTimer;
@@ -65,14 +67,15 @@ public class StageLevel extends Stage {
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		try {
-			if (data.get("level").matches("\\d*"))
-				map = LevelMap.loadLevel(Integer.parseInt(data.get("level")));
+			level = data.get("level");
+			if (level.matches("\\d*"))
+				map = LevelMap.loadLevel(Integer.parseInt(level));
 			else
-				map = LevelMap.loadLevel(new File(data.get("level")));
+				map = LevelMap.loadLevel(new File(level));
 
-			Log.info("Loaded Level " + data.get("level"));
+			Log.info("Loaded Level " + level);
 		} catch (IllegalArgumentException e) {
-			Log.error("Error loading Level: " + data.get("level"));
+			Log.error("Error loading Level: " + level);
 			throw new IllegalArgumentException(e);
 		}
 		map.setStageLevel(this);
@@ -182,7 +185,8 @@ public class StageLevel extends Stage {
 					playerClone[i].draw(g2, true);
 				}
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).draw(g2, true);
 		}
@@ -191,10 +195,12 @@ public class StageLevel extends Stage {
 		g2.setTransform(new AffineTransform());
 
 		// GUI
-		BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
-		g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
-		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10, chooseClone[selectedClone].getWidth() * 2,
-				chooseClone[selectedClone].getHeight() * 2, null);
+		if (player.health > 0) {
+			BufferedImage health = healthbar.getSubimage(0, (player.health - 1) * 20, healthbar.getWidth(), 20);
+			g2.drawImage(health, 10, 10, health.getWidth() * 2, health.getHeight() * 2, null);
+		}
+		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
+				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
 	}
 
@@ -234,17 +240,53 @@ public class StageLevel extends Stage {
 					}
 				}
 			}
-			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2] : null,
-					isCloneMoving[3] ? playerClone[3] : null);
-		} catch (NullPointerException e) {}
+			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2]
+					: null, isCloneMoving[3] ? playerClone[3] : null);
+		} catch (NullPointerException e) {
+		}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map);
 		}
+		// Region Entity Interaction
+
+		// Entity Player
+		for (int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			if (entity.getXPos() < player.getXPos() + player.getWidth() //
+					&& player.getXPos() < entity.getXPos() + entity.getWidth() //
+					&& entity.getYPos() < player.getYPos() + player.getHeight() //
+					&& player.getYPos() < entity.getYPos() + entity.getHeight()) {
+				player.interaction(entity, map);
+				entity.interaction(player, map);
+			}
+		}
+
+		// Entity Entity
+		for (int i = 0; i < entities.size(); i++) {
+			for (int j = i + 1; j < entities.size(); j++) {
+				Entity entity1 = entities.get(i);
+				Entity entity2 = entities.get(j);
+				if (entity1.getXPos() < entity2.getXPos() + entity2.getWidth() //
+						&& entity2.getXPos() < entity1.getXPos() + entity1.getWidth() //
+						&& entity1.getYPos() < entity2.getYPos() + entity2.getHeight() //
+						&& entity2.getYPos() < entity1.getYPos() + entity1.getHeight()) {
+					entity1.interaction(entity2, map);
+					entity2.interaction(entity1, map);
+				}
+			}
+		}
+		// EndRegion Entity Interaction
 		Monitoring.stop(2);
 	}
 
 	public void stop() {
 		updateTimer.cancel();
+	}
+
+	public void lose() {
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("level", level);
+		getStageManager().setStage(StageManager.STAGE_LEVEL, data);
 	}
 
 	private void initListeners() {

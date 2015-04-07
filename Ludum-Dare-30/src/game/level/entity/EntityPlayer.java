@@ -97,4 +97,11 @@ public class EntityPlayer extends EntityMob {
 		return health;
 	}
 
+	public void damage(int amount, LevelMap map) {
+		health -= amount;
+		if (health <= 0) {
+			map.getStageLevel().lose();
+		}
+	}
+
 }
