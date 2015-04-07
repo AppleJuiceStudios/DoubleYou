@@ -173,7 +173,6 @@ public class StageChoseLevel extends Stage {
 		imgBGS4 = ResourceManager.getImage("/backgrounds/Menu-Background.png");
 	}
 
-	@Override
 	public void draw(Graphics2D g2) {
 		// Backgrounds
 		g2.drawImage(imgBGS1, 0, 0, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
@@ -203,7 +202,6 @@ public class StageChoseLevel extends Stage {
 		getStageManager().setStage(StageManager.STAGE_LEVEL, send);
 	}
 
-	@Override
 	public void stop() {
 
 	}

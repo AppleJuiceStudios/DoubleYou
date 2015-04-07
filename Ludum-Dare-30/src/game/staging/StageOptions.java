@@ -211,7 +211,6 @@ public class StageOptions extends Stage {
 
 	}
 
-	@Override
 	public void draw(Graphics2D g2) {
 		g2.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
 
@@ -227,7 +226,6 @@ public class StageOptions extends Stage {
 		}
 	}
 
-	@Override
 	public void stop() {
 
 	}

@@ -286,7 +286,7 @@ public class StageLevel extends Stage {
 	public void lose() {
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("level", level);
-		getStageManager().setStage(StageManager.STAGE_LEVEL, data);
+		getStageManager().setStage(StageManager.STAGE_LOSE, data);
 	}
 
 	private void initListeners() {

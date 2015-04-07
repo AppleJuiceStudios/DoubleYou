@@ -34,7 +34,8 @@ public class StageManager {
 	public static final int STAGE_CREDITS = 4;
 	public static final int STAGE_CHOOSE_LEVEL = 5;
 	public static final int STAGE_WON = 6;
-	public static final int STAGE_CUSTOM_MAPS = 7;
+	public static final int STAGE_LOSE = 7;
+	public static final int STAGE_CUSTOM_MAPS = 8;
 
 	public StageManager(GameCanvas gameCanvas) {
 		this.gameCanvas = gameCanvas;
@@ -72,6 +73,8 @@ public class StageManager {
 				stage = new StageChoseLevel(this, data);
 			} else if (stageID == STAGE_WON) {
 				stage = new StageWon(this, data);
+			} else if (stageID == STAGE_LOSE) {
+				stage = new StageLose(this, data);
 			} else if (stageID == STAGE_CUSTOM_MAPS) {
 				stage = new StageCustomMaps(this, data);
 			}
