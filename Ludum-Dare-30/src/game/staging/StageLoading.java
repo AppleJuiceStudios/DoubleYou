@@ -78,7 +78,7 @@ public class StageLoading extends Stage {
 		if (finished)
 			g2.drawString("Press any key to continue.", 110, 530);
 		if (finished && GeneralUtils.isDevMode())
-			getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+			getStageManager().setStage(StageManager.STAGE_LEVEL_EDITOR);
 
 		if (System.currentTimeMillis() - lastMsgChange > messageSpeed)
 			nextMessage();

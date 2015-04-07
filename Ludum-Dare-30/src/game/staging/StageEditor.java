@@ -4,6 +4,7 @@ import game.level.LevelMapEditor;
 import game.level.TileSet;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectAction;
+import game.level.mapobject.MapObjectDecorationFinishFlag;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateHorizontal;
 import game.level.mapobject.MapObjectLogic;
@@ -108,7 +109,12 @@ public class StageEditor extends Stage {
 	}
 
 	private void loadMap(Map<String, String> data) {
-		File file = new File(data.get("file"));
+		File file;
+		if (data != null && data.containsKey("file")) {
+			file = new File(data.get("file"));
+		} else {
+			file = new File("res/level/levelEmpty.xml");
+		}
 		levelFile = file;
 		if (file.exists()) {
 			map = JAXB.unmarshal(file, LevelMapEditor.class);
@@ -177,8 +183,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
-							- 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+							* spriteSize + i * 2 - 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -195,8 +201,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth() == 0 ? 1 : selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight() == 0 ? 1 : selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
-							- 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+							* spriteSize + i * 2 - 1);
 				}
 			}
 		}
@@ -266,7 +272,10 @@ public class StageEditor extends Stage {
 		} else if (object instanceof MapObjectLasergateHorizontal) {
 			object.setX(Math.min(selectedX, lastSelectionX));
 			object.setWidth(Math.abs(selectedX - lastSelectionX) + 1);
+		} else if (object instanceof MapObjectDecorationFinishFlag) {
+			object.setHeight(2);
 		}
+
 		map.addMapObject(object);
 	}
 
@@ -574,8 +583,8 @@ public class StageEditor extends Stage {
 								startLogicLine.setOutput(mouseObject.getId());
 								if (mouseObject.inputCount() != 1 || mouseObject.moreInputs()) {
 									int inputcount = mouseObject.inputCount() + (mouseObject.moreInputs() ? 1 : 0);
-									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize : mouseObject
-											.getWidth() * spriteSize) / inputcount));
+									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize
+											: mouseObject.getWidth() * spriteSize) / inputcount));
 									mouseObject.setInput(input, startLogicLine.getId());
 								}
 								connectingLogicLine = false;
