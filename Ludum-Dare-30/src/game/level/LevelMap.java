@@ -13,7 +13,10 @@ import game.level.mapobject.MapObjectLasergateHorizontalClone;
 import game.level.mapobject.MapObjectLogicAnd;
 import game.level.mapobject.MapObjectLogicAndKeeping;
 import game.level.mapobject.MapObjectLogicOr;
+import game.level.mapobject.MapObjectTrigger;
 import game.level.mapobject.MapObjectTriggerLevel12;
+import game.level.mapobject.MapObjectActionTextbox;
+import game.level.mapobject.MapObjectActionWinning;
 import game.main.GameCanvas;
 import game.res.SaveGame;
 import game.staging.StageLevel;
@@ -51,8 +54,8 @@ public class LevelMap {
 			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
 			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
 			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
-			@XmlElementRef(type = MapObjectActionTextbox.class), @XmlElementRef(type = MapObjectActionWinning.class),
-			@XmlElementRef(type = MapObjectActionSpawner.class) })
+			@XmlElementRef(type = MapObjectTrigger.class), @XmlElementRef(type = MapObjectActionTextbox.class),
+			@XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
