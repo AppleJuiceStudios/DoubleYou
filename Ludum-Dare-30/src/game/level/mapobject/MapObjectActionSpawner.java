@@ -1,6 +1,7 @@
 package game.level.mapobject;
 
 import game.level.LevelMap;
+import game.level.TileSet;
 import game.level.entity.EntityEnemyMars;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +18,7 @@ public class MapObjectActionSpawner extends MapObjectAction {
 	}
 
 	public void action(LevelMap map) {
-		map.getStageLevel().spawnEntity(new EntityEnemyMars(x, y));
+		map.getStageLevel().spawnEntity(new EntityEnemyMars(x * TileSet.SPRITE_SIZE, y * TileSet.SPRITE_SIZE));
 	}
 
 }

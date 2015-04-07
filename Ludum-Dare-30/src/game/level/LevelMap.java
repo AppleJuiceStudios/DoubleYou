@@ -3,6 +3,8 @@ package game.level;
 import game.level.entity.Entity;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectActionSpawner;
+import game.level.mapobject.MapObjectActionTextbox;
+import game.level.mapobject.MapObjectActionWinning;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateClone;
@@ -47,11 +49,13 @@ public class LevelMap {
 	private int height;
 
 	@XmlElementWrapper(name = "mapObjects")
-	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class), @XmlElementRef(type = MapObject.class),
-			@XmlElementRef(type = MapObjectLasergateClone.class), @XmlElementRef(type = MapObjectLasergateHorizontal.class),
-			@XmlElementRef(type = MapObjectLasergateHorizontalClone.class), @XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
-			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class), @XmlElementRef(type = MapObjectTrigger.class),
-			@XmlElementRef(type = MapObjectActionTextbox.class), @XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class) })
+	@XmlElementRefs({ @XmlElementRef(type = MapObjectGroundswtich.class), @XmlElementRef(type = MapObjectLasergate.class),
+			@XmlElementRef(type = MapObject.class), @XmlElementRef(type = MapObjectLasergateClone.class),
+			@XmlElementRef(type = MapObjectLasergateHorizontal.class), @XmlElementRef(type = MapObjectLasergateHorizontalClone.class),
+			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
+			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
+			@XmlElementRef(type = MapObjectTrigger.class), @XmlElementRef(type = MapObjectActionTextbox.class),
+			@XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
@@ -81,7 +85,7 @@ public class LevelMap {
 	}
 
 	public void powerObject(int id, boolean power) {
-		if (id <= 32)
+		if (id >= 32)
 			objects[id - 32].setPower(power, this);
 	}
 
