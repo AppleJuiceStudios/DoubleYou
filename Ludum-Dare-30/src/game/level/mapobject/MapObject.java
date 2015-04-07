@@ -5,10 +5,14 @@ import game.level.entity.Entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.beans.Transient;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class MapObject {
 
 	protected int id;
@@ -151,10 +155,12 @@ public class MapObject {
 		return false;
 	}
 
+	@Transient
 	public int[] getInputs() {
 		return null;
 	}
 
+	@Transient
 	public int getOutput() {
 		return -1;
 	}

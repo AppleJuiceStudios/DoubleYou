@@ -5,6 +5,7 @@ import game.level.LevelMap;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.beans.Transient;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -57,6 +58,7 @@ public class MapObjectLogic extends MapObject {
 		return true;
 	}
 
+	@Transient
 	public int getOutput() {
 		return targetID;
 	}

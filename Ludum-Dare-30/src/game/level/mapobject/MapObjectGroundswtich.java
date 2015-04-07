@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.beans.Transient;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -60,7 +61,8 @@ public class MapObjectGroundswtich extends MapObject {
 		boolean t = false;
 		for (int i = 0; i < entities.length; i++) {
 			if (entities[i] != null) {
-				if (x == (int) ((entities[i].getXPos() + (entities[i].getWidth() / 2)) / 16) & y == (int) ((entities[i].getYPos() + entities[i].getHeight() - 1) / 16)) {
+				if (x == (int) ((entities[i].getXPos() + (entities[i].getWidth() / 2)) / 16)
+						& y == (int) ((entities[i].getYPos() + entities[i].getHeight() - 1) / 16)) {
 					t = true;
 				}
 			}
@@ -82,6 +84,7 @@ public class MapObjectGroundswtich extends MapObject {
 		return true;
 	}
 
+	@Transient
 	public int getOutput() {
 		return targetID;
 	}
