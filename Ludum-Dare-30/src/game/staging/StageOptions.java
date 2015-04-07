@@ -228,11 +228,6 @@ public class StageOptions extends Stage {
 	}
 
 	@Override
-	public void update() {
-
-	}
-
-	@Override
 	public void stop() {
 
 	}

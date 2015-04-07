@@ -90,10 +90,6 @@ public class StageManager {
 		Monitoring.stop(0);
 	}
 
-	public void update() {
-		stage.update();
-	}
-
 	public void setKeyListener(KeyListener keyListener) {
 		this.keyListener = keyListener;
 	}
