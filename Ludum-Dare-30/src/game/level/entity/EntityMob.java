@@ -15,15 +15,15 @@ public class EntityMob extends Entity {
 		super(x, y, width, height, image);
 	}
 
-	public void update(LevelMap map) {
-		colision(map);
+	public void update(LevelMap map, double timeFactor) {
+		colision(map, timeFactor);
 	}
 
-	protected void colision(LevelMap map) {
-		yMovement += 0.07;
+	protected void colision(LevelMap map, double timeFactor) {
+		yMovement += 0.07 * timeFactor;
 		if (xMovement > 0) {
 			lookLeft = false;
-			int xright = (int) ((x + width + xMovement) / 16);
+			int xright = (int) ((x + width + xMovement * timeFactor) / 16);
 			int ytop = (int) (y / 16 + 0.00001);
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
@@ -32,7 +32,7 @@ public class EntityMob extends Entity {
 			}
 		} else if (xMovement < 0) {
 			lookLeft = true;
-			int xleft = (int) ((x + xMovement) / 16);
+			int xleft = (int) ((x + xMovement * timeFactor) / 16);
 			int ytop = (int) (y / 16 + 0.00001);
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
@@ -40,7 +40,8 @@ public class EntityMob extends Entity {
 				xMovement = ((xleft + 1) * 16) - x;
 			}
 		}
-		x += xMovement;
+		x += xMovement * timeFactor;
+		// xMovement /= timeFactor;
 
 		if (yMovement > 10) {
 			yMovement = 10;
@@ -50,7 +51,7 @@ public class EntityMob extends Entity {
 		}
 		onGround = false;
 		if (yMovement > 0) {
-			int ybottom = (int) ((y + height + yMovement) / 16);
+			int ybottom = (int) ((y + height + yMovement * timeFactor) / 16);
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
 			if (colideWithBlock(map, xleft, ybottom) | colideWithBlock(map, xright, ybottom)) {
@@ -58,14 +59,15 @@ public class EntityMob extends Entity {
 				onGround = true;
 			}
 		} else if (yMovement < 0) {
-			int ytop = (int) ((y + yMovement) / 16);
+			int ytop = (int) ((y + yMovement * timeFactor) / 16);
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
 			if (colideWithBlock(map, xleft, ytop) | colideWithBlock(map, xright, ytop)) {
 				yMovement = ((ytop + 1) * 16) - y;
 			}
 		}
-		y += yMovement;
+		y += yMovement * timeFactor;
+		// yMovement /= timeFactor;
 	}
 
 	public boolean colideWithBlock(LevelMap map, int x, int y) {

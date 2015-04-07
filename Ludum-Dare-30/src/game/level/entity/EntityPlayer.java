@@ -36,9 +36,9 @@ public class EntityPlayer extends EntityMob {
 		image = ResourceManager.getImage("/model/player/Player-Model.png");
 	}
 
-	public void update(LevelMap map) {
+	public void update(LevelMap map, double timeFactor) {
 		move();
-		colision(map);
+		colision(map, timeFactor);
 	}
 
 	public void move() {
@@ -59,7 +59,7 @@ public class EntityPlayer extends EntityMob {
 			key_A = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_D) {
 			key_D = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_W) {
+		} else if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_W) {
 			key_W = true;
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			key_A = true;
@@ -86,13 +86,17 @@ public class EntityPlayer extends EntityMob {
 		}
 	}
 
-	protected BufferedImage getImage(boolean animated) {
-		if (animated) {
-			if (!onGround) {
-				return animationJump.getImage();
-			} else if (key_A || key_D) {
-				return animationRun.getImage();
-			}
+	public void resetKeys() {
+		key_A = false;
+		key_D = false;
+		key_W = false;
+	}
+
+	protected BufferedImage getImage(double timeFactor) {
+		if (!onGround) {
+			return animationJump.getImage(timeFactor);
+		} else if (key_A || key_D) {
+			return animationRun.getImage(timeFactor);
 		}
 		return image;
 	}
