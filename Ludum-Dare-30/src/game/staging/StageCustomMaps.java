@@ -1,12 +1,10 @@
 package game.staging;
 
-import game.main.GameApplet;
 import game.main.GameCanvas;
 import game.res.Button;
 import game.res.ResourceManager;
 import game.res.SaveGame;
 
-import java.applet.AppletContext;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Font;
@@ -297,10 +295,7 @@ public class StageCustomMaps extends Stage {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		if (GameCanvas.IS_APPLET) {
-			AppletContext a = GameApplet.appletContext;
-			a.showDocument(url, "_blank");
-		} else if (Desktop.isDesktopSupported()) {
+		if (Desktop.isDesktopSupported()) {
 			try {
 				Desktop.getDesktop().browse(url.toURI());
 			} catch (IOException | URISyntaxException e) {

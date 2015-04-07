@@ -33,7 +33,7 @@ import de.Auch.Monitoring;
 
 public class StageLevel extends Stage {
 
-	public static final int SCALE = 3;
+	public static int SCALE = 3;
 	public static final double SLOW_TIME_FACTOR = 0.1;
 	private double xOffset = 0;
 	private double yOffset = 0;
@@ -69,6 +69,9 @@ public class StageLevel extends Stage {
 
 	public StageLevel(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
+		int minXScale = GameCanvas.WIDTH / (20 * TileSet.SPRITE_SIZE) + 1;
+		int minYScale = GameCanvas.HEIGHT / (15 * TileSet.SPRITE_SIZE) + 1;
+		SCALE = Math.min(minXScale, minYScale);
 		try {
 			level = data.get("level");
 			if (level.matches("\\d*"))

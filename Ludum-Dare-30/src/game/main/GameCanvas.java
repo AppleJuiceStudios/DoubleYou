@@ -15,8 +15,8 @@ import de.Auch.Monitoring;
 @SuppressWarnings("serial")
 public class GameCanvas extends Canvas {
 
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 600;
+	public static int WIDTH;
+	public static int HEIGHT;
 
 	private StageManager stageManager;
 	public static FpsManager fpsManager;
@@ -27,7 +27,9 @@ public class GameCanvas extends Canvas {
 
 	public static final int FPS_MAX = 60;
 
-	public GameCanvas() {
+	public GameCanvas(int width, int height) {
+		WIDTH = width;
+		HEIGHT = height;
 		stageManager = new StageManager(this);
 		fpsManager = new FpsManager();
 	}
