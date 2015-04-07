@@ -7,6 +7,9 @@ import game.res.ResourceManager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class MapObjectSpike extends MapObject {
 
 	private BufferedImage image;
