@@ -207,7 +207,8 @@ public class LevelMap {
 			@XmlElementRef(type = MapObjectLogicAndKeeping.class), @XmlElementRef(type = MapObjectLogicOr.class),
 			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
 			@XmlElementRef(type = MapObjectTrigger.class), @XmlElementRef(type = MapObjectActionTextbox.class),
-			@XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class) })
+			@XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class),
+			@XmlElementRef(type = MapObjectDecorationFinishFlag.class) })
 	public MapObject[] getMapObjects() {
 		return objects;
 	}
