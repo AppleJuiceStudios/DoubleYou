@@ -190,8 +190,7 @@ public class StageLevel extends Stage {
 					playerClone[i].draw(g2, 1.0);
 				}
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).draw(g2, 1.0);
 		}
@@ -247,8 +246,7 @@ public class StageLevel extends Stage {
 			}
 			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2]
 					: null, isCloneMoving[3] ? playerClone[3] : null);
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map, timeFactor);
 		}
@@ -328,9 +326,10 @@ public class StageLevel extends Stage {
 			}
 
 			public void keyPressed(KeyEvent e) {
-				player.keyPressed(e);
 				if (isRecording) {
 					playerRecord.keyPressed(e);
+				} else {
+					player.keyPressed(e);
 				}
 				int clonenumber = -1;
 				if (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1 || e.getKeyCode() == KeyEvent.VK_H) {
@@ -375,6 +374,7 @@ public class StageLevel extends Stage {
 							}
 							isRecording = true;
 							selectedClone = clonenumber;
+							player.resetKeys();
 						}
 					}
 				}
