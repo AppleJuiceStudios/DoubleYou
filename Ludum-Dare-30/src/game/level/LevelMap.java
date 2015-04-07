@@ -5,6 +5,7 @@ import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectActionSpawner;
 import game.level.mapobject.MapObjectActionTextbox;
 import game.level.mapobject.MapObjectActionWinning;
+import game.level.mapobject.MapObjectDecorationFinishFlag;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateClone;
