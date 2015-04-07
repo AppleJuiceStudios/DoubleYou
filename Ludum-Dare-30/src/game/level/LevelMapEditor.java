@@ -288,7 +288,6 @@ public class LevelMapEditor extends LevelMap {
 
 	public void setMapObjects(MapObject[] mapObjects) {
 		objectsMap = new HashMap<Integer, MapObject>();
-		System.out.println(mapObjects.length);
 		for (int i = 0; i < mapObjects.length; i++) {
 			objectsMap.put(mapObjects[i].getId(), mapObjects[i]);
 		}

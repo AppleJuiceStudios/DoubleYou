@@ -1,5 +1,7 @@
 package game.level.mapobject;
 
+import java.beans.Transient;
+
 import game.level.LevelMap;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -38,6 +40,7 @@ public class MapObjectLogicAndKeeping extends MapObjectLogic {
 		return in.length;
 	}
 
+	@Transient
 	public int[] getInputs() {
 		return in;
 	}
