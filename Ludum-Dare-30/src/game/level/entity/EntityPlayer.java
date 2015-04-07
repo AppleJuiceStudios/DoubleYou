@@ -20,7 +20,7 @@ public class EntityPlayer extends EntityMob {
 
 	public EntityPlayer(double x, double y) {
 		super(x, y, 14d, 31d, null);
-		health = 3;
+		health = 1;
 		animationRun = new Animation(14, 31);
 		animationJump = new Animation(14, 31);
 		animationRun.load("/model/player/Run-Animation.png", 2, 150);
