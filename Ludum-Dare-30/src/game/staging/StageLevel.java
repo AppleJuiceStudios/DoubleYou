@@ -159,10 +159,13 @@ public class StageLevel extends Stage {
 		} else if (yOffset < 0) {
 			yOffset = 0;
 		}
-		g2.drawImage(background, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
+		drawBackground(g2, background);
+		// g2.drawImage(background, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
+		// Montains
 		double mountainsOffset = -xOffset * 0.3;
-		g2.drawImage(mountains, (int) (mountainsOffset % GameCanvas.WIDTH) + GameCanvas.WIDTH, -190, GameCanvas.WIDTH, GameCanvas.WIDTH, null);
-		g2.drawImage(mountains, (int) (mountainsOffset % GameCanvas.WIDTH), -190, GameCanvas.WIDTH, GameCanvas.WIDTH, null);
+		for (int i = (int) -mountainsOffset / (260 * SCALE); i <= ((int) -mountainsOffset + GameCanvas.WIDTH) / (260 * SCALE); i++) {
+			g2.drawImage(mountains, i * 260 * SCALE + (int) mountainsOffset, GameCanvas.HEIGHT - 260 * SCALE, 260 * SCALE, 260 * SCALE, null);
+		}
 		AffineTransform at = new AffineTransform();
 		at.translate((int) -xOffset, (int) -yOffset);
 		g2.setTransform(at);
