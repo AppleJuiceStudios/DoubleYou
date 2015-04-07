@@ -92,8 +92,8 @@ public class StageLevel extends Stage {
 
 		isCloneAllowed[0] = map.getIsCloneAllowed();
 		isCloneAllowed[1] = map.getIsCloneAllowed();
-		isCloneAllowed[2] = map.getIsCloneAllowed();
-		isCloneAllowed[3] = map.getIsCloneAllowed();
+		isCloneAllowed[2] = false;
+		isCloneAllowed[3] = true;
 		textbox = map.getStartTextbox();
 
 		try {
@@ -341,7 +341,7 @@ public class StageLevel extends Stage {
 						if (isCloneMoving[clonenumber]) {
 							isCloneMoving[clonenumber] = false;
 							playerClone[clonenumber] = null;
-						} else {
+						} else if (isCloneAllowed[clonenumber]) {
 							if (clonenumber == 0) {
 								playerRecord = player.createRecord(new EntityPlayerRecord(player.getXPos(), player.getYPos()));
 							} else if (clonenumber == 1) {
