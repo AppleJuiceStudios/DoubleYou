@@ -36,9 +36,9 @@ public class EntityPlayer extends EntityMob {
 		image = ResourceManager.getImage("/model/player/Player-Model.png");
 	}
 
-	public void update(LevelMap map) {
+	public void update(LevelMap map, double timeFactor) {
 		move();
-		colision(map);
+		colision(map, timeFactor);
 	}
 
 	public void move() {
@@ -92,13 +92,11 @@ public class EntityPlayer extends EntityMob {
 		key_W = false;
 	}
 
-	protected BufferedImage getImage(boolean animated) {
-		if (animated) {
-			if (!onGround) {
-				return animationJump.getImage();
-			} else if (key_A || key_D) {
-				return animationRun.getImage();
-			}
+	protected BufferedImage getImage(double timeFactor) {
+		if (!onGround) {
+			return animationJump.getImage(timeFactor);
+		} else if (key_A || key_D) {
+			return animationRun.getImage(timeFactor);
 		}
 		return image;
 	}

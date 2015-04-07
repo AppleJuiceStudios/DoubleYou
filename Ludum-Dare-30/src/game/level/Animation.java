@@ -37,8 +37,8 @@ public class Animation {
 
 	}
 
-	public BufferedImage getImage() {
-		if (System.currentTimeMillis() > lastChange + delay) {
+	public BufferedImage getImage(double timeFactor) {
+		if (System.currentTimeMillis() > lastChange + delay / timeFactor) {
 			lastChange += delay;
 			index = (index + 1) % imgAnimation.length;
 			lastChange = System.currentTimeMillis();

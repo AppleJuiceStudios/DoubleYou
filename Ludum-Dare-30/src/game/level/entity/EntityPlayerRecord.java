@@ -24,7 +24,7 @@ public class EntityPlayerRecord extends EntityPlayer {
 		animationJump.load("/model/clone/Jump-Animation.png", 2, 150);
 	}
 
-	public void update(LevelMap map) {
+	public void update(LevelMap map, double timeFactor) {
 		byte movement = 0;
 		if (key_D) {
 			movement = 1;
@@ -35,7 +35,7 @@ public class EntityPlayerRecord extends EntityPlayer {
 			movement += 3;
 		}
 		recording.add(movement);
-		super.update(map);
+		super.update(map, timeFactor);
 	}
 
 	public Byte[] getRecording() {

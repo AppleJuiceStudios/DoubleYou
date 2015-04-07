@@ -25,6 +25,6 @@ public class MapObjectDecoration extends MapObject {
 	}
 
 	public void draw(Graphics2D g2, int size) {
-		g2.drawImage(image, x * size, y * size, size, size, null);
+		g2.drawImage(image, x * size, y * size, width * size, height * size, null);
 	}
 }

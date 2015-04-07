@@ -12,26 +12,26 @@
             <y>16</y>
         </mapObjectLasergate>
         <mapObjectTrigger>
-            <height>6</height>
+            <height>3</height>
             <id>33</id>
-            <output>39</output>
+            <output>41</output>
             <power>false</power>
-            <width>9</width>
-            <x>64</x>
-            <y>9</y>
-            <targetID>41</targetID>
+            <width>3</width>
+            <x>66</x>
+            <y>13</y>
+            <targetID>42</targetID>
         </mapObjectTrigger>
         <mapObjectGroundswtich>
             <height>1</height>
             <id>34</id>
-            <output>30000</output>
+            <output>40</output>
             <power>false</power>
             <width>1</width>
             <x>14</x>
             <y>16</y>
             <inverted>false</inverted>
             <keep>false</keep>
-            <targetID>40</targetID>
+            <targetID>41</targetID>
         </mapObjectGroundswtich>
         <mapObjectGroundswtich>
             <height>1</height>
@@ -57,7 +57,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>37</id>
-            <output>35</output>
+            <output>36</output>
             <power>false</power>
             <width>1</width>
             <x>32</x>
@@ -69,7 +69,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>38</id>
-            <output>38</output>
+            <output>39</output>
             <power>false</power>
             <width>1</width>
             <x>54</x>
@@ -87,9 +87,18 @@
             <x>49</x>
             <y>15</y>
         </mapObjectLasergateHorizontal>
+        <mapObjectDecorationFinishFlag>
+            <height>2</height>
+            <id>40</id>
+            <output>-1</output>
+            <power>false</power>
+            <width>1</width>
+            <x>67</x>
+            <y>14</y>
+        </mapObjectDecorationFinishFlag>
         <mapObjectActionSpawner>
             <height>1</height>
-            <id>40</id>
+            <id>41</id>
             <output>-1</output>
             <power>false</power>
             <width>1</width>
@@ -99,7 +108,7 @@
         </mapObjectActionSpawner>
         <mapObjectActionWinning>
             <height>1</height>
-            <id>41</id>
+            <id>42</id>
             <output>-1</output>
             <power>false</power>
             <width>1</width>
@@ -177,9 +186,9 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAEFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAISEhISEhAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAISEhISEhAAIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAISEhISEhAAIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAISEhISEhAAIpBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAISEhISEhAAIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAISEhISEhIQIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAISEhISEhIQIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAISEhISEhIQIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAISEhISEhAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAISEhISEhAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAISEhISEhAAIFBQUF</spritesheet>
