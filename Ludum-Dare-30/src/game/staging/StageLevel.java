@@ -40,6 +40,9 @@ public class StageLevel extends Stage {
 	private double maxXOffset;
 	private double maxYOffset;
 
+	private boolean lose;
+	private long loseTime;
+
 	private BufferedImage background;
 	private BufferedImage mountains;
 	private BufferedImage healthbar;
@@ -212,6 +215,17 @@ public class StageLevel extends Stage {
 		g2.drawImage(chooseClone[selectedClone], GameCanvas.WIDTH - chooseClone[selectedClone].getWidth() * 2 - 10, 10,
 				chooseClone[selectedClone].getWidth() * 2, chooseClone[selectedClone].getHeight() * 2, null);
 		drawTextbox(g2);
+
+		if (lose) {
+			float density = (System.currentTimeMillis() - loseTime) / (float) 6000;
+			density = (float) Math.sqrt(density) + 0.05f;
+			g2.setColor(new Color(0f, 0f, 0f, density > 0.99 ? 0.99f : density));
+			g2.fillRect(0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT);
+			density = (System.currentTimeMillis() - loseTime) / (float) 3000 * 2;
+			g2.setColor(new Color(1f, 0f, 0f, density > 1.0 ? 1.0f : density));
+			g2.setFont(new Font("Segoe Print", Font.BOLD, 72));
+			g2.drawString("You lose...", GameCanvas.WIDTH / 2 - 200, 200);
+		}
 	}
 
 	private void drawTextbox(Graphics2D g2) {
@@ -304,6 +318,12 @@ public class StageLevel extends Stage {
 		}
 		// endregion Entity Interaction
 
+		if (lose) {
+			if (System.currentTimeMillis() - loseTime > 3000) {
+				reloadStage();
+			}
+		}
+
 		Monitoring.stop(2);
 	}
 
@@ -311,10 +331,17 @@ public class StageLevel extends Stage {
 		updateTimer.cancel();
 	}
 
-	public void lose() {
+	private void reloadStage() {
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("level", level);
-		getStageManager().setStage(StageManager.STAGE_LOSE, data);
+		getStageManager().setStage(StageManager.STAGE_LEVEL, data);
+	}
+
+	public void lose() {
+		if (!lose) {
+			loseTime = System.currentTimeMillis();
+			lose = true;
+		}
 	}
 
 	private void initListeners() {
@@ -332,6 +359,9 @@ public class StageLevel extends Stage {
 			}
 
 			public void keyPressed(KeyEvent e) {
+				if (lose) {
+					reloadStage();
+				}
 				if (isRecording) {
 					playerRecord.keyPressed(e);
 				} else {
