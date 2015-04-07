@@ -2,6 +2,7 @@ package game.level;
 
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectAction;
+import game.level.mapobject.MapObjectDecoration;
 import game.level.mapobject.MapObjectLogic;
 
 import java.awt.Color;
@@ -307,13 +308,13 @@ public class LevelMapEditor extends LevelMap {
 		sortedMapObjects = new MapObject[objectsMap.size()];
 		int index = 0;
 		for (Integer i : objectsMap.keySet()) {
-			if (!(objectsMap.get(i) instanceof MapObjectLogic || objectsMap.get(i) instanceof MapObjectAction)) {
+			if (!(objectsMap.get(i) instanceof MapObjectLogic || objectsMap.get(i) instanceof MapObjectAction || objectsMap.get(i) instanceof MapObjectDecoration)) {
 				sortedMapObjects[index] = objectsMap.get(i);
 				index++;
 			}
 		}
 		for (Integer i : objectsMap.keySet()) {
-			if (objectsMap.get(i) instanceof MapObjectLogic || objectsMap.get(i) instanceof MapObjectAction) {
+			if (objectsMap.get(i) instanceof MapObjectLogic || objectsMap.get(i) instanceof MapObjectAction || objectsMap.get(i) instanceof MapObjectDecoration) {
 				sortedMapObjects[index] = objectsMap.get(i);
 				index++;
 			}
@@ -323,9 +324,11 @@ public class LevelMapEditor extends LevelMap {
 		for (int i = 0; i < sortedMapObjects.length; i++) {
 			MapObject object = sortedMapObjects[i];
 			ids.put(object.getId(), i + 32);
-			for (int y = 0; y < object.getHeight(); y++) {
-				for (int x = 0; x < object.getWidth(); x++) {
-					setTileID(object.getX() + x, object.getY() + y, (byte) (i + 32));
+			if (!(object instanceof MapObjectLogic || object instanceof MapObjectAction || object instanceof MapObjectDecoration)) {
+				for (int y = 0; y < object.getHeight(); y++) {
+					for (int x = 0; x < object.getWidth(); x++) {
+						setTileID(object.getX() + x, object.getY() + y, (byte) (i + 32));
+					}
 				}
 			}
 		}
@@ -357,7 +360,6 @@ public class LevelMapEditor extends LevelMap {
 		}
 		tempFile.delete();
 	}
-
 	// endregion Save
 
 }
