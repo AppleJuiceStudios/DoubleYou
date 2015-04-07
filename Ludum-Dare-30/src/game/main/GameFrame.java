@@ -12,8 +12,8 @@ import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 
-import util.log.GeneralUtils;
-import util.log.Log;
+import util.GeneralUtils;
+import util.Log;
 import de.Auch.Monitoring;
 
 public class GameFrame extends JFrame {
@@ -46,7 +46,7 @@ public class GameFrame extends JFrame {
 				dMode = displayModes[i];
 			}
 		}
-		System.out.println(dMode.getWidth() + "x" + dMode.getHeight() + " " + dMode.getRefreshRate() + "Hz " + dMode.getBitDepth());
+		Log.info("Choosen DisplayMode: " + dMode.getWidth() + "x" + dMode.getHeight() + " " + dMode.getRefreshRate() + "Hz " + dMode.getBitDepth() + "Bit");
 		display.setDisplayMode(dMode);
 
 		gameCanvas = new GameCanvas(dMode.getWidth(), dMode.getHeight());

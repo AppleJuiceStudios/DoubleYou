@@ -149,11 +149,11 @@ public class StageChoseLevel extends Stage {
 		for (int y = 0; y < 4; y++)
 			for (int x = 0; x < 4; x++) {
 				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
-				int xx = 100 + (x / 2) * 400 + (x % 2) * 150;
-				int yy = 66 + (y / 2) * 298 + (y % 2) * 116;
+				int xx = (int) (GameCanvas.WIDTH * 0.125) + (x / 2) * (GameCanvas.WIDTH / 2) + (x % 2) * (int) (GameCanvas.WIDTH * 0.1875);
+				int yy = (int) (GameCanvas.HEIGHT * 0.1) + (y / 2) * GameCanvas.HEIGHT / 2 + (y % 2) * (int) (GameCanvas.HEIGHT * 0.2);
 				Rectangle rec = new Rectangle();
-				rec.width = 50;
-				rec.height = 50;
+				rec.width = (int) (GameCanvas.WIDTH * 0.08);
+				rec.height = (int) (GameCanvas.WIDTH * 0.08);
 				Button btn = new Button("", rec, xx, yy);
 				btn.setImage(ResourceManager.getImage("/buttons/Level" + (current % 4 + 1) + ".png"));
 				btn.setImageHighlight(ResourceManager.getImage("/buttons/selectedLevel.png"));
@@ -181,18 +181,18 @@ public class StageChoseLevel extends Stage {
 		g2.drawImage(imgBGS4, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, GameCanvas.WIDTH / 2, GameCanvas.HEIGHT / 2, null);
 		// Border
 		g2.setColor(Color.WHITE);
-		g2.fillRect(397, 0, 6, GameCanvas.HEIGHT);
-		g2.fillRect(0, 297, GameCanvas.WIDTH, 6);
+		g2.fillRect(GameCanvas.WIDTH / 2 - 3, 0, 6, GameCanvas.HEIGHT);
+		g2.fillRect(0, GameCanvas.HEIGHT / 2 - 3, GameCanvas.WIDTH, 6);
 
 		// Level & Overlay
 		for (int y = 0; y < 4; y++)
 			for (int x = 0; x < 4; x++) {
 				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
-				int xx = 100 + (x / 2) * 400 + (x % 2) * 150;
-				int yy = 66 + (y / 2) * 298 + (y % 2) * 116;
+				int xx = (int) (GameCanvas.WIDTH * 0.125) + (x / 2) * (GameCanvas.WIDTH / 2) + (x % 2) * (int) (GameCanvas.WIDTH * 0.1875);
+				int yy = (int) (GameCanvas.HEIGHT * 0.1) + (y / 2) * GameCanvas.HEIGHT / 2 + (y % 2) * (int) (GameCanvas.HEIGHT * 0.2);
 				btns[current].draw(g2);
 				if (current >= nextLevel)
-					g2.drawImage(imgLock, xx, yy, 50, 50, null);
+					g2.drawImage(imgLock, xx, yy, (int) (GameCanvas.WIDTH * 0.08), (int) (GameCanvas.WIDTH * 0.08), null);
 			}
 	}
 
