@@ -41,6 +41,10 @@ public class MapObjectTrigger extends MapObject {
 		targetID = id;
 	}
 
+	public int getOutput() {
+		return targetID;
+	}
+
 	public void drawLogic(Graphics2D g2, int size) {
 		g2.setColor(Color.LIGHT_GRAY);
 		g2.fillRect(x * size, y * size, width * size, height * size);
