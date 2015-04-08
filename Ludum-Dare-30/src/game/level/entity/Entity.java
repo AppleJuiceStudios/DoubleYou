@@ -24,21 +24,29 @@ public class Entity {
 		this.image = image;
 	}
 
-	public void draw(Graphics2D g2, boolean animated) {
+	public void draw(Graphics2D g2, double timeFactor) {
 		if (lookLeft) {
-			g2.drawImage(getImage(animated), (int) ((x + width) * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (-width * StageLevel.SCALE),
+			g2.drawImage(getImage(timeFactor), (int) ((x + width) * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (-width * StageLevel.SCALE),
 					(int) (height * StageLevel.SCALE), null);
 		} else {
-			g2.drawImage(getImage(animated), (int) (x * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (width * StageLevel.SCALE),
+			g2.drawImage(getImage(timeFactor), (int) (x * StageLevel.SCALE), (int) (y * StageLevel.SCALE), (int) (width * StageLevel.SCALE),
 					(int) (height * StageLevel.SCALE), null);
 		}
 	}
 
-	protected BufferedImage getImage(boolean animated) {
+	public void interaction(Entity entity, LevelMap map) {
+
+	}
+
+	public void damage(int amount, LevelMap map) {
+
+	}
+
+	protected BufferedImage getImage(double timeFactor) {
 		return image;
 	}
 
-	public void update(LevelMap map) {
+	public void update(LevelMap map, double timeFactor) {
 
 	}
 

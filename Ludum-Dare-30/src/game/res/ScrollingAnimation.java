@@ -17,12 +17,14 @@ public class ScrollingAnimation {
 	private double speed;
 	private Font font;
 
-	private int x, y, width, height;
+	private int x, x2, y, width, height, space;
 	private double currentY;
 
 	private ScrollingAnimation() {
 		speed = 1;
-		font = new Font("Arial", Font.PLAIN, 20);
+		font = new Font("Arial", Font.PLAIN, (int) (GameCanvas.HEIGHT * 0.05));
+		x2 = (int) (x + GameCanvas.WIDTH * 0.5);
+		space = font.getSize() + 10;
 	}
 
 	public ScrollingAnimation(String[] textLeft, String[] textRight, double speed, Rectangle rec) {
@@ -80,17 +82,17 @@ public class ScrollingAnimation {
 		// g.fillRect(x, y, width, height);
 		g.setColor(Color.WHITE);
 		int lastY = 0;
-		for (int i = 0; i < textLeft.length; i++) {
-			if ((i + 1) * 30 + currentY > y) {
-				if ((i + 1) * 30 + (int) currentY - y < 100) {
-					g.setColor(new Color(1f, 1f, 1f, (float) (((i + 1) * 30 + currentY - y) / 100)));
+		for (int i = 0; i < textLeft.length; i++) { // All Lines
+			if ((i + 1) * space + currentY > y) { // if under top line
+				if ((i + 1) * space + (int) currentY - y < 100) { // Distance to top line
+					g.setColor(new Color(1f, 1f, 1f, (float) (((i + 1) * space + currentY - y) / 100)));
 				} else {
 					g.setColor(Color.WHITE);
 				}
-				g.drawString(textLeft[i], x, (i + 1) * 30 + (int) currentY);
-				g.drawString(textRight[i], x + 250, (i + 1) * 30 + (int) currentY);
-				if (lastY < (i + 1) * 30 + (int) currentY)
-					lastY = (i + 1) * 30 + (int) currentY;
+				g.drawString(textLeft[i], x, (i + 1) * space + (int) currentY);
+				g.drawString(textRight[i], x2, (i + 1) * space + (int) currentY);
+				if (lastY < (i + 1) * space + (int) currentY)
+					lastY = (i + 1) * space + (int) currentY;
 			}
 		}
 		currentY -= speed / 60;

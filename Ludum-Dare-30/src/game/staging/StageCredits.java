@@ -1,12 +1,11 @@
 package game.staging;
 
-import game.main.GameApplet;
 import game.main.GameCanvas;
+import game.main.GameFrame;
 import game.res.Button;
 import game.res.ResourceManager;
 import game.res.ScrollingAnimation;
 
-import java.applet.AppletContext;
 import java.awt.Desktop;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -39,7 +38,8 @@ public class StageCredits extends Stage {
 		initKey();
 		initButtons();
 		loadTextures();
-		scroller = new ScrollingAnimation("/credits.txt", 30.0, 200, 160, 600, 300);
+		scroller = new ScrollingAnimation("/credits.txt", 30.0, (int) (GameCanvas.WIDTH * 0.2), (int) (GameCanvas.HEIGHT * 0.26),
+				(int) (GameCanvas.WIDTH * 0.6), (int) (GameCanvas.WIDTH * 0.25));
 	}
 
 	private void initMouse() {
@@ -140,8 +140,13 @@ public class StageCredits extends Stage {
 	private void initButtons() {
 		selectedButton = -1;
 		btns = new Button[2];
-		btns[0] = new Button(ResourceManager.getString("gui.back"), 190, 500);
-		btns[1] = new Button(ResourceManager.getString("gui.website"), 410, 500);
+
+		int buttonWidth = (int) (GameCanvas.WIDTH * 0.25);
+		int buttonY = (int) (GameCanvas.HEIGHT * 0.83);
+		int buttonGap = (int) (GameCanvas.HEIGHT * 0.1);
+
+		btns[0] = new Button(ResourceManager.getString("gui.back"), GameCanvas.WIDTH / 2 - (buttonWidth + buttonGap / 2), buttonY);
+		btns[1] = new Button(ResourceManager.getString("gui.website"), GameCanvas.WIDTH / 2 + buttonGap / 2, buttonY);
 
 		for (Button button : btns)
 			button.setHighlighted(false);
@@ -152,15 +157,11 @@ public class StageCredits extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
+		drawBackground(g2, imgBackground);
 		scroller.draw(g2);
 
 		for (Button button : btns)
 			button.draw(g2);
-	}
-
-	public void update() {
-
 	}
 
 	public void stop() {
@@ -175,14 +176,11 @@ public class StageCredits extends Stage {
 	private void website() {
 		URL url = null;
 		try {
-			url = new URL("https://github.com/TobiasBodewig/Ludum-Dare-30");
+			url = new URL(GameFrame.GAME_URL);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		if (GameCanvas.IS_APPLET) {
-			AppletContext a = GameApplet.appletContext;
-			a.showDocument(url, "_blank");
-		} else if (Desktop.isDesktopSupported()) {
+		if (Desktop.isDesktopSupported()) {
 			try {
 				Desktop.getDesktop().browse(url.toURI());
 			} catch (IOException | URISyntaxException e) {

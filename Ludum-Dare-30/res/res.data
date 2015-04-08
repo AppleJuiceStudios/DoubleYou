@@ -39,7 +39,14 @@
 /level/object/Lasergate-HorizontalOnlyClone.png
 /level/object/Lasergate-OnlyClone.png
 /level/object/Lasergate.png
+/level/object/spike.png
+/level/particle/DoubleJump.png
+/level/particle/DoubleJumpRecord.png
 /model/msfly.png
+/model/finishFlag.png
+/model/clone/DoubleJumpClone-JumpAnimation.png
+/model/clone/DoubleJumpClone-Model.png
+/model/clone/DoubleJumpClone-RunAnimation.png
 /model/clone/Jump-Animation.png
 /model/clone/Player-Model.png
 /model/clone/Run-Animation.png
@@ -47,6 +54,9 @@
 /model/enemys/MarsKnight-Model.png
 /model/enemys/MarsKnight-RunAnimation.png
 /model/enemys/Thumbs.db
+/model/player/DoubleJumpClone-JumpAnimation.png
+/model/player/DoubleJumpClone-Model.png
+/model/player/DoubleJumpClone-RunAnimation.png
 /model/player/Jump-Animation.png
 /model/player/Player-Model.png
 /model/player/Run-Animation.png

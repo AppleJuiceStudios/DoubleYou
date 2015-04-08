@@ -2,7 +2,10 @@ package game.main;
 
 import game.res.SaveGame;
 
+import java.awt.DisplayMode;
 import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -15,6 +18,7 @@ import de.Auch.Monitoring;
 
 public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 4260463266395801740L;
+	public static final String GAME_URL = "https://github.com/AppleJuiceStudios/DoubleYou/";
 	public static long GAMESTARTTIME;
 
 	private GameCanvas gameCanvas;
@@ -28,19 +32,36 @@ public class GameFrame extends JFrame {
 		Image img = kit.createImage(GameFrame.class.getResource("/dy_icon.png"));
 		setIconImage(img);
 
-		gameCanvas = new GameCanvas();
+		setUndecorated(true);
+		setVisible(true);
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice display = ge.getDefaultScreenDevice();
+		display.setFullScreenWindow(this);
+		DisplayMode[] displayModes = display.getDisplayModes();
+		DisplayMode dMode = displayModes[0];
+		for (int i = 1; i < displayModes.length; i++) {
+			if (displayModes[i].getWidth() * displayModes[i].getHeight() > dMode.getWidth() * dMode.getHeight()) {
+				dMode = displayModes[i];
+			} else if (displayModes[i].getWidth() == dMode.getWidth() && displayModes[i].getHeight() == dMode.getHeight()
+					&& displayModes[i].getRefreshRate() > dMode.getRefreshRate()) {
+				dMode = displayModes[i];
+			}
+		}
+		Log.info("Choosen DisplayMode: " + dMode.getWidth() + "x" + dMode.getHeight() + " " + dMode.getRefreshRate() + "Hz " + dMode.getBitDepth() + "Bit");
+		display.setDisplayMode(dMode);
+
+		gameCanvas = new GameCanvas(dMode.getWidth(), dMode.getHeight());
 		gameCanvas.init();
 		add(gameCanvas);
 
 		setResizable(false);
-		pack();
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				close();
 				System.exit(0);
 			}
 		});
-		setLocationRelativeTo(null);
+
 	}
 
 	public void start() {
@@ -61,6 +82,10 @@ public class GameFrame extends JFrame {
 		gameCanvas.start();
 	}
 
+	public void close() {
+		gameCanvas.close();
+	}
+
 	public static void main(String[] args) {
 		GAMESTARTTIME = System.currentTimeMillis();
 		EventQueue.invokeLater(new Runnable() {
@@ -73,10 +98,6 @@ public class GameFrame extends JFrame {
 				gf.start();
 			}
 		});
-	}
-
-	public void close() {
-		gameCanvas.close();
 	}
 
 }

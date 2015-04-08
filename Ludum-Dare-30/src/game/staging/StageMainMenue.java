@@ -80,13 +80,13 @@ public class StageMainMenue extends Stage {
 				if (btns[0].contains(point)) {
 					play();
 				} else if (btns[1].contains(point)) {
-					custom();
-				} else if (btns[2].contains(point)) {
 					options();
-				} else if (btns[3].contains(point)) {
+				} else if (btns[2].contains(point)) {
 					credits();
-				} else if (btns[4].contains(point)) {
+				} else if (btns[3].contains(point)) {
 					exit();
+				} else if (btns[4].contains(point)) {
+					custom();
 				}
 			}
 
@@ -145,21 +145,21 @@ public class StageMainMenue extends Stage {
 					if (selectedButton <= 0) {
 						play();
 					} else if (selectedButton == 1) {
-						custom();
-					} else if (selectedButton == 2) {
 						options();
-					} else if (selectedButton == 3) {
+					} else if (selectedButton == 2) {
 						credits();
-					} else if (selectedButton == 4) {
+					} else if (selectedButton == 3) {
 						exit();
+					} else if (selectedButton == 4) {
+						custom();
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
 					selectedButton++;
-					selectedButton %= 5;
+					selectedButton %= btns.length;
 				} else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 					selectedButton--;
 					if (selectedButton < 0)
-						selectedButton = 4;
+						selectedButton = btns.length - 1;
 				}
 				for (Button button : btns) {
 					button.setHighlighted(false);
@@ -172,12 +172,23 @@ public class StageMainMenue extends Stage {
 
 	private void initButtons() {
 		selectedButton = -1;
-		btns = new Button[5];
-		btns[0] = new Button(ResourceManager.getString("gui.play"), 30, 300);
-		btns[1] = new Button("CUSTOM MAPS", 30, 350);
-		btns[2] = new Button(ResourceManager.getString("gui.options"), 30, 400);
-		btns[3] = new Button(ResourceManager.getString("gui.credits"), 30, 450);
-		btns[4] = new Button(ResourceManager.getString("gui.exit"), 30, 500);
+		if (GeneralUtils.isDevMode())
+			btns = new Button[5];
+		else
+			btns = new Button[4];
+
+		int buttonX = (int) (GameCanvas.WIDTH * 0.1);
+		int startY = (int) (GameCanvas.HEIGHT * 0.5);
+		int buttonGap = (int) (GameCanvas.HEIGHT * 0.01);
+		int buttonHeight = (int) (GameCanvas.HEIGHT * 0.066);
+
+		btns[0] = new Button(ResourceManager.getString("gui.play"), buttonX, startY + buttonHeight * 1 + buttonGap * 1);
+		btns[1] = new Button(ResourceManager.getString("gui.options"), buttonX, startY + buttonHeight * 2 + buttonGap * 2);
+		btns[2] = new Button(ResourceManager.getString("gui.credits"), buttonX, startY + buttonHeight * 3 + buttonGap * 3);
+		btns[3] = new Button(ResourceManager.getString("gui.exit"), buttonX, startY + buttonHeight * 4 + buttonGap * 4);
+
+		if (GeneralUtils.isDevMode())
+			btns[4] = new Button("CUSTOM MAPS", buttonX, startY + buttonHeight * 0 + buttonGap * 0);
 
 		for (Button button : btns)
 			button.setHighlighted(false);
@@ -187,9 +198,8 @@ public class StageMainMenue extends Stage {
 		imgBackground = ResourceManager.getImage("/backgrounds/Menu-Background.png");
 	}
 
-	@Override
 	public void draw(Graphics2D g2) {
-		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
+		drawBackground(g2, imgBackground);
 
 		for (Button button : btns)
 			button.draw(g2);
@@ -202,12 +212,6 @@ public class StageMainMenue extends Stage {
 			g2.drawString(VERSION, GameCanvas.WIDTH - 50, GameCanvas.HEIGHT - 20);
 	}
 
-	@Override
-	public void update() {
-
-	}
-
-	@Override
 	public void stop() {
 
 	}
