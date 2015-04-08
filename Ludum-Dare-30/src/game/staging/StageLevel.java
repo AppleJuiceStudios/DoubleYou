@@ -9,6 +9,7 @@ import game.level.entity.EntityPlayerClone;
 import game.level.entity.EntityPlayerCloneJump;
 import game.level.entity.EntityPlayerRecord;
 import game.level.entity.EntityPlayerRecordJump;
+import game.level.particle.Particle;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 import game.res.SoundManager;
@@ -65,6 +66,7 @@ public class StageLevel extends Stage {
 	private int selectedClone;
 
 	protected List<Entity> entities;
+	protected List<Particle> particles;
 
 	public Textbox textbox;
 	private BufferedImage imgTextbox;
@@ -128,6 +130,7 @@ public class StageLevel extends Stage {
 
 		player = new EntityPlayer(map.getPlayerSpawnX(), map.getPlayerSpawnY());
 		entities = new ArrayList<>();
+		particles = new ArrayList<>();
 
 		updateTimer = new Timer();
 		updateTimer.scheduleAtFixedRate(new TimerTask() {
@@ -203,6 +206,9 @@ public class StageLevel extends Stage {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).draw(g2, 1.0);
 		}
+		for (int i = 0; i < particles.size(); i++) {
+			particles.get(i).draw(g2);
+		}
 
 		map.drawObjects(g2, spriteSize);
 		g2.setTransform(new AffineTransform());
@@ -269,6 +275,15 @@ public class StageLevel extends Stage {
 		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map, timeFactor);
+		}
+		for (int i = 0; i < particles.size(); i++) {
+			Particle p = particles.get(i);
+			if (p.getLifeTimeremaining() > 0) {
+				particles.get(i).update(map, timeFactor);
+			} else {
+				particles.remove(i);
+				i--;
+			}
 		}
 
 		// region Entity Interaction
@@ -439,6 +454,10 @@ public class StageLevel extends Stage {
 
 	public void spawnEntity(Entity entity) {
 		entities.add(entity);
+	}
+
+	public void spawnParticle(Particle particle) {
+		particles.add(particle);
 	}
 
 }

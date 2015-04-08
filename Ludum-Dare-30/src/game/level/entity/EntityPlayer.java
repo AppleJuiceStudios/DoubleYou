@@ -37,11 +37,11 @@ public class EntityPlayer extends EntityMob {
 	}
 
 	public void update(LevelMap map, double timeFactor) {
-		move();
+		move(map);
 		colision(map, timeFactor);
 	}
 
-	public void move() {
+	public void move(LevelMap map) {
 		xMovement = 0;
 		if (key_A) {
 			xMovement = -2;
