@@ -1,14 +1,14 @@
 package game.level.mapobject;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
 import game.level.LevelMap;
 import game.level.TileSet;
 import game.level.entity.EntityAirFlow;
 import game.res.ResourceManager;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class MapObjectDecorationAirFlow extends MapObjectDecoration {
@@ -22,6 +22,10 @@ public class MapObjectDecorationAirFlow extends MapObjectDecoration {
 		super(id, x, y, 1, 2);
 		this.forceX = forceX;
 		this.forceY = forceY;
+	}
+
+	public MapObjectDecorationAirFlow() {
+
 	}
 
 	public void onStart(LevelMap map) {
