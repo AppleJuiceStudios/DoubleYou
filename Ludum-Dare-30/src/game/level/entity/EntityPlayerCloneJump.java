@@ -27,20 +27,20 @@ public class EntityPlayerCloneJump extends EntityPlayerClone {
 		if (onGround) {
 			canDoubleJump = true;
 		}
-		if (key_A) {
+		if (key_left) {
 			xMovement = -2;
 		}
-		if (key_D) {
+		if (key_right) {
 			xMovement = 2;
 		}
-		if (key_W & onGround) {
+		if (key_up & onGround) {
 			yMovement = -2.75;
-		} else if (!old_key_W && key_W && canDoubleJump) {
+		} else if (!old_key_W && key_up && canDoubleJump) {
 			yMovement = -2.75;
 			canDoubleJump = false;
 			map.spawnParticle(new ParticleDoubleJump(x + (width / 2), y + height));
 		}
-		old_key_W = key_W;
+		old_key_W = key_up;
 	}
 
 }
