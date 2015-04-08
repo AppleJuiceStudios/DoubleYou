@@ -7,7 +7,7 @@ public class MapObjectDecoration extends MapObject {
 
 	protected BufferedImage image;
 
-	public MapObjectDecoration(int id, int x, int y, int width, int height, boolean power) {
+	public MapObjectDecoration(int id, int x, int y, int width, int height) {
 		super(id, x, y, 1, 2, false);
 		loadTexture();
 	}

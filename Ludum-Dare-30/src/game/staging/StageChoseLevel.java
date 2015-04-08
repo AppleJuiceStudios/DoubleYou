@@ -2,8 +2,8 @@ package game.staging;
 
 import game.main.GameCanvas;
 import game.res.Button;
+import game.res.Preferences;
 import game.res.ResourceManager;
-import game.res.SaveGame;
 import game.res.SoundManager;
 
 import java.awt.Color;
@@ -44,7 +44,7 @@ public class StageChoseLevel extends Stage {
 			SoundManager.play("Space Commando", true);
 		}
 
-		nextLevel = !GameCanvas.IS_APPLET ? SaveGame.saveGame.getNextLevel() : 16;
+		nextLevel = Preferences.getNextLevel();
 
 		btns = new Button[16];
 		selectedLevel = 0;

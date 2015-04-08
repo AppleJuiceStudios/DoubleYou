@@ -3,8 +3,8 @@ package game.staging;
 import game.main.GameCanvas;
 import game.main.GameFrame;
 import game.res.Button;
+import game.res.Preferences;
 import game.res.ResourceManager;
-import game.res.SaveGame;
 
 import java.awt.Desktop;
 import java.awt.Graphics2D;
@@ -88,8 +88,8 @@ public class StageOptions extends Stage {
 				for (int i = 0; i < langs.length; i++) {
 					if (langs[i].contains(point)) {
 						langs[i].highlight();
-						SaveGame.saveGame.setLang(langs[i].getText());
-						SaveGame.save();
+						Preferences.setLang(langs[i].getText());
+						Preferences.save();
 						ResourceManager.reloadLang();
 						initButtons();
 						selectedLang = i;
@@ -172,7 +172,7 @@ public class StageOptions extends Stage {
 	}
 
 	private void initLang() {
-		String lang = SaveGame.saveGame.getLang();
+		String lang = Preferences.getLang();
 
 		if (lang.contains("de_DE"))
 			selectedLang = 1;

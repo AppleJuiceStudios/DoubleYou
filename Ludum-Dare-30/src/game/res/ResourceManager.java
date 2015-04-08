@@ -56,7 +56,7 @@ public class ResourceManager {
 	private static void loadLang() {
 		Locale local = null;
 		for (Locale loc : Locale.getAvailableLocales()) {
-			if (loc.toString().contains(SaveGame.saveGame.getLang()))
+			if (loc.toString().contains(Preferences.getLang()))
 				local = loc;
 		}
 		InputStream input = null;

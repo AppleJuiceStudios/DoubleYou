@@ -9,6 +9,9 @@ public class EntityMob extends Entity {
 	protected double xMovement;
 	protected double yMovement;
 
+	protected double xForce;
+	protected double yForce;
+
 	protected boolean onGround;
 
 	public EntityMob(double x, double y, double width, double height, BufferedImage image) {
@@ -20,6 +23,11 @@ public class EntityMob extends Entity {
 	}
 
 	protected void colision(LevelMap map, double timeFactor) {
+		xMovement += xForce;
+		yMovement += yForce;
+		xForce = 0;
+		yForce = 0;
+
 		yMovement += 0.07 * timeFactor;
 		if (xMovement > 0) {
 			lookLeft = false;
@@ -72,6 +80,14 @@ public class EntityMob extends Entity {
 
 	public boolean colideWithBlock(LevelMap map, int x, int y) {
 		return map.isSolidTile(x, y);
+	}
+
+	public void pushX(double amount) {
+		xForce += amount;
+	}
+
+	public void pushY(double amount) {
+		yForce += amount;
 	}
 
 }
