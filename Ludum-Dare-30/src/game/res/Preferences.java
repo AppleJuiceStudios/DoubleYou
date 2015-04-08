@@ -7,15 +7,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.Set;
 
 import util.Log;
 
 public class Preferences {
 
 	private static Properties props;
+	private static Map<String, Integer> keyBinding;
 
 	private static int nextLevel;
 	private static String lang;
@@ -30,6 +34,7 @@ public class Preferences {
 		getDocumentPath();
 		path = getPath() + "/DoubleYou.properties";
 		props = new Properties();
+		keyBinding = new HashMap<String, Integer>();
 		File file = new File(path);
 		try {
 			file.createNewFile();
@@ -39,6 +44,13 @@ public class Preferences {
 			else {
 				// Writing Values from props
 				lang = props.getProperty("lang");
+
+				Set<Object> keys = props.keySet();
+				for (Object key : keys) {
+					String str = key + "";
+					if (str.startsWith("key_"))
+						keyBinding.put(str, Integer.parseInt(props.getProperty(str)));
+				}
 
 			}
 		} catch (IOException e1) {
