@@ -1,6 +1,8 @@
 package game.level.entity;
 
 import game.level.Animation;
+import game.level.LevelMap;
+import game.level.particle.ParticleDoubleJumpRecord;
 import game.res.ResourceManager;
 
 public class EntityPlayerRecordJump extends EntityPlayerRecord {
@@ -20,7 +22,7 @@ public class EntityPlayerRecordJump extends EntityPlayerRecord {
 		animationJump.load("/model/clone/DoubleJumpClone-JumpAnimation.png", 2, 150);
 	}
 
-	public void move() {
+	public void move(LevelMap map) {
 		xMovement = 0;
 		if (onGround) {
 			canDoubleJump = true;
@@ -36,6 +38,7 @@ public class EntityPlayerRecordJump extends EntityPlayerRecord {
 		} else if (!old_key_W && key_W && canDoubleJump) {
 			yMovement = -2.75;
 			canDoubleJump = false;
+			map.spawnParticle(new ParticleDoubleJumpRecord(x + (width / 2), y + height));
 		}
 		old_key_W = key_W;
 	}

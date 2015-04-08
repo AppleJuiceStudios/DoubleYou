@@ -22,12 +22,17 @@
 /gui/CloneChoose2.png
 /gui/CloneChoose3.png
 /gui/CloneChoose4.png
+/level/object/AirFlow.png
+/level/object/AirFlowHorizontal.png
 /level/object/Groundswitch.png
 /level/object/Lasergate-Hrizontal.png
 /level/object/Lasergate-HrizontalOnlyClone.png
 /level/object/Lasergate-OnlyClone.png
 /level/object/Lasergate.png
 /level/object/spike.png
+/level/particle/AirFlow.png
+/level/particle/DoubleJump.png
+/level/particle/DoubleJumpRecord.png
 /model/msfly.png
 /model/finishFlag.png
 /model/clone/DoubleJumpClone-JumpAnimation.png

@@ -17,6 +17,7 @@ import game.level.mapobject.MapObjectLogicOr;
 import game.level.mapobject.MapObjectSpike;
 import game.level.mapobject.MapObjectTrigger;
 import game.level.mapobject.MapObjectTriggerLevel12;
+import game.level.particle.Particle;
 import game.res.Preferences;
 import game.staging.StageLevel;
 import game.staging.StageManager;
@@ -220,6 +221,14 @@ public class LevelMap {
 			Preferences.setNextLevel(nextLevel + 1);
 		Preferences.save();
 		stageLevel.getStageManager().setStage(StageManager.STAGE_WON);
+	}
+
+	public void spawnEntity(Entity entity) {
+		stageLevel.spawnEntity(entity);
+	}
+
+	public void spawnParticle(Particle particle) {
+		stageLevel.spawnParticle(particle);
 	}
 
 }
