@@ -5,6 +5,7 @@ import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectActionSpawner;
 import game.level.mapobject.MapObjectActionTextbox;
 import game.level.mapobject.MapObjectActionWinning;
+import game.level.mapobject.MapObjectDecorationAirFlow;
 import game.level.mapobject.MapObjectDecorationFinishFlag;
 import game.level.mapobject.MapObjectGroundswtich;
 import game.level.mapobject.MapObjectLasergate;
@@ -56,7 +57,8 @@ public class LevelMap {
 			@XmlElementRef(type = MapObjectLogicAnd.class), @XmlElementRef(type = MapObjectTriggerLevel12.class),
 			@XmlElementRef(type = MapObjectTrigger.class), @XmlElementRef(type = MapObjectActionTextbox.class),
 			@XmlElementRef(type = MapObjectActionWinning.class), @XmlElementRef(type = MapObjectActionSpawner.class),
-			@XmlElementRef(type = MapObjectDecorationFinishFlag.class), @XmlElementRef(type = MapObjectSpike.class) })
+			@XmlElementRef(type = MapObjectDecorationFinishFlag.class), @XmlElementRef(type = MapObjectSpike.class),
+			@XmlElementRef(type = MapObjectDecorationAirFlow.class) })
 	protected MapObject[] objects;
 
 	public LevelMap() {
