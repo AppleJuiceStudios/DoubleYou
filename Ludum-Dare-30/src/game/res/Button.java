@@ -1,5 +1,7 @@
 package game.res;
 
+import game.main.GameCanvas;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -26,8 +28,8 @@ public class Button {
 	public Button(String text, int x, int y) {
 		this(text, new Rectangle(), x, y);
 		Rectangle rec = getRectangle();
-		rec.width = image.getWidth();
-		rec.height = image.getHeight();
+		rec.width = (int) (GameCanvas.WIDTH * 0.25);
+		rec.height = (int) (GameCanvas.HEIGHT * 0.066);
 		setRectangle(rec);
 	}
 
@@ -44,7 +46,7 @@ public class Button {
 		this.setImage(ResourceManager.getImage("/buttons/button.png"));
 		this.setImageHighlight(ResourceManager.getImage("/buttons/button-Highlight.png"));
 		this.setColor(Color.WHITE);
-		this.setFont(new Font("Impact", Font.BOLD, 24));
+		this.setFont(new Font("Impact", Font.BOLD, (int) (rectangle.height * 0.8)));
 		this.setOffset(20);
 	}
 
@@ -59,7 +61,7 @@ public class Button {
 		} else
 			g2.drawImage(image, x, y, (int) rectangle.getWidth(), (int) rectangle.getHeight(), null);
 		if (!isTextIsHidden())
-			g2.drawString(text, x + offset, y + 29);
+			g2.drawString(text, x + offset, (int) (y + rectangle.height - rectangle.height * 0.2));
 	}
 
 	public boolean contains(Point p) {
@@ -81,6 +83,8 @@ public class Button {
 
 	public void setRectangle(Rectangle rectangle) {
 		this.rectangle = rectangle;
+		rectangle.setLocation(x, y);
+		this.setFont(new Font("Impact", Font.BOLD, (int) (rectangle.height * 0.8)));
 	}
 
 	public Color getColor() {

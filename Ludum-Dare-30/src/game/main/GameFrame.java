@@ -18,6 +18,7 @@ import de.Auch.Monitoring;
 
 public class GameFrame extends JFrame {
 	private static final long serialVersionUID = 4260463266395801740L;
+	public static final String GAME_URL = "https://github.com/AppleJuiceStudios/DoubleYou/";
 	public static long GAMESTARTTIME;
 
 	private GameCanvas gameCanvas;

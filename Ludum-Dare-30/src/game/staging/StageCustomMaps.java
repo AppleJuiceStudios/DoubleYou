@@ -1,6 +1,7 @@
 package game.staging;
 
 import game.main.GameCanvas;
+import game.main.GameFrame;
 import game.res.Button;
 import game.res.ResourceManager;
 import game.res.SaveGame;
@@ -272,7 +273,7 @@ public class StageCustomMaps extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
+		drawBackground(g2, imgBackground);
 		g2.setColor(new Color(1f, 1f, 1f, 0.2f));
 		g2.fillRect(0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT);
 
@@ -291,7 +292,7 @@ public class StageCustomMaps extends Stage {
 	private void play() {
 		URL url = null;
 		try {
-			url = new URL("https://github.com/TobiasBodewig/Ludum-Dare-30");
+			url = new URL(GameFrame.GAME_URL);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

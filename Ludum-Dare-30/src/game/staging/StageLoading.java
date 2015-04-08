@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +70,7 @@ public class StageLoading extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(image, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
+		drawBackground(g2, image);
 
 		g2.setColor(color);
 		g2.fillRect(GameCanvas.WIDTH / 8, (int) (GameCanvas.HEIGHT * 0.75), GameCanvas.WIDTH - GameCanvas.WIDTH / 4, (int) (GameCanvas.HEIGHT * 0.08));
@@ -119,5 +121,31 @@ public class StageLoading extends Stage {
 				}
 			}
 		});
+		getStageManager().setMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (finished) {
+					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+
 	}
 }
