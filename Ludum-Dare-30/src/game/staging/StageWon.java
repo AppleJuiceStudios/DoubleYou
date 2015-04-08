@@ -91,8 +91,12 @@ public class StageWon extends Stage {
 	}
 
 	private void initButtons() {
-		btnLevel = new Button(ResourceManager.getString("gui.chooseLevel"), 190, 500);
-		btnMenu = new Button(ResourceManager.getString("gui.menue"), 410, 500);
+		int buttonWidth = (int) (GameCanvas.WIDTH * 0.25);
+		int buttonY = (int) (GameCanvas.HEIGHT * 0.83);
+		int buttonGap = (int) (GameCanvas.HEIGHT * 0.1);
+
+		btnLevel = new Button(ResourceManager.getString("gui.chooseLevel"), GameCanvas.WIDTH / 2 - (buttonWidth + buttonGap / 2), buttonY);
+		btnMenu = new Button(ResourceManager.getString("gui.menue"), GameCanvas.WIDTH / 2 + buttonGap / 2, buttonY);
 	}
 
 	private void loadTextures() {
@@ -101,7 +105,7 @@ public class StageWon extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(imgBackground, 0, 0, imgBackground.getWidth(), imgBackground.getHeight(), null);
+		drawBackground(g2, imgBackground);
 		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 200, null);
 
 		btnLevel.draw(g2);

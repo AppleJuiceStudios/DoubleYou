@@ -1,5 +1,7 @@
 package game.staging;
 
+import game.main.GameCanvas;
+import game.main.GameFrame;
 import game.res.Button;
 import game.res.ResourceManager;
 import game.res.SaveGame;
@@ -153,8 +155,13 @@ public class StageOptions extends Stage {
 	private void initButtons() {
 		selectedButton = -1;
 		btns = new Button[2];
-		btns[0] = new Button(ResourceManager.getString("gui.back"), 190, 500);
-		btns[1] = new Button(ResourceManager.getString("gui.website"), 410, 500);
+
+		int buttonWidth = (int) (GameCanvas.WIDTH * 0.25);
+		int buttonY = (int) (GameCanvas.HEIGHT * 0.83);
+		int buttonGap = (int) (GameCanvas.HEIGHT * 0.1);
+
+		btns[0] = new Button(ResourceManager.getString("gui.back"), GameCanvas.WIDTH / 2 - (buttonWidth + buttonGap / 2), buttonY);
+		btns[1] = new Button(ResourceManager.getString("gui.website"), GameCanvas.WIDTH / 2 + buttonGap / 2, buttonY);
 
 		for (Button button : btns)
 			button.setHighlighted(false);
@@ -178,28 +185,32 @@ public class StageOptions extends Stage {
 
 		langs = new Button[4];
 
-		Button btn = new Button("en_US", new Rectangle(80, 80), 100, 200);
+		int buttonY = (int) (GameCanvas.WIDTH * 0.15);
+		int buttonWidth = (int) (GameCanvas.WIDTH * 0.1);
+		Rectangle original = new Rectangle(buttonWidth, buttonWidth);
+
+		Button btn = new Button("en_US", new Rectangle(original), buttonWidth, buttonY);
 		btn.setImage(ResourceManager.getImage("/buttons/gb.png"));
 		btn.setImageHighlight(ResourceManager.getImage("/buttons/selectedLang.png"));
 		btn.setHighlightReplaces(false);
 		btn.setTextIsHidden(true);
 		langs[0] = btn;
 
-		Button btn2 = new Button("de_DE", new Rectangle(80, 80), 200, 200);
+		Button btn2 = new Button("de_DE", new Rectangle(original), buttonWidth * 3, buttonY);
 		btn2.setImage(ResourceManager.getImage("/buttons/ger.png"));
 		btn2.setImageHighlight(ResourceManager.getImage("/buttons/selectedLang.png"));
 		btn2.setHighlightReplaces(false);
 		btn2.setTextIsHidden(true);
 		langs[1] = btn2;
 
-		Button btn3 = new Button("es_ES", new Rectangle(80, 80), 300, 200);
+		Button btn3 = new Button("es_ES", new Rectangle(original), buttonWidth * 5, buttonY);
 		btn3.setImage(ResourceManager.getImage("/buttons/es.png"));
 		btn3.setImageHighlight(ResourceManager.getImage("/buttons/selectedLang.png"));
 		btn3.setHighlightReplaces(false);
 		btn3.setTextIsHidden(true);
 		langs[2] = btn3;
 
-		Button btn4 = new Button("pl_PL", new Rectangle(80, 80), 400, 200);
+		Button btn4 = new Button("pl_PL", new Rectangle(original), buttonWidth * 7, buttonY);
 		btn4.setImage(ResourceManager.getImage("/buttons/pl.png"));
 		btn4.setImageHighlight(ResourceManager.getImage("/buttons/selectedLang.png"));
 		btn4.setHighlightReplaces(false);
@@ -209,7 +220,7 @@ public class StageOptions extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(background, 0, 0, background.getWidth(), background.getHeight(), null);
+		drawBackground(g2, background);
 
 		for (Button button : btns)
 			button.draw(g2);
@@ -235,7 +246,7 @@ public class StageOptions extends Stage {
 	private void website() {
 		URL url = null;
 		try {
-			url = new URL("https://github.com/TobiasBodewig/Ludum-Dare-30");
+			url = new URL(GameFrame.GAME_URL);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}

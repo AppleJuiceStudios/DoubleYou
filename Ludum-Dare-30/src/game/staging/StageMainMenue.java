@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -81,13 +80,13 @@ public class StageMainMenue extends Stage {
 				if (btns[0].contains(point)) {
 					play();
 				} else if (btns[1].contains(point)) {
-					custom();
-				} else if (btns[2].contains(point)) {
 					options();
-				} else if (btns[3].contains(point)) {
+				} else if (btns[2].contains(point)) {
 					credits();
-				} else if (btns[4].contains(point)) {
+				} else if (btns[3].contains(point)) {
 					exit();
+				} else if (btns[4].contains(point)) {
+					custom();
 				}
 			}
 
@@ -146,21 +145,21 @@ public class StageMainMenue extends Stage {
 					if (selectedButton <= 0) {
 						play();
 					} else if (selectedButton == 1) {
-						custom();
-					} else if (selectedButton == 2) {
 						options();
-					} else if (selectedButton == 3) {
+					} else if (selectedButton == 2) {
 						credits();
-					} else if (selectedButton == 4) {
+					} else if (selectedButton == 3) {
 						exit();
+					} else if (selectedButton == 4) {
+						custom();
 					}
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_S) {
 					selectedButton++;
-					selectedButton %= 5;
+					selectedButton %= btns.length;
 				} else if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_W) {
 					selectedButton--;
 					if (selectedButton < 0)
-						selectedButton = 4;
+						selectedButton = btns.length - 1;
 				}
 				for (Button button : btns) {
 					button.setHighlighted(false);
@@ -173,26 +172,23 @@ public class StageMainMenue extends Stage {
 
 	private void initButtons() {
 		selectedButton = -1;
-		btns = new Button[5];
+		if (GeneralUtils.isDevMode())
+			btns = new Button[5];
+		else
+			btns = new Button[4];
 
-		int buttonWidth = (int) (GameCanvas.WIDTH * 0.25);
-		int buttonHeight = (int) (GameCanvas.HEIGHT * 0.066);
 		int buttonX = (int) (GameCanvas.WIDTH * 0.1);
 		int startY = (int) (GameCanvas.HEIGHT * 0.5);
 		int buttonGap = (int) (GameCanvas.HEIGHT * 0.01);
+		int buttonHeight = (int) (GameCanvas.HEIGHT * 0.066);
 
-		System.out.println(startY * 1 + buttonGap * 0);
-		System.out.println(startY * 2 + buttonGap * 1);
+		btns[0] = new Button(ResourceManager.getString("gui.play"), buttonX, startY + buttonHeight * 1 + buttonGap * 1);
+		btns[1] = new Button(ResourceManager.getString("gui.options"), buttonX, startY + buttonHeight * 2 + buttonGap * 2);
+		btns[2] = new Button(ResourceManager.getString("gui.credits"), buttonX, startY + buttonHeight * 3 + buttonGap * 3);
+		btns[3] = new Button(ResourceManager.getString("gui.exit"), buttonX, startY + buttonHeight * 4 + buttonGap * 4);
 
-		btns[0] = new Button(ResourceManager.getString("gui.play"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 0 + buttonGap
-				* 0);
-		btns[1] = new Button("CUSTOM MAPS", new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 1 + buttonGap * 1);
-		btns[2] = new Button(ResourceManager.getString("gui.options"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 2 + buttonGap
-				* 2);
-		btns[3] = new Button(ResourceManager.getString("gui.credits"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 3 + buttonGap
-				* 3);
-		btns[4] = new Button(ResourceManager.getString("gui.exit"), new Rectangle(buttonWidth, buttonHeight), buttonX, startY + buttonHeight * 4 + buttonGap
-				* 4);
+		if (GeneralUtils.isDevMode())
+			btns[4] = new Button("CUSTOM MAPS", buttonX, startY + buttonHeight * 0 + buttonGap * 0);
 
 		for (Button button : btns)
 			button.setHighlighted(false);
@@ -203,7 +199,7 @@ public class StageMainMenue extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(imgBackground, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
+		drawBackground(g2, imgBackground);
 
 		for (Button button : btns)
 			button.draw(g2);
