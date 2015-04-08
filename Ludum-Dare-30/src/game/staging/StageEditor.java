@@ -4,6 +4,8 @@ import game.level.LevelMapEditor;
 import game.level.TileSet;
 import game.level.mapobject.MapObject;
 import game.level.mapobject.MapObjectAction;
+import game.level.mapobject.MapObjectDecorationAirFlow;
+import game.level.mapobject.MapObjectDecorationFinishFlag;
 import game.level.mapobject.MapObjectLasergate;
 import game.level.mapobject.MapObjectLasergateHorizontal;
 import game.level.mapobject.MapObjectLogic;
@@ -118,8 +120,13 @@ public class StageEditor extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		g2.drawImage(background, 0, 0, 800, 600, null);
-		g2.drawImage(mountains, 0, -190, 800, 800, null);
+
+		drawBackground(g2, background);
+		double mountainsOffset = 0;
+		for (int i = (int) -mountainsOffset / (260 * 3); i <= ((int) -mountainsOffset + GameCanvas.WIDTH) / (260 * 3); i++) {
+			g2.drawImage(mountains, i * 260 * 3 + (int) mountainsOffset, GameCanvas.HEIGHT - 260 * 3, 260 * 3, 260 * 3, null);
+		}
+
 		AffineTransform at = new AffineTransform();
 		at.translate((int) -xOffset, (int) -yOffset);
 		g2.setTransform(at);
@@ -177,8 +184,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = Math.abs(selectedX - lastSelectionX) + 1;
 				int selectionHeight = Math.abs(selectedY - lastSelectionY) + 1;
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
-							- 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+							* spriteSize + i * 2 - 1);
 				}
 			} else {
 				for (int i = 1; i <= 1 + scale; i++) {
@@ -195,8 +202,8 @@ public class StageEditor extends Stage {
 				int selectionWidth = selectedMapObject.getWidth() == 0 ? 1 : selectedMapObject.getWidth();
 				int selectionHeight = selectedMapObject.getHeight() == 0 ? 1 : selectedMapObject.getHeight();
 				for (int i = 1; i <= 1 + scale; i++) {
-					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight * spriteSize + i * 2
-							- 1);
+					g2.drawRect(selectionStartX * spriteSize - i, selectionStartY * spriteSize - i, selectionWidth * spriteSize + i * 2 - 1, selectionHeight
+							* spriteSize + i * 2 - 1);
 				}
 			}
 		}
@@ -266,6 +273,28 @@ public class StageEditor extends Stage {
 		} else if (object instanceof MapObjectLasergateHorizontal) {
 			object.setX(Math.min(selectedX, lastSelectionX));
 			object.setWidth(Math.abs(selectedX - lastSelectionX) + 1);
+		} else if (object instanceof MapObjectDecorationFinishFlag) {
+			object.setHeight(2);
+		} else if (object instanceof MapObjectDecorationAirFlow) {
+			if (Math.abs(lastSelectionX - selectedX) < Math.abs(lastSelectionY - selectedY)) {
+				if (selectedY < lastSelectionY) {
+					((MapObjectDecorationAirFlow) object).setForceY(-0.5);
+					object.setHeight(lastSelectionY - selectedY + 1);
+				} else {
+					((MapObjectDecorationAirFlow) object).setForceY(0.5);
+					object.setY(lastSelectionY);
+					object.setHeight(selectedY - lastSelectionY + 1);
+				}
+			} else {
+				if (selectedX < lastSelectionX) {
+					((MapObjectDecorationAirFlow) object).setForceX(-0.5);
+					object.setWidth(lastSelectionX - selectedX + 1);
+				} else {
+					((MapObjectDecorationAirFlow) object).setForceY(0.5);
+					object.setX(lastSelectionX);
+					object.setWidth(selectedX - lastSelectionX + 1);
+				}
+			}
 		}
 		map.addMapObject(object);
 	}
@@ -287,7 +316,7 @@ public class StageEditor extends Stage {
 	}
 
 	public void scaleUp() {
-		if (scale < 4) {
+		if (scale < 6) {
 			xOffset = (xOffset + controls.mouse_X) * (scale + 1) / scale - controls.mouse_X;
 			yOffset = (yOffset + controls.mouse_Y) * (scale + 1) / scale - controls.mouse_Y;
 			scale++;
@@ -574,8 +603,8 @@ public class StageEditor extends Stage {
 								startLogicLine.setOutput(mouseObject.getId());
 								if (mouseObject.inputCount() != 1 || mouseObject.moreInputs()) {
 									int inputcount = mouseObject.inputCount() + (mouseObject.moreInputs() ? 1 : 0);
-									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize : mouseObject
-											.getWidth() * spriteSize) / inputcount));
+									int input = (int) (((mouse_X + xOffset) - (mouseObject.getX() * spriteSize)) / ((mouseObject.getWidth() == 0 ? spriteSize
+											: mouseObject.getWidth() * spriteSize) / inputcount));
 									mouseObject.setInput(input, startLogicLine.getId());
 								}
 								connectingLogicLine = false;

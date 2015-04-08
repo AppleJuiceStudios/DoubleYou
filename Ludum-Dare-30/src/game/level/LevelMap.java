@@ -226,11 +226,11 @@ public class LevelMap {
 	}
 
 	public void spawnEntity(Entity entity) {
-		stageLevel.spawnEntity(entity);
+
 	}
 
 	public void spawnParticle(Particle particle) {
-		stageLevel.spawnParticle(particle);
+
 	}
 
 }
