@@ -3,8 +3,8 @@ package game.staging;
 import game.main.GameCanvas;
 import game.main.GameFrame;
 import game.res.Button;
+import game.res.Preferences;
 import game.res.ResourceManager;
-import game.res.SaveGame;
 
 import java.awt.Color;
 import java.awt.Desktop;
@@ -61,8 +61,8 @@ public class StageCustomMaps extends Stage {
 
 	private void loadFromFilesystem() {
 
-		File folder = new File(SaveGame.getDocumentPath());
-		deleteDirectory(new File(SaveGame.getPath() + "/temp/"));
+		File folder = new File(Preferences.getDocumentPath());
+		deleteDirectory(new File(Preferences.getPath() + "/temp/"));
 
 		for (int i = 0; i < listFiles(folder).size(); i++) {
 			String file = listFiles(folder).get(i);
@@ -79,7 +79,7 @@ public class StageCustomMaps extends Stage {
 						ZipEntry entry = entries.nextElement();
 						if (entry.getName().toLowerCase().endsWith(".xml")) {
 							map.setUuid(UUID.randomUUID().toString().replace("-", ""));
-							File tempFile = new File(SaveGame.getPath() + "/temp/level/" + map.getUuid() + ".xml");
+							File tempFile = new File(Preferences.getPath() + "/temp/level/" + map.getUuid() + ".xml");
 							tempFile.mkdirs();
 							try {
 								Files.copy(zipFile.getInputStream(entry), tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -199,7 +199,7 @@ public class StageCustomMaps extends Stage {
 					if (customMap.getBtnPlay().contains(point)) {
 						Map<String, String> send = new HashMap<String, String>();
 
-						send.put("level", SaveGame.getPath() + "/temp/level/" + customMap.getUuid() + ".xml");
+						send.put("level", Preferences.getPath() + "/temp/level/" + customMap.getUuid() + ".xml");
 						getStageManager().setStage(StageManager.STAGE_LEVEL, send);
 					}
 				}

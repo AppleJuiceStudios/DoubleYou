@@ -1,6 +1,6 @@
 package game.main;
 
-import game.res.SaveGame;
+import game.res.Preferences;
 
 import java.awt.DisplayMode;
 import java.awt.EventQueue;
@@ -24,7 +24,6 @@ public class GameFrame extends JFrame {
 	private GameCanvas gameCanvas;
 
 	public GameFrame() {
-		GameCanvas.IS_APPLET = false;
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Double You");
 
@@ -90,7 +89,7 @@ public class GameFrame extends JFrame {
 		GAMESTARTTIME = System.currentTimeMillis();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				Log.openLog(SaveGame.getPath());
+				Log.openLog(Preferences.getPath());
 				Log.info("Starting Log!");
 				GameFrame gf = new GameFrame();
 				gf.setVisible(true);

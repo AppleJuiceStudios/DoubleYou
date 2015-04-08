@@ -17,8 +17,7 @@ import game.level.mapobject.MapObjectLogicOr;
 import game.level.mapobject.MapObjectSpike;
 import game.level.mapobject.MapObjectTrigger;
 import game.level.mapobject.MapObjectTriggerLevel12;
-import game.main.GameCanvas;
-import game.res.SaveGame;
+import game.res.Preferences;
 import game.staging.StageLevel;
 import game.staging.StageManager;
 
@@ -216,12 +215,10 @@ public class LevelMap {
 	}
 
 	public void hasWon() {
-		if (!GameCanvas.IS_APPLET) {
-			int nextLevel = SaveGame.saveGame.getNextLevel();
-			if (nextLevel == levelID)
-				SaveGame.saveGame.setNextLevel(nextLevel + 1);
-			SaveGame.save();
-		}
+		int nextLevel = Preferences.getNextLevel();
+		if (nextLevel == levelID)
+			Preferences.setNextLevel(nextLevel + 1);
+		Preferences.save();
 		stageLevel.getStageManager().setStage(StageManager.STAGE_WON);
 	}
 

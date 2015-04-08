@@ -23,8 +23,6 @@ public class GameCanvas extends Canvas {
 
 	private Thread thread;
 
-	public static boolean IS_APPLET;
-
 	public static final int FPS_MAX = 60;
 
 	public GameCanvas(int width, int height) {
