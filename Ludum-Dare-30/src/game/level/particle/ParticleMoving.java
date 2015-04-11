@@ -22,8 +22,8 @@ public class ParticleMoving extends Particle {
 	}
 
 	public void update(LevelMap map, double timeFactor) {
-		x += xMovement;
-		y += yMovement;
+		x += xMovement * timeFactor;
+		y += yMovement * timeFactor;
 		super.update(map, timeFactor);
 	}
 

@@ -22,21 +22,25 @@ public class EntityAirFlow extends Entity {
 	}
 
 	public void update(LevelMap map, double timeFactor) {
-		if (random.nextDouble() < 0.1) {
-			int lifeTime = 120;
-			double x;
-			if (forceX > 0) {
-				x = this.x * TileSet.SPRITE_SIZE + (width * TileSet.SPRITE_SIZE - forceX * lifeTime) * random.nextDouble();
-			} else {
-				x = this.x * TileSet.SPRITE_SIZE + (width * TileSet.SPRITE_SIZE + forceX * lifeTime) * random.nextDouble() + forceX * lifeTime;
+		int lifeTime = 120;
+		int particleSpawnCount = (int) ((width * height) / (TileSet.SPRITE_SIZE * TileSet.SPRITE_SIZE)) / 5;
+		for (int i = 0; i < particleSpawnCount; i++) {
+			if (random.nextDouble() < 0.2 * timeFactor) {
+				double x;
+				if (forceX > 0) {
+					x = this.x + (width - forceX * lifeTime) * random.nextDouble();
+				} else {
+					x = this.x + (width - (-forceX * lifeTime)) * random.nextDouble() - forceX * lifeTime;
+				}
+				double y;
+				if (forceY > 0) {
+					y = this.y + (height - forceY * lifeTime) * random.nextDouble();
+				} else {
+					y = this.y + (height - (-forceY * lifeTime)) * random.nextDouble() - forceY * lifeTime;
+				}
+				map.spawnParticle(new ParticleAirFlow(x, y, lifeTime, forceX, forceY));
 			}
-			double y;
-			if (forceY > 0) {
-				y = this.y * TileSet.SPRITE_SIZE + (height * TileSet.SPRITE_SIZE - forceY * lifeTime) * random.nextDouble();
-			} else {
-				y = this.y * TileSet.SPRITE_SIZE + (height * TileSet.SPRITE_SIZE + forceY * lifeTime) * random.nextDouble() + forceY * lifeTime;
-			}
-			map.spawnParticle(new ParticleAirFlow(x, y, lifeTime, forceX, forceY));
+
 		}
 	}
 

@@ -18,6 +18,10 @@ public class MapObjectDecorationAirFlow extends MapObjectDecoration {
 	protected double forceX;
 	protected double forceY;
 
+	public MapObjectDecorationAirFlow() {
+
+	}
+
 	public MapObjectDecorationAirFlow(int id, int x, int y, int width, int height, double forceX, double forceY) {
 		super(id, x, y, 1, 2);
 		this.forceX = forceX;

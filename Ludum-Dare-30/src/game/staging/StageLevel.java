@@ -202,13 +202,17 @@ public class StageLevel extends Stage {
 					playerClone[i].draw(g2, 1.0);
 				}
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
+
 		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).draw(g2, 1.0);
+			try {
+				entities.get(i).draw(g2, 1.0);
+			} catch (NullPointerException e) {}
 		}
 		for (int i = 0; i < particles.size(); i++) {
-			particles.get(i).draw(g2);
+			try {
+				particles.get(i).draw(g2);
+			} catch (NullPointerException e) {}
 		}
 
 		map.drawObjects(g2, spriteSize);
@@ -273,8 +277,7 @@ public class StageLevel extends Stage {
 			}
 			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2]
 					: null, isCloneMoving[3] ? playerClone[3] : null);
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map, timeFactor);
 		}
