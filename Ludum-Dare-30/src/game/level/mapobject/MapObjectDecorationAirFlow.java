@@ -28,10 +28,6 @@ public class MapObjectDecorationAirFlow extends MapObjectDecoration {
 		this.forceY = forceY;
 	}
 
-	public MapObjectDecorationAirFlow() {
-
-	}
-
 	public void onStart(LevelMap map) {
 		map.spawnEntity(new EntityAirFlow(x * TileSet.SPRITE_SIZE, y * TileSet.SPRITE_SIZE, width * TileSet.SPRITE_SIZE, height * TileSet.SPRITE_SIZE, forceX,
 				forceY));
