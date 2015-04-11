@@ -7,15 +7,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.Set;
 
 import util.Log;
 
 public class Preferences {
 
 	private static Properties props;
+	private static Map<String, Integer> keyBinding;
 
 	private static int nextLevel;
 	private static String lang;
@@ -30,6 +34,7 @@ public class Preferences {
 		getDocumentPath();
 		path = getPath() + "/DoubleYou.properties";
 		props = new Properties();
+		keyBinding = new HashMap<String, Integer>();
 		File file = new File(path);
 		try {
 			file.createNewFile();
@@ -39,6 +44,14 @@ public class Preferences {
 			else {
 				// Writing Values from props
 				lang = props.getProperty("lang");
+
+				// Keybindings
+				Set<Object> keys = props.keySet();
+				for (Object key : keys) {
+					String str = key + "";
+					if (str.startsWith("key_"))
+						keyBinding.put(str, Integer.parseInt(props.getProperty(str)));
+				}
 
 			}
 		} catch (IOException e1) {
@@ -64,6 +77,11 @@ public class Preferences {
 			props = new Properties();
 
 		props.setProperty("lang", lang);
+
+		// Keybindings
+		for (String key : keyBinding.keySet()) {
+			props.put(key, Integer.valueOf(keyBinding.get(key)).toString());
+		}
 
 		path = getPath() + "/DoubleYou.properties";
 		File file = new File(path);
@@ -91,6 +109,15 @@ public class Preferences {
 
 		// Manuall Values
 		lang = Locale.getDefault().toString();
+
+		// KeyBindings
+		keyBinding.put("key_up", 87);
+		keyBinding.put("key_up2", 38);
+		keyBinding.put("key_up3", 32);
+		keyBinding.put("key_left", 65);
+		keyBinding.put("key_left2", 37);
+		keyBinding.put("key_right", 68);
+		keyBinding.put("key_right2", 39);
 	}
 
 	// region Getter, Setter and Util
@@ -109,6 +136,10 @@ public class Preferences {
 
 	public static void setLang(String lang) {
 		Preferences.lang = lang;
+	}
+
+	public static int getKeyBinding(String key) {
+		return keyBinding.get(key);
 	}
 
 	public static String getPath() {

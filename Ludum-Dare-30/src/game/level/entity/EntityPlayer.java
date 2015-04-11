@@ -2,6 +2,7 @@ package game.level.entity;
 
 import game.level.Animation;
 import game.level.LevelMap;
+import game.res.Preferences;
 import game.res.ResourceManager;
 
 import java.awt.event.KeyEvent;
@@ -9,9 +10,9 @@ import java.awt.image.BufferedImage;
 
 public class EntityPlayer extends EntityMob {
 
-	protected boolean key_A;
-	protected boolean key_D;
-	protected boolean key_W;
+	protected boolean key_left;
+	protected boolean key_right;
+	protected boolean key_up;
 
 	public int health;
 
@@ -43,68 +44,58 @@ public class EntityPlayer extends EntityMob {
 
 	public void move(LevelMap map) {
 		xMovement = 0;
-		if (key_A) {
+		if (key_left) {
 			xMovement = -2;
 		}
-		if (key_D) {
+		if (key_right) {
 			xMovement = 2;
 		}
-		if (key_W & onGround) {
+		if (key_up & onGround) {
 			yMovement = -2.75;
 		}
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			key_A = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_D) {
-			key_D = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_W) {
-			key_W = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			key_A = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			key_D = true;
-		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			key_W = true;
+		if (e.getKeyCode() == Preferences.getKeyBinding("key_left") || e.getKeyCode() == Preferences.getKeyBinding("key_left2")) {
+			key_left = true;
+		} else if (e.getKeyCode() == Preferences.getKeyBinding("key_right") || e.getKeyCode() == Preferences.getKeyBinding("key_right2")) {
+			key_right = true;
+		} else if (e.getKeyCode() == Preferences.getKeyBinding("key_up") || e.getKeyCode() == Preferences.getKeyBinding("key_up2")
+				|| e.getKeyCode() == Preferences.getKeyBinding("key_up3")) {
+			key_up = true;
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_A) {
-			key_A = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_D) {
-			key_D = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_SPACE | e.getKeyCode() == KeyEvent.VK_W) {
-			key_W = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			key_A = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			key_D = false;
-		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			key_W = false;
+		if (e.getKeyCode() == Preferences.getKeyBinding("key_left") || e.getKeyCode() == Preferences.getKeyBinding("key_left2")) {
+			key_left = false;
+		} else if (e.getKeyCode() == Preferences.getKeyBinding("key_right") || e.getKeyCode() == Preferences.getKeyBinding("key_right2")) {
+			key_right = false;
+		} else if (e.getKeyCode() == Preferences.getKeyBinding("key_up") || e.getKeyCode() == Preferences.getKeyBinding("key_up2")
+				|| e.getKeyCode() == Preferences.getKeyBinding("key_up3")) {
+			key_up = false;
 		}
 	}
 
 	public void resetKeys() {
-		key_A = false;
-		key_D = false;
-		key_W = false;
+		key_left = false;
+		key_right = false;
+		key_up = false;
 	}
 
 	protected BufferedImage getImage(double timeFactor) {
 		if (!onGround) {
 			return animationJump.getImage(timeFactor);
-		} else if (key_A || key_D) {
+		} else if (key_left || key_right) {
 			return animationRun.getImage(timeFactor);
 		}
 		return image;
 	}
 
 	public EntityPlayerRecord createRecord(EntityPlayerRecord rec) {
-		rec.key_A = key_A;
-		rec.key_D = key_D;
-		rec.key_W = key_W;
+		rec.key_left = key_left;
+		rec.key_right = key_right;
+		rec.key_up = key_up;
 		return rec;
 	}
 
