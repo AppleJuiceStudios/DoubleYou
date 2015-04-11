@@ -290,7 +290,7 @@ public class StageEditor extends Stage {
 					((MapObjectDecorationAirFlow) object).setForceX(-0.5);
 					object.setWidth(lastSelectionX - selectedX + 1);
 				} else {
-					((MapObjectDecorationAirFlow) object).setForceY(0.5);
+					((MapObjectDecorationAirFlow) object).setForceX(0.5);
 					object.setX(lastSelectionX);
 					object.setWidth(selectedX - lastSelectionX + 1);
 				}
