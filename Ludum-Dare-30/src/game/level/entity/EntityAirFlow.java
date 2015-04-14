@@ -56,4 +56,9 @@ public class EntityAirFlow extends Entity {
 		}
 	}
 
+	public void interactionPlayerRecord(EntityPlayerRecord entity, LevelMap map) {
+		entity.pushX(forceX);
+		entity.pushY(forceY);
+	}
+
 }

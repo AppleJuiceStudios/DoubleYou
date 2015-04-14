@@ -322,6 +322,20 @@ public class StageLevel extends Stage {
 			}
 		}
 
+		// Entity PlayerRecord
+		if (isRecording) {
+			for (int i = 0; i < entities.size(); i++) {
+				Entity entity = entities.get(i);
+				if (entity.getXPos() < playerRecord.getXPos() + playerRecord.getWidth() //
+						&& playerRecord.getXPos() < entity.getXPos() + entity.getWidth() //
+						&& entity.getYPos() < playerRecord.getYPos() + playerRecord.getHeight() //
+						&& playerRecord.getYPos() < entity.getYPos() + entity.getHeight()) {
+					playerRecord.interaction(entity, map);
+					entity.interactionPlayerRecord(playerRecord, map);
+				}
+			}
+		}
+
 		// Entity Entity
 		for (int i = 0; i < entities.size(); i++) {
 			for (int j = i + 1; j < entities.size(); j++) {
