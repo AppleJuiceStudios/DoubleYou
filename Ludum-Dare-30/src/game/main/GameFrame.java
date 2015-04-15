@@ -35,7 +35,7 @@ public class GameFrame extends JFrame {
 		setVisible(true);
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice display = ge.getDefaultScreenDevice();
-		display.setFullScreenWindow(this);
+		// display.setFullScreenWindow(this);
 		DisplayMode[] displayModes = display.getDisplayModes();
 		DisplayMode dMode = displayModes[0];
 		for (int i = 1; i < displayModes.length; i++) {
@@ -47,11 +47,13 @@ public class GameFrame extends JFrame {
 			}
 		}
 		Log.info("Choosen DisplayMode: " + dMode.getWidth() + "x" + dMode.getHeight() + " " + dMode.getRefreshRate() + "Hz " + dMode.getBitDepth() + "Bit");
-		display.setDisplayMode(dMode);
+		// display.setDisplayMode(dMode);
 
 		gameCanvas = new GameCanvas(dMode.getWidth(), dMode.getHeight());
 		gameCanvas.init();
 		add(gameCanvas);
+
+		pack();
 
 		setResizable(false);
 		addWindowListener(new WindowAdapter() {
