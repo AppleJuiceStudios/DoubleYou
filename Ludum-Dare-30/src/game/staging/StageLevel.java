@@ -165,7 +165,7 @@ public class StageLevel extends Stage {
 		} else if (yOffset < 0) {
 			yOffset = 0;
 		}
-		drawBackground(g2, background);
+		drawBackgroundTopAligned(g2, background);
 		// g2.drawImage(background, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
 		// Montains
 		double mountainsOffset = -xOffset * 0.3;
@@ -202,13 +202,17 @@ public class StageLevel extends Stage {
 					playerClone[i].draw(g2, 1.0);
 				}
 			}
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
+
 		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).draw(g2, 1.0);
+			try {
+				entities.get(i).draw(g2, 1.0);
+			} catch (NullPointerException e) {}
 		}
 		for (int i = 0; i < particles.size(); i++) {
-			particles.get(i).draw(g2);
+			try {
+				particles.get(i).draw(g2);
+			} catch (NullPointerException e) {}
 		}
 
 		map.drawObjects(g2, spriteSize);
@@ -273,8 +277,7 @@ public class StageLevel extends Stage {
 			}
 			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2]
 					: null, isCloneMoving[3] ? playerClone[3] : null);
-		} catch (NullPointerException e) {
-		}
+		} catch (NullPointerException e) {}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map, timeFactor);
 		}
@@ -315,6 +318,20 @@ public class StageLevel extends Stage {
 						clone.interaction(entity, map);
 						entity.interaction(clone, map);
 					}
+				}
+			}
+		}
+
+		// Entity PlayerRecord
+		if (isRecording) {
+			for (int i = 0; i < entities.size(); i++) {
+				Entity entity = entities.get(i);
+				if (entity.getXPos() < playerRecord.getXPos() + playerRecord.getWidth() //
+						&& playerRecord.getXPos() < entity.getXPos() + entity.getWidth() //
+						&& entity.getYPos() < playerRecord.getYPos() + playerRecord.getHeight() //
+						&& playerRecord.getYPos() < entity.getYPos() + entity.getHeight()) {
+					playerRecord.interaction(entity, map);
+					entity.interactionPlayerRecord(playerRecord, map);
 				}
 			}
 		}

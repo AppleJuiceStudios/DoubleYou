@@ -23,12 +23,14 @@ public class EntityMob extends Entity {
 	}
 
 	protected void colision(LevelMap map, double timeFactor) {
+		if (yForce <= -0.07) {
+			yForce += 0.07;
+		} else {
+			yMovement += 0.07;
+		}
 		xMovement += xForce;
 		yMovement += yForce;
-		xForce = 0;
-		yForce = 0;
 
-		yMovement += 0.07 * timeFactor;
 		if (xMovement > 0) {
 			lookLeft = false;
 			int xright = (int) ((x + width + xMovement * timeFactor) / 16);
@@ -36,7 +38,14 @@ public class EntityMob extends Entity {
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
 			if (colideWithBlock(map, xright, ytop) | colideWithBlock(map, xright, ycenter) | colideWithBlock(map, xright, ybottom)) {
-				xMovement = (xright * 16) - (x + width);
+				double newxMovement = (xright * 16) - (x + width);
+				if (newxMovement < xMovement - xForce) {
+					xMovement = newxMovement - xForce;
+					xForce = 0;
+				} else {
+					xForce = (xMovement - xForce) - newxMovement;
+				}
+				xMovement = newxMovement;
 			}
 		} else if (xMovement < 0) {
 			lookLeft = true;
@@ -45,11 +54,17 @@ public class EntityMob extends Entity {
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
 			if (colideWithBlock(map, xleft, ytop) | colideWithBlock(map, xleft, ycenter) | colideWithBlock(map, xleft, ybottom)) {
-				xMovement = ((xleft + 1) * 16) - x;
+				double newxMovement = ((xleft + 1) * 16) - x;
+				if (newxMovement < xMovement - xForce) {
+					xMovement = newxMovement - xForce;
+					xForce = 0;
+				} else {
+					xForce = (xMovement - xForce) - newxMovement;
+				}
+				xMovement = newxMovement;
 			}
 		}
 		x += xMovement * timeFactor;
-		// xMovement /= timeFactor;
 
 		if (yMovement > 10) {
 			yMovement = 10;
@@ -63,7 +78,14 @@ public class EntityMob extends Entity {
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
 			if (colideWithBlock(map, xleft, ybottom) | colideWithBlock(map, xright, ybottom)) {
-				yMovement = (ybottom * 16) - (y + height);
+				double newyMovement = (ybottom * 16) - (y + height);
+				if (newyMovement < yMovement - yForce) {
+					yMovement = newyMovement - yForce;
+					yForce = 0;
+				} else {
+					yForce = (yMovement - yForce) - newyMovement;
+				}
+				yMovement = newyMovement;
 				onGround = true;
 			}
 		} else if (yMovement < 0) {
@@ -71,11 +93,22 @@ public class EntityMob extends Entity {
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
 			if (colideWithBlock(map, xleft, ytop) | colideWithBlock(map, xright, ytop)) {
-				yMovement = ((ytop + 1) * 16) - y;
+				double newyMovement = ((ytop + 1) * 16) - y;
+				if (newyMovement < yMovement - yForce) {
+					yMovement = newyMovement - yForce;
+					yForce = 0;
+				} else {
+					yForce = (yMovement - yForce) - newyMovement;
+				}
+				yMovement = newyMovement;
 			}
 		}
 		y += yMovement * timeFactor;
-		// yMovement /= timeFactor;
+
+		xMovement -= xForce;
+		yMovement -= yForce;
+		xForce = 0;
+		yForce = 0;
 	}
 
 	public boolean colideWithBlock(LevelMap map, int x, int y) {

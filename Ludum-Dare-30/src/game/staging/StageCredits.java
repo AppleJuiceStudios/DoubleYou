@@ -157,7 +157,7 @@ public class StageCredits extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		drawBackground(g2, imgBackground);
+		drawBackgroundTopAligned(g2, imgBackground);
 		scroller.draw(g2);
 
 		for (Button button : btns)

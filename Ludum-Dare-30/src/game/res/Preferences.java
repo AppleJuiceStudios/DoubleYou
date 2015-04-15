@@ -45,6 +45,7 @@ public class Preferences {
 				// Writing Values from props
 				lang = props.getProperty("lang");
 
+				// Keybindings
 				Set<Object> keys = props.keySet();
 				for (Object key : keys) {
 					String str = key + "";
@@ -77,6 +78,11 @@ public class Preferences {
 
 		props.setProperty("lang", lang);
 
+		// Keybindings
+		for (String key : keyBinding.keySet()) {
+			props.put(key, Integer.valueOf(keyBinding.get(key)).toString());
+		}
+
 		path = getPath() + "/DoubleYou.properties";
 		File file = new File(path);
 		try {
@@ -103,6 +109,15 @@ public class Preferences {
 
 		// Manuall Values
 		lang = Locale.getDefault().toString();
+
+		// KeyBindings
+		keyBinding.put("key_up", 87);
+		keyBinding.put("key_up2", 38);
+		keyBinding.put("key_up3", 32);
+		keyBinding.put("key_left", 65);
+		keyBinding.put("key_left2", 37);
+		keyBinding.put("key_right", 68);
+		keyBinding.put("key_right2", 39);
 	}
 
 	// region Getter, Setter and Util
@@ -121,6 +136,10 @@ public class Preferences {
 
 	public static void setLang(String lang) {
 		Preferences.lang = lang;
+	}
+
+	public static int getKeyBinding(String key) {
+		return keyBinding.get(key);
 	}
 
 	public static String getPath() {

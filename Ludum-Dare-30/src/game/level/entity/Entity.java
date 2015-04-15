@@ -38,6 +38,10 @@ public class Entity {
 
 	}
 
+	public void interactionPlayerRecord(EntityPlayerRecord entity, LevelMap map) {
+
+	}
+
 	public void damage(int amount, LevelMap map) {
 
 	}

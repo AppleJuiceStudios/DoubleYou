@@ -26,12 +26,12 @@ public class EntityPlayerRecord extends EntityPlayer {
 
 	public void update(LevelMap map, double timeFactor) {
 		byte movement = 0;
-		if (key_D) {
+		if (key_right) {
 			movement = 1;
-		} else if (key_A) {
+		} else if (key_left) {
 			movement = 2;
 		}
-		if (key_W) {
+		if (key_up) {
 			movement += 3;
 		}
 		recording.add(movement);
