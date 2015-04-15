@@ -30,7 +30,6 @@ public class EntityMob extends Entity {
 		}
 		xMovement += xForce;
 		yMovement += yForce;
-		System.out.println(yMovement);
 
 		if (xMovement > 0) {
 			lookLeft = false;
@@ -110,9 +109,6 @@ public class EntityMob extends Entity {
 		yMovement -= yForce;
 		xForce = 0;
 		yForce = 0;
-
-		System.out.println("     " + yMovement);
-		System.out.println("     " + onGround);
 	}
 
 	public boolean colideWithBlock(LevelMap map, int x, int y) {
