@@ -220,7 +220,7 @@ public class StageOptions extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		drawBackground(g2, background);
+		drawBackgroundTopAligned(g2, background);
 
 		for (Button button : btns)
 			button.draw(g2);

@@ -36,4 +36,17 @@ public abstract class Stage {
 		}
 	}
 
+	public void drawBackgroundTopAligned(Graphics2D g2, BufferedImage image) {
+		double minXScale = (double) GameCanvas.WIDTH / image.getWidth();
+		double minYScale = (double) GameCanvas.HEIGHT / image.getHeight();
+		if (minXScale > minYScale) {
+			g2.drawImage(image, 0, 0, GameCanvas.WIDTH, (int) (image.getHeight() * minXScale), null);
+		} else if (minXScale < minYScale) {
+			g2.drawImage(image, (int) (-(image.getWidth() * minYScale - GameCanvas.WIDTH) / 2), 0, (int) (image.getWidth() * minYScale), GameCanvas.HEIGHT,
+					null);
+		} else {
+			g2.drawImage(image, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
+		}
+	}
+
 }

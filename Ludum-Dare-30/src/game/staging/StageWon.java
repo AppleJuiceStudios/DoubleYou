@@ -105,7 +105,7 @@ public class StageWon extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		drawBackground(g2, imgBackground);
+		drawBackgroundTopAligned(g2, imgBackground);
 		g2.drawImage(imgContributors, 20, 20, GameCanvas.WIDTH - 40, GameCanvas.HEIGHT - 200, null);
 
 		btnLevel.draw(g2);

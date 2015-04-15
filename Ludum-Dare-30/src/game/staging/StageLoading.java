@@ -70,7 +70,7 @@ public class StageLoading extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		drawBackground(g2, image);
+		drawBackgroundTopAligned(g2, image);
 
 		g2.setColor(color);
 		g2.fillRect(GameCanvas.WIDTH / 8, (int) (GameCanvas.HEIGHT * 0.75), GameCanvas.WIDTH - GameCanvas.WIDTH / 4, (int) (GameCanvas.HEIGHT * 0.08));

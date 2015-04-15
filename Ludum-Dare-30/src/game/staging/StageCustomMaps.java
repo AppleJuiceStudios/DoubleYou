@@ -273,7 +273,7 @@ public class StageCustomMaps extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		drawBackground(g2, imgBackground);
+		drawBackgroundTopAligned(g2, imgBackground);
 		g2.setColor(new Color(1f, 1f, 1f, 0.2f));
 		g2.fillRect(0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT);
 

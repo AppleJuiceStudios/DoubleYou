@@ -199,7 +199,7 @@ public class StageMainMenue extends Stage {
 	}
 
 	public void draw(Graphics2D g2) {
-		drawBackground(g2, imgBackground);
+		drawBackgroundTopAligned(g2, imgBackground);
 
 		for (Button button : btns)
 			button.draw(g2);

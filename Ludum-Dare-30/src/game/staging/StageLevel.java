@@ -165,7 +165,7 @@ public class StageLevel extends Stage {
 		} else if (yOffset < 0) {
 			yOffset = 0;
 		}
-		drawBackground(g2, background);
+		drawBackgroundTopAligned(g2, background);
 		// g2.drawImage(background, 0, 0, GameCanvas.WIDTH, GameCanvas.HEIGHT, null);
 		// Montains
 		double mountainsOffset = -xOffset * 0.3;
