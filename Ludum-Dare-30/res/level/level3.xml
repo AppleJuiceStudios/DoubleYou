@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<levelMap13>
-	<soundTrack>mars_3.wav</soundTrack>
-	<isCloneAllowed>true</isCloneAllowed>
+<levelMap>
+    <isCloneAllowed>true</isCloneAllowed>
     <mapObjects>
         <mapObjectLasergate>
             <height>2</height>
             <id>32</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>17</x>
@@ -14,17 +14,19 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>33</id>
+            <output>-1</output>
             <power>false</power>
             <width>1</width>
             <x>17</x>
             <y>14</y>
             <inverted>false</inverted>
             <keep>false</keep>
-            <targetID>49</targetID>
+            <targetID>-1</targetID>
         </mapObjectGroundswtich>
         <mapObjectGroundswtich>
             <height>1</height>
             <id>34</id>
+            <output>32</output>
             <power>false</power>
             <width>1</width>
             <x>17</x>
@@ -36,17 +38,19 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>35</id>
+            <output>36</output>
             <power>false</power>
             <width>1</width>
             <x>11</x>
             <y>17</y>
-            <inverted>false</inverted>
+            <inverted>true</inverted>
             <keep>false</keep>
-            <targetID>49</targetID>
+            <targetID>36</targetID>
         </mapObjectGroundswtich>
         <mapObjectLasergate>
             <height>3</height>
             <id>36</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>15</x>
@@ -55,6 +59,7 @@
         <mapObjectLasergateHorizontal>
             <height>1</height>
             <id>37</id>
+            <output>-1</output>
             <power>true</power>
             <width>3</width>
             <x>25</x>
@@ -63,6 +68,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>38</id>
+            <output>37</output>
             <power>false</power>
             <width>1</width>
             <x>21</x>
@@ -74,39 +80,43 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>39</id>
+            <output>-1</output>
             <power>false</power>
             <width>1</width>
             <x>38</x>
             <y>14</y>
             <inverted>false</inverted>
             <keep>false</keep>
-            <targetID>51</targetID>
+            <targetID>-1</targetID>
         </mapObjectGroundswtich>
         <mapObjectGroundswtich>
             <height>1</height>
             <id>40</id>
+            <output>50</output>
             <power>false</power>
             <width>1</width>
             <x>40</x>
             <y>14</y>
             <inverted>false</inverted>
             <keep>false</keep>
-            <targetID>51</targetID>
+            <targetID>50</targetID>
         </mapObjectGroundswtich>
         <mapObjectGroundswtich>
             <height>1</height>
             <id>41</id>
+            <output>43</output>
             <power>false</power>
             <width>1</width>
             <x>42</x>
             <y>14</y>
-            <inverted>false</inverted>
+            <inverted>true</inverted>
             <keep>false</keep>
-            <targetID>52</targetID>
+            <targetID>43</targetID>
         </mapObjectGroundswtich>
         <mapObjectLasergate>
             <height>2</height>
             <id>42</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>40</x>
@@ -115,6 +125,7 @@
         <mapObjectLasergate>
             <height>2</height>
             <id>43</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>42</x>
@@ -123,6 +134,7 @@
         <mapObjectLasergateHorizontal>
             <height>1</height>
             <id>44</id>
+            <output>-1</output>
             <power>false</power>
             <width>7</width>
             <x>56</x>
@@ -131,6 +143,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>45</id>
+            <output>44</output>
             <power>false</power>
             <width>1</width>
             <x>59</x>
@@ -142,6 +155,7 @@
         <mapObjectLasergateHorizontal>
             <height>1</height>
             <id>46</id>
+            <output>-1</output>
             <power>true</power>
             <width>5</width>
             <x>67</x>
@@ -150,6 +164,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>47</id>
+            <output>46</output>
             <power>false</power>
             <width>1</width>
             <x>59</x>
@@ -158,64 +173,64 @@
             <keep>false</keep>
             <targetID>46</targetID>
         </mapObjectGroundswtich>
-        <mapObjectTriggerWinning>
-            <height>4</height>
-            <id>48</id>
-            <power>false</power>
-            <width>1</width>
-            <x>76</x>
-            <y>14</y>
-        </mapObjectTriggerWinning>
-        <mapObjectLogicOr>
-            <height>0</height>
-            <id>49</id>
-            <power>true</power>
-            <width>0</width>
-            <x>0</x>
-            <y>0</y>
-            <inverted>true</inverted>
-            <targetID>36</targetID>
-            <in>33</in>
-            <in>35</in>
-        </mapObjectLogicOr>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>50</id>
+            <id>48</id>
+            <output>50</output>
             <power>false</power>
             <width>1</width>
             <x>38</x>
             <y>14</y>
             <inverted>false</inverted>
             <keep>false</keep>
-            <targetID>52</targetID>
+            <targetID>50</targetID>
         </mapObjectGroundswtich>
-        <mapObjectLogicAndKeeping>
-            <height>0</height>
-            <id>51</id>
+        <mapObjectTrigger>
+            <height>3</height>
+            <id>49</id>
+            <output>52</output>
             <power>false</power>
-            <width>0</width>
-            <x>0</x>
-            <y>0</y>
+            <width>3</width>
+            <x>78</x>
+            <y>15</y>
+            <targetID>52</targetID>
+        </mapObjectTrigger>
+        <mapObjectLogicAndKeeping>
+            <height>1</height>
+            <id>50</id>
+            <output>42</output>
+            <power>false</power>
+            <width>1</width>
+            <x>39</x>
+            <y>15</y>
             <inverted>true</inverted>
             <targetID>42</targetID>
-            <in>39</in>
+            <in>48</in>
             <in>40</in>
         </mapObjectLogicAndKeeping>
-        <mapObjectLogicAndKeeping>
-            <height>0</height>
-            <id>52</id>
+        <mapObjectDecorationFinishFlag>
+            <height>2</height>
+            <id>51</id>
+            <output>-1</output>
             <power>false</power>
-            <width>0</width>
-            <x>0</x>
-            <y>0</y>
-            <inverted>true</inverted>
-            <targetID>43</targetID>
-            <in>50</in>
-            <in>41</in>
-        </mapObjectLogicAndKeeping>
+            <width>1</width>
+            <x>79</x>
+            <y>16</y>
+        </mapObjectDecorationFinishFlag>
+        <mapObjectActionWinning>
+            <height>1</height>
+            <id>52</id>
+            <output>-1</output>
+            <power>false</power>
+            <width>1</width>
+            <x>79</x>
+            <y>19</y>
+            <repeat>false</repeat>
+        </mapObjectActionWinning>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>
     <playerSpawnY>272</playerSpawnY>
+    <soundTrack>mars_3.wav</soundTrack>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYGBgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
@@ -233,7 +248,7 @@
     <spritesheet>AAAAAAAAAAAAAAEHAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAIIJCQkAQcAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAIIAAAAAggAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAIIAAAhAgggIAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAIIAAAiAgggIAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAUFBAQEBQgAAAIF</spritesheet>
     <spritesheet>AgUFBQUFBQUFBgYGBgYFBQkAAAIF</spritesheet>
     <spritesheet>AgUFBQUFBQUJAAAAAAADCQAAAAIF</spritesheet>
@@ -254,7 +269,7 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAQcAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAmAggAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAwAggAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAggAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAoAggqKgIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAggAAAIF</spritesheet>
@@ -294,10 +309,10 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAwMDAwAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAMTExAgUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAMTExAgUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAMTExAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAQEBQUF</spritesheet>
-</levelMap13>
+</levelMap>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <levelMap>
-    <isCloneAllowed>true</isCloneAllowed>
+    <isCloneAllowed>false</isCloneAllowed>
     <mapObjects>
         <mapObjectLasergate>
             <height>3</height>
@@ -23,9 +23,19 @@
             <keep>true</keep>
             <targetID>32</targetID>
         </mapObjectGroundswtich>
+        <mapObjectTrigger>
+            <height>3</height>
+            <id>34</id>
+            <output>30002</output>
+            <power>false</power>
+            <width>3</width>
+            <x>65</x>
+            <y>13</y>
+            <targetID>40</targetID>
+        </mapObjectTrigger>
         <mapObjectLasergate>
             <height>2</height>
-            <id>34</id>
+            <id>35</id>
             <output>-1</output>
             <power>true</power>
             <width>1</width>
@@ -34,7 +44,7 @@
         </mapObjectLasergate>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>35</id>
+            <id>36</id>
             <output>34</output>
             <power>false</power>
             <width>1</width>
@@ -42,11 +52,11 @@
             <y>15</y>
             <inverted>true</inverted>
             <keep>true</keep>
-            <targetID>34</targetID>
+            <targetID>35</targetID>
         </mapObjectGroundswtich>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>36</id>
+            <id>37</id>
             <output>37</output>
             <power>false</power>
             <width>1</width>
@@ -54,61 +64,36 @@
             <y>14</y>
             <inverted>true</inverted>
             <keep>true</keep>
-            <targetID>37</targetID>
+            <targetID>38</targetID>
         </mapObjectGroundswtich>
         <mapObjectLasergateHorizontal>
             <height>1</height>
-            <id>37</id>
+            <id>38</id>
             <output>-1</output>
             <power>true</power>
             <width>4</width>
             <x>49</x>
             <y>15</y>
         </mapObjectLasergateHorizontal>
-        <mapObjectDecorationAirFlow>
-            <height>1</height>
-            <id>38</id>
-            <output>-1</output>
-            <power>false</power>
-            <width>7</width>
-            <x>24</x>
-            <y>17</y>
-            <forceX>-0.5</forceX>
-            <forceY>0.0</forceY>
-        </mapObjectDecorationAirFlow>
-        <mapObjectDecorationAirFlow>
-            <height>8</height>
+        <mapObjectDecorationFinishFlag>
+            <height>2</height>
             <id>39</id>
             <output>-1</output>
             <power>false</power>
             <width>1</width>
-            <x>12</x>
-            <y>11</y>
-            <forceX>0.0</forceX>
-            <forceY>-0.5</forceY>
-        </mapObjectDecorationAirFlow>
-        <mapObjectDecorationAirFlow>
-            <height>6</height>
+            <x>66</x>
+            <y>14</y>
+        </mapObjectDecorationFinishFlag>
+        <mapObjectActionWinning>
+            <height>1</height>
             <id>40</id>
             <output>-1</output>
             <power>false</power>
             <width>1</width>
-            <x>15</x>
-            <y>11</y>
-            <forceX>0.0</forceX>
-            <forceY>0.5</forceY>
-        </mapObjectDecorationAirFlow>
-        <mapObjectDecorationAirFlow>
-            <height>1</height>
-            <id>41</id>
-            <output>-1</output>
-            <power>false</power>
-            <width>6</width>
-            <x>1</x>
-            <y>15</y>
-            <forceX>0.5</forceX>
-            <forceY>0.0</forceY>
-        </mapObjectDecorationAirFlow>
+            <x>66</x>
+            <y>17</y>
+            <repeat>false</repeat>
+        </mapObjectActionWinning>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>
     <playerSpawnY>240</playerSpawnY>
@@ -124,11 +109,11 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAADBgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAQcAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAggAAAAAAAAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAggAAAAAAAABBAUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAggAAAAAAAACBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAwkAAAAAAAADBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAABBAUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAADBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAwUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
@@ -145,7 +130,7 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAAC</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAAC</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAEHAAAC</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAIwIIIiIC</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJAIIIyMC</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIIAAAC</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAUIAAAC</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYJAAAC</spritesheet>
@@ -162,12 +147,12 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAQUFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAgUFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAwYGBgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAQcAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAkAggAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAlAggAAAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBQgAAAIF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgkAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
@@ -178,9 +163,9 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAABBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAEFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAJiYmJgIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAACIiIgIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAACIiIgIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAACIiIgIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAJycnJwIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
