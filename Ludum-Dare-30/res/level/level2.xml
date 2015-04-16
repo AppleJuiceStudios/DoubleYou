@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<levelMap12>
-	<soundTrack>mars_2.wav</soundTrack>
-	<isCloneAllowed>true</isCloneAllowed>
-	<startTextbox>
-		<content>
-			<item>So in this level there is something new!</item>
-			<item>Use the spacebar to create a clone!</item>
-		</content>
-		<content>
-			<item>While you clone is transparent you can</item>
-			<item>tell him what to do. When you hit</item>
-			<item>space again he will perform this!</item>
-		</content>
-		<content>
-			<item>You will notice that the plates aren't</item>
-			<item>sticking to the floor anymore!</item>
-		</content>
-		<content>
-			<item>With the right amount of timing</item>
-			<item>you're clone might help you ;)</item>
-			<item>Just try it out!</item>
-		</content>
-	</startTextbox>
+<levelMap>
+    <isCloneAllowed>true</isCloneAllowed>
     <mapObjects>
         <mapObject>
             <height>0</height>
             <id>32</id>
+            <output>-1</output>
             <power>false</power>
             <width>0</width>
             <x>0</x>
@@ -34,6 +14,7 @@
         <mapObjectLasergate>
             <height>2</height>
             <id>33</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>23</x>
@@ -42,6 +23,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>34</id>
+            <output>33</output>
             <power>false</power>
             <width>1</width>
             <x>23</x>
@@ -53,6 +35,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>35</id>
+            <output>30000</output>
             <power>false</power>
             <width>1</width>
             <x>31</x>
@@ -64,6 +47,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>36</id>
+            <output>30000</output>
             <power>false</power>
             <width>1</width>
             <x>34</x>
@@ -75,6 +59,7 @@
         <mapObjectLasergate>
             <height>3</height>
             <id>37</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>37</x>
@@ -83,6 +68,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>38</id>
+            <output>40</output>
             <power>false</power>
             <width>1</width>
             <x>48</x>
@@ -94,6 +80,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>39</id>
+            <output>41</output>
             <power>false</power>
             <width>1</width>
             <x>50</x>
@@ -105,6 +92,7 @@
         <mapObjectLasergate>
             <height>2</height>
             <id>40</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>48</x>
@@ -113,6 +101,7 @@
         <mapObjectLasergate>
             <height>2</height>
             <id>41</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>50</x>
@@ -121,6 +110,7 @@
         <mapObjectTriggerLevel12>
             <height>1</height>
             <id>42</id>
+            <output>-1</output>
             <power>false</power>
             <width>1</width>
             <x>49</x>
@@ -129,6 +119,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>43</id>
+            <output>44</output>
             <power>false</power>
             <width>1</width>
             <x>69</x>
@@ -140,34 +131,58 @@
         <mapObjectLasergateHorizontal>
             <height>1</height>
             <id>44</id>
+            <output>-1</output>
             <power>true</power>
             <width>3</width>
             <x>62</x>
             <y>16</y>
         </mapObjectLasergateHorizontal>
-        <mapObjectTriggerWinning>
-            <height>4</height>
+        <mapObjectTrigger>
+            <height>3</height>
             <id>45</id>
+            <output>30003</output>
+            <power>false</power>
+            <width>3</width>
+            <x>77</x>
+            <y>15</y>
+            <targetID>48</targetID>
+        </mapObjectTrigger>
+        <mapObjectLogicAndKeeping>
+            <height>1</height>
+            <id>46</id>
+            <output>37</output>
             <power>false</power>
             <width>1</width>
-            <x>77</x>
-            <y>14</y>
-        </mapObjectTriggerWinning>
-        <mapObjectLogicAndKeeping>
-            <height>0</height>
-            <id>46</id>
-            <power>false</power>
-            <width>0</width>
-            <x>0</x>
-            <y>0</y>
+            <x>33</x>
+            <y>15</y>
             <inverted>true</inverted>
             <targetID>37</targetID>
             <in>35</in>
             <in>36</in>
         </mapObjectLogicAndKeeping>
+        <mapObjectDecorationFinishFlag>
+            <height>2</height>
+            <id>47</id>
+            <output>-1</output>
+            <power>false</power>
+            <width>1</width>
+            <x>78</x>
+            <y>16</y>
+        </mapObjectDecorationFinishFlag>
+        <mapObjectActionWinning>
+            <height>1</height>
+            <id>48</id>
+            <output>-1</output>
+            <power>false</power>
+            <width>1</width>
+            <x>78</x>
+            <y>19</y>
+            <repeat>false</repeat>
+        </mapObjectActionWinning>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>
     <playerSpawnY>240</playerSpawnY>
+    <soundTrack>mars_2.wav</soundTrack>
     <spritesheet>AwYGBgYGBgUFBQUFBQYGBgYFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAIFBQUFCQAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAIFBQUIAAAAAAACBQUF</spritesheet>
@@ -246,9 +261,29 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAtLS0tAgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAALS0tAgUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAALS0tAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAgUF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAQEBQUF</spritesheet>
-</levelMap12>
+    <startTextbox>
+        <content>
+            <item>So in this level there is something new!</item>
+            <item>Use the spacebar to create a clone!</item>
+        </content>
+        <content>
+            <item>While you clone is transparent you can</item>
+            <item>tell him what to do. When you hit</item>
+            <item>space again he will perform this!</item>
+        </content>
+        <content>
+            <item>You will notice that the plates aren't</item>
+            <item>sticking to the floor anymore!</item>
+        </content>
+        <content>
+            <item>With the right amount of timing</item>
+            <item>you're clone might help you ;)</item>
+            <item>Just try it out!</item>
+        </content>
+    </startTextbox>
+</levelMap>

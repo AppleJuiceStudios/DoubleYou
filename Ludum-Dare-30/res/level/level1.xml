@@ -1,27 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<levelMap11>
-	<soundTrack>mars_1.wav</soundTrack>
-	<isCloneAllowed>false</isCloneAllowed>
-	<startTextbox>
-		<content>
-        	<item>Hey!</item>
-        	<item>Glad you made it!</item>
-        	<item>            (Press enter to continue...)</item>
-    	</content>
-    	<content>
-    		<item>You are currently on Mars so go ahead and</item>
-    		<item>experiment with the low gravity...</item>
-    		<item>Use W,A,D to move around.</item>
-    	</content>
-    	<content>
-    		<item>If you see red laser beams those are doors!</item>
-    		<item>Usually there is a plate to open them...</item>
-    	</content>
-	</startTextbox>
+<levelMap>
+    <isCloneAllowed>false</isCloneAllowed>
     <mapObjects>
         <mapObjectLasergate>
             <height>3</height>
             <id>32</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>23</x>
@@ -30,6 +14,7 @@
         <mapObjectGroundswtich>
             <height>1</height>
             <id>33</id>
+            <output>32</output>
             <power>false</power>
             <width>1</width>
             <x>20</x>
@@ -38,9 +23,20 @@
             <keep>true</keep>
             <targetID>32</targetID>
         </mapObjectGroundswtich>
+        <mapObjectTrigger>
+            <height>3</height>
+            <id>34</id>
+            <output>30002</output>
+            <power>false</power>
+            <width>3</width>
+            <x>65</x>
+            <y>13</y>
+            <targetID>40</targetID>
+        </mapObjectTrigger>
         <mapObjectLasergate>
             <height>2</height>
-            <id>34</id>
+            <id>35</id>
+            <output>-1</output>
             <power>true</power>
             <width>1</width>
             <x>32</x>
@@ -48,59 +44,60 @@
         </mapObjectLasergate>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>35</id>
+            <id>36</id>
+            <output>34</output>
             <power>false</power>
             <width>1</width>
             <x>32</x>
             <y>15</y>
             <inverted>true</inverted>
             <keep>true</keep>
-            <targetID>34</targetID>
+            <targetID>35</targetID>
         </mapObjectGroundswtich>
         <mapObjectGroundswtich>
             <height>1</height>
-            <id>36</id>
+            <id>37</id>
+            <output>37</output>
             <power>false</power>
             <width>1</width>
             <x>54</x>
             <y>14</y>
             <inverted>true</inverted>
             <keep>true</keep>
-            <targetID>37</targetID>
+            <targetID>38</targetID>
         </mapObjectGroundswtich>
         <mapObjectLasergateHorizontal>
             <height>1</height>
-            <id>37</id>
+            <id>38</id>
+            <output>-1</output>
             <power>true</power>
             <width>4</width>
             <x>49</x>
             <y>15</y>
         </mapObjectLasergateHorizontal>
-        <mapObjectTriggerTextbox>
-            <height>4</height>
-            <id>38</id>
-            <power>false</power>
-            <width>1</width>
-            <x>64</x>
-            <y>12</y>
-            <textbox>
-                <content>
-                    <item>Congratulations!</item>
-                    <item>See you in the next level!</item>
-                </content>
-            </textbox>
-        </mapObjectTriggerTextbox>
-        <mapObjectTriggerWinning>
-            <height>4</height>
+        <mapObjectDecorationFinishFlag>
+            <height>2</height>
             <id>39</id>
+            <output>-1</output>
             <power>false</power>
             <width>1</width>
-            <x>68</x>
-            <y>12</y>
-        </mapObjectTriggerWinning>
+            <x>66</x>
+            <y>14</y>
+        </mapObjectDecorationFinishFlag>
+        <mapObjectActionWinning>
+            <height>1</height>
+            <id>40</id>
+            <output>-1</output>
+            <power>false</power>
+            <width>1</width>
+            <x>66</x>
+            <y>17</y>
+            <repeat>false</repeat>
+        </mapObjectActionWinning>
     </mapObjects>
     <playerSpawnX>48</playerSpawnX>
     <playerSpawnY>240</playerSpawnY>
+    <soundTrack>mars_1.wav</soundTrack>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAACBQUF</spritesheet>
@@ -133,7 +130,7 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAAC</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAAC</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAEHAAAC</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAIwIIIiIC</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJAIIIyMC</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIIAAAC</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAUIAAAC</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgYJAAAC</spritesheet>
@@ -150,12 +147,12 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAQUFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAgUFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAwYGBgUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAJQAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAAJgAAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAQcAAAIF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAkAggAAAIF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAAAAlAggAAAIF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBQgAAAIF</spritesheet>
     <spritesheet>AwYGBgYGBgYGBgYGBgYGBgkAAAIF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAAAAAIF</spritesheet>
@@ -166,9 +163,9 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAABBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAEFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAJiYmJgIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
-    <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAACIiIgIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAACIiIgIFBQUF</spritesheet>
+    <spritesheet>AAAAAAAAAAAAAAAAACIiIgIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAJycnJwIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
@@ -176,4 +173,21 @@
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AAAAAAAAAAAAAAAAAAAAAAIFBQUF</spritesheet>
     <spritesheet>AQQEBAQEBAQEBAQEBAQEBAUFBQUF</spritesheet>
-</levelMap11>
+    <startTextbox>
+        <content>
+            <item>Hey!</item>
+            <item>Glad you made it!</item>
+            <item>            (Press enter to continue...)</item>
+        </content>
+        <content>
+            <item>You are currently on Mars so go ahead and</item>
+            <item>experiment with the low gravity...</item>
+            <item>Use W,A,D to move around.</item>
+        </content>
+        <content>
+            <item>If you see red laser beams those are doors!</item>
+            <item>Usually there is a plate to open them...</item>
+        </content>
+    </startTextbox>
+</levelMap>
+>>>>>>> refs/heads/master
