@@ -550,6 +550,8 @@ public class StageEditor extends Stage {
 					}
 				} else if (selected == 1) {
 					map.save(levelFile);
+				} else if (selected == 2) {
+					getStageManager().exitGame();
 				}
 				return;
 			}
