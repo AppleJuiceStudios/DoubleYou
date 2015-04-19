@@ -2,18 +2,38 @@
 <levelMap>
     <isCloneAllowed>true</isCloneAllowed>
     <mapObjects>
+        <mapObjectTrigger>
+            <height>3</height>
+            <id>32</id>
+            <output>30001</output>
+            <power>false</power>
+            <width>3</width>
+            <x>18</x>
+            <y>16</y>
+            <targetID>34</targetID>
+        </mapObjectTrigger>
         <mapObjectDecorationFinishFlag>
             <height>2</height>
-            <id>32</id>
+            <id>33</id>
             <output>-1</output>
             <power>false</power>
             <width>1</width>
             <x>19</x>
             <y>17</y>
         </mapObjectDecorationFinishFlag>
+        <mapObjectActionWinning>
+            <height>1</height>
+            <id>34</id>
+            <output>-1</output>
+            <power>false</power>
+            <width>1</width>
+            <x>22</x>
+            <y>17</y>
+            <repeat>false</repeat>
+        </mapObjectActionWinning>
     </mapObjects>
-    <playerSpawnX>208</playerSpawnX>
-    <playerSpawnY>224</playerSpawnY>
+    <playerSpawnX>112</playerSpawnX>
+    <playerSpawnY>192</playerSpawnY>
     <soundTrack>mars_4.wav</soundTrack>
     <spritesheet>BQYGBgYGBgYGBgYGBgYGBgYGBgU=</spritesheet>
     <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
@@ -33,9 +53,9 @@
     <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
     <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
     <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
-    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
-    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
-    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAACAgIAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAACAgIAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAACAgIAI=</spritesheet>
     <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
     <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
     <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
