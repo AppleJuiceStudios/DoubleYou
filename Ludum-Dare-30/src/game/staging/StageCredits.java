@@ -3,6 +3,7 @@ package game.staging;
 import game.main.GameCanvas;
 import game.main.GameFrame;
 import game.res.Button;
+import game.res.Preferences;
 import game.res.ResourceManager;
 import game.res.ScrollingAnimation;
 
@@ -109,7 +110,7 @@ public class StageCredits extends Stage {
 			}
 
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				if (e.getKeyCode() == Preferences.getKeyBinding("key_back")) {
 					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER) {

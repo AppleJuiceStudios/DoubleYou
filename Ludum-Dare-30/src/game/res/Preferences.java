@@ -7,18 +7,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.Vector;
 
 import util.Log;
 
 public class Preferences {
 
-	private static Properties props;
+	private static SortedProperties props;
 	private static Map<String, Integer> keyBinding;
 
 	private static int nextLevel;
@@ -33,7 +36,7 @@ public class Preferences {
 
 		getDocumentPath();
 		path = getPath() + "/DoubleYou.properties";
-		props = new Properties();
+		props = new SortedProperties();
 		keyBinding = new HashMap<String, Integer>();
 		File file = new File(path);
 		try {
@@ -74,7 +77,7 @@ public class Preferences {
 
 		// Values
 		if (props == null)
-			props = new Properties();
+			props = new SortedProperties();
 
 		props.setProperty("lang", lang);
 
@@ -107,17 +110,39 @@ public class Preferences {
 	private static void createAllValues() {
 		Log.warning("Unable to detect preferences! Using defaults.");
 
-		// Manuall Values
+		// Values
 		lang = Locale.getDefault().toString();
 
-		// KeyBindings
-		keyBinding.put("key_up", 87);
-		keyBinding.put("key_up2", 38);
-		keyBinding.put("key_up3", 32);
+		// KeyBindings - Level
+		keyBinding.put("key_jump", 87);
+		keyBinding.put("key_jump2", 38);
+		keyBinding.put("key_jump3", 32);
 		keyBinding.put("key_left", 65);
 		keyBinding.put("key_left2", 37);
 		keyBinding.put("key_right", 68);
 		keyBinding.put("key_right2", 39);
+
+		keyBinding.put("key_clone1_1", 49);
+		keyBinding.put("key_clone1_2", 97);
+		keyBinding.put("key_clone1_3", 72);
+
+		keyBinding.put("key_clone2_1", 50);
+		keyBinding.put("key_clone2_2", 98);
+		keyBinding.put("key_clone2_3", 74);
+
+		keyBinding.put("key_clone3_1", 51);
+		keyBinding.put("key_clone3_2", 99);
+		keyBinding.put("key_clone3_3", 75);
+
+		keyBinding.put("key_clone4_1", 52);
+		keyBinding.put("key_clone4_2", 100);
+		keyBinding.put("key_clone4_3", 76);
+
+		keyBinding.put("key_next", 13);
+
+		// KeyBindings - General
+		keyBinding.put("key_back", 27);
+
 	}
 
 	// region Getter, Setter and Util
@@ -204,5 +229,20 @@ public class Preferences {
 	}
 
 	// endregion Getter, Setter and Util
+}
+
+class SortedProperties extends Properties {
+	private static final long serialVersionUID = 1L;
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Enumeration keys() {
+		Enumeration keysEnum = super.keys();
+		Vector<String> keyList = new Vector<String>();
+		while (keysEnum.hasMoreElements()) {
+			keyList.add((String) keysEnum.nextElement());
+		}
+		Collections.sort(keyList);
+		return keyList.elements();
+	}
 
 }

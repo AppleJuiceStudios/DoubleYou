@@ -33,13 +33,13 @@ public class EntityPlayerRecordJump extends EntityPlayerRecord {
 		if (key_right) {
 			xMovement = 2;
 		}
-		if (key_up & onGround) {
+		if (key_jump & onGround) {
 			yMovement = -2.75;
-		} else if (!old_key_W && key_up && canDoubleJump) {
+		} else if (!old_key_W && key_jump && canDoubleJump) {
 			yMovement = -2.75;
 			canDoubleJump = false;
 			map.spawnParticle(new ParticleDoubleJumpRecord(x + (width / 2), y + height));
 		}
-		old_key_W = key_up;
+		old_key_W = key_jump;
 	}
 }

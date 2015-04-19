@@ -31,7 +31,7 @@ public class EntityPlayerRecord extends EntityPlayer {
 		} else if (key_left) {
 			movement = 2;
 		}
-		if (key_up) {
+		if (key_jump) {
 			movement += 3;
 		}
 		recording.add(movement);
