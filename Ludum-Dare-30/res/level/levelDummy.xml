@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<levelMap>
+    <isCloneAllowed>true</isCloneAllowed>
+    <mapObjects>
+        <mapObjectDecorationFinishFlag>
+            <height>2</height>
+            <id>32</id>
+            <output>-1</output>
+            <power>false</power>
+            <width>1</width>
+            <x>19</x>
+            <y>17</y>
+        </mapObjectDecorationFinishFlag>
+    </mapObjects>
+    <playerSpawnX>208</playerSpawnX>
+    <playerSpawnY>224</playerSpawnY>
+    <soundTrack>mars_4.wav</soundTrack>
+    <spritesheet>BQYGBgYGBgYGBgYGBgYGBgYGBgU=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>CAAAAAAAAAAAAAAAAAAAAAAAAAI=</spritesheet>
+    <spritesheet>BQQEBAQEBAQEBAQEBAQEBAQEBAU=</spritesheet>
+    <startTextbox>
+        <content>
+            <item>These blue doors are different!</item>
+            <item>You're clone can walk through them</item>
+            <item>even when you are not programming him...</item>
+        </content>
+    </startTextbox>
+</levelMap>
