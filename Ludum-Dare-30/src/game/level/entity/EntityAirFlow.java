@@ -51,14 +51,14 @@ public class EntityAirFlow extends Entity {
 	public void interaction(Entity entity, LevelMap map) {
 		if (entity instanceof EntityMob) {
 			EntityMob e = (EntityMob) entity;
-			e.pushX(forceX);
-			e.pushY(forceY);
+			e.pushX(forceX, 0.2);
+			e.pushY(forceY, 0.2);
 		}
 	}
 
 	public void interactionPlayerRecord(EntityPlayerRecord entity, LevelMap map) {
-		entity.pushX(forceX);
-		entity.pushY(forceY);
+		entity.pushX(forceX, 0.2);
+		entity.pushY(forceY, 0.2);
 	}
 
 }

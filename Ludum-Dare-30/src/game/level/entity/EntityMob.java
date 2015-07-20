@@ -6,11 +6,14 @@ import java.awt.image.BufferedImage;
 
 public class EntityMob extends Entity {
 
+	protected double physicVelocityX;
+	protected double physicVelocityY;
+
+	protected double movementVelocityX;
+	protected double movementVelocityY;
+
 	protected double xMovement;
 	protected double yMovement;
-
-	protected double xForce;
-	protected double yForce;
 
 	protected boolean onGround;
 
@@ -23,13 +26,9 @@ public class EntityMob extends Entity {
 	}
 
 	protected void colision(LevelMap map, double timeFactor) {
-		if (yForce <= -0.07) {
-			yForce += 0.07;
-		} else {
-			yMovement += 0.07;
-		}
-		xMovement += xForce;
-		yMovement += yForce;
+		physicVelocityY += 0.07;
+		double xMovement = physicVelocityX + movementVelocityX;
+		double yMovement = physicVelocityY + movementVelocityY;
 
 		if (xMovement > 0) {
 			lookLeft = false;
@@ -38,14 +37,7 @@ public class EntityMob extends Entity {
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
 			if (colideWithBlock(map, xright, ytop) | colideWithBlock(map, xright, ycenter) | colideWithBlock(map, xright, ybottom)) {
-				double newxMovement = (xright * 16) - (x + width);
-				if (newxMovement < xMovement - xForce) {
-					xMovement = newxMovement - xForce;
-					xForce = 0;
-				} else {
-					xForce = (xMovement - xForce) - newxMovement;
-				}
-				xMovement = newxMovement;
+				xMovement = (xright * 16) - (x + width);
 			}
 		} else if (xMovement < 0) {
 			lookLeft = true;
@@ -54,14 +46,7 @@ public class EntityMob extends Entity {
 			int ycenter = (int) ((y + height / 2) / 16);
 			int ybottom = (int) ((y + height) / 16 - 0.00001);
 			if (colideWithBlock(map, xleft, ytop) | colideWithBlock(map, xleft, ycenter) | colideWithBlock(map, xleft, ybottom)) {
-				double newxMovement = ((xleft + 1) * 16) - x;
-				if (newxMovement < xMovement - xForce) {
-					xMovement = newxMovement - xForce;
-					xForce = 0;
-				} else {
-					xForce = (xMovement - xForce) - newxMovement;
-				}
-				xMovement = newxMovement;
+				xMovement = ((xleft + 1) * 16) - x;
 			}
 		}
 		x += xMovement * timeFactor;
@@ -78,14 +63,7 @@ public class EntityMob extends Entity {
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
 			if (colideWithBlock(map, xleft, ybottom) | colideWithBlock(map, xright, ybottom)) {
-				double newyMovement = (ybottom * 16) - (y + height);
-				if (newyMovement < yMovement - yForce) {
-					yMovement = newyMovement - yForce;
-					yForce = 0;
-				} else {
-					yForce = (yMovement - yForce) - newyMovement;
-				}
-				yMovement = newyMovement;
+				yMovement = (ybottom * 16) - (y + height);
 				onGround = true;
 			}
 		} else if (yMovement < 0) {
@@ -93,34 +71,35 @@ public class EntityMob extends Entity {
 			int xright = (int) ((x + width) / 16 - 0.00001);
 			int xleft = (int) (x / 16 + 0.00001);
 			if (colideWithBlock(map, xleft, ytop) | colideWithBlock(map, xright, ytop)) {
-				double newyMovement = ((ytop + 1) * 16) - y;
-				if (newyMovement < yMovement - yForce) {
-					yMovement = newyMovement - yForce;
-					yForce = 0;
-				} else {
-					yForce = (yMovement - yForce) - newyMovement;
-				}
-				yMovement = newyMovement;
+				yMovement = ((ytop + 1) * 16) - y;
 			}
 		}
 		y += yMovement * timeFactor;
 
-		xMovement -= xForce;
-		yMovement -= yForce;
-		xForce = 0;
-		yForce = 0;
+		if (xMovement > 0) {
+			if (xMovement < physicVelocityX) {
+				physicVelocityX = xMovement;
+			}
+		} else {
+			if (xMovement > physicVelocityX) {
+				physicVelocityX = xMovement;
+			}
+		}
+		if (yMovement < physicVelocityY) {
+			physicVelocityY = yMovement;
+		}
 	}
 
 	public boolean colideWithBlock(LevelMap map, int x, int y) {
 		return map.isSolidTile(x, y);
 	}
 
-	public void pushX(double amount) {
-		xForce += amount;
+	public void pushX(double speed, double amount) {
+		physicVelocityX += (speed - physicVelocityX) * amount;
 	}
 
-	public void pushY(double amount) {
-		yForce += amount;
+	public void pushY(double speed, double amount) {
+		physicVelocityY += (speed - physicVelocityY) * amount;
 	}
 
 }

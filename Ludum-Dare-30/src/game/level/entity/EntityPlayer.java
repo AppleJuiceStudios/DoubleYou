@@ -43,15 +43,16 @@ public class EntityPlayer extends EntityMob {
 	}
 
 	public void move(LevelMap map) {
-		xMovement = 0;
+		movementVelocityX = 0;
 		if (key_left) {
-			xMovement = -2;
+			System.out.println("Left");
+			movementVelocityX = -2;
 		}
 		if (key_right) {
-			xMovement = 2;
+			movementVelocityX = 2;
 		}
 		if (key_up & onGround) {
-			yMovement = -2.75;
+			pushY(-2.75, 1);
 		}
 	}
 

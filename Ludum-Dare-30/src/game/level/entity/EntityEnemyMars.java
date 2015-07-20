@@ -31,12 +31,12 @@ public class EntityEnemyMars extends EntityEnemy {
 
 	public void update(LevelMap map, double timeFactor) {
 		if (walkLeft) {
-			xMovement = 1;
+			movementVelocityX = 1;
 		} else {
-			xMovement = -1;
+			movementVelocityX = -1;
 		}
 		super.update(map, timeFactor);
-		if (xMovement == 0) {
+		if (movementVelocityX == 0) {
 			walkLeft = !walkLeft;
 		}
 	}
