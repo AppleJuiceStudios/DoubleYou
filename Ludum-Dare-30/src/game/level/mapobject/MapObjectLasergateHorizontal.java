@@ -25,7 +25,7 @@ public class MapObjectLasergateHorizontal extends MapObject {
 	}
 
 	protected void loadTexture() {
-		BufferedImage image = ResourceManager.getImage("/level/object/Lasergate-Hrizontal.png");
+		BufferedImage image = ResourceManager.getImage("/level/object/Lasergate-Horizontal.png");
 		images = new BufferedImage[6];
 		images[0] = image.getSubimage(0, 0, 16, 16);
 		images[1] = image.getSubimage(16, 0, 16, 16);

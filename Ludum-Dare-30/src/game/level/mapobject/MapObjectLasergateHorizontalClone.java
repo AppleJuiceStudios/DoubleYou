@@ -18,7 +18,7 @@ public class MapObjectLasergateHorizontalClone extends MapObjectLasergateHorizon
 	}
 
 	protected void loadTexture() {
-		BufferedImage image = ResourceManager.getImage("/level/object/Lasergate-HrizontalOnlyClone.png");
+		BufferedImage image = ResourceManager.getImage("/level/object/Lasergate-HorizontalOnlyClone.png");
 		images = new BufferedImage[6];
 		images[0] = image.getSubimage(0, 0, 16, 16);
 		images[1] = image.getSubimage(16, 0, 16, 16);
