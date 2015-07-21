@@ -26,7 +26,7 @@ public class EntityPlayerClone extends EntityPlayer {
 	public void update(LevelMap map, double timeFactor) {
 		if (!isDead) {
 			byte movement = recording[frame];
-			key_up = movement > 2;
+			key_jump = movement > 2;
 			key_left = (movement % 3) == 2;
 			key_right = (movement % 3) == 1;
 			super.update(map, timeFactor);

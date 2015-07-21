@@ -124,7 +124,7 @@ public class StageOptions extends Stage {
 			}
 
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				if (e.getKeyCode() == Preferences.getKeyBinding("key_back")) {
 					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
 				}
 				if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_ENTER) {

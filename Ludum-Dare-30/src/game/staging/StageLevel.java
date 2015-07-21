@@ -11,6 +11,7 @@ import game.level.entity.EntityPlayerRecord;
 import game.level.entity.EntityPlayerRecordJump;
 import game.level.particle.Particle;
 import game.main.GameCanvas;
+import game.res.Preferences;
 import game.res.ResourceManager;
 import game.res.SoundManager;
 
@@ -202,17 +203,20 @@ public class StageLevel extends Stage {
 					playerClone[i].draw(g2, 1.0);
 				}
 			}
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 
 		for (int i = 0; i < entities.size(); i++) {
 			try {
 				entities.get(i).draw(g2, 1.0);
-			} catch (NullPointerException e) {}
+			} catch (NullPointerException e) {
+			}
 		}
 		for (int i = 0; i < particles.size(); i++) {
 			try {
 				particles.get(i).draw(g2);
-			} catch (NullPointerException e) {}
+			} catch (NullPointerException e) {
+			}
 		}
 
 		map.drawObjects(g2, spriteSize);
@@ -277,7 +281,8 @@ public class StageLevel extends Stage {
 			}
 			map.updateTriger(player, isCloneMoving[0] ? playerClone[0] : null, isCloneMoving[1] ? playerClone[1] : null, isCloneMoving[2] ? playerClone[2]
 					: null, isCloneMoving[3] ? playerClone[3] : null);
-		} catch (NullPointerException e) {}
+		} catch (NullPointerException e) {
+		}
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(map, timeFactor);
 		}
@@ -402,13 +407,17 @@ public class StageLevel extends Stage {
 					player.keyPressed(e);
 				}
 				int clonenumber = -1;
-				if (e.getKeyCode() == KeyEvent.VK_1 || e.getKeyCode() == KeyEvent.VK_NUMPAD1 || e.getKeyCode() == KeyEvent.VK_H) {
+				if (e.getKeyCode() == Preferences.getKeyBinding("key_clone1_1") || e.getKeyCode() == Preferences.getKeyBinding("key_clone1_2")
+						|| e.getKeyCode() == Preferences.getKeyBinding("key_clone1_3")) {
 					clonenumber = 0;
-				} else if (e.getKeyCode() == KeyEvent.VK_2 || e.getKeyCode() == KeyEvent.VK_NUMPAD2 || e.getKeyCode() == KeyEvent.VK_J) {
+				} else if (e.getKeyCode() == Preferences.getKeyBinding("key_clone2_1") || e.getKeyCode() == Preferences.getKeyBinding("key_clone2_2")
+						|| e.getKeyCode() == Preferences.getKeyBinding("key_clone2_3")) {
 					clonenumber = 1;
-				} else if (e.getKeyCode() == KeyEvent.VK_3 || e.getKeyCode() == KeyEvent.VK_NUMPAD3 || e.getKeyCode() == KeyEvent.VK_K) {
+				} else if (e.getKeyCode() == Preferences.getKeyBinding("key_clone3_1") || e.getKeyCode() == Preferences.getKeyBinding("key_clone3_2")
+						|| e.getKeyCode() == Preferences.getKeyBinding("key_clone3_3")) {
 					clonenumber = 2;
-				} else if (e.getKeyCode() == KeyEvent.VK_4 || e.getKeyCode() == KeyEvent.VK_NUMPAD4 || e.getKeyCode() == KeyEvent.VK_L) {
+				} else if (e.getKeyCode() == Preferences.getKeyBinding("key_clone4_1") || e.getKeyCode() == Preferences.getKeyBinding("key_clone4_2")
+						|| e.getKeyCode() == Preferences.getKeyBinding("key_clone4_3")) {
 					clonenumber = 3;
 				}
 				if (clonenumber != -1) {
@@ -448,10 +457,10 @@ public class StageLevel extends Stage {
 						}
 					}
 				}
-				if (e.getKeyCode() == KeyEvent.VK_ENTER && hasTextbox) {
+				if (e.getKeyCode() == Preferences.getKeyBinding("key_next") && hasTextbox) {
 					textbox.nextPage();
 				}
-				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				if (e.getKeyCode() == Preferences.getKeyBinding("key_back")) {
 					getStageManager().setStage(StageManager.STAGE_CHOOSE_LEVEL);
 				}
 			}
