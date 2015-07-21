@@ -1,23 +1,36 @@
 package game.staging;
 
 import game.level.TileSet;
+import game.level.mapobject.MapObject;
 import game.levelEditor.LevelMapEditable;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.JAXB;
 
 public class StageLevelEditor extends Stage {
 
 	private File levelFile;
 	private LevelMapEditable map;
+	private ControlListener controls;
 
 	private int scale = 3;
 	private double xOffset = 0;
@@ -35,6 +48,12 @@ public class StageLevelEditor extends Stage {
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
 		player = ResourceManager.getImage("/model/player/Player-Model.png");
 		tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
+
+		controls = new ControlListener();
+		getStageManager().setMouseListener(controls);
+		getStageManager().setKeyListener(controls);
+		getStageManager().setMouseMotionListener(controls);
+		getStageManager().setMouseWheelListener(controls);
 	}
 
 	private void loadMap(Map<String, String> data) {
@@ -95,6 +114,127 @@ public class StageLevelEditor extends Stage {
 	}
 
 	public void stop() {
+
+	}
+
+	public void scaleUp() {
+		if (scale < 6) {
+			xOffset = (xOffset + controls.mouse_X) * (scale + 1) / scale - controls.mouse_X;
+			yOffset = (yOffset + controls.mouse_Y) * (scale + 1) / scale - controls.mouse_Y;
+			scale++;
+		}
+	}
+
+	public void scaleDown() {
+		if (scale > 1) {
+			xOffset = (xOffset + controls.mouse_X) * (scale - 1) / scale - controls.mouse_X;
+			yOffset = (yOffset + controls.mouse_Y) * (scale - 1) / scale - controls.mouse_Y;
+			scale--;
+		}
+	}
+
+	private class ControlListener implements MouseListener, KeyListener, MouseMotionListener, MouseWheelListener {
+
+		private double mouse_X;
+		private double mouse_Y;
+
+		private boolean Key_W;
+		private boolean Key_A;
+		private boolean Key_S;
+		private boolean Key_D;
+		private boolean Key_Shift;
+
+		// region Keys
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_PLUS) {
+				scaleUp();
+			} else if (e.getKeyCode() == KeyEvent.VK_MINUS) {
+				scaleDown();
+			}
+			keyUpdate(e.getKeyCode(), true);
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			keyUpdate(e.getKeyCode(), false);
+		}
+
+		private void keyUpdate(int keyCode, boolean pressed) {
+			if (keyCode == KeyEvent.VK_W) {
+				Key_W = pressed;
+			} else if (keyCode == KeyEvent.VK_A) {
+				Key_A = pressed;
+			} else if (keyCode == KeyEvent.VK_S) {
+				Key_S = pressed;
+			} else if (keyCode == KeyEvent.VK_D) {
+				Key_D = pressed;
+			} else if (keyCode == KeyEvent.VK_SHIFT) {
+				Key_Shift = pressed;
+			}
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+
+		}
+
+		// endregion Keys
+
+		// region Mouse
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			if (SwingUtilities.isMiddleMouseButton(e)) {
+				xOffset += mouse_X - e.getX();
+				yOffset += mouse_Y - e.getY();
+			}
+			mouse_X = e.getX();
+			mouse_Y = e.getY();
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			mouse_X = e.getX();
+			mouse_Y = e.getY();
+		}
+
+		@Override
+		public void mouseWheelMoved(MouseWheelEvent e) {
+			int rotation = e.getWheelRotation();
+			if (rotation < 0)
+				scaleUp();
+			if (rotation > 0)
+				scaleDown();
+		}
+
+		// endregion Mouse
 
 	}
 
