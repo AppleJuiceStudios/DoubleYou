@@ -35,6 +35,7 @@ public class StageManager {
 	public static final int STAGE_CHOOSE_LEVEL = 5;
 	public static final int STAGE_WON = 6;
 	public static final int STAGE_CUSTOM_MAPS = 7;
+	public static final int STAGE_LEVEL_EDITOR = 8;
 
 	public StageManager(GameCanvas gameCanvas) {
 		this.gameCanvas = gameCanvas;
@@ -72,6 +73,8 @@ public class StageManager {
 				stage = new StageWon(this, data);
 			} else if (stageID == STAGE_CUSTOM_MAPS) {
 				stage = new StageCustomMaps(this, data);
+			} else if (stageID == STAGE_LEVEL_EDITOR) {
+				stage = new StageLevelEditor(this, data);
 			}
 		} catch (IllegalArgumentException e) {
 			stage = new StageMainMenue(this, null);

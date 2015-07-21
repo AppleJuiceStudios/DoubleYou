@@ -3,6 +3,7 @@ package game.level.mapobject;
 import game.level.LevelMap;
 import game.level.TileSet;
 import game.level.entity.EntityEnemyMars;
+import game.res.ResourceManager;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,6 +16,10 @@ public class MapObjectActionSpawner extends MapObjectAction {
 
 	public MapObjectActionSpawner() {
 
+	}
+
+	protected void loadTexture() {
+		texture = ResourceManager.getImage("/buttons/ActionSpawner.png");
 	}
 
 	public void action(LevelMap map) {

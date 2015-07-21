@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -82,8 +83,9 @@ public class StageLoading extends Stage {
 		if (finished) {
 			g2.drawString("Press any key to continue.", GameCanvas.WIDTH / 8 + 20, (int) (GameCanvas.HEIGHT * 0.93));
 		}
-		if (finished && GeneralUtils.isDevMode())
-			getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+		if (finished && GeneralUtils.isDevMode()) {
+			switchStage();
+		}
 
 		if (System.currentTimeMillis() - lastMsgChange > messageSpeed)
 			nextMessage();
@@ -104,6 +106,12 @@ public class StageLoading extends Stage {
 
 	}
 
+	public void switchStage() {
+		Map<String, String> data = new HashMap<>();
+		data.put("file", "res/level/level1.xml");
+		getStageManager().setStage(StageManager.STAGE_LEVEL_EDITOR, data);
+	}
+
 	private void initListeners() {
 		getStageManager().setKeyListener(new KeyListener() {
 
@@ -117,7 +125,7 @@ public class StageLoading extends Stage {
 
 			public void keyPressed(KeyEvent e) {
 				if (finished) {
-					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+					switchStage();
 				}
 			}
 		});
@@ -130,7 +138,7 @@ public class StageLoading extends Stage {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (finished) {
-					getStageManager().setStage(StageManager.STAGE_MAIN_MENUE);
+					switchStage();
 				}
 			}
 

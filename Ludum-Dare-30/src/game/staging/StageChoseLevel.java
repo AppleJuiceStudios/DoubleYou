@@ -185,7 +185,7 @@ public class StageChoseLevel extends Stage {
 		g2.fillRect(0, GameCanvas.HEIGHT / 2 - 3, GameCanvas.WIDTH, 6);
 
 		// Level & Overlay
-		for (int y = 0; y < 4; y++)
+		for (int y = 0; y < 4; y++) {
 			for (int x = 0; x < 4; x++) {
 				int current = (x % 2) + (x / 2) * 4 + (y % 2) * 2 + (y / 2) * 8;
 				int xx = (int) (GameCanvas.WIDTH * 0.125) + (x / 2) * (GameCanvas.WIDTH / 2) + (x % 2) * (int) (GameCanvas.WIDTH * 0.1875);
@@ -194,6 +194,7 @@ public class StageChoseLevel extends Stage {
 				if (current >= nextLevel)
 					g2.drawImage(imgLock, xx, yy, (int) (GameCanvas.WIDTH * 0.08), (int) (GameCanvas.WIDTH * 0.08), null);
 			}
+		}
 	}
 
 	private void send(String level) {

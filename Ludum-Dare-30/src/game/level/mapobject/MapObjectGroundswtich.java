@@ -4,8 +4,11 @@ import game.level.LevelMap;
 import game.level.entity.Entity;
 import game.res.ResourceManager;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.beans.Transient;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -45,11 +48,21 @@ public class MapObjectGroundswtich extends MapObject {
 		}
 	}
 
+	public void drawLogic(Graphics2D g2, int size) {
+		super.drawLogic(g2, size);
+		if (keep) {
+			g2.setColor(Color.GREEN);
+			g2.setFont(new Font("Dialog", Font.PLAIN, size / 2));
+			g2.drawString("k", x * size, y * size + size);
+		}
+	}
+
 	public void updateTriger(LevelMap map, Entity... entities) {
 		boolean t = false;
 		for (int i = 0; i < entities.length; i++) {
 			if (entities[i] != null) {
-				if (x == (int) ((entities[i].getXPos() + (entities[i].getWidth() / 2)) / 16) & y == (int) ((entities[i].getYPos() + entities[i].getHeight() - 1) / 16)) {
+				if (x == (int) ((entities[i].getXPos() + (entities[i].getWidth() / 2)) / 16)
+						& y == (int) ((entities[i].getYPos() + entities[i].getHeight() - 1) / 16)) {
 					t = true;
 				}
 			}
@@ -65,6 +78,31 @@ public class MapObjectGroundswtich extends MapObject {
 				map.powerObject(targetID, inverted);
 			}
 		}
+	}
+
+	public boolean hasOutput() {
+		return true;
+	}
+
+	@Transient
+	public int getOutput() {
+		return targetID;
+	}
+
+	public boolean isOutputInverted() {
+		return inverted;
+	}
+
+	public void invertOutput() {
+		inverted = !inverted;
+	}
+
+	public void onEditorRightClick() {
+		keep = !keep;
+	}
+
+	public void setOutput(int id) {
+		targetID = id;
 	}
 
 	public int getTargetID() {

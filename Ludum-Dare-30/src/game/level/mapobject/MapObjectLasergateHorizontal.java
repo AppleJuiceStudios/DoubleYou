@@ -55,4 +55,8 @@ public class MapObjectLasergateHorizontal extends MapObject {
 		}
 	}
 
+	public int inputCount() {
+		return 1;
+	}
+
 }
