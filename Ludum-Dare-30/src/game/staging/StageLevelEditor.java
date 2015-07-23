@@ -3,6 +3,7 @@ package game.staging;
 import game.level.TileSet;
 import game.level.mapobject.MapObject;
 import game.levelEditor.LevelMapEditable;
+import game.levelEditor.tool.ToolbarWorld;
 import game.main.GameCanvas;
 import game.res.ResourceManager;
 
@@ -41,6 +42,8 @@ public class StageLevelEditor extends Stage {
 	private BufferedImage player;
 	private TileSet tileSet;
 
+	private ToolbarWorld toolbarWorld;
+
 	public StageLevelEditor(StageManager stageManager, Map<String, String> data) {
 		super(stageManager, data);
 		loadMap(data);
@@ -48,6 +51,8 @@ public class StageLevelEditor extends Stage {
 		mountains = ResourceManager.getImage("/planets/mars/Mars-Mountains.png");
 		player = ResourceManager.getImage("/model/player/Player-Model.png");
 		tileSet = new TileSet("/planets/mars/Mars-TileSet.png");
+
+		toolbarWorld = new ToolbarWorld();
 
 		controls = new ControlListener();
 		getStageManager().setMouseListener(controls);
@@ -111,6 +116,8 @@ public class StageLevelEditor extends Stage {
 		map.drawObjects(g2, spriteSize);
 
 		g2.setTransform(new AffineTransform());
+
+		toolbarWorld.draw(g2, controls.mouse_X, controls.mouse_Y);
 	}
 
 	public void stop() {
@@ -152,6 +159,8 @@ public class StageLevelEditor extends Stage {
 				scaleUp();
 			} else if (e.getKeyCode() == KeyEvent.VK_MINUS) {
 				scaleDown();
+			} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				getStageManager().exitGame();
 			}
 			keyUpdate(e.getKeyCode(), true);
 		}

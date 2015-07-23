@@ -33,6 +33,10 @@
 /level/particle/AirFlow.png
 /level/particle/DoubleJump.png
 /level/particle/DoubleJumpRecord.png
+/levelEditor/toolBackground.png
+/levelEditor/toolbarLeft.png
+/levelEditor/toolbarDown.png
+/levelEditor/toolbarRight.png
 /model/msfly.png
 /model/finishFlag.png
 /model/clone/DoubleJumpClone-JumpAnimation.png
